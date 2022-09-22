@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using API.Entities;
 using API.interfaces;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Configuration;
+using System.Security.Cryptography;
 
 namespace API.Services
 {
@@ -25,7 +27,7 @@ namespace API.Services
             // Add claim
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.NameId, user.UserName)
+                new Claim(JwtRegisteredClaimNames.NameId, user.UserName),
             };
 
             //create credentials
