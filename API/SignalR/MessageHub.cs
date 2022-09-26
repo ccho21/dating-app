@@ -66,7 +66,9 @@ namespace API.SignalR
             };
 
             var groupName = GetGroupName(sender.UserName, recipient.UserName);
+
             var group = await _messageRepository.GetMessageGroup(groupName);
+
             if (group.Connections.Any(x => x.Username == recipient.UserName))
             {
                 message.DateRead = DateTime.UtcNow;
@@ -76,7 +78,7 @@ namespace API.SignalR
 
             if (await _messageRepository.SaveAllAsync())
             {
-                await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageHub>(message));
+                await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageDto>(message));
             }
 
 
