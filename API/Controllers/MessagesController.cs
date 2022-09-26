@@ -35,16 +35,16 @@ namespace API.Controllers
                 return BadRequest("You cannot send messages to yourself");
 
             var sender = await _userRepository.GetUserByUsernameAsync(username);
-            var Recipient = await _userRepository.GetUserByUsernameAsync(createMessageDto.RecipientUsername);
+            var recipient = await _userRepository.GetUserByUsernameAsync(createMessageDto.RecipientUsername);
 
-            if (Recipient == null) return NotFound();
+            if (recipient == null) return NotFound();
 
-            var message = new Message()
+            var message = new Message
             {
                 Sender = sender,
-                Recipient = Recipient,
+                Recipient = recipient,
                 SenderUsername = sender.UserName,
-                RecipientUsername = Recipient.UserName,
+                RecipientUsername = recipient.UserName,
                 Content = createMessageDto.Content
             };
 
@@ -71,7 +71,27 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessageThread(string username)
         {
             var currentUsername = User.GetUsername();
+
             return Ok(await _messageRepository.GetMessageThread(currentUsername, username));
+        }
+
+        [HttpDelete("thread/{id}")]
+        public async Task<ActionResult> DeleteMessage(int id)
+        {
+            var username = User.GetUsername();
+            var message = await _messageRepository.GetMessage(id);
+
+            if (message.Sender.UserName != username &&
+                message.Recipient.UserName != username) return Unauthorized();
+
+            if (message.Sender.UserName == username) message.SenderDeleted = true;
+            if (message.Recipient.UserName == username) message.RecipientDeleted = true;
+
+            if (message.SenderDeleted && message.RecipientDeleted)
+                _messageRepository.DeleteMessage(message);
+            if (await _messageRepository.SaveAllAsync()) return Ok();
+
+            return BadRequest("Problem deleting the message");
         }
     }
 
