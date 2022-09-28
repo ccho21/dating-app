@@ -8,7 +8,7 @@ import { MessageService } from 'src/app/_services/message.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-member-messages',
   templateUrl: './member-messages.component.html',
-  styleUrls: ['./member-messages.component.css']
+  styleUrls: ['./member-messages.component.scss']
 })
 export class MemberMessagesComponent implements OnInit {
   @ViewChild('messageForm') messageForm: NgForm;
