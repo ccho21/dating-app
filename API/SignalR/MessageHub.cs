@@ -99,10 +99,9 @@ namespace API.SignalR
             {
                 await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageDto>(message));
             }
-
-
         }
 
+        
         private async Task<Group> AddToGroup(string groupName)
         {
             var group = await _unitOfWork.MessageRepository.GetMessageGroup(groupName);
