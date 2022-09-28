@@ -6,7 +6,7 @@ import { MembersService } from '../_services/members.service';
 @Component({
   selector: 'app-lists',
   templateUrl: './lists.component.html',
-  styleUrls: ['./lists.component.css']
+  styleUrls: ['./lists.component.scss']
 })
 export class ListsComponent implements OnInit {
   members: Partial<Member[]>;
