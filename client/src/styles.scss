@@ -1,51 +1,39 @@
 @import "../node_modules/driver.js/dist/driver.min.css";
 /* You can add global styles to this file, and also import other style files */
-.tab-panel {
-  border: 1px solid #ddd;
-  padding: 10px;
-  border-radius: 4px;
+body {
+  background: #303030;
+  color: #ffffff;
+}
+.img-circle {
+  border-radius: 50% !important;
+  max-width: 100%;
 }
 
-.nav-tabs > li.open,
-.member-tabset > .nav-tabs > li:hover {
-  border-bottom: 4px solid #fbcdcf;
+.img-thumbnail {
+  width: 3rem;
+  height: 3rem;
+  padding: 0.1rem;
 }
 
-.member-tabset > .nav-tabs > li.open > a,
-.member-tabset > .nav-tabs > li:hover > a {
-  border: 0;
-  background: none !important;
-  color: #333333;
+.blue-snackbar {
+  background: #2196f3;
 }
 
-.member-tabset > .nav-tabs > li.open > a > i,
-.member-tabset > .nav-tabs > li:hover > a > i {
-  color: #a6a6a6;
+.red-snackbar {
+  background: #f44336;
 }
 
-.member-tabset > .nav-tabs > li.open .dropdown-menu,
-.member-tabset > .nav-tabs > li:hover .dropdown-menu {
-  margin-top: 0px;
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
 }
 
-.member-tabset > .nav-tabs > li.active {
-  border-bottom: 4px solid #e95420;
-  position: relative;
+.example-full-width {
+  width: 100%;
 }
 
-.member-tabset > .nav-tabs > li.active > a {
-  border: 0 !important;
-  color: #333333;
-}
-
-.member-tabset > .nav-tabs > li.active > a > i {
-  color: #404040;
-}
-
-.member-tabset > .tab-content {
-  margin-top: -3px;
-  background-color: #fff;
-  border: 0;
-  border-top: 1px solid #eee;
-  padding: 15px 0;
+.example-half-width {
+  width: 60%;
+  margin-bottom: 0.25rem;
 }

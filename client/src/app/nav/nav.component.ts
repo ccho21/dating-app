@@ -3,8 +3,9 @@ import { AccountService } from '../_services/account.service';
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import Driver from 'driver.js';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-nav',
@@ -16,18 +17,18 @@ export class NavComponent implements OnInit {
 
   driver: Driver;
   constructor(
+    public dialog: MatDialog,
     public accountService: AccountService,
-    private router: Router,
-    private toastr: ToastrService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.model.username = 'lisa';
     this.model.password = 'Pa$$w0rd';
 
-    setTimeout(() => {
-      this.startNavigationGuide();
-    }, 1000);
+    // setTimeout(() => {
+    //   this.startNavigationGuide();
+    // }, 1000);
   }
 
   startNavigationGuide() {
@@ -70,10 +71,17 @@ export class NavComponent implements OnInit {
       this.driver = undefined;
     }
   }
-  login() {
-    this.accountService.login(this.model).subscribe((response) => {
-      this.router.navigateByUrl('/members');
-    });
+
+  openLogin() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(LoginComponent, dialogConfig);
+
+    dialogRef
+      .afterClosed()
+      .subscribe(() => this.router.navigateByUrl('/members'));
   }
 
   logout() {
