@@ -1,4 +1,44 @@
-<mat-card>
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="d-flex align-items-center justify-content-center font-md">
+      <span
+        [class.is-online]="
+          (presence.onlineUsers$ | async).includes(member.username)
+        "
+      >
+        <i class="fa fa-user px-2" style="font-size: 20px;"></i>
+      </span>
+    </div>
+    <mat-card-title> {{ member.knownAs }}, {{ member.age }} </mat-card-title>
+    <mat-card-subtitle>{{ member.city }}</mat-card-subtitle>
+  </mat-card-header>
+  <img
+    mat-card-image
+    src="{{ member.photoUrl || './assets/user.png' }}"
+    alt="{{ member.knownAs }}"
+    style="width: 250px"
+  />
+
+  <mat-card-content> </mat-card-content>
+  <mat-card-actions align="center">
+    <button mat-icon-button routerLink="/members/{{ member.username }}">
+      <mat-icon>person</mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="addLike(member)">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      routerLink="/members/{{ member.username }}"
+      [queryParams]="{ tab: 3 }"
+    >
+      <mat-icon> mail_outline</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<!-- <mat-card>
   <mat-card-header>
     <div mat-card-avatar>
       <span
@@ -34,7 +74,7 @@
       <mat-icon> mail_outline</mat-icon>
     </button>
   </mat-card-actions>
-</mat-card>
+</mat-card> -->
 
 <!-- <div class="card mb-4">
   <div class="card-img-wrapper">

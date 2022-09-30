@@ -4,63 +4,65 @@
       >Dating App</a
     >
     <span class="example-spacer"></span>
-    <ng-container *ngIf="accountService.currentUser$ | async">
+    <div fxHide.lt-md>
+      <ng-container *ngIf="accountService.currentUser$ | async">
+        <a
+          class="nav-link-1"
+          mat-button
+          routerLink="/members"
+          routerLinkActive="active"
+          >Matches</a
+        >
+        <a
+          class="nav-link-1"
+          mat-button
+          routerLink="/lists"
+          routerLinkActive="active"
+          >Lists</a
+        >
+        <a
+          class="nav-link-1"
+          mat-button
+          routerLink="/messages"
+          routerLinkActive="active"
+          >Messages</a
+        >
+        <a
+          class="nav-link-1"
+          mat-button
+          routerLink="/admin"
+          routerLinkActive="active"
+          *appHasRole="['Admin', 'Moderator']"
+        >
+          Admin
+        </a>
+      </ng-container>
       <a
         class="nav-link-1"
         mat-button
-        routerLink="/members"
+        routerLink="/errors"
         routerLinkActive="active"
-        >Matches</a
+        >Errors</a
       >
       <a
-        class="nav-link-1"
         mat-button
-        routerLink="/lists"
-        routerLinkActive="active"
-        >Lists</a
-      >
-      <a
-        class="nav-link-1"
-        mat-button
-        routerLink="/messages"
-        routerLinkActive="active"
-        >Messages</a
-      >
-      <a
-        class="nav-link-1"
-        mat-button
-        routerLink="/admin"
-        routerLinkActive="active"
-        *appHasRole="['Admin', 'Moderator']"
-      >
-        Admin
+        (click)="openLogin()"
+        *ngIf="(accountService.currentUser$ | async) === null"
+        >Login
       </a>
-    </ng-container>
-    <a
-      class="nav-link-1"
-      mat-button
-      routerLink="/errors"
-      routerLinkActive="active"
-      >Errors</a
-    >
-    <a
-      mat-button
-      (click)="openLogin()"
-      *ngIf="(accountService.currentUser$ | async) === null"
-      >Login
-    </a>
+    </div>
 
     <ng-container *ngIf="accountService.currentUser$ | async as user">
       <button mat-button>
         <span>Welcome {{ user.knownAs || user.username | titlecase }}! </span>
       </button>
-      <img
-        class="img-thumbnail img-circle"
-        src="{{ user.photoUrl || './assets/user.png' }}"
-        alt="{{ user.username }}"
-      />
+
       <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>more_vert</mat-icon>
+        <img
+          class="img-circle"
+          src="{{ user.photoUrl || './assets/user.png' }}"
+          alt="{{ user.username }}"
+        />
       </button>
     </ng-container>
 
@@ -74,6 +76,55 @@
         <span>Logout</span>
       </button>
     </mat-menu>
+  </mat-toolbar-row>
+  <mat-toolbar-row fxHide.gt-sm fxLayoutAlign="center center">
+    <div>
+      <ng-container *ngIf="accountService.currentUser$ | async">
+        <a
+          class="nav-link-1"
+          mat-button
+          routerLink="/members"
+          routerLinkActive="active"
+          >Matches</a
+        >
+        <a
+          class="nav-link-1"
+          mat-button
+          routerLink="/lists"
+          routerLinkActive="active"
+          >Lists</a
+        >
+        <a
+          class="nav-link-1"
+          mat-button
+          routerLink="/messages"
+          routerLinkActive="active"
+          >Messages</a
+        >
+        <a
+          class="nav-link-1"
+          mat-button
+          routerLink="/admin"
+          routerLinkActive="active"
+          *appHasRole="['Admin', 'Moderator']"
+        >
+          Admin
+        </a>
+      </ng-container>
+      <a
+        class="nav-link-1"
+        mat-button
+        routerLink="/errors"
+        routerLinkActive="active"
+        >Errors</a
+      >
+      <a
+        mat-button
+        (click)="openLogin()"
+        *ngIf="(accountService.currentUser$ | async) === null"
+        >Login
+      </a>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
 

@@ -35,6 +35,8 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { MaterialModule } from 'material.module';
 import { LoginComponent } from './login/login.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 @NgModule({
   declarations: [
@@ -73,6 +75,7 @@ import { LoginComponent } from './login/login.component';
     SharedModule,
     NgxSpinnerModule,
     MaterialModule,
+    FlexLayoutModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
