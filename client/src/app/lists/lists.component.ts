@@ -61,6 +61,7 @@ export class ListsComponent implements OnInit {
     this.pageSize = event.pageSize;
     this.loadLikes();
   }
+  
   startNavigationGuide() {
     if (!this.driver) {
       this.driver = new Driver({

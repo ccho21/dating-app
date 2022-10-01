@@ -4,6 +4,8 @@ import { Pagination } from '../_models/pagination';
 import { ConfirmService } from '../_services/confirm.service';
 import { MessageService } from '../_services/message.service';
 import Driver from 'driver.js';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-messages',
@@ -15,30 +17,62 @@ export class MessagesComponent implements OnInit {
   pagination: Pagination;
   container = 'Unread';
   pageNumber = 1;
-  pageSize = 5;
+  pageSize = 10;
   loading = false;
 
   driver: Driver;
 
+  //
+
+  columns: string[] = [
+    'content',
+    'senderUsername',
+    'recipientUsername',
+    'messageSent',
+  ];
+  displayedColumns = [];
+
+  //
+
   constructor(
     private messageService: MessageService,
-    private confirmService: ConfirmService
+    private confirmService: ConfirmService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
     this.loadMessages();
-    this.startNavigationGuide();
+    // this.startNavigationGuide();
   }
 
   loadMessages() {
+    this.handleColumns();
+
     this.loading = true;
     this.messageService
       .getMessages(this.pageNumber, this.pageSize, this.container)
       .subscribe((response) => {
         this.messages = response.result;
         this.pagination = response.pagination;
+        this.pagination.currentPage = response.pagination.currentPage - 1;
         this.loading = false;
+
+        console.log('### ', this.messages);
       });
+  }
+
+  handleColumns() {
+    console.log('### container', this.container);
+
+    if (this.container === 'Outbox') {
+      this.displayedColumns = this.columns.filter(
+        (column) => column !== 'senderUsername'
+      );
+    } else {
+      this.displayedColumns = this.columns.filter(
+        (column) => column !== 'recipientUsername'
+      );
+    }
   }
 
   deleteMessage(id: number) {
@@ -58,7 +92,8 @@ export class MessagesComponent implements OnInit {
 
   pageChanged(event: any) {
     if (this.pageNumber !== event.page) {
-      this.pageNumber = event.page;
+      this.pageNumber = event.pageIndex + 1;
+      this.pageSize = event.pageSize;
       this.loadMessages();
     }
   }

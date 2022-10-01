@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AccountService } from '../_services/account.service';
-import { ToastrService } from 'ngx-toastr';
 import {
   AbstractControl,
   FormBuilder,
@@ -72,6 +71,9 @@ export class RegisterComponent implements OnInit {
         console.log('### Successfully Registered ', res);
         this._snackBar.open('Successfully Registered', 'Dance', {
           panelClass: ['blue-snackbar'],
+          duration: 5000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'right',
         });
         this.dialogRef.close(true);
       },
@@ -81,6 +83,9 @@ export class RegisterComponent implements OnInit {
         console.log('### ERROR', err);
         this._snackBar.open('Error occured', 'Dance', {
           panelClass: ['red-snackbar'],
+          duration: 5000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'right',
         });
       },
     });

@@ -39,6 +39,9 @@ export class LoginComponent implements OnInit {
         console.log('### successfully logged in ', res);
         this._snackBar.open('successfully logged in', 'Dance', {
           panelClass: ['blue-snackbar'],
+          duration: 5000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'right',
         });
         this.dialogRef.close(true);
       },
@@ -46,6 +49,9 @@ export class LoginComponent implements OnInit {
         console.log('### ERROR', err);
         this._snackBar.open('Error occured', 'Dance', {
           panelClass: ['red-snackbar'],
+          duration: 5000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'right',
         });
       },
     });
