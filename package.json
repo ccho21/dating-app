@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@ngbmodule/material-carousel": "^0.7.2"
+  }
+}

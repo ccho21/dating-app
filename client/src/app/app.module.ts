@@ -36,6 +36,7 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
 import { MaterialModule } from 'material.module';
 import { LoginComponent } from './login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatCarouselModule } from '@ngbmodule/material-carousel';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     SharedModule,
     NgxSpinnerModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatCarouselModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
