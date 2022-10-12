@@ -8,6 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Member } from 'src/app/_models/member';
 import { Message } from 'src/app/_models/message';
 import { MembersService } from 'src/app/_services/members.service';
 import { MessageService } from 'src/app/_services/message.service';
@@ -21,7 +22,7 @@ import { MessageService } from 'src/app/_services/message.service';
 export class MemberMessagesComponent implements OnInit, OnChanges {
   @ViewChild('messageForm') messageForm: NgForm;
   @Input() messages: Message[];
-  @Input() username: string;
+  @Input() member: Member;
   messageContent: string;
   loading = false;
 
@@ -42,6 +43,7 @@ export class MemberMessagesComponent implements OnInit, OnChanges {
 
   constructor(public messageService: MessageService) {}
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('### CHANGES', changes);
     if (changes.messages) {
       console.log('### changes ', changes);
     }
@@ -51,8 +53,9 @@ export class MemberMessagesComponent implements OnInit, OnChanges {
 
   sendMessage() {
     this.loading = true;
+    console.log(this.messageContent);
     this.messageService
-      .sendMessage(this.username, this.messageContent)
+      .sendMessage(this.member.username, this.messageContent)
       .then(() => {
         this.messageForm.reset();
       })

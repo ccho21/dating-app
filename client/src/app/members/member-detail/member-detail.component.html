@@ -1,6 +1,6 @@
 <div class="content" fxLayout="row" fxLayout.xs="column" fxFlexFill>
   <div fxFlex="30" class="sec1" fxFlex.xs="55" class="m-3">
-    <mat-card class="example-card">
+    <mat-card class="member-detail-card">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>Shiba Inu</mat-card-title>
@@ -48,6 +48,7 @@
       mat-align-tabs="start"
       (selectedTabChange)="selectTab($event)"
       [selectedIndex]="activeTab"
+      style="max-height: 750px; min-height: 500px"
     >
       <mat-tab [label]="'About ' + member.knownAs">
         <h4>Description</h4>
@@ -85,7 +86,7 @@
         </mat-carousel>
       </mat-tab>
       <mat-tab label="Messages">
-        <app-member-messages [username]="member.username"></app-member-messages
+        <app-member-messages [member]="member"></app-member-messages
       ></mat-tab>
     </mat-tab-group>
   </div>
