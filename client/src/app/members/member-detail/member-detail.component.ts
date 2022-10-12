@@ -2,22 +2,14 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/_models/member';
 import { MembersService } from 'src/app/_services/members.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  NgxGalleryOptions,
-  NgxGalleryImage,
-  NgxGalleryAnimation,
-} from '@kolkov/ngx-gallery';
-import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
+
 import { Message } from 'src/app/_models/message';
 import { MessageService } from 'src/app/_services/message.service';
 import { PresenceService } from 'src/app/_services/presence.service';
 import { AccountService } from 'src/app/_services/account.service';
 import { User } from 'src/app/_models/user';
 import { take } from 'rxjs/operators';
-import {
-  MatCarouselSlide,
-  MatCarouselSlideComponent,
-} from '@ngbmodule/material-carousel';
+
 import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
@@ -26,10 +18,8 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
   styleUrls: ['./member-detail.component.scss'],
 })
 export class MemberDetailComponent implements OnInit, OnDestroy {
-  @ViewChild('memberTabs', { static: true }) memberTabs: TabsetComponent;
   member: Member;
-  galleryOptions: NgxGalleryOptions[];
-  galleryImages: NgxGalleryImage[];
+  galleryImages: any[];
   activeTab: number | null;
   messages: Message[] = [];
   user: User;
@@ -53,26 +43,14 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     });
 
     this.route.queryParams.subscribe((params) => {
-      // params.tab ? this.selectTab(params.tab) : this.selectTab(0);
       this.activeTab = params.tab ? Number(params.tab) : 0;
       this.selectTab({ index: this.activeTab } as MatTabChangeEvent);
     });
 
-    this.galleryOptions = [
-      {
-        width: '500px',
-        height: '500px',
-        imagePercent: 100,
-        thumbnailsColumns: 4,
-        imageAnimation: NgxGalleryAnimation.Slide,
-        preview: false,
-      },
-    ];
-
     this.galleryImages = this.getImages();
   }
 
-  getImages(): NgxGalleryImage[] {
+  getImages(): any[] {
     const imageUrls = [];
     for (const photo of this.member.photos) {
       imageUrls.push({

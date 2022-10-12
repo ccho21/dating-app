@@ -1,25 +1,31 @@
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-roles-modal',
   templateUrl: './roles-modal.component.html',
-  styleUrls: ['./roles-modal.component.scss']
+  styleUrls: ['./roles-modal.component.scss'],
 })
 export class RolesModalComponent implements OnInit {
-  @Input() updateSelectedRoles = new EventEmitter();
-  user: User;
-  roles: any[]; 
+  user?: User;
+  roles?: any[];
 
-  constructor(public bsModalRef: BsModalRef) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { user: User; roles: any[] },
+    private dialogRef: MatDialogRef<RolesModalComponent>
+  ) {}
 
   ngOnInit(): void {
+    console.log('### data', this.data);
+    if (this.data) {
+      this.user = { ...this.data.user };
+      this.roles = [...this.data.roles];
+    }
   }
 
   updateRoles() {
-    this.updateSelectedRoles.emit(this.roles);
-    this.bsModalRef.hide();
+    console.log('### this.roles', this.roles);
+    this.dialogRef.close(this.roles);
   }
-
 }
