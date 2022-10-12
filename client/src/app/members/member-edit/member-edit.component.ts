@@ -6,6 +6,7 @@ import { MembersService } from 'src/app/_services/members.service';
 import { take } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-member-edit',
@@ -16,6 +17,8 @@ export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
   member: Member;
   user: User;
+  activeTab?: number;
+
   @HostListener('window:beforeunload', ['$event']) unloadNotification(
     $event: any
   ) {
@@ -52,5 +55,13 @@ export class MemberEditComponent implements OnInit {
       });
       this.editForm.reset(this.member);
     });
+  }
+
+  selectTab(tab: MatTabChangeEvent) {
+    // if (tab.index === 3 && this.messages.length === 0) {
+    //   this.messageService.createHubConnection(this.user, this.member.username);
+    // } else {
+    //   this.messageService.stopHubConnection();
+    // }
   }
 }

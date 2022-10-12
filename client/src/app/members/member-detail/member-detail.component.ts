@@ -20,7 +20,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 export class MemberDetailComponent implements OnInit, OnDestroy {
   member: Member;
   galleryImages: any[];
-  activeTab: number | null;
+  activeTab?: number;
   messages: Message[] = [];
   user: User;
 

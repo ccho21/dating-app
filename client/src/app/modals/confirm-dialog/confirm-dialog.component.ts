@@ -28,11 +28,11 @@ export class ConfirmDialogComponent implements OnInit {
 
   confirm() {
     this.result = true;
-    this.dialogRef.close();
+    this.dialogRef.close(this.result);
   }
 
   decline() {
     this.result = false;
-    this.dialogRef.close();
+    this.dialogRef.close(this.result);
   }
 }

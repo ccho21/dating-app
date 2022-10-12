@@ -21,7 +21,6 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
@@ -33,11 +32,7 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
-import { MaterialModule } from 'material.module';
 import { LoginComponent } from './login/login.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatCarouselModule } from '@ngbmodule/material-carousel';
-
 
 @NgModule({
   declarations: [
@@ -74,10 +69,6 @@ import { MatCarouselModule } from '@ngbmodule/material-carousel';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    NgxSpinnerModule,
-    MaterialModule,
-    FlexLayoutModule,
-    MatCarouselModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

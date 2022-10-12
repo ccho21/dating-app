@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { ConfirmDialogComponent } from '../modals/confirm-dialog/confirm-dialog.component';
 import {
@@ -12,10 +11,9 @@ import {
   providedIn: 'root',
 })
 export class ConfirmService {
-  bsModelRef: BsModalRef;
   dialogRef: MatDialogRef<ConfirmDialogComponent, any>;
 
-  constructor(private modalService: BsModalService, public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {}
 
   confirm(
     title = 'Confirmation',
@@ -26,17 +24,8 @@ export class ConfirmService {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.minWidth = '350px';
     dialogConfig.data = { title, message, btnOkText, btnCancelText };
-    const config = {
-      initialState: {
-        title,
-        message,
-        btnOkText,
-        btnCancelText,
-      },
-    };
 
     this.dialogRef = this.dialog.open(ConfirmDialogComponent, dialogConfig);
-    // this.bsModelRef = this.modalService.show(ConfirmDialogComponent, config);
 
     return new Observable<boolean>(this.getResult());
   }
@@ -44,7 +33,6 @@ export class ConfirmService {
   private getResult() {
     return (observer) => {
       const subscription = this.dialogRef.afterClosed().subscribe((res) => {
-        console.log('### sadk', res);
         observer.next(res);
         observer.complete();
       });
