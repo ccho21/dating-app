@@ -4,7 +4,6 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { TimeagoModule } from 'ngx-timeago';
 import { MaterialModule } from 'material.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [],
@@ -14,14 +13,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     TimeagoModule.forRoot(),
     MaterialModule,
     NgxSpinnerModule,
-    FlexLayoutModule,
   ],
-  exports: [
-    FileUploadModule,
-    TimeagoModule,
-    MaterialModule,
-    NgxSpinnerModule,
-    FlexLayoutModule,
-  ],
+  exports: [FileUploadModule, TimeagoModule, MaterialModule, NgxSpinnerModule],
 })
 export class SharedModule {}

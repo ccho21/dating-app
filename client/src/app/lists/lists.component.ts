@@ -3,7 +3,6 @@ import { Member } from '../_models/member';
 import { Pagination } from '../_models/pagination';
 import { MembersService } from '../_services/members.service';
 import Driver from 'driver.js';
-import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { MatGridList } from '@angular/material/grid-list';
 import { MatPaginator } from '@angular/material/paginator';
 
@@ -29,20 +28,11 @@ export class ListsComponent implements OnInit {
   pagination: Pagination;
   driver: Driver;
 
-  constructor(
-    private memberService: MembersService,
-    private media: MediaObserver
-  ) {}
+  constructor(private memberService: MembersService) {}
 
   ngOnInit(): void {
     this.loadLikes();
     // this.startNavigationGuide();
-  }
-
-  ngAfterContentInit() {
-    this.media.asObservable().subscribe((changes: MediaChange[]) => {
-      this.grid.cols = this.gridByBreakpoint[changes[0].mqAlias];
-    });
   }
 
   loadLikes() {
@@ -61,7 +51,7 @@ export class ListsComponent implements OnInit {
     this.pageSize = event.pageSize;
     this.loadLikes();
   }
-  
+
   startNavigationGuide() {
     if (!this.driver) {
       this.driver = new Driver({

@@ -1,10 +1,10 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row>
+  <mat-toolbar-row class="">
     <a mat-stroked-button routerLink="/" routerLinkActive="active"
       >Dating App</a
     >
     <span class="example-spacer"></span>
-    <div fxHide.lt-md>
+    <div class="d-none d-md-block">
       <ng-container *ngIf="accountService.currentUser$ | async">
         <a
           class="nav-link-1"
@@ -38,7 +38,7 @@
         </a>
       </ng-container>
       <a
-        class="nav-link-1"
+        class="nav-link-1 d-none"
         mat-button
         routerLink="/errors"
         routerLinkActive="active"
@@ -77,7 +77,7 @@
       </button>
     </mat-menu>
   </mat-toolbar-row>
-  <mat-toolbar-row fxHide.gt-sm fxLayoutAlign="center center">
+  <mat-toolbar-row class="justify-content-center align-items-center d-md-none">
     <div>
       <ng-container *ngIf="accountService.currentUser$ | async">
         <a
@@ -112,7 +112,7 @@
         </a>
       </ng-container>
       <a
-        class="nav-link-1"
+        class="nav-link-1 d-none"
         mat-button
         routerLink="/errors"
         routerLinkActive="active"

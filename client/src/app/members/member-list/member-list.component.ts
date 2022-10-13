@@ -9,7 +9,6 @@ import { take } from 'rxjs/operators';
 import { User } from 'src/app/_models/user';
 import Driver from 'driver.js';
 import { MatGridList } from '@angular/material/grid-list';
-import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { MatSelect } from '@angular/material/select';
 import { MatPaginator } from '@angular/material/paginator';
 
@@ -19,15 +18,6 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./member-list.component.scss'],
 })
 export class MemberListComponent implements OnInit {
-  @ViewChild('grid') grid: MatGridList;
-  gridByBreakpoint = {
-    xl: 5,
-    lg: 3,
-    md: 3,
-    sm: 2,
-    xs: 1,
-  };
-
   members: Member[];
   pagination: Pagination;
   userParams: UserParams;
@@ -39,22 +29,13 @@ export class MemberListComponent implements OnInit {
 
   driver: Driver;
 
-  constructor(
-    private memberService: MembersService,
-    private media: MediaObserver
-  ) {
+  constructor(private memberService: MembersService) {
     this.userParams = this.memberService.getUserParams();
   }
 
   ngOnInit(): void {
     this.loadMembers();
     // this.startNavigationGuide();
-  }
-
-  ngAfterContentInit() {
-    this.media.asObservable().subscribe((changes: MediaChange[]) => {
-      this.grid.cols = this.gridByBreakpoint[changes[0].mqAlias];
-    });
   }
 
   loadMembers() {

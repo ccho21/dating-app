@@ -1,11 +1,5 @@
-<div
-  class="content"
-  fxLayout="row"
-  fxLayout.xs="column"
-  fxFlexFill
-  *ngIf="member"
->
-  <div fxFlex="30" class="sec1" fxFlex.xs="55" class="m-3">
+<div class="content" *ngIf="member">
+  <div class="sec1" class="m-3">
     <h1>Your profile</h1>
     <mat-card class="member-detail-card">
       <mat-card-header> </mat-card-header>
@@ -46,7 +40,7 @@
       </mat-card-actions>
     </mat-card>
   </div>
-  <div fxFlex="70" class="" class="m-3">
+  <div class="" class="m-3">
     <div class="alert alert-info" *ngIf="editForm.dirty">
       <strong>Information: </strong> You have made changes. Any unsaved changes
       will be lost
