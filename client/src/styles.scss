@@ -1,9 +1,13 @@
 @import "../node_modules/driver.js/dist/driver.min.css";
+@import "~swiper/swiper-bundle.css";
+
 /* You can add global styles to this file, and also import other style files */
 body {
   background: #303030;
   color: #ffffff;
   font-size: 62.5%;
+  position: relative;
+  height: 100%;
 }
 .img-circle {
   border-radius: 50% !important;
@@ -32,6 +36,10 @@ body {
 .example-half-width {
   width: 60%;
   margin-bottom: 0.25rem;
+}
+
+.demo-table {
+  width: 100%;
 }
 
 /* width */

@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class MessagesComponent implements OnInit {
   messages: Message[] = [];
   pagination: Pagination;
-  container = 'Unread';
+  container = 'Inbox';
   pageNumber = 1;
   pageSize = 10;
   loading = false;
@@ -25,9 +25,9 @@ export class MessagesComponent implements OnInit {
   //
 
   columns: string[] = [
-    'content',
     'senderUsername',
     'recipientUsername',
+    'content',
     'messageSent',
   ];
   displayedColumns = [];

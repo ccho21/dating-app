@@ -12,6 +12,12 @@ import { take } from 'rxjs/operators';
 
 import { MatTabChangeEvent } from '@angular/material/tabs';
 
+import { SwiperComponent } from 'swiper/angular';
+// import Swiper core and required modules
+import SwiperCore, { Pagination, Navigation } from 'swiper';
+// install Swiper modules
+SwiperCore.use([Navigation, Pagination]);
+
 @Component({
   selector: 'app-member-detail',
   templateUrl: './member-detail.component.html',
@@ -23,6 +29,14 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   activeTab?: number;
   messages: Message[] = [];
   user: User;
+
+  // config: SwiperOptions = {
+  //   slidesPerView: 1,
+  //   spaceBetween: 50,
+  //   navigation: true,
+  //   pagination: { clickable: true },
+  //   scrollbar: { draggable: true },
+  // };
 
   constructor(
     public presence: PresenceService,
@@ -79,14 +93,11 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   }
   detectTabChange(tab: MatTabChangeEvent) {}
 
-  // onTabActivated(data: TabDirective) {
-  //   console.log(data.heading);
-  //   this.activeTab = data;
-  //   if (this.activeTab.heading === 'Messages' && this.messages.length === 0) {
-  //     this.messageService.createHubConnection(this.user, this.member.username);
-  //   } else {
-  //     this.messageService.stopHubConnection();
-  //   }
+  // onSwiper(swiper) {
+  //   console.log(swiper);
+  // }
+  // onSlideChange() {
+  //   console.log('slide change');
   // }
 
   ngOnDestroy(): void {

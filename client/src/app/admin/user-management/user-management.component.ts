@@ -11,6 +11,7 @@ import { AdminService } from 'src/app/_services/admin.service';
 })
 export class UserManagementComponent implements OnInit {
   users: Partial<User[]>;
+  displayedColumns: string[] = ['username', 'activeRole', 'action'];
 
   constructor(private adminService: AdminService, public dialog: MatDialog) {}
 
@@ -73,4 +74,11 @@ export class UserManagementComponent implements OnInit {
     });
     return roles;
   }
+}
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
 }

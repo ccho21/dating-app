@@ -56,12 +56,36 @@
         <h4>Looking for</h4>
         <p>{{ member.lookingFor }}</p>
       </mat-tab>
+
       <mat-tab label="Interests">
         <h4>Interests</h4>
         <p>{{ member.interests }}</p>
       </mat-tab>
+
       <mat-tab label="Photos">
-        <mat-carousel
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mt-4">
+              <swiper
+                [navigation]="true"
+                [pagination]="{
+                  dynamicBullets: true,
+                  clickable: true
+                }"
+                class="mySwiper"
+              >
+                <ng-template
+                  swiperSlide
+                  *ngFor="let image of galleryImages; let i = index"
+                >
+                  <img [src]="image.big" alt="" class="w-100" />
+                </ng-template>
+              </swiper>
+            </div>
+          </div>
+        </div>
+
+        <!-- <mat-carousel
           timings="250ms ease-in"
           [autoplay]="true"
           interval="5000"
@@ -84,7 +108,7 @@
             [hideOverlay]="false"
           >
           </mat-carousel-slide>
-        </mat-carousel>
+        </mat-carousel> -->
       </mat-tab>
       <mat-tab label="Messages">
         <app-member-messages [member]="member"></app-member-messages>
