@@ -15,7 +15,7 @@ import { LoginComponent } from '../login/login.component';
 export class NavComponent implements OnInit {
   model: any = {};
 
-  driver: Driver;
+  driver?: Driver;
   constructor(
     public dialog: MatDialog,
     public accountService: AccountService,

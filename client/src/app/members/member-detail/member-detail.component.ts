@@ -15,6 +15,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { SwiperComponent } from 'swiper/angular';
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation } from 'swiper';
+import { Photo } from 'src/app/_models/photo';
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination]);
 
@@ -24,11 +25,11 @@ SwiperCore.use([Navigation, Pagination]);
   styleUrls: ['./member-detail.component.scss'],
 })
 export class MemberDetailComponent implements OnInit, OnDestroy {
-  member: Member;
-  galleryImages: any[];
+  member?: Member;
+  galleryImages?: any[];
   activeTab?: number;
-  messages: Message[] = [];
-  user: User;
+  messages?: Message[] = [];
+  user?: User;
 
   // config: SwiperOptions = {
   //   slidesPerView: 1,
@@ -47,18 +48,20 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   ) {
     this.accountService.currentUser$
       .pipe(take(1))
-      .subscribe((user) => (this.user = user));
+      .subscribe((user) => (this.user = user as User));
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
-      this.member = data.member;
+      this.member = data['member'];
     });
 
     this.route.queryParams.subscribe((params) => {
-      this.activeTab = params.tab ? Number(params.tab) : 0;
-      this.selectTab({ index: this.activeTab } as MatTabChangeEvent);
+      if (params) {
+        this.activeTab = params['tab'] ? Number(params['tab']) : 0;
+        this.selectTab({ index: this.activeTab } as MatTabChangeEvent);
+      }
     });
 
     this.galleryImages = this.getImages();
@@ -66,7 +69,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
   getImages(): any[] {
     const imageUrls = [];
-    for (const photo of this.member.photos) {
+    for (const photo of this.member?.photos as Photo[]) {
       imageUrls.push({
         small: photo?.url,
         medium: photo?.url,
@@ -78,15 +81,18 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
   loadMessages() {
     this.messageService
-      .getMessageThread(this.member.username)
+      .getMessageThread(this.member?.username as string)
       .subscribe((messages) => {
         this.messages = messages;
       });
   }
 
   selectTab(tab: MatTabChangeEvent) {
-    if (tab.index === 3 && this.messages.length === 0) {
-      this.messageService.createHubConnection(this.user, this.member.username);
+    if (tab.index === 3 && this.messages?.length === 0) {
+      this.messageService.createHubConnection(
+        this.user as User,
+        this.member?.username as string
+      );
     } else {
       this.messageService.stopHubConnection();
     }

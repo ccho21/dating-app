@@ -21,11 +21,18 @@
       <div>No messages yet... say hi by using the message box below</div>
     </div>
 
-    <div *ngIf="(messageService.messageThread$ | async)?.length > 0">
+    <div
+      *ngIf="
+        (messageService.messageThread$ | async) &&
+        (messageService.messageThread$ | async)!.length > 0
+      "
+    >
       <div *ngFor="let message of messageService.messageThread$ | async">
         <div
           class="message-item"
-          [ngClass]="{ 'text-end': member.username !== message.senderUsername }"
+          [ngClass]="{
+            'text-end': member?.username !== message.senderUsername
+          }"
         >
           <div class="">
             <div class="message-content">{{ message.content }}</div>
@@ -36,7 +43,10 @@
 
               <span
                 class="text-success small ms-2"
-                *ngIf="message.dateRead && message.senderUsername !== username"
+                *ngIf="
+                  message.dateRead &&
+                  message.senderUsername !== member?.username
+                "
               >
                 <i class="fa fa-check-circle-o" aria-hidden="true"></i>
               </span>

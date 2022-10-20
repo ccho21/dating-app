@@ -22,7 +22,10 @@ export class AdminGuard implements CanActivate {
   canActivate(): Observable<boolean> {
     return this.accountService.currentUser$.pipe(
       map((user) => {
-        if (user.roles.includes('Admin') || user.roles.includes('Moderator')) {
+        if (
+          (user && user.roles.includes('Admin')) ||
+          (user && user.roles.includes('Moderator'))
+        ) {
           return true;
         }
         this._snackBar.open('You cannot enter this area', 'Dismiss', {
@@ -31,6 +34,7 @@ export class AdminGuard implements CanActivate {
           verticalPosition: 'bottom',
           horizontalPosition: 'right',
         });
+        return false;
       })
     );
   }

@@ -9,8 +9,8 @@ import { take } from 'rxjs/operators';
 import { User } from 'src/app/_models/user';
 import Driver from 'driver.js';
 import { MatGridList } from '@angular/material/grid-list';
-import { MatSelect } from '@angular/material/select';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatSelect, MatSelectChange } from '@angular/material/select';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-member-list',
@@ -18,16 +18,16 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./member-list.component.scss'],
 })
 export class MemberListComponent implements OnInit {
-  members: Member[];
-  pagination: Pagination;
-  userParams: UserParams;
-  user: User;
+  members?: Member[];
+  pagination?: Pagination;
+  userParams?: UserParams;
+  user?: User;
   genderList = [
     { value: 'male', display: 'Males' },
     { value: 'female', display: 'Females' },
   ];
 
-  driver: Driver;
+  driver?: Driver;
 
   constructor(private memberService: MembersService) {
     this.userParams = this.memberService.getUserParams();
@@ -40,15 +40,20 @@ export class MemberListComponent implements OnInit {
 
   loadMembers() {
     console.log(this.userParams);
-    this.memberService.setUserParams(this.userParams);
-    this.memberService.getMembers(this.userParams).subscribe((response) => {
-      console.log('### RESPONSE', response);
-      this.members = response.result;
-      this.pagination = response.pagination;
-      this.pagination.currentPage = response.pagination.currentPage - 1;
-    });
+    if (this.userParams) {
+      this.memberService.setUserParams(this.userParams);
+      this.memberService.getMembers(this.userParams).subscribe((response) => {
+        console.log('### RESPONSE', response);
+        this.members = response.result;
+        this.pagination = response.pagination;
+
+        if (this.pagination) {
+          this.pagination.currentPage = response.pagination.currentPage - 1;
+        }
+      });
+    }
   }
-  change(e: MatSelect) {
+  change(e: MatSelectChange) {
     this.loadMembers();
   }
   resetFilters() {
@@ -56,13 +61,15 @@ export class MemberListComponent implements OnInit {
     this.loadMembers();
   }
 
-  pageChanged(event: MatPaginator) {
-    this.userParams.pageSize = event.pageSize;
-    this.userParams.pageNumber = event.pageIndex + 1;
-    console.log('### event', this.userParams);
+  pageChanged(event: PageEvent) {
+    if (this.userParams) {
+      this.userParams.pageSize = event.pageSize;
+      this.userParams.pageNumber = event.pageIndex + 1;
+      console.log('### event', this.userParams);
 
-    this.memberService.setUserParams(this.userParams);
-    this.loadMembers();
+      this.memberService.setUserParams(this.userParams);
+      this.loadMembers();
+    }
   }
 
   startNavigationGuide() {

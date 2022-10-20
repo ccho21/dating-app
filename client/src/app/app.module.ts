@@ -34,6 +34,7 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { LoginComponent } from './login/login.component';
 import { SwiperModule } from 'swiper/angular';
+import { FormControlPipe } from './_pipes/form-control.pipe';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { SwiperModule } from 'swiper/angular';
     RolesModalComponent,
     ConfirmDialogComponent,
     LoginComponent,
+    FormControlPipe,
   ],
   imports: [
     BrowserModule,

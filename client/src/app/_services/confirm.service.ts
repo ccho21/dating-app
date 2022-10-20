@@ -11,7 +11,7 @@ import {
   providedIn: 'root',
 })
 export class ConfirmService {
-  dialogRef: MatDialogRef<ConfirmDialogComponent, any>;
+  dialogRef?: MatDialogRef<ConfirmDialogComponent, any>;
 
   constructor(public dialog: MatDialog) {}
 
@@ -31,15 +31,15 @@ export class ConfirmService {
   }
 
   private getResult() {
-    return (observer) => {
-      const subscription = this.dialogRef.afterClosed().subscribe((res) => {
+    return (observer: any) => {
+      const subscription = this.dialogRef?.afterClosed().subscribe((res) => {
         observer.next(res);
         observer.complete();
       });
 
       return {
         unsubscribe() {
-          subscription.unsubscribe();
+          subscription?.unsubscribe();
         },
       };
     };

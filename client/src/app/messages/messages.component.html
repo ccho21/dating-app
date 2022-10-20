@@ -20,7 +20,7 @@
   <h3>No messages</h3>
 </div>
 
-<div class="mat-elevation-z8" *ngIf="messages?.length > 0">
+<div class="mat-elevation-z8" *ngIf="messages && messages.length > 0">
   <table mat-table [dataSource]="messages">
     <ng-container matColumnDef="senderUsername">
       <th mat-header-cell *matHeaderCellDef>From</th>

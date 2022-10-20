@@ -13,14 +13,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./messages.component.scss'],
 })
 export class MessagesComponent implements OnInit {
-  messages: Message[] = [];
-  pagination: Pagination;
+  messages?: Message[] = [];
+  pagination?: Pagination;
   container = 'Inbox';
   pageNumber = 1;
   pageSize = 10;
   loading = false;
 
-  driver: Driver;
+  driver?: Driver;
 
   //
 
@@ -30,7 +30,7 @@ export class MessagesComponent implements OnInit {
     'content',
     'messageSent',
   ];
-  displayedColumns = [];
+  displayedColumns: Array<string> = [];
 
   //
 
@@ -52,12 +52,14 @@ export class MessagesComponent implements OnInit {
     this.messageService
       .getMessages(this.pageNumber, this.pageSize, this.container)
       .subscribe((response) => {
-        this.messages = response.result;
-        this.pagination = response.pagination;
-        this.pagination.currentPage = response.pagination.currentPage - 1;
-        this.loading = false;
-
-        console.log('### ', this.messages);
+        if (response && response.pagination) {
+          this.messages = response.result;
+          this.pagination = response.pagination;
+          if (this.pagination) {
+            this.pagination.currentPage = response.pagination.currentPage - 1;
+          }
+          this.loading = false;
+        }
       });
   }
 
@@ -81,7 +83,7 @@ export class MessagesComponent implements OnInit {
       .subscribe((result) => {
         if (result) {
           this.messageService.deleteMessage(id).subscribe(() => {
-            this.messages.splice(
+            this.messages?.splice(
               this.messages.findIndex((m) => m.id === id),
               1
             );

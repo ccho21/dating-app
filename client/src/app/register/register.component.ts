@@ -19,9 +19,23 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
-  registerForm: FormGroup;
-  maxDate: Date;
+
+  maxDate?: Date;
   validationErrors: string[] = [];
+
+  registerForm: FormGroup = this.fb.group({
+    gender: ['male'],
+    username: ['', Validators.required],
+    knownAs: ['', Validators.required],
+    dateOfBirth: ['', Validators.required],
+    city: ['', Validators.required],
+    country: ['', Validators.required],
+    password: [
+      '',
+      [Validators.required, Validators.minLength(4), Validators.maxLength(8)],
+    ],
+    confirmPassword: ['', [Validators.required, this.matchValues('password')]],
+  });
 
   constructor(
     private accountService: AccountService,
@@ -37,27 +51,10 @@ export class RegisterComponent implements OnInit {
     console.log(this.maxDate);
   }
 
-  intitializeForm() {
-    this.registerForm = this.fb.group({
-      gender: ['male'],
-      username: ['', Validators.required],
-      knownAs: ['', Validators.required],
-      dateOfBirth: ['', Validators.required],
-      city: ['', Validators.required],
-      country: ['', Validators.required],
-      password: [
-        '',
-        [Validators.required, Validators.minLength(4), Validators.maxLength(8)],
-      ],
-      confirmPassword: [
-        '',
-        [Validators.required, this.matchValues('password')],
-      ],
-    });
-  }
+  intitializeForm() {}
 
   matchValues(matchTo: string): ValidatorFn {
-    return (control: AbstractControl) => {
+    return (control: any) => {
       return control?.value === control?.parent?.controls[matchTo].value
         ? null
         : { isMatching: true };
@@ -65,8 +62,8 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.registerForm.value);
-    this.accountService.register(this.registerForm.value).subscribe({
+    console.log(this.registerForm?.value);
+    this.accountService.register(this.registerForm?.value).subscribe({
       next: (res) => {
         console.log('### Successfully Registered ', res);
         this._snackBar.open('Successfully Registered', 'Dance', {

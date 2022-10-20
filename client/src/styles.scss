@@ -1,65 +1,65 @@
 @import "../node_modules/driver.js/dist/driver.min.css";
 @import "~swiper/swiper-bundle.css";
-
 /* You can add global styles to this file, and also import other style files */
 body {
-  background: #303030;
-  color: #ffffff;
-  font-size: 62.5%;
-  position: relative;
-  height: 100%;
-}
-.img-circle {
-  border-radius: 50% !important;
-  max-width: 100%;
-  padding: 0.1rem;
-}
-
-.blue-snackbar {
-  background: #2196f3;
-}
-
-.red-snackbar {
-  background: #f44336;
-}
-
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-}
-
-.example-full-width {
-  width: 100%;
-}
-
-.example-half-width {
-  width: 60%;
-  margin-bottom: 0.25rem;
-}
-
-.demo-table {
-  width: 100%;
-}
-
-/* width */
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+    font-size: 62.5%;
+    position: relative;
+    height: 100%;
+  }
+  .img-circle {
+    border-radius: 50% !important;
+    max-width: 100%;
+    padding: 0.1rem;
+  }
+  
+  .blue-snackbar {
+    background: #2196f3;
+  }
+  
+  .red-snackbar {
+    background: #f44336;
+  }
+  
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  
+  .example-half-width {
+    width: 60%;
+    margin-bottom: 0.25rem;
+  }
+  
+  .demo-table {
+    width: 100%;
+  }
+  
+  /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

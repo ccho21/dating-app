@@ -10,7 +10,7 @@ import { AdminService } from 'src/app/_services/admin.service';
   styleUrls: ['./user-management.component.scss'],
 })
 export class UserManagementComponent implements OnInit {
-  users: Partial<User[]>;
+  users?: Partial<User[]>;
   displayedColumns: string[] = ['username', 'activeRole', 'action'];
 
   constructor(private adminService: AdminService, public dialog: MatDialog) {}
@@ -35,7 +35,9 @@ export class UserManagementComponent implements OnInit {
       console.log('### values ', values);
       const rolesToUpdate = {
         roles: [
-          ...values.filter((el) => el.checked === true).map((el) => el.name),
+          ...values
+            .filter((el: any) => el.checked === true)
+            .map((el: any) => el.name),
         ],
       };
       if (rolesToUpdate) {
@@ -48,8 +50,8 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
-  private getRolesArray(user) {
-    const roles = [];
+  private getRolesArray(user: User) {
+    const roles: any[] = [];
     const userRoles = user.roles;
     const availableRoles: any[] = [
       { name: 'Admin', value: 'Admin' },

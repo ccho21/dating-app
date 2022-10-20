@@ -1,4 +1,4 @@
-<h2>Edit roles for {{ user.username }}</h2>
+<h2>Edit roles for {{ user?.username }}</h2>
 
 <mat-dialog-content class="mat-typography">
   <form #rolesForm="ngForm" id="rolesForm">
@@ -9,7 +9,7 @@
         [checked]="role.checked"
         value="role.name"
         (change)="role.checked = !role.checked"
-        [disabled]="role.name === 'Admin' && user.username === 'admin'"
+        [disabled]="role.name === 'Admin' && user?.username === 'admin'"
       />
       <label>{{ role.name }}</label>
     </div>

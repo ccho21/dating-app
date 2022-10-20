@@ -1,12 +1,15 @@
-<mat-card class="example-card">
+<mat-card class="example-card" *ngIf="member">
   <mat-card-header>
-    <div mat-card-avatar class="d-flex align-items-center justify-content-center font-md">
+    <div
+      mat-card-avatar
+      class="d-flex align-items-center justify-content-center font-md"
+    >
       <span
         [class.is-online]="
-          (presence.onlineUsers$ | async).includes(member.username)
+          (presence.onlineUsers$ | async)!.includes(member.username)
         "
       >
-        <i class="fa fa-user px-2" style="font-size: 20px;"></i>
+        <i class="fa fa-user px-2" style="font-size: 20px"></i>
       </span>
     </div>
     <mat-card-title> {{ member.knownAs }}, {{ member.age }} </mat-card-title>
@@ -19,7 +22,7 @@
   />
 
   <mat-card-content> </mat-card-content>
-  <mat-card-actions align="center">
+  <mat-card-actions>
     <button mat-icon-button routerLink="/members/{{ member.username }}">
       <mat-icon>person</mat-icon>
     </button>

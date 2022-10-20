@@ -7,8 +7,8 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
   styleUrls: ['./date-input.component.scss'],
 })
 export class DateInputComponent implements ControlValueAccessor {
-  @Input() label: string;
-  @Input() maxDate: Date;
+  @Input() label?: string;
+  @Input() maxDate?: Date;
 
   constructor(@Self() public ngControl: NgControl) {
     this.ngControl.valueAccessor = this;

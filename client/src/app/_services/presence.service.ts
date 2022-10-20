@@ -12,14 +12,11 @@ import { User } from '../_models/user';
 })
 export class PresenceService {
   hubUrl = environment.hubUrl;
-  private hubConnection: HubConnection;
+  private hubConnection?: HubConnection;
   private onlineUsersSource = new BehaviorSubject<string[]>([]);
   onlineUsers$ = this.onlineUsersSource.asObservable();
 
-  constructor(
-    private router: Router,
-    private _snackBar: MatSnackBar
-  ) {}
+  constructor(private router: Router, private _snackBar: MatSnackBar) {}
 
   createHubConnection(user: User) {
     this.hubConnection = new HubConnectionBuilder()
@@ -68,6 +65,6 @@ export class PresenceService {
   }
 
   stopHubConnection() {
-    this.hubConnection.stop().catch((error) => console.log(error));
+    this.hubConnection?.stop().catch((error) => console.log(error));
   }
 }

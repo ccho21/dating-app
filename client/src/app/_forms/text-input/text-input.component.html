@@ -1,24 +1,28 @@
-<mat-form-field class="example-full-width" appearance="fill">
+<mat-form-field
+  class="example-full-width"
+  appearance="fill"
+  *ngIf="ngControl.control"
+>
   <mat-label>{{ label }}</mat-label>
   <input
     [class.is-invalid]="ngControl.touched && ngControl.invalid"
     type="{{ type }}"
     matInput
-    [formControl]="ngControl.control"
+    [formControl]="ngControl.control | formControl"
     placeholder="{{ label }}"
   />
-  <mat-error *ngIf="ngControl.control.errors?.required">
+  <mat-error *ngIf="ngControl.control?.errors?.required">
     Please enter a {{ label }}
   </mat-error>
-  <mat-error *ngIf="ngControl.control.errors?.minlength">
+  <mat-error *ngIf="ngControl.control?.errors?.minlength">
     {{ label }} must be at least
-    {{ ngControl.control.errors.minlength["requiredLength"] }}
+    {{ ngControl.control.errors?.minlength["requiredLength"] }}
   </mat-error>
-  <mat-error *ngIf="ngControl.control.errors?.maxlength">
+  <mat-error *ngIf="ngControl.control?.errors?.maxlength">
     {{ label }} must be at most
-    {{ ngControl.control.errors.maxlength["requiredLength"] }}
+    {{ ngControl.control.errors?.maxlength["requiredLength"] }}
   </mat-error>
-  <mat-error *ngIf="ngControl.control.errors?.isMatching">
+  <mat-error *ngIf="ngControl.control?.errors?.isMatching">
     Passwords do not match
   </mat-error>
 </mat-form-field>

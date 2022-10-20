@@ -1,78 +1,80 @@
-<div class="d-inline-block">
-  <section class="example-section">
-    <mat-radio-group
-      aria-label="Select a gender"
-      [(ngModel)]="userParams.gender"
-    >
-      <mat-radio-button
-        class="example-margin"
-        *ngFor="let gender of genderList"
-        [value]="gender.value"
+<div *ngIf="userParams">
+  <div class="d-inline-block">
+    <section class="example-section">
+      <mat-radio-group
+        aria-label="Select a gender"
+        [(ngModel)]="userParams.gender"
       >
-        {{ gender.display }}
-      </mat-radio-button>
-    </mat-radio-group>
-  </section>
-  <section class="example-section">
-    <mat-form-field class="example-margin example-width" appearance="fill">
-      <mat-label>Age From</mat-label>
-      <input matInput type="number" [(ngModel)]="userParams.minAge" />
-    </mat-form-field>
-    <mat-form-field class="example-margin example-width" appearance="fill">
-      <mat-label>Age To</mat-label>
-      <input matInput type="number" [(ngModel)]="userParams.maxAge" />
-    </mat-form-field>
-  </section>
-  <section class="example-section">
-    <button
-      mat-raised-button
-      color="warn"
-      class="mx-2"
-      (click)="resetFilters()"
-    >
-      Reset
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      class="mx-2"
-      (click)="loadMembers()"
-    >
-      Search
-    </button>
-  </section>
-</div>
+        <mat-radio-button
+          class="example-margin"
+          *ngFor="let gender of genderList"
+          [value]="gender.value"
+        >
+          {{ gender.display }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </section>
+    <section class="example-section">
+      <mat-form-field class="example-margin example-width" appearance="fill">
+        <mat-label>Age From</mat-label>
+        <input matInput type="number" [(ngModel)]="userParams.minAge" />
+      </mat-form-field>
+      <mat-form-field class="example-margin example-width" appearance="fill">
+        <mat-label>Age To</mat-label>
+        <input matInput type="number" [(ngModel)]="userParams.maxAge" />
+      </mat-form-field>
+    </section>
+    <section class="example-section">
+      <button
+        mat-raised-button
+        color="warn"
+        class="mx-2"
+        (click)="resetFilters()"
+      >
+        Reset
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="mx-2"
+        (click)="loadMembers()"
+      >
+        Search
+      </button>
+    </section>
+  </div>
 
-<div class="mt-4 mb-1" fxLayoutAlign="space-between end">
-  <h3>Your matches - {{ pagination?.totalItems }} found</h3>
-  <mat-form-field appearance="fill">
-    <mat-label>Sort By</mat-label>
-    <mat-select
-      (selectionChange)="change($event)"
-      [(ngModel)]="userParams.orderBy"
-    >
-      <mat-option value="created">Newest Member</mat-option>
-      <mat-option value="lastActive">Last Active</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
+  <div class="mt-4 mb-1">
+    <h3>Your matches - {{ pagination?.totalItems }} found</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Sort By</mat-label>
+      <mat-select
+        (selectionChange)="change($event)"
+        [(ngModel)]="userParams.orderBy"
+      >
+        <mat-option value="created">Newest Member</mat-option>
+        <mat-option value="lastActive">Last Active</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-3 mb-4" *ngFor="let member of members">
-      <app-member-card [member]="member"></app-member-card>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 mb-4" *ngFor="let member of members">
+        <app-member-card [member]="member"></app-member-card>
+      </div>
     </div>
   </div>
-</div>
 
-<mat-paginator
-  *ngIf="pagination"
-  [length]="pagination.totalItems"
-  [pageSize]="pagination.itemsPerPage"
-  [pageSizeOptions]="[5, 10, 25, 100]"
-  [pageIndex]="pagination.currentPage"
-  (page)="pageChanged($event)"
-  class="mt-5"
-  aria-label="Select page"
->
-</mat-paginator>
+  <mat-paginator
+    *ngIf="pagination"
+    [length]="pagination.totalItems"
+    [pageSize]="pagination.itemsPerPage"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    [pageIndex]="pagination.currentPage"
+    (page)="pageChanged($event)"
+    class="mt-5"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>

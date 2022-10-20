@@ -20,10 +20,10 @@ import { MessageService } from 'src/app/_services/message.service';
   styleUrls: ['./member-messages.component.scss'],
 })
 export class MemberMessagesComponent implements OnInit, OnChanges {
-  @ViewChild('messageForm') messageForm: NgForm;
-  @Input() messages: Message[];
-  @Input() member: Member;
-  messageContent: string;
+  @ViewChild('messageForm') messageForm?: NgForm;
+  @Input() messages?: Message[];
+  @Input() member?: Member;
+  messageContent?: string;
   loading = false;
 
   folders: Section[] = [
@@ -44,9 +44,6 @@ export class MemberMessagesComponent implements OnInit, OnChanges {
   constructor(public messageService: MessageService) {}
   ngOnChanges(changes: SimpleChanges): void {
     console.log('### CHANGES', changes);
-    if (changes.messages) {
-      console.log('### changes ', changes);
-    }
   }
 
   ngOnInit(): void {}
@@ -55,9 +52,12 @@ export class MemberMessagesComponent implements OnInit, OnChanges {
     this.loading = true;
     console.log(this.messageContent);
     this.messageService
-      .sendMessage(this.member.username, this.messageContent)
+      .sendMessage(
+        this.member?.username as string,
+        this.messageContent as string
+      )
       .then(() => {
-        this.messageForm.reset();
+        this.messageForm?.reset();
       })
       .finally(() => (this.loading = false));
   }

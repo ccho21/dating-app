@@ -14,15 +14,15 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
   styleUrls: ['./member-edit.component.scss'],
 })
 export class MemberEditComponent implements OnInit {
-  @ViewChild('editForm') editForm: NgForm;
-  member: Member;
-  user: User;
+  @ViewChild('editForm') editForm?: NgForm;
+  member?: Member;
+  user?: User;
   activeTab?: number;
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification(
     $event: any
   ) {
-    if (this.editForm.dirty) {
+    if (this.editForm?.dirty) {
       $event.returnValue = true;
     }
   }
@@ -34,7 +34,7 @@ export class MemberEditComponent implements OnInit {
   ) {
     this.accountService.currentUser$
       .pipe(take(1))
-      .subscribe((user) => (this.user = user));
+      .subscribe((user) => (this.user = user as User));
   }
 
   ngOnInit(): void {
@@ -42,18 +42,20 @@ export class MemberEditComponent implements OnInit {
   }
 
   loadMember() {
-    this.memberService.getMember(this.user.username).subscribe((member) => {
-      this.member = member;
-    });
+    this.memberService
+      .getMember(this.user?.username as string)
+      .subscribe((member) => {
+        this.member = member;
+      });
   }
 
   updateMember() {
-    this.memberService.updateMember(this.member).subscribe(() => {
+    this.memberService.updateMember(this.member as Member).subscribe(() => {
       this._snackBar.open(`Profile updated successfully`, 'okay', {
         duration: 5000,
         verticalPosition: 'bottom',
       });
-      this.editForm.reset(this.member);
+      this.editForm?.reset(this.member);
     });
   }
 
