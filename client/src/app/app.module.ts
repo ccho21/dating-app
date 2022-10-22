@@ -35,6 +35,7 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
 import { LoginComponent } from './login/login.component';
 import { SwiperModule } from 'swiper/angular';
 import { FormControlPipe } from './_pipes/form-control.pipe';
+import { MemberSearchComponent } from './members/member-search/member-search.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { FormControlPipe } from './_pipes/form-control.pipe';
     ConfirmDialogComponent,
     LoginComponent,
     FormControlPipe,
+    MemberSearchComponent,
   ],
   imports: [
     BrowserModule,

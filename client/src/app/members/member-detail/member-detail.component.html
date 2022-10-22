@@ -49,6 +49,7 @@
         mat-align-tabs="start"
         (selectedTabChange)="selectTab($event)"
         [selectedIndex]="activeTab"
+        animationDuration="0ms"
         style="max-height: 750px; min-height: 500px"
       >
         <mat-tab [label]="'About ' + member.knownAs">
@@ -85,31 +86,6 @@
               </div>
             </div>
           </div>
-
-          <!-- <mat-carousel
-          timings="250ms ease-in"
-          [autoplay]="true"
-          interval="5000"
-          color="primary"
-          maxWidth="auto"
-          proportion="25"
-          slides="7"
-          [loop]="true"
-          [hideArrows]="false"
-          [hideIndicators]="false"
-          [useKeyboard]="true"
-          [useMouseWheel]="false"
-          orientation="ltr"
-        >
-          <mat-carousel-slide
-            #matCarouselSlide
-            *ngFor="let image of galleryImages; let i = index"
-            [image]="image.big"
-            overlayColor=""
-            [hideOverlay]="false"
-          >
-          </mat-carousel-slide>
-        </mat-carousel> -->
         </mat-tab>
         <mat-tab label="Messages">
           <app-member-messages [member]="member"></app-member-messages>

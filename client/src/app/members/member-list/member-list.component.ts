@@ -38,8 +38,10 @@ export class MemberListComponent implements OnInit {
     // this.startNavigationGuide();
   }
 
-  loadMembers() {
-    console.log(this.userParams);
+  loadMembers(userParams?: UserParams) {
+    if (userParams) {
+      this.userParams = userParams;
+    }
     if (this.userParams) {
       this.memberService.setUserParams(this.userParams);
       this.memberService.getMembers(this.userParams).subscribe((response) => {
@@ -54,10 +56,6 @@ export class MemberListComponent implements OnInit {
     }
   }
   change(e: MatSelectChange) {
-    this.loadMembers();
-  }
-  resetFilters() {
-    this.userParams = this.memberService.resetUserParams();
     this.loadMembers();
   }
 
