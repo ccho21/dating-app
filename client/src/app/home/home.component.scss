@@ -1,9 +1,24 @@
+.home-container {
+  position: relative;
+  min-height: 40vh;
+
+  .home-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}
 .home-background {
+  width: 100%;
+  min-height: 40vh;
+  height: 100%;
   position: relative;
   background: url("/assets/home-background.jpg");
   background-position: center center;
   background-size: cover;
-  min-height: 40vh;
   z-index: 1;
   &::before {
     content: "";
@@ -15,4 +30,33 @@
     left: 0;
     z-index: -1;
   }
+}
+
+.heading-text-1 {
+  font-size: 5rem;
+  line-height: 1.2;
+}
+
+// Carousel
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  background: #f1f1f1;
+  color: #000;
+  text-align: center;
+  line-height: 300px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  max-width: 300px;
 }

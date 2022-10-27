@@ -28,6 +28,11 @@ export class HomeComponent implements OnInit {
     { value: 'female', display: 'Females' },
   ];
 
+  imageUrls = [
+    'home-background-1.jpg',
+    'home-background-2.jpg',
+    'home-background-3.jpg',
+  ];
   constructor(
     public dialog: MatDialog,
     public accountService: AccountService,

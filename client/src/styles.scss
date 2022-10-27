@@ -10,6 +10,12 @@ body {
   margin: 0;
 }
 
+.container {
+  @media screen and (max-width: 567px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 .container-wrapper {
   margin: 24px 0;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -60,4 +66,13 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 1.34375em;
+  padding-top: 1.34375em;
 }

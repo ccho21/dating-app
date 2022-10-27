@@ -11,8 +11,6 @@ import { User } from 'src/app/_models/user';
 import { take } from 'rxjs/operators';
 
 import { MatTabChangeEvent } from '@angular/material/tabs';
-
-import { SwiperComponent } from 'swiper/angular';
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation } from 'swiper';
 import { Photo } from 'src/app/_models/photo';

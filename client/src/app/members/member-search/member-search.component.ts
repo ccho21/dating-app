@@ -3,20 +3,13 @@ import {
   EventEmitter,
   OnInit,
   Output,
-  ViewChild,
 } from '@angular/core';
 import { Member } from 'src/app/_models/member';
 import { MembersService } from 'src/app/_services/members.service';
-import { Observable } from 'rxjs';
 import { Pagination } from 'src/app/_models/pagination';
 import { UserParams } from 'src/app/_models/userParams';
-import { AccountService } from 'src/app/_services/account.service';
-import { take } from 'rxjs/operators';
 import { User } from 'src/app/_models/user';
 import Driver from 'driver.js';
-import { MatGridList } from '@angular/material/grid-list';
-import { MatSelect, MatSelectChange } from '@angular/material/select';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-member-search',

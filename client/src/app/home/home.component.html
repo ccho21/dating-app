@@ -1,17 +1,36 @@
-<div class="home-background p-5">
-  <div *ngIf="!registerMode" style="text-align: center">
-    <h1>Find your match</h1>
-    <p class="lead">
-      Come on in to view your matches... all you need to do is sign up!
-    </p>
-    <div class="text-center">
-      <button mat-raised-button color="primary" (click)="openRegister()">
-        Register
-      </button>
-      <button mat-raised-button color="warn">Learn more</button>
+<div class="p-5">
+  <div class="home-container">
+    <swiper
+      [navigation]="false"
+      [pagination]="{
+        dynamicBullets: true,
+        clickable: true
+      }"
+      [autoplay]="{
+        delay: 2500,
+        disableOnInteraction: false
+      }"
+      class="mySwiper"
+    >
+      <ng-template swiperSlide *ngFor="let url of imageUrls">
+        <div
+          class="home-background"
+          [ngStyle]="{ 'background-image': 'url(/assets/' + url + ')' }"
+        ></div>
+      </ng-template>
+    </swiper>
+    <div class="home-content" *ngIf="!registerMode">
+      <h1 class="heading-text-1">Find your match</h1>
+      <p class="lead">
+        Come on in to view your matches... all you need to do is sign up!
+      </p>
+      <div class="text-center">
+        <button mat-raised-button color="primary" (click)="openRegister()">
+          Register
+        </button>
+        <button mat-raised-button color="warn" class="ms-3">Learn more</button>
+      </div>
     </div>
   </div>
-  <div class="container-wrapper">
-    <app-member-search (searchEvent)="loadMembers($event)"></app-member-search>
-  </div>
 </div>
+<app-member-search (searchEvent)="loadMembers($event)"></app-member-search>
