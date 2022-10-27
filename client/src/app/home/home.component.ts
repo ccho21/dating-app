@@ -4,6 +4,11 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AccountService } from '../_services/account.service';
 import { Router } from '@angular/router';
 import { RegisterComponent } from '../register/register.component';
+import { MembersService } from '../_services/members.service';
+import { UserParams } from '../_models/userParams';
+import { User } from '../_models/user';
+import { Member } from '../_models/member';
+import { Pagination } from '../_models/pagination';
 
 @Component({
   selector: 'app-home',
@@ -13,10 +18,21 @@ import { RegisterComponent } from '../register/register.component';
 export class HomeComponent implements OnInit {
   registerMode = false;
 
+  members?: Member[];
+  pagination?: Pagination;
+  userParams?: UserParams;
+  user?: User;
+
+  genderList = [
+    { value: 'male', display: 'Males' },
+    { value: 'female', display: 'Females' },
+  ];
+
   constructor(
     public dialog: MatDialog,
     public accountService: AccountService,
-    private router: Router
+    private router: Router,
+    private memberService: MembersService
   ) {}
 
   ngOnInit(): void {}
@@ -39,5 +55,23 @@ export class HomeComponent implements OnInit {
 
   cancelRegisterMode(event: boolean) {
     this.registerMode = event;
+  }
+
+  loadMembers(userParams?: UserParams) {
+    if (userParams) {
+      this.userParams = userParams;
+    }
+    if (this.userParams) {
+      this.memberService.setUserParams(this.userParams);
+      this.memberService.getMembers(this.userParams).subscribe((response) => {
+        console.log('### RESPONSE', response);
+        this.members = response.result;
+        this.pagination = response.pagination;
+
+        if (this.pagination) {
+          this.pagination.currentPage = response.pagination.currentPage - 1;
+        }
+      });
+    }
   }
 }
