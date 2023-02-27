@@ -1,3 +1,14 @@
 .img-circle {
-    max-height: 50px;
+  max-height: 50px;
+}
+
+table {
+  width: 100%;
+}
+.mat-row:hover .mat-cell {
+  opacity: 0.7;
+}
+
+.mat-row .mat-cell {
+  cursor: pointer;
 }

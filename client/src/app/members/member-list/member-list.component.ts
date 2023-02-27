@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/_models/member';
 import { MembersService } from 'src/app/_services/members.service';
 import { Observable } from 'rxjs';
@@ -8,22 +8,26 @@ import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs/operators';
 import { User } from 'src/app/_models/user';
 import Driver from 'driver.js';
+import { MatGridList } from '@angular/material/grid-list';
+import { MatSelect, MatSelectChange } from '@angular/material/select';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+
 @Component({
   selector: 'app-member-list',
   templateUrl: './member-list.component.html',
   styleUrls: ['./member-list.component.scss'],
 })
 export class MemberListComponent implements OnInit {
-  members: Member[];
-  pagination: Pagination;
-  userParams: UserParams;
-  user: User;
+  members?: Member[];
+  pagination?: Pagination;
+  userParams?: UserParams;
+  user?: User;
   genderList = [
     { value: 'male', display: 'Males' },
     { value: 'female', display: 'Females' },
   ];
 
-  driver: Driver;
+  driver?: Driver;
 
   constructor(private memberService: MembersService) {
     this.userParams = this.memberService.getUserParams();
@@ -31,26 +35,39 @@ export class MemberListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadMembers();
-    this.startNavigationGuide();
+    // this.startNavigationGuide();
   }
 
-  loadMembers() {
-    this.memberService.setUserParams(this.userParams);
-    this.memberService.getMembers(this.userParams).subscribe((response) => {
-      this.members = response.result;
-      this.pagination = response.pagination;
-    });
-  }
+  loadMembers(userParams?: UserParams) {
+    if (userParams) {
+      this.userParams = userParams;
+    }
+    if (this.userParams) {
+      this.memberService.setUserParams(this.userParams);
+      this.memberService.getMembers(this.userParams).subscribe((response) => {
+        console.log('### RESPONSE', response);
+        this.members = response.result;
+        this.pagination = response.pagination;
 
-  resetFilters() {
-    this.userParams = this.memberService.resetUserParams();
+        if (this.pagination) {
+          this.pagination.currentPage = response.pagination.currentPage - 1;
+        }
+      });
+    }
+  }
+  change(e: MatSelectChange) {
     this.loadMembers();
   }
 
-  pageChanged(event: any) {
-    this.userParams.pageNumber = event.page;
-    this.memberService.setUserParams(this.userParams);
-    this.loadMembers();
+  pageChanged(event: PageEvent) {
+    if (this.userParams) {
+      this.userParams.pageSize = event.pageSize;
+      this.userParams.pageNumber = event.pageIndex + 1;
+      console.log('### event', this.userParams);
+
+      this.memberService.setUserParams(this.userParams);
+      this.loadMembers();
+    }
   }
 
   startNavigationGuide() {

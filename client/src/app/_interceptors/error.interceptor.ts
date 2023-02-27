@@ -3,21 +3,23 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Router, NavigationExtras } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { catchError } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
+  constructor(private router: Router, private _snackBar: MatSnackBar) {}
 
-  constructor(private router: Router, private toastr: ToastrService) {}
-
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
-      catchError(error => {
+      catchError((error) => {
         if (error) {
           switch (error.status) {
             case 400:
@@ -25,34 +27,60 @@ export class ErrorInterceptor implements HttpInterceptor {
                 const modalStateErrors = [];
                 for (const key in error.error.errors) {
                   if (error.error.errors[key]) {
-                    modalStateErrors.push(error.error.errors[key])
+                    modalStateErrors.push(error.error.errors[key]);
                   }
                 }
                 throw modalStateErrors.flat();
-              } else if (typeof(error.error) === 'object') {
-                this.toastr.error(error.statusText, error.status);
+              } else if (typeof error.error === 'object') {
+                this._snackBar.open(error.statusText, 'Dismiss', {
+                  panelClass: ['red-snackbar'],
+                  duration: 5000,
+                  verticalPosition: 'bottom',
+                  horizontalPosition: 'right',
+                });
               } else {
-                this.toastr.error(error.error, error.status);
+                this._snackBar.open(error.error, 'Dismiss', {
+                  panelClass: ['red-snackbar'],
+                  duration: 5000,
+                  verticalPosition: 'bottom',
+                  horizontalPosition: 'right',
+                });
               }
               break;
             case 401:
-              this.toastr.error(error.statusText, error.status);
+              this._snackBar.open(error.statusText, 'Dismiss', {
+                panelClass: ['red-snackbar'],
+                duration: 5000,
+                verticalPosition: 'bottom',
+                horizontalPosition: 'right',
+              });
               break;
             case 404:
               this.router.navigateByUrl('/not-found');
               break;
             case 500:
-              const navigationExtras: NavigationExtras = {state: {error: error.error}}
+              const navigationExtras: NavigationExtras = {
+                state: { error: error.error },
+              };
               this.router.navigateByUrl('/server-error', navigationExtras);
               break;
             default:
-              this.toastr.error('Something unexpected went wrong');
+              this._snackBar.open(
+                'Something unexpected went wrong',
+                'Dismiss',
+                {
+                  panelClass: ['red-snackbar'],
+                  duration: 5000,
+                  verticalPosition: 'bottom',
+                  horizontalPosition: 'right',
+                }
+              );
               console.log(error);
               break;
           }
         }
         return throwError(error);
       })
-    )
+    );
   }
 }

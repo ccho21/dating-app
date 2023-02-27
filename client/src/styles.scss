@@ -1,51 +1,77 @@
 @import "../node_modules/driver.js/dist/driver.min.css";
+@import "~swiper/swiper-bundle.css";
 /* You can add global styles to this file, and also import other style files */
-.tab-panel {
-  border: 1px solid #ddd;
-  padding: 10px;
+body {
+  font-size: 62.5%;
+  position: relative;
+  height: 100%;
+  // background-color:rgba(201, 167, 167, 0.923);
+  margin: 0;
+}
+
+.container {
+  @media screen and (max-width: 567px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+.container-wrapper {
+  margin: 24px 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
 }
-
-.nav-tabs > li.open,
-.member-tabset > .nav-tabs > li:hover {
-  border-bottom: 4px solid #fbcdcf;
+.img-circle {
+  border-radius: 50% !important;
+  max-width: 100%;
+  padding: 0.1rem;
 }
 
-.member-tabset > .nav-tabs > li.open > a,
-.member-tabset > .nav-tabs > li:hover > a {
-  border: 0;
-  background: none !important;
-  color: #333333;
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
 }
 
-.member-tabset > .nav-tabs > li.open > a > i,
-.member-tabset > .nav-tabs > li:hover > a > i {
-  color: #a6a6a6;
+.example-full-width {
+  width: 100%;
 }
 
-.member-tabset > .nav-tabs > li.open .dropdown-menu,
-.member-tabset > .nav-tabs > li:hover .dropdown-menu {
-  margin-top: 0px;
+.example-half-width {
+  width: 60%;
+  margin-bottom: 0.25rem;
 }
 
-.member-tabset > .nav-tabs > li.active {
-  border-bottom: 4px solid #e95420;
-  position: relative;
+.demo-table {
+  width: 100%;
 }
 
-.member-tabset > .nav-tabs > li.active > a {
-  border: 0 !important;
-  color: #333333;
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
 }
 
-.member-tabset > .nav-tabs > li.active > a > i {
-  color: #404040;
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
 }
 
-.member-tabset > .tab-content {
-  margin-top: -3px;
-  background-color: #fff;
-  border: 0;
-  border-top: 1px solid #eee;
-  padding: 15px 0;
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 1.34375em;
+  padding-top: 1.34375em;
 }

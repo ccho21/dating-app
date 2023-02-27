@@ -1,18 +1,67 @@
-<div class="container mt-5">
-    <div *ngIf="!registerMode" style='text-align: center;' id="step1">
-        <h1>Find your match</h1>
-        <p class="lead">Come on in to view your matches... all you need to do is sign up!</p>
-        <div class="text-center">
-            <button (click)="registerToggle()" class="btn btn-primary btn-lg me-2">Register</button>
-            <button class="btn btn-info btn-lg">Learn more</button>
+<div class="row home-container">
+  <!-- <swiper
+    [navigation]="false"
+    [pagination]="{
+      dynamicBullets: true,
+      clickable: true
+    }"
+    [autoplay]="{
+      delay: 2500,
+      disableOnInteraction: false
+    }"
+    class="mySwiper"
+  >
+    <ng-template swiperSlide *ngFor="let url of imageUrls">
+      <div
+        class="home-background"
+        [ngStyle]="{ 'background-image': 'url(/assets/' + url + ')' }"
+      ></div>
+    </ng-template>
+  </swiper> -->
+
+  <div class="home-background">
+    <div
+      class="home-content"
+      *ngIf="accountService.currentUser$ | async as user; else logged"
+    >
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="heading-text-1">Find your match</h1>
+          <p class="sub-heading">
+            Come on in to view your matches... all you need to do is sign up!
+          </p>
         </div>
+      </div>
     </div>
 
-    <div *ngIf="registerMode" class="container">
-        <div class="row justify-content-center">
-            <div class="col-4">
-                <app-register (cancelRegister)="cancelRegisterMode($event)" ></app-register>
-            </div>
+    <ng-template #logged>
+      <div class="home-content">
+        <div class="row">
+          <div class="col-md-6 main-left">
+            <h1 class="heading-text-1">Find your match</h1>
+            <p class="sub-heading">
+              Come on in to view your matches... all you need to do is sign up!
+            </p>
+            <!-- <div class="text-center">
+              <button mat-raised-button color="primary" (click)="openRegister()">
+                Register
+              </button>
+              <button mat-raised-button color="warn" class="ms-3">
+                Learn more
+              </button>
+            </div> -->
+          </div>
+          <div class="offset-md-1 col-md-4 text-right">
+            <app-register></app-register>
+          </div>
         </div>
-    </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<div class="container">
+  <div class="panel" (click)="checkLoggedIn()">
+    <app-member-search (searchEvent)="loadMembers($event)"></app-member-search>
+  </div>
 </div>

@@ -1,10 +1,18 @@
-<div class="modal-header">
-    <h4 class="modal-title pull-left">{{title}}</h4>
-  </div>
-  <div class="modal-body">
-    <p>{{message}}</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="confirm()">{{btnOkText}}</button>
-    <button type="button" class="btn btn-danger" (click)="decline()">{{btnCancelText}}</button>
-  </div>
+<h2>{{ data.title }}</h2>
+
+<mat-dialog-content class="mat-typography">
+  <p>{{ data.message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close (click)="decline()">
+    {{ data.btnCancelText }}
+  </button>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    (click)="confirm()"
+  >
+    {{ data.btnOkText }}
+  </button>
+</mat-dialog-actions>

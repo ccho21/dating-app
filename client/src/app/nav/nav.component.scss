@@ -1,13 +1,16 @@
-.dropdown-toggle,
-.dropdown-item {
-  cursor: pointer;
+.nav-main {
+  position: fixed;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
 }
-
-img {
-  max-height: 50px;
-  border: 2px solid #fff;
-  display: inline;
+.nav-link-1 {
+  &:hover {
+    color: #fff;
+  }
 }
-.nav-item {
-  background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity));
+.example-spacer {
+  flex: 1 1 auto;
 }
