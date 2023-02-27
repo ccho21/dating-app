@@ -30,6 +30,7 @@ export class MemberSearchComponent implements OnInit {
     this.userParams = this.memberService.getUserParams();
   }
 
+  
   ngOnInit(): void {
     this.userParams = {
       gender: 'female',
