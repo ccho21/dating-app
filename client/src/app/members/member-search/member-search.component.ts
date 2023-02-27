@@ -1,9 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Member } from 'src/app/_models/member';
 import { MembersService } from 'src/app/_services/members.service';
 import { Pagination } from 'src/app/_models/pagination';
@@ -20,7 +15,9 @@ export class MemberSearchComponent implements OnInit {
   @Output() searchEvent = new EventEmitter<UserParams>();
   members?: Member[];
   pagination?: Pagination;
+
   userParams?: UserParams;
+
   user?: User;
   genderList = [
     { value: 'male', display: 'Males' },
@@ -34,6 +31,14 @@ export class MemberSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userParams = {
+      gender: 'female',
+      maxAge: 70,
+      minAge: 18,
+      orderBy: 'lastActive',
+      pageNumber: 0,
+      pageSize: 10,
+    };
     // this.startNavigationGuide();
   }
 

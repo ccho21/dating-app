@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AccountService } from '../_services/account.service';
 import { Router } from '@angular/router';
-import { RegisterComponent } from '../register/register.component';
 import { MembersService } from '../_services/members.service';
 import { UserParams } from '../_models/userParams';
 import { User } from '../_models/user';
@@ -42,17 +41,17 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openRegister() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
+  // openRegister() {
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
 
-    const dialogRef = this.dialog.open(RegisterComponent, dialogConfig);
+  //   const dialogRef = this.dialog.open(RegisterComponent, dialogConfig);
 
-    dialogRef
-      .afterClosed()
-      .subscribe(() => this.router.navigateByUrl('/members'));
-  }
+  //   dialogRef
+  //     .afterClosed()
+  //     .subscribe(() => this.router.navigateByUrl('/members'));
+  // }
 
   registerToggle() {
     this.registerMode = !this.registerMode;
@@ -78,5 +77,13 @@ export class HomeComponent implements OnInit {
         }
       });
     }
+  }
+  checkLoggedIn() {
+    this.accountService.currentUser$.subscribe((res) => {
+      if (!res) {
+        alert('!!! please login first.');
+      }
+      console.log('### res', res);
+    });
   }
 }

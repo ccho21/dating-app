@@ -1,76 +1,69 @@
-<div>
-  <h2>Sign up</h2>
-</div>
-<form
-  [formGroup]="registerForm"
-  (ngSubmit)="registerForm.valid && register()"
-  autocomplete="off"
->
-  <label
-    id="example-radio-group-label"
-    style="margin-bottom: 1rem; margin-right: 0.5rem"
+<div class="panel-white">
+  <form
+    [formGroup]="registerForm"
+    (ngSubmit)="registerForm.valid && register()"
+    autocomplete="off"
   >
-    I am a:
-  </label>
-  <mat-radio-group aria-label="Select an option" formControlName="gender">
-    <mat-radio-button value="male" style="margin: 0.25rem">
-      Male
-    </mat-radio-button>
-    <mat-radio-button value="female" style="margin: 0.25rem">
-      Female
-    </mat-radio-button>
-  </mat-radio-group>
+    <div class="text-left">
+      <label id="example-radio-group-label"> I AM LOOKING FOR </label>
+      <mat-radio-group aria-label="Select an option" formControlName="gender">
+        <mat-radio-button value="male" style="margin: 0.25rem">
+          Male
+        </mat-radio-button>
+        <mat-radio-button value="female" style="margin: 0.25rem">
+          Female
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
 
-  <app-text-input
-    [formControl]="registerForm.controls['username'] | formControl"
-    [label]="'Username'"
-  ></app-text-input>
+    <app-text-input
+      [formControl]="registerForm.controls['username'] | formControl"
+      [label]="'Username'"
+    ></app-text-input>
 
-  <app-text-input
-    [formControl]="registerForm.controls['password'] | formControl"
-    [label]="'Password'"
-    [type]="'password'"
-  >
-  </app-text-input>
+    <app-text-input
+      [formControl]="registerForm.controls['password'] | formControl"
+      [label]="'Password'"
+      [type]="'password'"
+    >
+    </app-text-input>
 
-  <app-text-input
-    [formControl]="registerForm.controls['confirmPassword'] | formControl"
-    [label]="'Confirm Password'"
-    [type]="'password'"
-  ></app-text-input>
+    <app-text-input
+      [formControl]="registerForm.controls['confirmPassword'] | formControl"
+      [label]="'Confirm Password'"
+      [type]="'password'"
+    ></app-text-input>
 
-  <app-text-input
-    [formControl]="registerForm.controls['knownAs'] | formControl"
-    [label]="'Known As'"
-  ></app-text-input>
+    <app-text-input
+      [formControl]="registerForm.controls['knownAs'] | formControl"
+      [label]="'Known As'"
+    ></app-text-input>
 
-  <app-date-input
-    [formControl]="registerForm.controls['dateOfBirth'] | formControl"
-    [label]="'Date Of Birth'"
-    [maxDate]="maxDate"
-  ></app-date-input>
+    <app-date-input
+      [formControl]="registerForm.controls['dateOfBirth'] | formControl"
+      [label]="'Date Of Birth'"
+      [maxDate]="maxDate"
+    ></app-date-input>
 
-  <app-text-input
-    [formControl]="registerForm.controls['city'] | formControl"
-    [label]="'City'"
-  ></app-text-input>
+    <app-text-input
+      [formControl]="registerForm.controls['city'] | formControl"
+      [label]="'City'"
+    ></app-text-input>
 
-  <app-text-input
-    [formControl]="registerForm.controls['country'] | formControl"
-    [label]="'Country'"
-  ></app-text-input>
+    <app-text-input
+      [formControl]="registerForm.controls['country'] | formControl"
+      [label]="'Country'"
+    ></app-text-input>
 
-  <div class="row" *ngIf="validationErrors.length > 0">
-    <ul class="text-danger">
-      <li *ngFor="let error of validationErrors">
-        {{ error }}
-      </li>
-    </ul>
-  </div>
-</form>
-
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
+    <div class="row" *ngIf="validationErrors.length > 0">
+      <ul class="text-danger">
+        <li *ngFor="let error of validationErrors">
+          {{ error }}
+        </li>
+      </ul>
+    </div>
+  </form>
+  <button mat-raised-button cdkFocusInitial>Cancel</button>
   <button
     mat-raised-button
     cdkFocusInitial
@@ -79,4 +72,4 @@
   >
     Register
   </button>
-</mat-dialog-actions>
+</div>

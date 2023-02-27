@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<RegisterComponent>,
+    // private dialogRef: MatDialogRef<RegisterComponent>,
     private _snackBar: MatSnackBar
   ) {}
 
@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
           verticalPosition: 'bottom',
           horizontalPosition: 'right',
         });
-        this.dialogRef.close(true);
+        // this.dialogRef.close(true);
       },
       error: (err) => {
         this.validationErrors = err;

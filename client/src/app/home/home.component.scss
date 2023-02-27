@@ -1,6 +1,6 @@
 .home-container {
   position: relative;
-  min-height: 40vh;
+  min-height: 100vh;
 
   .home-content {
     position: absolute;
@@ -9,14 +9,24 @@
     z-index: 10;
     transform: translate(-50%, -50%);
     text-align: center;
+    width: 90%;
+
+    .main-left {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .main-right {
+    }
   }
 }
 .home-background {
   width: 100%;
-  min-height: 40vh;
+  min-height: 100vh;
   height: 100%;
   position: relative;
-  background: url("/assets/home-background.jpg");
+  background: url("/assets/home-background-2.jpg");
   background-position: center center;
   background-size: cover;
   z-index: 1;
@@ -35,6 +45,11 @@
 .heading-text-1 {
   font-size: 5rem;
   line-height: 1.2;
+  color: white;
+}
+.sub-heading {
+  line-height: 1.2;
+  color: white;
 }
 
 // Carousel
