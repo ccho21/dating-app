@@ -1,75 +1,155 @@
-<div class="row home-container">
-  <div class="home-background">
-    <div
-      class="home-content"
-      *ngIf="accountService.currentUser$ | async as user; else logged"
-    >
-      <div class="row">
-        <div class="col-md-12">
-          <h1 class="heading-text-1">Find your match</h1>
-          <p class="sub-heading">
-            Come on in to view your matches... all you need to do is sign up!
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <ng-template #logged>
-      <div class="home-content">
+<section class="mb-5">
+  <div class="row home-container">
+    <div class="home-background">
+      <div
+        class="home-content"
+        *ngIf="accountService.currentUser$ | async as user; else logged"
+      >
         <div class="row">
-          <div class="col-md-6 main-left">
+          <div class="col-md-12">
             <h1 class="heading-text-1">Find your match</h1>
             <p class="sub-heading">
               Come on in to view your matches... all you need to do is sign up!
             </p>
-            <!-- <div class="text-center">
-              <button mat-raised-button color="primary" (click)="openRegister()">
-                Register
-              </button>
-              <button mat-raised-button color="warn" class="ms-3">
-                Learn more
-              </button>
-            </div> -->
-          </div>
-          <div class="offset-md-1 col-md-4 text-right">
-            <app-register></app-register>
           </div>
         </div>
       </div>
-    </ng-template>
-  </div>
-</div>
 
-<div class="container">
-  <div class="panel-border">
-    <app-member-search (searchEvent)="loadMembers($event)"></app-member-search>
-  </div>
-
-  <div class="mb-5">
-    <h3>SEARCH RESULTS</h3>
-    <hr />
-  </div>
-  <div class="mb-5">
-    <swiper
-      [navigation]="true"
-      [spaceBetween]="30"
-      [slidesPerView]="5"
-      [pagination]="{
-        dynamicBullets: true,
-        clickable: true
-      }"
-      [loop]="true"
-      [autoplay]="{
-        delay: 2500,
-        disableOnInteraction: false
-      }"
-      class="mySwiper"
-    >
-      <ng-template swiperSlide *ngFor="let member of members">
-        <div class="text-center">
-          <h1>NUMBER</h1>
+      <ng-template #logged>
+        <div class="home-content">
+          <div class="row">
+            <div class="col-md-6 main-left">
+              <h1 class="heading-text-1">Find your match</h1>
+              <p class="sub-heading">
+                Come on in to view your matches... all you need to do is sign
+                up!
+              </p>
+              <!-- <div class="text-center">
+                <button mat-raised-button color="primary" (click)="openRegister()">
+                  Register
+                </button>
+                <button mat-raised-button color="warn" class="ms-3">
+                  Learn more
+                </button>
+              </div> -->
+            </div>
+            <div class="offset-md-1 col-md-4 text-right">
+              <app-register></app-register>
+            </div>
+          </div>
         </div>
       </ng-template>
-    </swiper>
+    </div>
   </div>
-</div>
+</section>
+
+<section class="mb-5">
+  <div class="container">
+    <div class="panel-border">
+      <app-member-search
+        (searchEvent)="loadMembers($event)"
+      ></app-member-search>
+    </div>
+
+    <div class="mb-5">
+      <h3>SEARCH RESULTS</h3>
+      <hr />
+    </div>
+    <div class="mb-5">
+      <swiper
+        [navigation]="true"
+        [spaceBetween]="0"
+        [slidesPerView]="7"
+        [pagination]="{
+          dynamicBullets: true,
+          clickable: true
+        }"
+        [loop]="true"
+        [autoplay]="{
+          delay: 2500,
+          disableOnInteraction: false
+        }"
+        class="mySwiper"
+      >
+        <ng-template swiperSlide *ngFor="let member of members">
+          <div class="text-center">
+            <div class="p-4">
+              <button (click)="openMemberDetail(member)" class="member-link">
+                <img
+                  [src]="member.photoUrl"
+                  [alt]="member.username"
+                  class="user-thumbnail"
+                />
+              </button>
+            </div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+  </div>
+</section>
+
+<section class="mb-5" id="member-detail" *ngIf="member">
+  <div class="container">
+    <div class="row">
+      <div class="offset-md-1 col-md-5">
+        <div class="panel">
+          <div class="head text-left p-2">
+            <h1 class="mb-0">{{ member.username }}</h1>
+          </div>
+          <div class="body p-3">
+            <div class="text-center mb-3">
+              <img
+                [src]="member.photoUrl"
+                [alt]="member.username"
+                class="user-thumbnail big"
+              />
+            </div>
+            <div class="footer text-center">
+              <button
+                mat-icon-button
+                routerLink="/members/{{ member.username }}"
+              >
+                <mat-icon>person</mat-icon>
+              </button>
+
+              <button mat-icon-button>
+                <mat-icon>favorite</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                routerLink="/members/{{ member.username }}"
+                [queryParams]="{ tab: 3 }"
+              >
+                <mat-icon> mail_outline</mat-icon>
+              </button>
+            </div>
+            <hr />
+            <div class="text-left">detail #1</div>
+            <hr />
+            <div class="text-left">detail #2</div>
+            <hr />
+            <div class="text-left">detail #3</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="panel outline">
+          <div class="head text-left p-2">
+            <h1 class="mb-0">Message</h1>
+          </div>
+          <div class="body p-3">
+            <div class="footer text-center"></div>
+            <hr />
+            <div class="text-left">detail #1</div>
+            <hr />
+            <div class="text-left">detail #2</div>
+            <hr />
+            <div class="text-left">detail #3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

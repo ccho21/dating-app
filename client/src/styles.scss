@@ -1,12 +1,43 @@
 @import "../node_modules/driver.js/dist/driver.min.css";
 @import "~swiper/swiper-bundle.css";
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --peach: #ffbf90;
+  --red: #f36870;
+  --celadon: #ced6ca;
+  --champagne: #fff5d7;
+  --white: #ffffff;
+}
 body {
   font-size: 62.5%;
   position: relative;
   height: 100%;
-  // background-color:rgba(201, 167, 167, 0.923);
+  background-color: var(--white);
   margin: 0;
+}
+
+.panel {
+  background-color: var(--champagne);
+  border-radius: 10px;
+  border: 1px white solid;
+  overflow: hidden;
+
+  &.outline {
+    background-color: var(--white);
+    border: 2px solid var(--red);
+    border-color: var(--red);
+    backface-visibility: hidden;
+    & .head {
+      color: var(--white);
+      font-weight: 500;
+      background-color: var(--red);
+    }
+  }
+
+  & .head {
+    background-color: var(--peach);
+  }
 }
 
 .panel-white {

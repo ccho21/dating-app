@@ -3,7 +3,6 @@
     <ng-container>
       <button
         mat-icon-button
-        [matMenuTriggerFor]="menu"
         routerLink="/"
         *ngIf="accountService.currentUser$ | async as user"
       >
@@ -13,7 +12,7 @@
           alt="{{ user.username }}"
         />
       </button>
-      <button mat-button>
+      <button mat-button routerLink="/">
         <span>FIND YOUR MATCH </span>
       </button>
     </ng-container>
