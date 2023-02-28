@@ -1,8 +1,22 @@
 <mat-toolbar class="nav-main">
   <mat-toolbar-row class="">
-    <a mat-stroked-button routerLink="/" routerLinkActive="active"
-      >Dating App</a
-    >
+    <ng-container>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        routerLink="/"
+        *ngIf="accountService.currentUser$ | async as user"
+      >
+        <img
+          class="img-circle"
+          src="{{ user.photoUrl || './assets/user.png' }}"
+          alt="{{ user.username }}"
+        />
+      </button>
+      <button mat-button>
+        <span>FIND YOUR MATCH </span>
+      </button>
+    </ng-container>
     <span class="example-spacer"></span>
     <div class="d-none d-md-block">
       <ng-container *ngIf="accountService.currentUser$ | async">
@@ -53,16 +67,8 @@
     </div>
 
     <ng-container *ngIf="accountService.currentUser$ | async as user">
-      <button mat-button>
+      <button mat-stroked-button [matMenuTriggerFor]="menu">
         <span>Welcome {{ user.knownAs || user.username | titlecase }}! </span>
-      </button>
-
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <img
-          class="img-circle"
-          src="{{ user.photoUrl || './assets/user.png' }}"
-          alt="{{ user.username }}"
-        />
       </button>
     </ng-container>
 

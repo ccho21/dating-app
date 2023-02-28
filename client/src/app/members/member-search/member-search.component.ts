@@ -39,6 +39,7 @@ export class MemberSearchComponent implements OnInit {
       pageNumber: 0,
       pageSize: 10,
     };
+    this.search();
     // this.startNavigationGuide();
   }
 

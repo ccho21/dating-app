@@ -1,6 +1,6 @@
 .home-container {
   position: relative;
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
 
   .home-content {
     position: absolute;
@@ -23,8 +23,6 @@
 }
 .home-background {
   width: 100%;
-  min-height: 100vh;
-  height: 100%;
   position: relative;
   background: url("/assets/home-background-2.jpg");
   background-position: center center;
@@ -75,3 +73,4 @@
   width: 100%;
   max-width: 300px;
 }
+

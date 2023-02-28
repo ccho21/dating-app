@@ -81,7 +81,7 @@ export class NavComponent implements OnInit {
 
     dialogRef
       .afterClosed()
-      .subscribe(() => this.router.navigateByUrl('/members'));
+      .subscribe(() => this.router.navigateByUrl('/'));
   }
 
   logout() {

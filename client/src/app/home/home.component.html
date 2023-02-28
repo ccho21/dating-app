@@ -1,24 +1,4 @@
 <div class="row home-container">
-  <!-- <swiper
-    [navigation]="false"
-    [pagination]="{
-      dynamicBullets: true,
-      clickable: true
-    }"
-    [autoplay]="{
-      delay: 2500,
-      disableOnInteraction: false
-    }"
-    class="mySwiper"
-  >
-    <ng-template swiperSlide *ngFor="let url of imageUrls">
-      <div
-        class="home-background"
-        [ngStyle]="{ 'background-image': 'url(/assets/' + url + ')' }"
-      ></div>
-    </ng-template>
-  </swiper> -->
-
   <div class="home-background">
     <div
       class="home-content"
@@ -61,7 +41,35 @@
 </div>
 
 <div class="container">
-  <div class="panel" (click)="checkLoggedIn()">
+  <div class="panel-border">
     <app-member-search (searchEvent)="loadMembers($event)"></app-member-search>
+  </div>
+
+  <div class="mb-5">
+    <h3>SEARCH RESULTS</h3>
+    <hr />
+  </div>
+  <div class="mb-5">
+    <swiper
+      [navigation]="true"
+      [spaceBetween]="30"
+      [slidesPerView]="5"
+      [pagination]="{
+        dynamicBullets: true,
+        clickable: true
+      }"
+      [loop]="true"
+      [autoplay]="{
+        delay: 2500,
+        disableOnInteraction: false
+      }"
+      class="mySwiper"
+    >
+      <ng-template swiperSlide *ngFor="let member of members">
+        <div class="text-center">
+          <h1>NUMBER</h1>
+        </div>
+      </ng-template>
+    </swiper>
   </div>
 </div>

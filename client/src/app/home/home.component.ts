@@ -8,6 +8,7 @@ import { UserParams } from '../_models/userParams';
 import { User } from '../_models/user';
 import { Member } from '../_models/member';
 import { Pagination } from '../_models/pagination';
+import { concatMap, of } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -39,19 +40,12 @@ export class HomeComponent implements OnInit {
     private memberService: MembersService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.accountService.currentUser$.subscribe((res) => {
+      this.user = res!;
+    });
+  }
 
-  // openRegister() {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.disableClose = true;
-  //   dialogConfig.autoFocus = true;
-
-  //   const dialogRef = this.dialog.open(RegisterComponent, dialogConfig);
-
-  //   dialogRef
-  //     .afterClosed()
-  //     .subscribe(() => this.router.navigateByUrl('/members'));
-  // }
 
   registerToggle() {
     this.registerMode = !this.registerMode;
@@ -62,28 +56,25 @@ export class HomeComponent implements OnInit {
   }
 
   loadMembers(userParams?: UserParams) {
-    if (userParams) {
+    console.log('### use rParams', userParams);
+    if (userParams && this.user) {
       this.userParams = userParams;
-    }
-    if (this.userParams) {
       this.memberService.setUserParams(this.userParams);
-      this.memberService.getMembers(this.userParams).subscribe((response) => {
-        console.log('### RESPONSE', response);
-        this.members = response.result;
-        this.pagination = response.pagination;
 
-        if (this.pagination) {
-          this.pagination.currentPage = response.pagination.currentPage - 1;
-        }
-      });
+      this.memberService
+        .getMembers(this.userParams as UserParams)
+        .subscribe((response) => {
+          if (response) {
+            console.log('### RESPONSE', response);
+            this.members = response.result;
+            this.pagination = response.pagination;
+            // if (this.pagination) {
+            //   this.pagination.currentPage = response.pagination.currentPage - 1;
+            // }
+          }
+        });
+    } else {
+      alert('Please LOGIN FIRST!');
     }
-  }
-  checkLoggedIn() {
-    this.accountService.currentUser$.subscribe((res) => {
-      if (!res) {
-        alert('!!! please login first.');
-      }
-      console.log('### res', res);
-    });
   }
 }
