@@ -23,6 +23,7 @@ export class MessageService {
   constructor(private http: HttpClient, private busyService: BusyService) {}
 
   createHubConnection(user: User, otherUsername: string) {
+    console.log('### create?', user, otherUsername);
     this.busyService.busy();
     this.hubConnection = new HubConnectionBuilder()
       .withUrl(this.hubUrl + 'message?user=' + otherUsername, {
@@ -84,6 +85,8 @@ export class MessageService {
   }
 
   async sendMessage(username: string, content: string) {
+    console.log('### user name', username);
+    console.log('### content', content);
     return this.hubConnection
       ?.invoke('SendMessage', { recipientUsername: username, content })
       .catch((error) => console.log(error));

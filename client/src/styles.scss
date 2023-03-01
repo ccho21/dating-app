@@ -18,20 +18,20 @@ body {
 }
 
 .panel {
-  background-color: var(--champagne);
+  // background-color: var(--champagne);
   border-radius: 10px;
   border: 1px white solid;
   overflow: hidden;
+  border: 2px solid var(--red);
 
   &.outline {
     background-color: var(--white);
-    border: 2px solid var(--red);
     border-color: var(--red);
     backface-visibility: hidden;
     & .head {
-      color: var(--white);
+      // color: var(--white);
+      // background-color: var(--red);
       font-weight: 500;
-      background-color: var(--red);
     }
   }
 
@@ -102,9 +102,4 @@ body {
 
 .mat-form-field {
   width: 100%;
-}
-
-.mat-form-field-wrapper {
-  padding-bottom: 1.34375em;
-  padding-top: 1.34375em;
 }

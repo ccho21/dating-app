@@ -89,8 +89,66 @@
   </div>
 </section>
 
-<section class="mb-5" id="member-detail" *ngIf="member">
-  <div class="container">
+<section class="mb-5" id="member-detail">
+  <div class="container" *ngIf="member">
+    <div class="d-post-wrapper">
+      <div class="d-post">
+        <div class="d-post-box-left" @fadeIn>
+          <div class="d-post-content">
+            <div class="head text-left p-3">
+              <h1 class="mb-0">{{ member.username }}</h1>
+            </div>
+            <div class="body p-3">
+              <div class="text-center mb-3">
+                <img
+                  [src]="member.photoUrl"
+                  [alt]="member.username"
+                  class="user-thumbnail big"
+                />
+              </div>
+              <div class="footer text-center">
+                <button
+                  mat-icon-button
+                  routerLink="/members/{{ member.username }}"
+                >
+                  <mat-icon>person</mat-icon>
+                </button>
+
+                <button mat-icon-button>
+                  <mat-icon>favorite</mat-icon>
+                </button>
+                <button mat-icon-button (click)="openMessage(member)">
+                  <mat-icon> mail_outline</mat-icon>
+                </button>
+              </div>
+              <hr />
+              <div class="text-left">detail #1</div>
+              <hr />
+              <div class="text-left">detail #2</div>
+              <hr />
+              <div class="text-left">detail #3</div>
+            </div>
+          </div>
+        </div>
+        <div class="d-post-box-right" @fadeIn *ngIf="messageOpen; else empty">
+          <app-member-messages
+            [member]="member"
+            (messageClose)="closeMessage($event)"
+          ></app-member-messages>
+        </div>
+        <ng-template #empty>
+          <div class="d-post-box-right">
+            <!-- <div class="d-post-box-right-container">
+              <div class="d-post-contents">
+                <div class="d-post-comment-write">asdff</div>
+              </div>
+            </div> -->
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="container">
     <div class="row">
       <div class="offset-md-1 col-md-5">
         <div class="panel">
@@ -135,21 +193,8 @@
       </div>
 
       <div class="col-md-5">
-        <div class="panel outline">
-          <div class="head text-left p-2">
-            <h1 class="mb-0">Message</h1>
-          </div>
-          <div class="body p-3">
-            <div class="footer text-center"></div>
-            <hr />
-            <div class="text-left">detail #1</div>
-            <hr />
-            <div class="text-left">detail #2</div>
-            <hr />
-            <div class="text-left">detail #3</div>
-          </div>
-        </div>
+        <app-member-messages></app-member-messages>
       </div>
     </div>
-  </div>
+  </div> -->
 </section>

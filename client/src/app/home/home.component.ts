@@ -10,11 +10,22 @@ import { Member } from '../_models/member';
 import { Pagination } from '../_models/pagination';
 import { concatMap, of } from 'rxjs';
 import { ViewportScroller } from '@angular/common';
+import { animate, style, transition, trigger } from '@angular/animations';
+
+const enterTransition = transition(':enter', [
+  style({
+    opacity: 0,
+  }),
+  animate('.3s ease-in', style({ opacity: 1 })),
+]);
+
+const fadeIn = trigger('fadeIn', [enterTransition]);
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  animations: [fadeIn],
 })
 export class HomeComponent implements OnInit {
   registerMode = false;
@@ -35,6 +46,9 @@ export class HomeComponent implements OnInit {
     'home-background-2.jpg',
     'home-background-3.jpg',
   ];
+
+  messageOpen: boolean = false;
+
   constructor(
     public dialog: MatDialog,
     public accountService: AccountService,
@@ -83,7 +97,7 @@ export class HomeComponent implements OnInit {
 
   openMemberDetail(member: Member) {
     this.member = undefined;
-
+    this.messageOpen = false;
     setTimeout(() => {
       if (member) {
         this.member = member;
@@ -93,5 +107,12 @@ export class HomeComponent implements OnInit {
         this.scroller.scrollToAnchor('member-detail');
       }, 300);
     }, 300);
+  }
+
+  openMessage(member: Member) {
+    this.messageOpen = true;
+  }
+  closeMessage(e: boolean) {
+    this.messageOpen = e;
   }
 }

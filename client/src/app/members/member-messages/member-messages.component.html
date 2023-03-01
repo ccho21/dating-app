@@ -1,4 +1,96 @@
-<mat-card class="messages">
+<div class="message-container" *ngIf="member">
+  <div class="message-contents">
+    <div class="heading d-flex align-items-center">
+      <div class="align-self-center">
+        <img
+          class="img-thumbnail img-circle img-no-padding img-responsive img-fluid"
+          width="40"
+          [src]="member.photoUrl"
+          [alt]="member.username"
+        />
+      </div>
+      <div class="font-weight-bold flex-grow-1 ps-2">
+        <a class="section-link text-md text-black" href="">
+          {{ member.username }}
+        </a>
+      </div>
+      <div class="pr-2"></div>
+
+      <div>
+        <button mat-icon-button (click)="close()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="body" #messageBody>
+      <div *ngIf="(messageService.messageThread$ | async)?.length === 0">
+        <div>No messages yet... Please say HI!</div>
+      </div>
+
+      <div *ngFor="let message of messageService.messageThread$ | async">
+        <div
+          class="message-item"
+          [ngClass]="{
+            'text-end': member.username !== message.senderUsername
+          }"
+        >
+          <div>
+            <div class="message-content">{{ message.content }}</div>
+            <div class="text-muted">
+              <div class="fa fa-clock-o pr-2" timeago [date]="message.messageSent" [live]="false">
+              </div>
+
+              <span
+                class="text-success small ms-2"
+                *ngIf="
+                  message.dateRead &&
+                  message.senderUsername !== member?.username
+                "
+              >
+                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="write" id="bottom">
+      <div class="">
+        <form
+          #messageForm="ngForm"
+          autocomplete="off"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+          (ngSubmit)="sendMessage()"
+        >
+          <mat-form-field class="w-100 px-3 pt-2" appearance="standard">
+            <mat-label>Message</mat-label>
+            <input
+              matInput
+              class=""
+              placeholder="Send a private message"
+              name="messageContent"
+              [(ngModel)]="messageContent"
+              type="text"
+            />
+            <button
+              matSuffix
+              mat-mini-fab
+              color="primary"
+              class="mb-2"
+              aria-label=""
+            >
+              <mat-icon>send</mat-icon>
+            </button>
+          </mat-form-field>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- <mat-card class="messages">
   <div class="message-header">
     <div class="d-flex align-items-center" *ngIf="member">
       <img
@@ -86,4 +178,5 @@
       </mat-form-field>
     </form>
   </div>
-</mat-card>
+</mat-card> -->
+</div>
