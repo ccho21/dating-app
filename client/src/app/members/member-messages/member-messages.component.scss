@@ -61,6 +61,17 @@
         background-color: rgba(179, 177, 177, 0.792);
         padding: 0.75rem;
         border-radius: 1rem;
+        max-width: 350px;
+      }
+      .message-line {
+        display: flex;
+        align-items: center;
+        .icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 15px;
+        }
       }
     }
   }

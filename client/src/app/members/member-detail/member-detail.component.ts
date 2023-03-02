@@ -95,6 +95,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
       this.messageService.stopHubConnection();
     }
   }
+  
   detectTabChange(tab: MatTabChangeEvent) {}
 
   // onSwiper(swiper) {

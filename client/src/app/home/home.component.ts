@@ -11,6 +11,7 @@ import { Pagination } from '../_models/pagination';
 import { concatMap, of } from 'rxjs';
 import { ViewportScroller } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { PresenceService } from '../_services/presence.service';
 
 const enterTransition = transition(':enter', [
   style({
@@ -54,7 +55,8 @@ export class HomeComponent implements OnInit {
     public accountService: AccountService,
     private router: Router,
     private memberService: MembersService,
-    private scroller: ViewportScroller
+    private scroller: ViewportScroller,
+    public presence: PresenceService
   ) {}
 
   ngOnInit(): void {
@@ -62,6 +64,17 @@ export class HomeComponent implements OnInit {
       this.user = res!;
     });
   }
+
+  // selectTab() {
+  //   if (this.user && this.member) {
+  //     this.messageService.createHubConnection(
+  //       this.user as User,
+  //       this.member?.username as string
+  //     );
+  //   } else {
+  //     this.messageService.stopHubConnection();
+  //   }
+  // }
 
   registerToggle() {
     this.registerMode = !this.registerMode;

@@ -8,12 +8,13 @@
   --celadon: #ced6ca;
   --champagne: #fff5d7;
   --white: #ffffff;
+  --wash: #f0f2f5;
 }
 body {
   font-size: 62.5%;
   position: relative;
   height: 100%;
-  background-color: var(--white);
+  background-color: var(--wash);
   margin: 0;
 }
 

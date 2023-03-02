@@ -6,6 +6,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Output,
   SimpleChanges,
@@ -13,7 +14,7 @@ import {
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { take } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { Member } from 'src/app/_models/member';
 import { Message } from 'src/app/_models/message';
 import { User } from 'src/app/_models/user';
@@ -27,7 +28,7 @@ import { MessageService } from 'src/app/_services/message.service';
   templateUrl: './member-messages.component.html',
   styleUrls: ['./member-messages.component.scss'],
 })
-export class MemberMessagesComponent implements OnInit, OnChanges {
+export class MemberMessagesComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('messageBody') messageBody?: ElementRef<HTMLDivElement>;
   @ViewChild('messageForm') messageForm?: NgForm;
   @Input() messages?: Message[];
@@ -37,6 +38,7 @@ export class MemberMessagesComponent implements OnInit, OnChanges {
   loading = false;
   user?: User;
 
+  messageThread$?: Subscription;
   folders: Section[] = [
     {
       name: 'Photos',
@@ -62,24 +64,24 @@ export class MemberMessagesComponent implements OnInit, OnChanges {
       .subscribe((user) => (this.user = user as User));
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('### CHANGES', changes);
-    console.log('### this.user', this.user);
-    console.log('###  this.memberr', this.member);
     if (this.user && this.member) this.selectTab();
   }
 
   ngAfterViewInit() {
     const maxScroll = this.messageBody?.nativeElement.scrollHeight;
     console.log('### maxScroll', maxScroll);
-    this.messageBody?.nativeElement.scrollTo({ top: maxScroll, behavior: 'smooth' });
+    this.messageBody?.nativeElement.scrollTo({
+      top: maxScroll,
+      behavior: 'smooth',
+    });
   }
 
   ngOnInit(): void {
-    console.log('### when ngOn init');
-
-    this.messageService.messageThread$.subscribe((res) => {
-      console.log('### check what is coiming!', res);
-    });
+    this.messageThread$ = this.messageService.messageThread$.subscribe(
+      (res) => {
+        console.log('### Check Message Thread$', res);
+      }
+    );
   }
 
   selectTab() {
@@ -114,6 +116,13 @@ export class MemberMessagesComponent implements OnInit, OnChanges {
     console.log('### emit the close ');
     this.messageService.stopHubConnection();
     this.messageClose.emit(false);
+  }
+
+  ngOnDestroy(): void {
+    console.log('### Member message is destroyed');
+    if (this.messageThread$) {
+      this.messageThread$.unsubscribe();
+    }
   }
 }
 

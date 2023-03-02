@@ -6,6 +6,13 @@
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>Shiba Inu</mat-card-title>
           <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+          <span
+            [class.is-online]="
+              (presence.onlineUsers$ | async)!.includes(member.username)
+            "
+          >
+            ONLNE?
+          </span>
         </mat-card-header>
         <img
           src="{{ member.photoUrl || './assets/user.png' }}"
@@ -34,7 +41,7 @@
             </div>
             <div>
               <strong>Member since:</strong>
-              <p>{{ member.created | date: "dd MMM yyyy" }}</p>
+              <p>{{ member.created | date : "dd MMM yyyy" }}</p>
             </div>
           </div>
         </mat-card-content>

@@ -91,12 +91,19 @@
 
 <section class="mb-5" id="member-detail">
   <div class="container" *ngIf="member">
-    <div class="d-post-wrapper">
-      <div class="d-post">
-        <div class="d-post-box-left" @fadeIn>
-          <div class="d-post-content">
-            <div class="head text-left p-3">
+    <div class="member-wrapper">
+      <div class="member">
+        <div class="member-box-left" @fadeIn>
+          <div class="member-content">
+            <div class="head text-left ps-3 py-2">
               <h1 class="mb-0">{{ member.username }}</h1>
+              <mat-icon
+                class="status"
+                [class.is-online]="
+                  (presence.onlineUsers$ | async)!.includes(member.username)
+                "
+                >brightness_1
+              </mat-icon>
             </div>
             <div class="body p-3">
               <div class="text-center mb-3">
@@ -130,20 +137,14 @@
             </div>
           </div>
         </div>
-        <div class="d-post-box-right" @fadeIn *ngIf="messageOpen; else empty">
+        <div class="member-box-right" @fadeIn *ngIf="messageOpen; else empty">
           <app-member-messages
             [member]="member"
             (messageClose)="closeMessage($event)"
           ></app-member-messages>
         </div>
         <ng-template #empty>
-          <div class="d-post-box-right">
-            <!-- <div class="d-post-box-right-container">
-              <div class="d-post-contents">
-                <div class="d-post-comment-write">asdff</div>
-              </div>
-            </div> -->
-          </div>
+          <div class="member-box-right"></div>
         </ng-template>
       </div>
     </div>
