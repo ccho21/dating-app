@@ -58,7 +58,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     this.route.queryParams.subscribe((params) => {
       if (params) {
         this.activeTab = params['tab'] ? Number(params['tab']) : 0;
-        this.selectTab({ index: this.activeTab } as MatTabChangeEvent);
+        // this.selectTab({ index: this.activeTab } as MatTabChangeEvent);
       }
     });
 
@@ -86,26 +86,15 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   }
 
   selectTab(tab: MatTabChangeEvent) {
-    if (tab.index === 3 && this.messages?.length === 0) {
-      this.messageService.createHubConnection(
-        this.user as User,
-        this.member?.username as string
-      );
-    } else {
-      this.messageService.stopHubConnection();
-    }
+    console.log('### tab', tab);
+    this.activeTab = tab.index;
   }
-  
+
   detectTabChange(tab: MatTabChangeEvent) {}
 
-  // onSwiper(swiper) {
-  //   console.log(swiper);
-  // }
-  // onSlideChange() {
-  //   console.log('slide change');
-  // }
 
   ngOnDestroy(): void {
+    console.log('#################MEMBER DETAIL DESTROYED');
     this.messageService.stopHubConnection();
   }
 }

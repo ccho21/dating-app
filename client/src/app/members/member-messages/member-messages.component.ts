@@ -112,17 +112,20 @@ export class MemberMessagesComponent implements OnInit, OnChanges, OnDestroy {
       .finally(() => (this.loading = false));
   }
 
+  resetMessageService() {
+    this.messageThread$!.unsubscribe();
+    this.messageService.stopHubConnection();
+  }
+
   close() {
     console.log('### emit the close ');
-    this.messageService.stopHubConnection();
+    this.resetMessageService();
     this.messageClose.emit(false);
   }
 
   ngOnDestroy(): void {
     console.log('### Member message is destroyed');
-    if (this.messageThread$) {
-      this.messageThread$.unsubscribe();
-    }
+    this.resetMessageService();
   }
 }
 

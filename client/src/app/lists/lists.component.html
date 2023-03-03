@@ -1,39 +1,37 @@
-<div class="text-center mt-3">
-  <h2>
-    {{ predicate === "liked" ? "Members I like" : "Members who like me" }}
-  </h2>
-</div>
-<section class="example-section mb-4">
-  <mat-button-toggle-group
-    name="fontStyle"
-    aria-label="Font Style"
-    [(ngModel)]="predicate"
-  >
-    <mat-button-toggle color="primary" value="liked" (click)="loadLikes()">
-      Members I like
-    </mat-button-toggle>
-    <mat-button-toggle color="primary" value="likedBy" (click)="loadLikes()">
-      Members who like me
-    </mat-button-toggle>
-  </mat-button-toggle-group>
-</section>
+<div class="container my-5">
+  <div class="text-center mt-3"></div>
+  <section class="example-section mb-4 text-end">
+    <mat-button-toggle-group
+      name="fontStyle"
+      aria-label="Font Style"
+      [(ngModel)]="predicate"
+    >
+      <mat-button-toggle color="primary" value="liked" (click)="loadLikes()">
+        Members I like
+      </mat-button-toggle>
+      <mat-button-toggle color="primary" value="likedBy" (click)="loadLikes()">
+        Members who like me
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </section>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-3 mb-4" *ngFor="let member of members">
-      <app-member-card [member]="member"></app-member-card>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 mb-4" *ngFor="let member of members">
+        <app-member-card [member]="member"></app-member-card>
+      </div>
     </div>
   </div>
-</div>
 
-<mat-paginator
-  *ngIf="pagination"
-  [length]="pagination.totalItems"
-  [pageSize]="pagination.itemsPerPage"
-  [pageSizeOptions]="[5, 10, 25, 100]"
-  [pageIndex]="pagination.currentPage"
-  (page)="pageChanged($event)"
-  class="mt-5"
-  aria-label="Select page"
->
-</mat-paginator>
+  <mat-paginator
+    *ngIf="pagination"
+    [length]="pagination.totalItems"
+    [pageSize]="pagination.itemsPerPage"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    [pageIndex]="pagination.currentPage"
+    (page)="pageChanged($event)"
+    class="mt-5"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>

@@ -1,4 +1,4 @@
-<div class="container" *ngIf="member">
+<div class="container my-5" *ngIf="member">
   <div class="row">
     <div class="col-md-4">
       <mat-card class="member-detail-card">
@@ -60,19 +60,23 @@
         style="max-height: 750px; min-height: 500px"
       >
         <mat-tab [label]="'About ' + member.knownAs">
-          <h4>Description</h4>
-          <p>{{ member.introduction }}</p>
-          <h4>Looking for</h4>
-          <p>{{ member.lookingFor }}</p>
+          <div *ngIf="activeTab === 0">
+            <h4>Description</h4>
+            <p>{{ member.introduction }}</p>
+            <h4>Looking for</h4>
+            <p>{{ member.lookingFor }}</p>
+          </div>
         </mat-tab>
 
         <mat-tab label="Interests">
-          <h4>Interests</h4>
-          <p>{{ member.interests }}</p>
+          <div *ngIf="activeTab === 1">
+            <h4>Interests</h4>
+            <p>{{ member.interests }}</p>
+          </div>
         </mat-tab>
 
         <mat-tab label="Photos">
-          <div class="container">
+          <div class="container" *ngIf="activeTab === 2">
             <div class="row">
               <div class="col-lg-8 mt-4">
                 <swiper
@@ -95,7 +99,7 @@
           </div>
         </mat-tab>
         <mat-tab label="Messages">
-          <app-member-messages [member]="member"></app-member-messages>
+          <app-member-messages [member]="member" *ngIf="activeTab === 3"></app-member-messages>
         </mat-tab>
       </mat-tab-group>
     </div>

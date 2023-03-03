@@ -1,11 +1,13 @@
 <div class="member-card" *ngIf="member">
-  <div class="image">
-    <img
-      mat-card-image
-      src="{{ member.photoUrl || './assets/user.png' }}"
-      alt="{{ member.knownAs }}"
-    />
-  </div>
+  <a href="" class="d-block" routerLink="/members/{{ member.username }}">
+    <div class="image">
+      <img
+        class="w-100"
+        src="{{ member.photoUrl || './assets/user.png' }}"
+        alt="{{ member.knownAs }}"
+      />
+    </div>
+  </a>
   <div class="body">
     <div class="action-btns mb-2">
       <button mat-icon-button (click)="addLike(member)" class="action-icon">
@@ -21,9 +23,13 @@
       </button>
     </div>
     <div class="d-flex align-items-center">
-      <div class="name">
+      <a
+        href=""
+        class="d-block name"
+        routerLink="/members/{{ member.username }}"
+      >
         {{ member.username }}
-      </div>
+      </a>
       <mat-icon
         class="status"
         [class.is-online]="

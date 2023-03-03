@@ -33,7 +33,7 @@ export class MemberSearchComponent implements OnInit {
   ngOnInit(): void {
     this.userParams = {
       gender: 'female',
-      maxAge: 70,
+      maxAge: 99,
       minAge: 18,
       orderBy: 'lastActive',
       pageNumber: 0,
