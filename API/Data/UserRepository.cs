@@ -77,9 +77,7 @@ namespace API.Data
                 _ => query.OrderByDescending(u => u.LastActive)
             };
 
-            // query = query.Where(u => u.MessagesReceived.Count() > 0);
-
-            // query = query.Where(u => u.MessagesReceived.Where(m => m.RecipientUsername == userParams.CurrentUsername).Count() > 0);
+            query = query.Where(u => u.MessagesSent.Where(m => m.RecipientUsername == userParams.CurrentUsername).Count() > 0);
 
             return await PagedList<MemberMessageDto>.CreateAsync(
                 query.ProjectTo<MemberMessageDto>(_mapper.ConfigurationProvider).AsNoTracking(),

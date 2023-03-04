@@ -79,29 +79,34 @@ namespace API.SignalR
 
             var group = await _unitOfWork.MessageRepository.GetMessageGroup(groupName);
 
-            if (group.Connections.Any(x => x.Username == recipient.UserName))
+            var isGroupConnected = group.Connections.Any(x => x.Username == recipient.UserName);
+            //  If user is connected, update dateRed to now.
+            if (isGroupConnected)
             {
                 message.DateRead = DateTime.UtcNow;
             }
-            else
-            {
-                var connections = await _tracker.GetConnectionsForUser(recipient.UserName);
-                if (connections != null)
-                {
-                    await _presenceHub.Clients.Clients(connections).SendAsync("NewMessageReceived",
-                        new { username = sender.UserName, knownAs = sender.KnownAs });
-                }
-            }
 
+            // Add Message
             _unitOfWork.MessageRepository.AddMessage(message);
 
             if (await _unitOfWork.Complete())
             {
                 await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageDto>(message));
             }
+
+
+            if (!isGroupConnected)
+            {
+                var connections = await _tracker.GetConnectionsForUser(recipient.UserName);
+                if (connections != null)
+                {
+                    await _presenceHub.Clients.Clients(connections).SendAsync("NewMessageReceived",
+                         _mapper.Map<MessageDto>(message));
+                }
+            }
         }
 
-        
+
         private async Task<Group> AddToGroup(string groupName)
         {
             var group = await _unitOfWork.MessageRepository.GetMessageGroup(groupName);

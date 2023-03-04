@@ -17,4 +17,5 @@ export interface Member {
   country: string;
   photos: Photo[];
   messagesReceived: Message[];
+  messageSent: Message[];
 }

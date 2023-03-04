@@ -53,14 +53,6 @@ namespace API.Controllers
         {
             userParams.CurrentUsername = User.GetUsername();
             
-            var messageParams = new MessageParams();
-            messageParams.Username = userParams.CurrentUsername;
-            messageParams.PageSize = 10;
-            messageParams.PageNumber = 1;
-
-
-            // var messages = await _unitOfWork.MessageRepository.GetMessagesForUser(messageParams);
-
             var users = await _unitOfWork.UserRepository.GetMembersWithMessagesAsync(userParams);
             
             
