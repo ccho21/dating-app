@@ -42,11 +42,33 @@ namespace API.Controllers
             }
 
             var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
-
+            
             Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
 
             return Ok(users);
         }
+
+         [HttpGet("with-message")]
+        public async Task<ActionResult<IEnumerable<UserMessageDto>>> GetUsersAll([FromQuery] UserParams userParams)
+        {
+            userParams.CurrentUsername = User.GetUsername();
+            
+            var messageParams = new MessageParams();
+            messageParams.Username = userParams.CurrentUsername;
+            messageParams.PageSize = 10;
+            messageParams.PageNumber = 1;
+
+
+            // var messages = await _unitOfWork.MessageRepository.GetMessagesForUser(messageParams);
+
+            var users = await _unitOfWork.UserRepository.GetMembersWithMessagesAsync(userParams);
+            
+            
+            Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+
+            return Ok(users);
+        }
+
 
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)

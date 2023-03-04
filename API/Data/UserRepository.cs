@@ -35,7 +35,10 @@ namespace API.Data
             var query = _context.Users.AsQueryable();
 
             query = query.Where(u => u.UserName != userParams.CurrentUsername);
-            query = query.Where(u => u.Gender == userParams.Gender);
+            if (!string.IsNullOrEmpty(userParams.Gender))
+            {
+                query = query.Where(u => u.Gender == userParams.Gender);
+            }
 
             var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
             var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
@@ -52,6 +55,37 @@ namespace API.Data
                 query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(),
                 userParams.PageNumber, userParams.PageSize);
         }
+
+        public async Task<PagedList<UserMessageDto>> GetMembersWithMessagesAsync(UserParams userParams)
+        {
+            var query = _context.Users.AsQueryable();
+
+            query = query.Where(u => u.UserName != userParams.CurrentUsername);
+            if (!string.IsNullOrEmpty(userParams.Gender))
+            {
+                query = query.Where(u => u.Gender == userParams.Gender);
+            }
+
+            var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
+            var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
+
+            query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
+
+            query = userParams.OrderBy switch
+            {
+                "created" => query.OrderByDescending(u => u.Created),
+                _ => query.OrderByDescending(u => u.LastActive)
+            };
+
+            // query = query.Where(u => u.MessagesReceived.Count() > 0);
+
+            query = query.Where(u => u.MessagesReceived.Where(m => m.SenderUsername == userParams.CurrentUsername).Count() > 0);
+
+            return await PagedList<UserMessageDto>.CreateAsync(
+                query.ProjectTo<UserMessageDto>(_mapper.ConfigurationProvider).AsNoTracking(),
+                userParams.PageNumber, userParams.PageSize);
+        }
+
 
         public async Task<AppUser> GetUserByIdAsync(int id)
         {
