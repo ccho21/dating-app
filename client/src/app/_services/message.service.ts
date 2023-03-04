@@ -23,7 +23,6 @@ export class MessageService {
   constructor(private http: HttpClient, private busyService: BusyService) {}
 
   createHubConnection(user: User, otherUsername: string) {
-    console.log('### create?', user, otherUsername);
     this.busyService.busy();
     this.hubConnection = new HubConnectionBuilder()
       .withUrl(this.hubUrl + 'message?user=' + otherUsername, {
@@ -48,7 +47,6 @@ export class MessageService {
     });
 
     this.hubConnection.on('UpdatedGroup', (group: Group) => {
-      console.log('##########', group.connections.filter((x) => x.username === otherUsername))
       if (group.connections.some((x) => x.username === otherUsername)) {
         this.messageThread$.pipe(take(1)).subscribe((messages) => {
           messages.forEach((message) => {
@@ -86,8 +84,6 @@ export class MessageService {
   }
 
   async sendMessage(username: string, content: string) {
-    console.log('### user name', username);
-    console.log('### content', content);
     return this.hubConnection
       ?.invoke('SendMessage', { recipientUsername: username, content })
       .catch((error) => console.log(error));

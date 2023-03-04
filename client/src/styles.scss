@@ -16,6 +16,7 @@ body {
   height: 100%;
   background-color: var(--wash);
   margin: 0;
+  font-family: Roboto, sans-serif;
 }
 
 .panel {
@@ -103,4 +104,13 @@ body {
 
 .mat-form-field {
   width: 100%;
+}
+
+.user-thumbnail {
+  width: 150px;
+  border-radius: 50%;
+  max-width: 100%;
+  &.big {
+    width: 250px;
+  }
 }

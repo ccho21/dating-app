@@ -1,45 +1,49 @@
-<div class="container my-5">
-  <div class="panel mb-5 p-3">
-    <app-member-search (searchEvent)="loadMembers($event)"></app-member-search>
-  </div>
+<section class="my-5">
+  <div class="container">
+    <div class="panel mb-5 p-3">
+      <app-member-search
+        (searchEvent)="loadMembers($event)"
+      ></app-member-search>
+    </div>
 
-  <div *ngIf="userParams">
-    <div class="row">
-      <div class="offset-md-10 col-md-2">
-        <mat-form-field appearance="fill">
-          <mat-label>Sort By</mat-label>
-          <mat-select
-            (selectionChange)="change($event)"
-            [(ngModel)]="userParams.orderBy"
-          >
-            <mat-option value="created">Newest Member</mat-option>
-            <mat-option value="lastActive">Last Active</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="mt-4 mb-5">
-      <h3>Your matches - {{ pagination?.totalItems }} found</h3>
-      <hr />
-    </div>
-    <div class="container">
+    <div *ngIf="userParams">
       <div class="row">
-        <div class="col-md-3 mb-4" *ngFor="let member of members">
-          <app-member-card [member]="member"></app-member-card>
+        <div class="offset-md-10 col-md-2">
+          <mat-form-field appearance="fill">
+            <mat-label>Sort By</mat-label>
+            <mat-select
+              (selectionChange)="change($event)"
+              [(ngModel)]="userParams.orderBy"
+            >
+              <mat-option value="created">Newest Member</mat-option>
+              <mat-option value="lastActive">Last Active</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
-    </div>
+      <div class="mt-4 mb-5">
+        <h3>Your matches - {{ pagination?.totalItems }} found</h3>
+        <hr />
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 mb-4" *ngFor="let member of members">
+            <app-member-card [member]="member"></app-member-card>
+          </div>
+        </div>
+      </div>
 
-    <mat-paginator
-      *ngIf="pagination"
-      [length]="pagination.totalItems"
-      [pageSize]="pagination.itemsPerPage"
-      [pageSizeOptions]="[5, 10, 25, 100]"
-      [pageIndex]="pagination.currentPage"
-      (page)="pageChanged($event)"
-      class="mt-5"
-      aria-label="Select page"
-    >
-    </mat-paginator>
+      <mat-paginator
+        *ngIf="pagination"
+        [length]="pagination.totalItems"
+        [pageSize]="pagination.itemsPerPage"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        [pageIndex]="pagination.currentPage"
+        (page)="pageChanged($event)"
+        class="mt-5"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+    </div>
   </div>
-</div>
+</section>

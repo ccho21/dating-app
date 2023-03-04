@@ -37,6 +37,7 @@ import { SwiperModule } from 'swiper/angular';
 import { FormControlPipe } from './_pipes/form-control.pipe';
 import { MemberSearchComponent } from './members/member-search/member-search.component';
 
+MessagesComponent;
 @NgModule({
   declarations: [
     AppComponent,
