@@ -49,7 +49,7 @@ namespace API.Controllers
         }
 
          [HttpGet("with-message")]
-        public async Task<ActionResult<IEnumerable<UserMessageDto>>> GetUsersAll([FromQuery] UserParams userParams)
+        public async Task<ActionResult<IEnumerable<MemberMessageDto>>> GetUsersAll([FromQuery] UserParams userParams)
         {
             userParams.CurrentUsername = User.GetUsername();
             

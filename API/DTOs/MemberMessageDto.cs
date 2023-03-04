@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace API.DTOs
 {
-    public class UserMessageDto
+    public class MemberMessageDto
     {
         public int Id { get; set; }
         public string Username { get; set; }
@@ -22,5 +22,6 @@ namespace API.DTOs
         public string Country { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
         public ICollection<MessageDto> MessagesReceived { get; set; }
+        public ICollection<MessageDto> MessagesSent { get; set; }
     }
 }

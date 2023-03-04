@@ -56,7 +56,7 @@ namespace API.Data
                 userParams.PageNumber, userParams.PageSize);
         }
 
-        public async Task<PagedList<UserMessageDto>> GetMembersWithMessagesAsync(UserParams userParams)
+        public async Task<PagedList<MemberMessageDto>> GetMembersWithMessagesAsync(UserParams userParams)
         {
             var query = _context.Users.AsQueryable();
 
@@ -79,10 +79,10 @@ namespace API.Data
 
             // query = query.Where(u => u.MessagesReceived.Count() > 0);
 
-            query = query.Where(u => u.MessagesReceived.Where(m => m.SenderUsername == userParams.CurrentUsername).Count() > 0);
+            // query = query.Where(u => u.MessagesReceived.Where(m => m.RecipientUsername == userParams.CurrentUsername).Count() > 0);
 
-            return await PagedList<UserMessageDto>.CreateAsync(
-                query.ProjectTo<UserMessageDto>(_mapper.ConfigurationProvider).AsNoTracking(),
+            return await PagedList<MemberMessageDto>.CreateAsync(
+                query.ProjectTo<MemberMessageDto>(_mapper.ConfigurationProvider).AsNoTracking(),
                 userParams.PageNumber, userParams.PageSize);
         }
 
