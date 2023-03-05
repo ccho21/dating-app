@@ -1,4 +1,4 @@
-<section class="mb-5">
+<section class="">
   <div class="row home-container">
     <div class="home-background">
       <div
@@ -42,7 +42,7 @@
     </div>
   </div>
 </section>
-
+<!-- 
 <section class="mb-5">
   <div class="container">
     <div class="panel-border">
@@ -86,9 +86,9 @@
       </swiper>
     </div>
   </div>
-</section>
+</section> -->
 
-<section class="mb-5" id="member-detail">
+<section class="" id="member-detail">
   <div class="container" *ngIf="member">
     <div class="member-wrapper">
       <div class="member">
@@ -137,11 +137,11 @@
           </div>
         </div>
         <div class="member-box-right" @fadeIn *ngIf="messageOpen; else empty">
-          <app-member-messages
+          <!-- <app-member-messages
             [member]="member"
             (messageClose)="closeMessage($event)"
           >
-          </app-member-messages>
+          </app-member-messages> -->
         </div>
         <ng-template #empty>
           <div class="member-box-right"></div>

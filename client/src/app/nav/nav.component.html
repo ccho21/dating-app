@@ -1,20 +1,14 @@
 <mat-toolbar class="nav-main">
   <mat-toolbar-row class="">
     <ng-container>
-      <button
-        mat-icon-button
-        routerLink="/"
-        *ngIf="accountService.currentUser$ | async as user"
-      >
+      <a href="" class="d-block" routerLink="/">
         <img
-          class="img-circle"
-          src="{{ user.photoUrl || './assets/user.png' }}"
-          alt="{{ user.username }}"
+          width="180"
+          class="img-fluid"
+          src="./assets/together-logo-6.svg"
+          alt="Get together Logo"
         />
-      </button>
-      <button mat-button routerLink="/">
-        <span>FIND YOUR MATCH </span>
-      </button>
+      </a>
     </ng-container>
     <span class="example-spacer"></span>
     <div class="d-none d-md-block">

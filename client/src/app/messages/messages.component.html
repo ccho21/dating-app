@@ -31,20 +31,22 @@
               </div>
             </div>
             <div class="action">
-              <button href="" (click)="openMemberDetail(member)">
+              <a href="" routerLink="/messages/{{ member.username }}">
                 <mat-icon>keyboard_arrow_right</mat-icon>
-              </button>
+              </a>
             </div>
           </li>
         </ul>
       </div>
-      <div class="col-md-7">
-        <app-member-messages
+      <div class="col-md-7 px-0">
+        <router-outlet></router-outlet>
+
+        <!-- <app-member-messages
           [member]="member"
           (messageClose)="closeMessage($event)"
           *ngIf="member"
         >
-        </app-member-messages>
+        </app-member-messages> -->
       </div>
     </div>
   </div>

@@ -11,8 +11,9 @@ import { UserParams } from '../_models/userParams';
 import { Member } from '../_models/member';
 import { AccountService } from '../_services/account.service';
 import { User } from '../_models/user';
-import { Subscription } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { PresenceService } from '../_services/presence.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface Section {
   name: string;
@@ -80,33 +81,28 @@ export class MessagesComponent implements OnInit, OnDestroy {
     private memberService: MembersService,
     private confirmService: ConfirmService,
     private presenceService: PresenceService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe((res) => {
       this.user = res!;
     });
-    // this.loadMessages();
 
     this.loadUsers();
-    // this.startNavigationGuide();
 
     this.newMessageThread$ = this.presenceService.newMessage$.subscribe(
       (res: Message) => {
-        console.log('### New Message Came$', res);
         const index = this.members?.findIndex(
           (member) => member.username === res.senderUsername
         ) as number;
 
-        console.log('### INDEX', index);
-        console.log('### this.members', this.members);
         if (index > -1 && this.members && this.members.length) {
           const messages = this.members[index!].messagesSent;
           this.members[index!].messagesSent = [...messages, res];
-          console.log('### this memeber!', this.members[index!]);
         } else {
-          console.log('### THIS LOAD USERS', this.members);
           setTimeout(() => {
             this.loadUsers();
           }, 1000);
@@ -117,12 +113,19 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this.messageThread$ = this.messageService.messageThread$.subscribe(
       (res) => {
         console.log('### Check Message Thread$', res);
-        console.log('### this.member!!', this.member);
-        if (this.member) {
-          this.member.messagesSent = res;
-        }
+        // console.log('### this.member!!', this.member);
+        // if (this.member) {
+        //   this.member.messagesSent = res;
+        // }
       }
     );
+
+    
+  }
+
+  openMemberDetail(member: Member) {
+    console.log('### member', member);
+    // this.router.navigate()
   }
 
   loadUsers() {
@@ -132,17 +135,36 @@ export class MessagesComponent implements OnInit, OnDestroy {
       pageSize: this.pageSize,
     };
 
-    this.memberService.getUsersWithMessage(userParams).subscribe((response) => {
-      console.log('### THIS LOAD USERS RESPONSE', response);
-      if (response && response.pagination) {
-        this.members = response.result;
-        this.pagination = response.pagination;
-        if (this.pagination) {
-          this.pagination.currentPage = response.pagination.currentPage - 1;
+    this.memberService
+      .getUsersWithMessage(userParams)
+      .pipe(
+        map((res) => {
+          let { result } = res;
+          const updated = result?.map((member: Member) => {
+            const messageSent = member.messagesSent.filter(
+              (m) => m.recipientUsername === this.user?.username
+            );
+            return {
+              ...member,
+              messagesSent: messageSent,
+            };
+          });
+
+          res.result = updated;
+          return res;
+        })
+      )
+      .subscribe((response) => {
+        console.log('### THIS LOAD USERS RESPONSE', response);
+        if (response && response.pagination) {
+          this.members = response.result;
+          this.pagination = response.pagination;
+          if (this.pagination) {
+            this.pagination.currentPage = response.pagination.currentPage - 1;
+          }
+          this.loading = false;
         }
-        this.loading = false;
-      }
-    });
+      });
   }
 
   loadMessages() {
@@ -201,30 +223,6 @@ export class MessagesComponent implements OnInit, OnDestroy {
     }
   }
 
-  startNavigationGuide() {
-    if (!this.driver) {
-      this.driver = new Driver({
-        animate: true,
-        keyboardControl: true,
-      });
-
-      const steps = [
-        {
-          element: '#login-step3',
-          popover: {
-            title: 'Messages',
-            description:
-              'Message box that allows you to communicate with other members!',
-            position: 'bottom-center',
-          },
-        },
-      ];
-      console.log('### this driver', steps);
-      this.driver.defineSteps(steps);
-      this.driver.start();
-    }
-  }
-
   resetNavigationGuide() {
     if (this.driver) {
       this.driver.reset();
@@ -236,15 +234,6 @@ export class MessagesComponent implements OnInit, OnDestroy {
     return messages && messages.length
       ? messages.filter((message) => message.dateRead === null).length
       : 0;
-  }
-
-  openMemberDetail(member: Member) {
-    this.member = null!;
-    setTimeout(() => {
-      if (member) {
-        this.member = member;
-      }
-    }, 300);
   }
 
   closeMessage(e: boolean) {

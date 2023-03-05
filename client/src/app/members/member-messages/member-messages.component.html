@@ -1,6 +1,6 @@
-<div class="message-container" *ngIf="member">
+<div class="message-container">
   <div class="message-contents">
-    <div class="heading d-flex align-items-center">
+    <div class="heading d-flex align-items-center" *ngIf="member">
       <div class="align-self-center">
         <img
           class="img-thumbnail img-circle img-no-padding img-responsive img-fluid"
@@ -32,13 +32,13 @@
         <div
           class="message-item"
           [ngClass]="{
-            'text-end': member.username !== message.senderUsername
+            'text-end': member?.username !== message.senderUsername
           }"
         >
           <div
             class="message-line"
             [ngClass]="{
-              'justify-content-end': member.username !== message.senderUsername
+              'justify-content-end': member?.username !== message.senderUsername
             }"
           >
             <div class="message-content">{{ message.content }}</div>
