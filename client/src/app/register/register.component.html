@@ -1,10 +1,10 @@
-<div class="panel-white">
+<div class="register">
   <form
     [formGroup]="registerForm"
     (ngSubmit)="registerForm.valid && register()"
     autocomplete="off"
   >
-    <div class="text-left">
+    <!-- <div class="text-left">
       <label id="example-radio-group-label"> I AM LOOKING FOR </label>
       <mat-radio-group aria-label="Select an option" formControlName="gender">
         <mat-radio-button value="male" style="margin: 0.25rem">
@@ -14,19 +14,34 @@
           Female
         </mat-radio-button>
       </mat-radio-group>
+    </div> -->
+
+    <div class="row">
+      <div class="col-md-7">
+        <app-text-input
+          [formControl]="registerForm.controls['username'] | formControl"
+          [label]="'Username'"
+        >
+        </app-text-input>
+        <app-text-input
+          [formControl]="registerForm.controls['password'] | formControl"
+          [label]="'Password'"
+          [type]="'password'"
+        >
+        </app-text-input>
+        <app-date-input
+          [formControl]="registerForm.controls['dateOfBirth'] | formControl"
+          [label]="'Date Of Birth'"
+          [maxDate]="maxDate"
+        ></app-date-input>
+      </div>
+      <div class="col-md-7">
+        <app-text-input
+          [formControl]="registerForm.controls['country'] | formControl"
+          [label]="'Country'"
+        ></app-text-input>
+      </div>
     </div>
-
-    <app-text-input
-      [formControl]="registerForm.controls['username'] | formControl"
-      [label]="'Username'"
-    ></app-text-input>
-
-    <app-text-input
-      [formControl]="registerForm.controls['password'] | formControl"
-      [label]="'Password'"
-      [type]="'password'"
-    >
-    </app-text-input>
 
     <!-- <app-text-input
       [formControl]="registerForm.controls['confirmPassword'] | formControl"
@@ -39,21 +54,21 @@
       [label]="'Known As'"
     ></app-text-input> -->
 
-    <app-date-input
+    <!-- <app-date-input
       [formControl]="registerForm.controls['dateOfBirth'] | formControl"
       [label]="'Date Of Birth'"
       [maxDate]="maxDate"
-    ></app-date-input>
+    ></app-date-input> -->
 
     <!-- <app-text-input
       [formControl]="registerForm.controls['city'] | formControl"
       [label]="'City'"
     ></app-text-input> -->
 
-    <app-text-input
+    <!-- <app-text-input
       [formControl]="registerForm.controls['country'] | formControl"
       [label]="'Country'"
-    ></app-text-input>
+    ></app-text-input> -->
 
     <div class="row" *ngIf="validationErrors.length > 0">
       <ul class="text-danger">

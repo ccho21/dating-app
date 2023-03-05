@@ -1,0 +1,76 @@
+.banner {
+  padding: 5rem;
+  text-align: center;
+  color: var(--white);
+  &.white {
+    background-color: var(--white);
+    color: var(--black);
+  }
+  &.green {
+    background-color: var(--dark-green);
+  }
+  &.purple {
+    background-color: var(--purple);
+  }
+  &.light-green {
+    background-color: var(--light-green);
+  }
+
+  & .title {
+    font-size: 20px;
+    font-size: 2rem;
+    @extend .heading-text-3;
+  }
+  
+  & .logo {
+    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
+    max-width: 100px;
+    max-width: 10rem;
+    min-width: 50px;
+    min-width: 5rem;
+  }
+}
+
+.panel {
+  border-radius: 10px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  min-height: 15rem;
+
+  &.white {
+    color: var(--black);
+    background-color: var(--champagne);
+    border: 2px solid var(--champagne);
+  }
+  &.green {
+    color: var(--champagne);
+    background-color: var(--light-green);
+
+    border: 2px solid var(--light-green);
+  }
+
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
+    0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+
+  .logo {
+    margin-bottom: 1rem;
+  }
+  .title {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 1.5rem;
+    // letter-spacing: 0.1rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  .sub {
+    letter-spacing: 0.1rem;
+  }
+}

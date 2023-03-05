@@ -1,9 +1,6 @@
-<mat-form-field
-  class="example-full-width"
-  appearance="fill"
-  *ngIf="ngControl.control"
->
+<mat-form-field class="text-input" appearance="fill" *ngIf="ngControl.control">
   <mat-label>{{ label }}</mat-label>
+  <mat-icon matSuffix>verified_user</mat-icon>
   <input
     [class.is-invalid]="ngControl.touched && ngControl.invalid"
     type="{{ type }}"

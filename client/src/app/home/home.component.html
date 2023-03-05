@@ -1,44 +1,105 @@
 <section class="">
-  <div class="row home-container">
+  <div class="home">
     <div class="home-background">
-      <div
-        class="home-content"
-        *ngIf="accountService.currentUser$ | async as user; else logged"
-      >
+      <div class="home-content">
         <div class="row">
-          <div class="col-md-12">
-            <h1 class="heading-text-1">Find your match</h1>
-            <p class="sub-heading">
-              Come on in to view your matches... all you need to do is sign up!
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <ng-template #logged>
-        <div class="home-content">
-          <div class="row">
-            <div class="col-md-6 main-left">
-              <h1 class="heading-text-1">Find your match</h1>
-              <p class="sub-heading">
-                Come on in to view your matches... all you need to do is sign
-                up!
+          <div class="offset-md-1 col-md-5">
+            <div class="mb-5">
+              <h1 class="heading-text-1">
+                LET'S GET<br />
+                <mark>TOGETHER </mark>
+              </h1>
+              <p class="sub-heading-text-1">
+                Find professionals you're looking for and share experiences for
+                collboration!
               </p>
-              <!-- <div class="text-center">
-                <button mat-raised-button color="primary" (click)="openRegister()">
-                  Register
-                </button>
-                <button mat-raised-button color="warn" class="ms-3">
-                  Learn more
-                </button>
-              </div> -->
             </div>
-            <div class="offset-md-1 col-md-4 text-right">
+
+            <div>
               <app-register></app-register>
             </div>
           </div>
         </div>
-      </ng-template>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 banner green">
+        <div class="">
+          <div class="">
+            <img
+              class="logo"
+              src="./assets/heart.svg"
+              alt="Get together Logo"
+            />
+          </div>
+          <div class="title"><mark>#1 TRUSTED </mark> DEV CONNECTOR</div>
+          <div class="sub">
+            *2022 Survey of 1,300 Respondents from the US, UK, Canada and
+            Australia
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 banner purple">
+        <div class="">
+          <img class="logo" src="./assets/heart.svg" alt="Get together Logo" />
+
+          <div class="title">
+            EVERY <mark>14 MINUTES</mark>, SOMEONE FINDS LOVE ON EHARMONY
+          </div>
+          <div class="sub">eharmony user data</div>
+        </div>
+      </div>
+      <div class="col-md-4 banner light-green">
+        <div class="">
+          <img class="logo" src="./assets/heart.svg" alt="Get together Logo" />
+          <div class="title"><mark>HIGHEST QUALITY</mark> DATING POOL</div>
+          <div class="sub">2018 Survey of 1,616 U.S. Singles</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="bg-white" style="min-height: 15rem">
+  <div class="container">
+    <h2 class="text-center">
+      Our dating site has helped millions of couples find love
+    </h2>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="banner white">
+          <img class="logo" src="./assets/temp-1.webp" alt="" />
+          <div class="title">OVER 2 MILLION HAVE FOUND LOVE</div>
+          <div class="sub">Trust the dating experts</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="banner white">
+          <img class="logo" src="./assets/temp-2.webp" alt="" />
+          <div class="title">51% MEN 49% WOMEN</div>
+          <div class="sub">Trust the dating experts</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="banner white">
+          <img class="logo" src="./assets/temp-3.webp" alt="" />
+          <div class="title">
+            THE APP THAT HELPS USERS FIND THE HAPPIEST RELATIONSHIPS*
+          </div>
+          <div class="sub">… the right one may be waiting for you!</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="banner white">
+          <img class="logo" src="./assets/temp-4.webp" alt="" />
+          <div class="title">2.3 MILLION MESSAGES SENT WEEKLY</div>
+          <div class="sub">See who wants to talk to you!</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
