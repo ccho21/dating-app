@@ -62,6 +62,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe((res) => {
       this.user = res!;
+      if (this.user) {
+        this.router.navigate(['profile']);
+      }
     });
   }
 

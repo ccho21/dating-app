@@ -2,6 +2,7 @@
   appearance="fill"
   class="date-input"
   *ngIf="ngControl.control"
+  color="black"
 >
   <mat-label>Choose a date</mat-label>
   <input
@@ -11,11 +12,10 @@
     placeholder="{{ label }}"
   />
   <mat-hint>MM/DD/YYYY</mat-hint>
-  <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+  <mat-datepicker-toggle matSuffix [for]="datepicker" color="black"></mat-datepicker-toggle>
   <mat-datepicker #datepicker>
     <mat-datepicker-actions>
-      <button mat-button matDatepickerCancel>Cancel</button>
-      <button mat-raised-button color="primary" matDatepickerApply>
+      <button mat-raised-button color="default" matDatepickerApply>
         Apply
       </button>
     </mat-datepicker-actions>

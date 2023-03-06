@@ -15,9 +15,11 @@ import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'profile', component: ProfileComponent },
   {
     path: '',
     runGuardsAndResolvers: 'always',

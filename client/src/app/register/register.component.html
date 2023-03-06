@@ -21,6 +21,7 @@
         <app-text-input
           [formControl]="registerForm.controls['username'] | formControl"
           [label]="'Username'"
+          class="theme-green"
         >
         </app-text-input>
         <app-text-input
@@ -40,6 +41,11 @@
           [formControl]="registerForm.controls['country'] | formControl"
           [label]="'Country'"
         ></app-text-input>
+      </div>
+      <div class="col-md-7">
+        <button mat-raised-button cdkFocusInitial (click)="register()">
+          Register
+        </button>
       </div>
     </div>
 
@@ -78,13 +84,4 @@
       </ul>
     </div>
   </form>
-  <button mat-raised-button cdkFocusInitial>Cancel</button>
-  <button
-    mat-raised-button
-    cdkFocusInitial
-    color="primary"
-    (click)="register()"
-  >
-    Register
-  </button>
 </div>

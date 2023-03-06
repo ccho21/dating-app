@@ -1,9 +1,12 @@
-::ng-deep {
-  .text-input {
-    width: 100%;
-    height: 72px;
-    .mat-form-field-flex {
-      border-radius: 0 !important;
-    }
+.text-input {
+  width: 100%;
+  height: 72px;
+
+  :host-context(.theme-green) {
+    //    checking what is working
   }
+}
+
+.mat-form-field.mat-black {
+  color: var(--dark-blue, --black);
 }
