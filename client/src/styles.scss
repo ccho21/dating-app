@@ -28,7 +28,7 @@ body {
   font-size: 1.6rem;
   position: relative;
   height: 100%;
-  background-color: var(--white);
+  background-color: var(--main-bg-white);
 
   margin: 0;
   font-family: Roboto, sans-serif;
@@ -51,14 +51,30 @@ body {
   --dark-green: #1a5f78;
   --amber: #fcb900;
   --purple: #617dc6;
+  --main-bg-white: hsla(0, 0%, 0%, 0.05);
+  --dark-shadow: hsla(240, 2%, 60%, 1);
+  --light-shadow: hsla(0, 0%, 0%, 0.15);
 }
 
 .user-thumbnail {
   width: 150px;
+  width: 15rem;
   border-radius: 50%;
   max-width: 100%;
-  &.big {
+  &.size-lg {
     width: 250px;
+    width: 25rem;
+  }
+  &.size-md {
+    width: 200px;
+    width: 20rem;
+  }
+  &.size-sm {
+    width: 150px;
+    width: 15rem;
+  }
+  &.user-border {
+    border: 0.2rem solid var(--white);
   }
 }
 

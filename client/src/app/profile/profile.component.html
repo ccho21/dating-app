@@ -1,18 +1,38 @@
-<section class="profile">
+<section class="profile" *ngIf="user">
   <div class="header-background">
     <div class="container profile-content">
       <div class="row">
         <div class="col-md-12">
-          <div class="mb-5">
-            <img src="" alt="" />
-            <h2>Hello Charles</h2>
+          <div class="">
+            <img
+              class="user-thumbnail size-sm user-border mb-4"
+              width="40"
+              [src]="user.photoUrl || './assets/user.png'"
+              [alt]="user.username"
+            />
+            <i class="fa-solid fa-pen"></i>
           </div>
+          <h2 class="main-text-2">Hello Charles</h2>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="action-groups">
-            
+            <div>
+              <a href="" class="action-link">
+                <i class="action-icon fa-solid fa-user"></i>
+              </a>
+            </div>
+            <div>
+              <a href="" class="action-link">
+                <i class="action-icon fa-solid fa-users"></i>
+              </a>
+            </div>
+            <div>
+              <a href="" class="action-link">
+                <i class="action-icon fa-regular fa-message"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -21,12 +41,101 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <div class="panel">messages</div>
-        <div class="panel">Matches</div>
-        <div class="panel">Recent Visitors</div>
+        <div class="panel white left">
+          <div class="message">
+            <div class="title">
+              <mat-icon class="me-3"> mail </mat-icon>
+              <div
+                matBadge="4"
+                matBadgeOverlap="false"
+                matBadgeColor="warn"
+                class="demo-section"
+              >
+                New Messages
+              </div>
+            </div>
+            <div class="empty">
+              <i class="empty-icon fa-solid fa-comment-dots"></i>
+              <div class="main-text-2">Your new messages will appear here.</div>
+              <div class="empty-btn">
+                <button>Let's Go Talk</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel white left">
+          <div class="people">
+            <div class="title">
+              <mat-icon class="me-3">people</mat-icon>
+              Saved Connections
+            </div>
+            <div class="empty">
+              <i class="empty-icon fa-solid fa-people-group"></i>
+              <div class="main-text-2">
+                Your new connections will appear here.
+              </div>
+              <div class="empty-btn">
+                <button>Get Connected</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel white left">
+          <div class="visitor">
+            <div class="title">
+              <mat-icon class="me-3">remove_red_eye</mat-icon>
+              Recent Visitors
+            </div>
+            <div class="empty">
+              <i class="empty-icon fa-solid fa-eye"></i>
+              <div class="main-text-2">
+                If you have had no visitors to your profile, consider updating
+                your profile
+              </div>
+              <div class="empty-btn">
+                <button>Update Profile</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col-md-4">
-        <div>Your Options</div>
+        <div class="panel white left">
+          <div class="options">
+            <div class="title">
+              <mat-icon class="me-3">list_alt</mat-icon>
+              YOUR OPTIONS:
+            </div>
+            <div>
+              <ul class="side-nav">
+                <li>
+                  <a href="">
+                    <i class="fa-solid fa-file-circle-check me-3"></i>
+                    Profile
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <i class="fa-solid fa-diagram-project me-3"></i>
+                    Project
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <i class="fa-solid fa-user-group me-3"></i>
+                    People
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <i class="fa-solid fa-gears me-3"></i>
+                    Settings
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

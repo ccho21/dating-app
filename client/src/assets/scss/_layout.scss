@@ -21,7 +21,7 @@
     font-size: 2rem;
     @extend .heading-text-3;
   }
-  
+
   & .logo {
     margin-bottom: 15px;
     margin-bottom: 1.5rem;
@@ -43,11 +43,20 @@
   padding: 2rem;
   text-align: center;
   min-height: 15rem;
+  margin: 3rem 1.5rem;
+  &.left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  &.right {
+    align-items: flex-end;
+  }
 
   &.white {
     color: var(--black);
-    background-color: var(--champagne);
-    border: 2px solid var(--champagne);
+    background-color: var(--white);
+    border: 2px solid var(--white);
   }
   &.green {
     color: var(--champagne);
@@ -69,6 +78,8 @@
     // letter-spacing: 0.1rem;
     margin-bottom: 0.5rem;
     line-height: 1.2;
+    display: flex;
+    align-items: center;
   }
   .sub {
     letter-spacing: 0.1rem;
