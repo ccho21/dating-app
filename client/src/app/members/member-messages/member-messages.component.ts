@@ -67,19 +67,24 @@ export class MemberMessagesComponent implements OnInit, OnChanges, OnDestroy {
   ) {}
   ngOnChanges(changes: SimpleChanges): void {}
 
-  ngAfterViewInit() {
-    const maxScroll = this.messageBody?.nativeElement.scrollHeight;
-    console.log('### maxScroll', maxScroll);
-    this.messageBody?.nativeElement.scrollTo({
-      top: maxScroll,
-      behavior: 'smooth',
-    });
-  }
+  // ngAfterViewInit() {
+  //   const maxScroll = this.messageBody?.nativeElement.scrollHeight;
+  //   console.log('### maxScroll', maxScroll);
+  //   this.messageBody?.nativeElement.scrollTo({
+  //     top: maxScroll,
+  //     behavior: 'smooth',
+  //   });
+  // }
 
   ngOnInit(): void {
     this.accountService.currentUser$
       .pipe(take(1))
-      .subscribe((user: User | null) => (this.user = user!));
+      .subscribe((user: User | null) => {
+        if (user) {
+          this.user = user;
+          console.log('### ACCOUNT SERVICE', this.user);
+        }
+      });
 
     console.log('### MEMBER MESSAGE STARTED');
     this.messageThread$ = this.messageService.messageThread$.subscribe(

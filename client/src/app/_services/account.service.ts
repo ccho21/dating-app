@@ -20,10 +20,12 @@ export class AccountService {
     return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(
       map((response: User) => {
         const user: User = response;
+        console.log('### user', user);
         if (user) {
           this.setCurrentUser(user);
           this.presence.createHubConnection(user);
         }
+        return user;
       })
     );
   }

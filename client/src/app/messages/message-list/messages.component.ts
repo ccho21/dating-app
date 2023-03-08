@@ -1,19 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Message } from '../_models/message';
-import { Pagination } from '../_models/pagination';
-import { ConfirmService } from '../_services/confirm.service';
-import { MessageService } from '../_services/message.service';
 import Driver from 'driver.js';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MembersService } from '../_services/members.service';
-import { UserParams } from '../_models/userParams';
-import { Member } from '../_models/member';
-import { AccountService } from '../_services/account.service';
-import { User } from '../_models/user';
 import { map, Subscription } from 'rxjs';
-import { PresenceService } from '../_services/presence.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Message } from 'src/app/_models/message';
+import { Pagination } from 'src/app/_models/pagination';
+import { Member } from 'src/app/_models/member';
+import { User } from 'src/app/_models/user';
+import { MessageService } from 'src/app/_services/message.service';
+import { AccountService } from 'src/app/_services/account.service';
+import { MembersService } from 'src/app/_services/members.service';
+import { ConfirmService } from 'src/app/_services/confirm.service';
+import { PresenceService } from 'src/app/_services/presence.service';
+import { UserParams } from 'src/app/_models/userParams';
 
 export interface Section {
   name: string;
@@ -49,30 +49,6 @@ export class MessagesComponent implements OnInit, OnDestroy {
   ];
   displayedColumns: Array<string> = [];
 
-  folders: Section[] = [
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
-    },
-    {
-      name: 'Work',
-      updated: new Date('1/28/16'),
-    },
-  ];
-  notes: Section[] = [
-    {
-      name: 'Vacation Itinerary',
-      updated: new Date('2/20/16'),
-    },
-    {
-      name: 'Kitchen Remodel',
-      updated: new Date('1/18/16'),
-    },
-  ];
   //
 
   constructor(
@@ -87,8 +63,8 @@ export class MessagesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.accountService.currentUser$.subscribe((res) => {
-      this.user = res!;
+    this.accountService.currentUser$.subscribe((user) => {
+      if (user) this.user = user;
     });
 
     this.loadUsers();
@@ -103,9 +79,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
           const messages = this.members[index!].messagesSent;
           this.members[index!].messagesSent = [...messages, res];
         } else {
-          setTimeout(() => {
-            this.loadUsers();
-          }, 1000);
+          this.loadUsers();
         }
       }
     );
@@ -119,8 +93,6 @@ export class MessagesComponent implements OnInit, OnDestroy {
         // }
       }
     );
-
-    
   }
 
   openMemberDetail(member: Member) {

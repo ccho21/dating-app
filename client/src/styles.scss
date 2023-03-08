@@ -73,6 +73,10 @@ body {
     width: 150px;
     width: 15rem;
   }
+  &.size-xs {
+    width: 70px;
+    width: 7rem;
+  }
   &.user-border {
     border: 0.2rem solid var(--white);
   }

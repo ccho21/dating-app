@@ -27,6 +27,7 @@ export class MembersService {
       .pipe(take(1))
       .subscribe((user: User | null) => {
         this.user = user as User;
+        console.log('### ACCOUNT SERVICE', this.user);
         this.userParams = new UserParams(this.user);
       });
   }

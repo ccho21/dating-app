@@ -12,7 +12,6 @@ import { RegisterComponent } from './register/register.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { ListsComponent } from './lists/lists.component';
-import { MessagesComponent } from './messages/messages.component';
 import { SharedModule } from './_modules/shared.module';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
@@ -37,8 +36,10 @@ import { SwiperModule } from 'swiper/angular';
 import { FormControlPipe } from './_pipes/form-control.pipe';
 import { MemberSearchComponent } from './members/member-search/member-search.component';
 import { ProfileComponent } from './profile/profile.component';
+import { MessagesComponent } from './messages/message-list/messages.component';
+import { MessageOverviewComponent } from './messages/message-overview/message-overview.component';
+import { ConnectionOverviewComponent } from './connections/connection-overview/connection-overview.component';
 
-MessagesComponent;
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,6 @@ MessagesComponent;
     MemberListComponent,
     MemberDetailComponent,
     ListsComponent,
-    MessagesComponent,
     TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
@@ -68,6 +68,9 @@ MessagesComponent;
     FormControlPipe,
     MemberSearchComponent,
     ProfileComponent,
+    MessagesComponent,
+    MessageOverviewComponent,
+    ConnectionOverviewComponent,
   ],
   imports: [
     BrowserModule,

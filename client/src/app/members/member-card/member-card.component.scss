@@ -1,11 +1,14 @@
+@import "../../../assets/scss/typography";
+
 .member-card {
   position: relative;
-  background-color: white;
-  border-radius: 8px;
-  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
-    0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+  & .member-link {
+    text-decoration: none;
+    color: var(--black);
+    display: block;
+    cursor: pointer;
+  }
   & .image {
     width: 100%;
     position: relative;
@@ -26,45 +29,34 @@
     }
   }
   & .body {
-    padding-left: 0.5rem;
-    padding: 0.75rem;
-    & .name {
-      font-size: 1.3rem;
+    & .name-link {
+      @extend .main-text-1;
+      color: var(--black);
+      margin-bottom: 0;
+      font-size: 2rem;
       font-weight: 500;
-      padding-left: 0.75rem;
+      text-decoration: none;
+      line-height: 1.5;
     }
     & .status {
-      font-size: 12px;
+      font-size: 1rem;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       color: gray;
       margin-left: 0.2rem;
-      &.is-online {
-        color: green;
-        animation-name: example;
-        animation-duration: 3s;
-        animation-iteration-count: infinite;
-      }
     }
 
-    @keyframes example {
-      0% {
-        color: gray;
-      }
-      30% {
-        color: green;
-      }
-      90% {
-        color: green;
-      }
-      100% {
-        color: gray;
-      }
+    & .is-online {
+      color: #00bf63;
+      animation-name: example;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
     }
     & .city {
+      // font
+      font-size: 1.2rem;
       color: rgb(130, 130, 130);
-      padding-left: 0.75rem;
     }
 
     & .action-btns {
@@ -75,26 +67,22 @@
       display: flex;
       align-items: center;
       z-index: 1;
-      opacity: 0;
+      opacity: 1;
       transition: 0.3s all ease;
-
+      
       & .action-icon {
         margin: 0.2rem;
-        font-size: 22px;
-        width: 35px;
-        height: 35px;
+        font-size: 20px;
+        font-size: 2rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: white;
         border-radius: 50%;
+        color: var(--red) !important;
       }
     }
   }
   &:hover {
-    .action-btns {
-      opacity: 1 !important;
-    }
     .image {
       &::before {
         opacity: 0;

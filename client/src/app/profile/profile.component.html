@@ -42,43 +42,24 @@
     <div class="row">
       <div class="col-md-8">
         <div class="panel white left">
-          <div class="message">
-            <div class="title">
-              <mat-icon class="me-3"> mail </mat-icon>
-              <div
-                matBadge="4"
-                matBadgeOverlap="false"
-                matBadgeColor="warn"
-                class="demo-section"
-              >
-                New Messages
-              </div>
-            </div>
-            <div class="empty">
-              <i class="empty-icon fa-solid fa-comment-dots"></i>
-              <div class="main-text-2">Your new messages will appear here.</div>
-              <div class="empty-btn">
-                <button>Let's Go Talk</button>
-              </div>
+          <div class="title mb-4">
+            <mat-icon class="me-3"> mail </mat-icon>
+            <div
+              matBadgeOverlap="false"
+              matBadgeColor="warn"
+              class="demo-section"
+            >
+              Recent Messages
             </div>
           </div>
+          <app-message-overview class="w-100"></app-message-overview>
         </div>
         <div class="panel white left">
-          <div class="people">
-            <div class="title">
-              <mat-icon class="me-3">people</mat-icon>
-              Saved Connections
-            </div>
-            <div class="empty">
-              <i class="empty-icon fa-solid fa-people-group"></i>
-              <div class="main-text-2">
-                Your new connections will appear here.
-              </div>
-              <div class="empty-btn">
-                <button>Get Connected</button>
-              </div>
-            </div>
+          <div class="title mb-4">
+            <mat-icon class="me-3">people</mat-icon>
+            Saved Connections
           </div>
+          <app-connection-overview class="w-100"></app-connection-overview>
         </div>
         <div class="panel white left">
           <div class="visitor">

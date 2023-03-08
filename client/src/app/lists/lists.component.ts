@@ -12,14 +12,6 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
   styleUrls: ['./lists.component.scss'],
 })
 export class ListsComponent implements OnInit {
-  @ViewChild('grid') grid?: MatGridList;
-  gridByBreakpoint = {
-    xl: 5,
-    lg: 3,
-    md: 3,
-    sm: 2,
-    xs: 1,
-  };
 
   members?: Partial<Member[]>;
   predicate = 'liked';

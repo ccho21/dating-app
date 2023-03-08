@@ -114,15 +114,11 @@ export class HomeComponent implements OnInit {
   openMemberDetail(member: Member) {
     this.member = undefined;
     this.messageOpen = false;
-    setTimeout(() => {
-      if (member) {
-        this.member = member;
-      }
+    if (member) {
+      this.member = member;
+    }
 
-      setTimeout(() => {
-        this.scroller.scrollToAnchor('member-detail');
-      }, 300);
-    }, 300);
+    this.scroller.scrollToAnchor('member-detail');
   }
 
   openMessage(member: Member) {

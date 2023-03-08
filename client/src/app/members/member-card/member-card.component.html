@@ -1,5 +1,5 @@
 <div class="member-card" *ngIf="member">
-  <a href="" class="d-block" routerLink="/members/{{ member.username }}">
+  <a href="" class="member-link" routerLink="/members/{{ member.username }}">
     <div class="image">
       <img
         class="w-100"
@@ -11,35 +11,46 @@
   <div class="body">
     <div class="action-btns mb-2">
       <button mat-icon-button (click)="addLike(member)" class="action-icon">
-        <mat-icon>favorite</mat-icon>
+        <i class="fa-solid fa-heart"></i>
       </button>
-      <button
+      <!-- <button
         class="action-icon"
         mat-icon-button
         routerLink="/members/{{ member.username }}"
         [queryParams]="{ tab: 3 }"
       >
         <mat-icon class="action-icon"> mail_outline</mat-icon>
-      </button>
+      </button> -->
     </div>
     <div class="d-flex align-items-center">
-      <a
-        href=""
-        class="d-block name"
-        routerLink="/members/{{ member.username }}"
-      >
+      <a href="" class="name-link" routerLink="/members/{{ member.username }}">
         {{ member.username }}
       </a>
-      <mat-icon
+    </div>
+    <div class="city">
+      <!-- {{ member.city }} -->
+      Software Developer
+    </div>
+    <div class="status">
+      <div
+        *ngIf="
+          (presence.onlineUsers$ | async)!.includes(member.username);
+          else offline
+        "
+      >
+        <i class="fa-solid fa-circle is-online"></i>
+        <span class="ps-2">Online</span>
+      </div>
+      <ng-template #offline>
+        <i class="fa-regular fa-circle"></i> <span class="ps-2">Offline</span>
+      </ng-template>
+      <!-- <mat-icon
         class="status"
         [class.is-online]="
           (presence.onlineUsers$ | async)!.includes(member.username)
         "
         >brightness_1
-      </mat-icon>
-    </div>
-    <div class="city">
-      {{ member.city }}
+      </mat-icon> -->
     </div>
   </div>
 </div>

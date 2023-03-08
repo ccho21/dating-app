@@ -63,41 +63,8 @@
   }
 }
 
-.message {
-  width: 100%;
-  .empty {
-    color: var(--dark-shadow);
-    text-align: center;
-    margin-bottom: 2rem;
-    & .empty-icon {
-      color: var(--light-shadow);
-      width: 20rem;
-      height: 20rem;
-      margin-bottom: 2rem;
-    }
-    & .empty-btn {
-      text-align: right;
-    }
-  }
-}
 
-.people {
-  width: 100%;
-  .empty {
-    color: var(--dark-shadow);
-    text-align: center;
-    margin-bottom: 2rem;
-    & .empty-icon {
-      color: var(--light-shadow);
-      width: 20rem;
-      height: 20rem;
-      margin-bottom: 2rem;
-    }
-    & .empty-btn {
-      text-align: right;
-    }
-  }
-}
+
 
 .visitor {
   width: 100%;
