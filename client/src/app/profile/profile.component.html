@@ -3,14 +3,16 @@
     <div class="container profile-content">
       <div class="row">
         <div class="col-md-12">
-          <div class="">
+          <div class="thumbnail-box">
             <img
               class="user-thumbnail size-sm user-border mb-4"
               width="40"
               [src]="user.photoUrl || './assets/user.png'"
               [alt]="user.username"
             />
-            <i class="fa-solid fa-pen"></i>
+            <a class="edit-icon-link">
+              <i class="fa-solid fa-pen"></i>
+            </a>
           </div>
           <h2 class="main-text-2">Hello Charles</h2>
         </div>
@@ -74,7 +76,7 @@
                 your profile
               </div>
               <div class="empty-btn">
-                <button>Update Profile</button>
+                <button class="btn btn-primary">Update Profile</button>
               </div>
             </div>
           </div>
@@ -89,28 +91,36 @@
             </div>
             <div>
               <ul class="side-nav">
-                <li>
-                  <a href="">
-                    <i class="fa-solid fa-file-circle-check me-3"></i>
-                    Profile
+                <li class="side-nav-item">
+                  <a href="" class="side-nav-link">
+                    <div class="nav-icon">
+                      <i class="fa-solid fa-file-circle-check me-3"></i>
+                    </div>
+                    <div class="nav-title">Edit Profile</div>
                   </a>
                 </li>
-                <li>
-                  <a href="">
-                    <i class="fa-solid fa-diagram-project me-3"></i>
-                    Project
+                <li class="side-nav-item">
+                  <a href="" class="side-nav-link">
+                    <div class="nav-icon">
+                      <i class="fa-solid fa-diagram-project me-3"></i>
+                    </div>
+                    <div class="nav-title">View Project</div>
                   </a>
                 </li>
-                <li>
-                  <a href="">
-                    <i class="fa-solid fa-user-group me-3"></i>
-                    People
+                <li class="side-nav-item">
+                  <a href="" class="side-nav-link">
+                    <div class="nav-icon">
+                      <i class="fa-solid fa-user-group me-3"></i>
+                    </div>
+                    <div class="nav-title">View Connections</div>
                   </a>
                 </li>
-                <li>
-                  <a href="">
-                    <i class="fa-solid fa-gears me-3"></i>
-                    Settings
+                <li class="side-nav-item">
+                  <a href="" class="side-nav-link">
+                    <div class="nav-icon">
+                      <i class="fa-solid fa-gears me-3"></i>
+                    </div>
+                    <div class="nav-title">Go to Settings</div>
                   </a>
                 </li>
               </ul>

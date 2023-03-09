@@ -19,6 +19,17 @@
   --dark-green: #1a5f78;
   --amber: #fcb900;
   --purple: #617dc6;
+
+  --COLOR_decoration_100-h: 195;
+  --COLOR_decoration_100-s: 64%;
+  --COLOR_decoration_100-l: 28%;
+  --COLOR_decoration_100-a: 1;
+
+  --COLOR_mainBrand_100: hsla(184, 91%, 28%, 1);
+  --COLOR_mainBrand_100-h: 184;
+  --COLOR_mainBrand_100-s: 91%;
+  --COLOR_mainBrand_100-l: 28%;
+  --COLOR_mainBrand_100-a: 1;
 }
 
 html {
@@ -54,6 +65,7 @@ body {
   --main-bg-white: hsla(0, 0%, 0%, 0.05);
   --dark-shadow: hsla(240, 2%, 60%, 1);
   --light-shadow: hsla(0, 0%, 0%, 0.15);
+  --t-black: hsla(0, 0%, 0%, 0.6);
 }
 
 .user-thumbnail {
@@ -61,6 +73,14 @@ body {
   width: 15rem;
   border-radius: 50%;
   max-width: 100%;
+  &.square {
+    border-radius: 3rem;
+    width: 100%;
+  }
+  &.size-xl {
+    width: 300px;
+    width: 30rem;
+  }
   &.size-lg {
     width: 250px;
     width: 25rem;

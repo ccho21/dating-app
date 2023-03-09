@@ -10,12 +10,13 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
-import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MessagesComponent } from './messages/message-list/messages.component';
+import { MemberResolver } from './_resolvers/member.resolver';
+import { MemberComponent } from './members/member/member.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,8 +29,8 @@ const routes: Routes = [
       { path: 'members', component: MemberListComponent },
       {
         path: 'members/:username',
-        component: MemberDetailComponent,
-        resolve: { member: MemberDetailedResolver },
+        component: MemberComponent,
+        resolve: { member: MemberResolver },
       },
       {
         path: 'member/edit',

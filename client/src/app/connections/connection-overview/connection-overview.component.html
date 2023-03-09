@@ -6,14 +6,17 @@
           <app-member-card [member]="member"></app-member-card>
         </div>
       </div>
+      <div class="connection-btn">
+        <button class="btn btn-primary">Get Connected</button>
+      </div>
     </div>
   </div>
   <ng-template #noData>
     <div class="empty">
       <i class="empty-icon fa-solid fa-people-group"></i>
       <div class="main-text-2">Your new connections will appear here.</div>
-      <div class="empty-btn">
-        <button>Get Connected</button>
+      <div class="connection-btn">
+        <button class="btn-btn-primary">Get Connected</button>
       </div>
     </div>
   </ng-template>

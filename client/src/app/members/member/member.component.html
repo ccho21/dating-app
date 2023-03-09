@@ -1,0 +1,70 @@
+<section class="member" *ngIf="member">
+  <div class="header-background">
+    <div class="container">
+      <div class="row">
+        <div class="offset-md-1 col-md-4">
+          <img
+            class="user-thumbnail square"
+            width="40"
+            [src]="member.photoUrl || './assets/user.png'"
+            [alt]="member.username"
+          />
+        </div>
+        <div class="col-md-6">
+          <div class="member-info">
+            <div class="member-settings">
+              <span class="member-badge">
+                <i class="action-icon fa-solid fa-user"></i> 89
+              </span>
+              <a href="">
+                <span class="member-badge circle">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </span>
+              </a>
+            </div>
+            <div class="member-content">
+              <div></div>
+              <div>
+                <div class="member-name">
+                  Julia, <span class="member-age">35</span>
+                </div>
+                <div class="member-job">Occupation</div>
+                <div class="last-visit">
+                  <span class="member-badge">
+                    Last Login:
+                    <strong class="ms-2">Today</strong>
+                  </span>
+                </div>
+              </div>
+
+              <div class="action-groups">
+                <div>
+                  <button href="" class="btn btn-primary">
+                    <i class="action-icon fa-solid fa-user"></i>
+                  </button>
+                </div>
+                <div>
+                  <button class="btn btn-primary">
+                    <i class="action-icon fa-solid fa-users"></i>
+                  </button>
+                </div>
+                <div>
+                  <button class="btn btn-primary">
+                    <i class="action-icon fa-regular fa-message"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container move-over">
+    <div class="row">
+      <div class="offset-md-1 col-md-10">
+        <div class="panel white bg-white">Hello</div>
+      </div>
+    </div>
+  </div>
+</section>

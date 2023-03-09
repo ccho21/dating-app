@@ -39,6 +39,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { MessagesComponent } from './messages/message-list/messages.component';
 import { MessageOverviewComponent } from './messages/message-overview/message-overview.component';
 import { ConnectionOverviewComponent } from './connections/connection-overview/connection-overview.component';
+import { MemberComponent } from './members/member/member.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { ConnectionOverviewComponent } from './connections/connection-overview/c
     MessagesComponent,
     MessageOverviewComponent,
     ConnectionOverviewComponent,
+    MemberComponent,
   ],
   imports: [
     BrowserModule,
