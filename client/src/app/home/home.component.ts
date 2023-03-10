@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AccountService } from '../_services/account.service';
 import { Router } from '@angular/router';
-import { MembersService } from '../_services/members.service';
+import { MemberService } from '../_services/member.service';
 import { UserParams } from '../_models/userParams';
 import { User } from '../_models/user';
 import { Member } from '../_models/member';
@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
     public dialog: MatDialog,
     public accountService: AccountService,
     private router: Router,
-    private memberService: MembersService,
+    private memberService: MemberService,
     private scroller: ViewportScroller,
     public presence: PresenceService
   ) {}

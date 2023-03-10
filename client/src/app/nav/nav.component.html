@@ -18,8 +18,8 @@
           mat-button
           routerLink="/members"
           routerLinkActive="active"
-          >Matches</a
-        >
+          >People
+        </a>
         <a
           class="nav-link-1"
           mat-button
@@ -60,7 +60,7 @@
     </div>
 
     <ng-container *ngIf="accountService.currentUser$ | async as user">
-      <button mat-stroked-button [matMenuTriggerFor]="menu">
+      <button mat-stroked-button [matMenuTriggerFor]="menu" class="nav-link-1">
         <span>Welcome {{ user.knownAs || user.username | titlecase }}! </span>
       </button>
     </ng-container>

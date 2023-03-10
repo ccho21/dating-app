@@ -1,47 +1,43 @@
 <div class="member-card" *ngIf="member">
   <a href="" class="member-link" routerLink="/members/{{ member.username }}">
-    <div class="image">
-      <img
-        class="w-100"
-        src="{{ member.photoUrl || './assets/user.png' }}"
-        alt="{{ member.knownAs }}"
-      />
-    </div>
-  </a>
-  <div class="body">
-    <div class="action-btns mb-2">
-      <button mat-icon-button (click)="addLike(member)" class="action-icon">
-        <i class="fa-solid fa-heart"></i>
-      </button>
-    </div>
-    <div class="d-flex align-items-center">
-      <a href="" class="name-link" routerLink="/members/{{ member.username }}">
-        {{ member.username }}
-      </a>
-    </div>
-    <div class="city">
-      <!-- {{ member.city }} -->
-      Software Developer
-    </div>
-    <div class="status">
-      <div
-        *ngIf="
-          (presence.onlineUsers$ | async)!.includes(member.username);
-          else offline
-        "
-      >
-        <div>
-          <i class="fa-solid fa-circle is-online"></i>
-          <span class="ps-2">ONLINE</span>
+    <div
+      class="member-bg"
+      [ngStyle]="{
+        'background-image': member.photoUrl
+          ? 'url(' + member.photoUrl + ')'
+          : 'url(' + '/assets/user.png' + ')'
+      }"
+    >
+      <div class="member-card-header mb-2">
+        <div class="main-line">
+          <button (click)="addLike(member)" class="badge-btn">
+            <span class="member-badge">
+              <i class="fa-solid fa-heart me-2"></i> 99
+            </span>
+          </button>
+          <button (click)="addLike(member)" class="badge-btn">
+            <span class="member-badge circle">
+              <i class="fa-solid fa-star"></i>
+            </span>
+          </button>
         </div>
       </div>
-      <ng-template #offline>
-        <div>
-          <i class="fa-regular fa-circle"></i> <span class="ps-2">OFFLINE</span>
+      <div class="member-info">
+        <div class="name">
+          {{ member.username }}
         </div>
-      </ng-template>
+        <div class="occupation">Software Developer</div>
+        <div class="d-flex align-items-center">
+          <span class="distance">
+            <i class="fa-solid fa-location-dot me-1"></i> km
+          </span>
+          <span class="member-badge ms-2">
+            {{ member.city }}
+          </span>
+        </div>
+      </div>
     </div>
-  </div>
+  </a>
 </div>
 
 <!-- <mat-card class="example-card" *ngIf="member">

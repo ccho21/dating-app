@@ -2,7 +2,7 @@
   <div class="header-background">
     <div class="container profile-content">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 text-center">
           <div class="thumbnail-box">
             <img
               class="user-thumbnail size-sm user-border mb-4"
@@ -14,7 +14,7 @@
               <i class="fa-solid fa-pen"></i>
             </a>
           </div>
-          <h2 class="main-text-2">Hello Charles</h2>
+          <h2 class="main-text-2">Welcome {{ user.knownAs }}!</h2>
         </div>
       </div>
       <div class="row">
@@ -54,7 +54,10 @@
               Recent Messages
             </div>
           </div>
-          <app-message-overview class="w-100"></app-message-overview>
+          <app-message-overview
+            *ngIf="user"
+            class="w-100"
+          ></app-message-overview>
         </div>
         <div class="panel white left">
           <div class="title mb-4">
@@ -69,13 +72,13 @@
               <mat-icon class="me-3">remove_red_eye</mat-icon>
               Recent Visitors
             </div>
-            <div class="empty">
-              <i class="empty-icon fa-solid fa-eye"></i>
+            <div class="no-data">
+              <i class="no-data-icon fa-solid fa-eye"></i>
               <div class="main-text-2">
                 If you have had no visitors to your profile, consider updating
                 your profile
               </div>
-              <div class="empty-btn">
+              <div class="no-data-btn">
                 <button class="btn btn-primary">Update Profile</button>
               </div>
             </div>

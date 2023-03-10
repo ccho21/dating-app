@@ -20,7 +20,7 @@ import { Member } from 'src/app/_models/member';
 import { Message } from 'src/app/_models/message';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
-import { MembersService } from 'src/app/_services/members.service';
+import { MemberService } from 'src/app/_services/member.service';
 import { MessageService } from 'src/app/_services/message.service';
 
 @Component({
@@ -63,7 +63,7 @@ export class MemberMessagesComponent implements OnInit, OnChanges, OnDestroy {
     private scroller: ViewportScroller,
     private route: ActivatedRoute,
     private router: Router,
-    private memberService: MembersService
+    private memberService: MemberService
   ) {}
   ngOnChanges(changes: SimpleChanges): void {}
 

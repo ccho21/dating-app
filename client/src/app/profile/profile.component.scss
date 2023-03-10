@@ -24,10 +24,11 @@
       z-index: -1;
     }
   }
-  
+
   .thumbnail-box {
     position: relative;
     display: inline-block;
+    margin-top: 3rem;
     & .edit-icon-link {
       cursor: pointer;
       position: absolute;
@@ -50,7 +51,6 @@
   }
 
   & &-content {
-   
   }
 
   & .action-groups {
@@ -83,17 +83,17 @@
 
 .visitor {
   width: 100%;
-  .empty {
+  .no-data {
     color: var(--dark-shadow);
     text-align: center;
     margin-bottom: 2rem;
-    & .empty-icon {
+    & .no-data-icon {
       color: var(--light-shadow);
       width: 20rem;
       height: 20rem;
       margin-bottom: 2rem;
     }
-    & .empty-btn {
+    & .no-data-btn {
       text-align: right;
     }
   }

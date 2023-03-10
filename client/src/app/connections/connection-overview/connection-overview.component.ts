@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Member } from 'src/app/_models/member';
 import { Pagination } from 'src/app/_models/pagination';
-import { MembersService } from 'src/app/_services/members.service';
+import { MemberService } from 'src/app/_services/member.service';
 
 @Component({
   selector: 'app-connection-overview',
@@ -14,7 +14,7 @@ export class ConnectionOverviewComponent implements OnInit {
   pageNumber = 1;
   pageSize = 5;
   pagination?: Pagination;
-  constructor(private memberService: MembersService) {}
+  constructor(private memberService: MemberService) {}
 
   ngOnInit(): void {
     this.loadLikes();

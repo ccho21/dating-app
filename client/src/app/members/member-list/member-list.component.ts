@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/_models/member';
-import { MembersService } from 'src/app/_services/members.service';
+import { MemberService } from 'src/app/_services/member.service';
 import { Observable } from 'rxjs';
 import { Pagination } from 'src/app/_models/pagination';
 import { UserParams } from 'src/app/_models/userParams';
@@ -19,7 +19,6 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 })
 export class MemberListComponent implements OnInit {
   members?: Member[];
-  pagination?: Pagination;
   userParams?: UserParams;
   user?: User;
   genderList = [
@@ -27,9 +26,12 @@ export class MemberListComponent implements OnInit {
     { value: 'female', display: 'Females' },
   ];
 
-  driver?: Driver;
+  predicate = 'liked';
+  pageNumber = 1;
+  pageSize = 5;
+  pagination?: Pagination;
 
-  constructor(private memberService: MembersService) {
+  constructor(private memberService: MemberService) {
     this.userParams = this.memberService.getUserParams();
   }
 
@@ -55,6 +57,19 @@ export class MemberListComponent implements OnInit {
       });
     }
   }
+
+  loadLikes() {
+    this.memberService
+      .getLikes(this.predicate, this.pageNumber, this.pageSize)
+      .subscribe((response) => {
+        if (response && response.pagination) {
+          this.members = response.result as Member[];
+          this.pagination = response.pagination;
+          this.pagination.currentPage = response.pagination.currentPage - 1;
+        }
+      });
+  }
+
   change(e: MatSelectChange) {
     this.loadMembers();
   }
@@ -67,38 +82,6 @@ export class MemberListComponent implements OnInit {
 
       this.memberService.setUserParams(this.userParams);
       this.loadMembers();
-    }
-  }
-
-  startNavigationGuide() {
-    if (!this.driver) {
-      this.driver = new Driver({
-        animate: true,
-        keyboardControl: true,
-      });
-
-      const steps = [
-        {
-          element: '#login-step1',
-          popover: {
-            className: 'first-step-popover-class',
-            title: 'Matches',
-            description:
-              'Menu that shows a list of members who might interest you. Please use filter to find someone you love!',
-            position: 'bottom-center',
-          },
-        },
-      ];
-      console.log('### this driver', steps);
-      this.driver.defineSteps(steps);
-      this.driver.start();
-    }
-  }
-
-  resetNavigationGuide() {
-    if (this.driver) {
-      this.driver.reset();
-      this.driver = undefined;
     }
   }
 }

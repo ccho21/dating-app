@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
-import { MembersService } from 'src/app/_services/members.service';
+import { MemberService } from 'src/app/_services/member.service';
 import { take } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -29,7 +29,7 @@ export class MemberEditComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private memberService: MembersService,
+    private memberService: MemberService,
     private _snackBar: MatSnackBar
   ) {
     this.accountService.currentUser$

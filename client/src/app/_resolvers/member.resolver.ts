@@ -6,13 +6,13 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Member } from '../_models/member';
-import { MembersService } from '../_services/members.service';
+import { MemberService } from '../_services/member.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MemberResolver implements Resolve<Member> {
-  constructor(private memberService: MembersService) {}
+  constructor(private memberService: MemberService) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<Member> {
     return this.memberService.getMember(

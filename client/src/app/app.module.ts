@@ -40,6 +40,7 @@ import { MessagesComponent } from './messages/message-list/messages.component';
 import { MessageOverviewComponent } from './messages/message-overview/message-overview.component';
 import { ConnectionOverviewComponent } from './connections/connection-overview/connection-overview.component';
 import { MemberComponent } from './members/member/member.component';
+import { ConnectionCardComponent } from './connections/connection-card/connection-card.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { MemberComponent } from './members/member/member.component';
     MessageOverviewComponent,
     ConnectionOverviewComponent,
     MemberComponent,
+    ConnectionCardComponent,
   ],
   imports: [
     BrowserModule,

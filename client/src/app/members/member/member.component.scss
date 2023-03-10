@@ -4,19 +4,7 @@
 .member {
   position: relative;
   color: var(--white);
-  .member-badge {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--t-black);
-    padding: 0.5rem 1rem;
-    border-radius: 10rem;
-    &.circle {
-      border-radius: 50%;
-      width: 3rem;
-      height: 3rem;
-    }
-  }
+ 
   .header-background {
     z-index: 1;
     width: 100%;
@@ -134,5 +122,13 @@
     z-index: 10;
     margin-top: -5rem;
     position: relative;
+    margin-bottom: 3rem;
   }
+}
+
+.member-card {
+  padding: 20px;
+  border-radius: 20px;
+  border: solid 10px hsla(0, 0%, 94%, 1);
+  margin: 4px 0 20px 0;
 }

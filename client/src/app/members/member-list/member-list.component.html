@@ -1,4 +1,71 @@
+<section class="example-section mb-4 text-end">
+  <div class="container">
+    <div class="row">
+      <div class="offset-md-1 col-md-10">
+        <mat-button-toggle-group
+          class="list-search"
+          name="fontStyle"
+          aria-label="Font Style"
+          [(ngModel)]="predicate"
+        >
+          <mat-button-toggle
+            color="primary"
+            value="liked"
+            (click)="loadLikes()"
+            class="list-search-item"
+          >
+            Like
+          </mat-button-toggle>
+          <mat-button-toggle
+            color="primary"
+            value="likedBy"
+            (click)="loadLikes()"
+            class="list-search-item"
+          >
+            Liked
+          </mat-button-toggle>
+          <mat-button-toggle
+            color="primary"
+            value="likedBy"
+            (click)="loadLikes()"
+            class="list-search-item"
+          >
+            My Favourite
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="my-5">
+  <div class="container">
+    <div class="row">
+      <h2 class="title mb-4">
+        <mat-icon class="me-3">people</mat-icon>
+        Matches
+      </h2>
+      <ng-container *ngIf="members && members.length; else noData">
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mb-4"
+          *ngFor="let member of members"
+        >
+          <app-member-card [member]="member"></app-member-card>
+        </div>
+      </ng-container>
+      <ng-template #noData>
+        <div class="no-data">
+          <i class="no-data-icon fa-solid fa-people-group"></i>
+          <div class="main-text-2">NO PEOPLE FOUND</div>
+          <div class="connection-btn">
+            <button class="btn-btn-primary">Please Go Find People!</button>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="my-5">
   <div class="container">
     <div class="panel mb-5 p-3">
       <app-member-search
@@ -27,7 +94,7 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-md-3 mb-4" *ngFor="let member of members">
+          <div class="col-md-4 mb-4" *ngFor="let member of members">
             <app-member-card [member]="member"></app-member-card>
           </div>
         </div>
@@ -46,4 +113,4 @@
       </mat-paginator>
     </div>
   </div>
-</section>
+</section> -->

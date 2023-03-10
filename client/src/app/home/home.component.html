@@ -197,14 +197,14 @@
             </div>
           </div>
         </div>
-        <div class="member-box-right" @fadeIn *ngIf="messageOpen; else empty">
+        <div class="member-box-right" @fadeIn *ngIf="messageOpen; else noData">
           <!-- <app-member-messages
             [member]="member"
             (messageClose)="closeMessage($event)"
           >
           </app-member-messages> -->
         </div>
-        <ng-template #empty>
+        <ng-template #noData>
           <div class="member-box-right"></div>
         </ng-template>
       </div>

@@ -9,7 +9,7 @@ import { User } from 'src/app/_models/user';
 import { UserParams } from 'src/app/_models/userParams';
 import { AccountService } from 'src/app/_services/account.service';
 import { ConfirmService } from 'src/app/_services/confirm.service';
-import { MembersService } from 'src/app/_services/members.service';
+import { MemberService } from 'src/app/_services/member.service';
 import { MessageService } from 'src/app/_services/message.service';
 import { PresenceService } from 'src/app/_services/presence.service';
 
@@ -35,7 +35,7 @@ export class MessageOverviewComponent implements OnInit, OnDestroy {
   constructor(
     private messageService: MessageService,
     private accountService: AccountService,
-    private memberService: MembersService,
+    private memberService: MemberService,
     private confirmService: ConfirmService,
     private presenceService: PresenceService,
     private _snackBar: MatSnackBar,

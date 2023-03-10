@@ -12,7 +12,7 @@ import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 @Injectable({
   providedIn: 'root',
 })
-export class MembersService {
+export class MemberService {
   baseUrl = environment.apiUrl;
   members: Member[] = [];
   memberCache = new Map();
@@ -77,11 +77,12 @@ export class MembersService {
   }
 
   getUsersWithMessage(userParams: Partial<UserParams>) {
-    var response = this.memberCache.get(Object.values(userParams).join('-'));
+    // var response = this.memberCache.get(Object.values(userParams).join('-'));
+    // console.log('### this.memberCache', this.memberCache);
 
-    if (response) {
-      return of(response);
-    }
+    // if (response) {
+    //   return of(response);
+    // }
 
     let params = getPaginationHeaders(
       userParams.pageNumber!,

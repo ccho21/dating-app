@@ -5,13 +5,12 @@ import { MemberService } from 'src/app/_services/member.service';
 import { PresenceService } from 'src/app/_services/presence.service';
 
 @Component({
-  selector: 'app-member-card',
-  templateUrl: './member-card.component.html',
-  styleUrls: ['./member-card.component.scss'],
+  selector: 'app-connection-card',
+  templateUrl: './connection-card.component.html',
+  styleUrls: ['./connection-card.component.scss'],
 })
-export class MemberCardComponent implements OnInit {
+export class ConnectionCardComponent implements OnInit {
   @Input() member?: Member;
-  defaultImage: string = './assets/user.png';
 
   constructor(
     private memberService: MemberService,

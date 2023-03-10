@@ -5,11 +5,10 @@
   // left: 0;
   // width: 100%;
   // z-index: 10;
+  background-color: var(--light-green);
 }
 .nav-link-1 {
-  &:hover {
-    color: #fff;
-  }
+  color: var(--white);
 }
 .example-spacer {
   flex: 1 1 auto;

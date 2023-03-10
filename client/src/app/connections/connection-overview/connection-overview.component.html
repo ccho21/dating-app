@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3 mb-4" *ngFor="let member of members">
-          <app-member-card [member]="member"></app-member-card>
+          <app-connection-card [member]="member"></app-connection-card>
         </div>
       </div>
       <div class="connection-btn">
@@ -12,8 +12,8 @@
     </div>
   </div>
   <ng-template #noData>
-    <div class="empty">
-      <i class="empty-icon fa-solid fa-people-group"></i>
+    <div class="no-data">
+      <i class="no-data-icon fa-solid fa-people-group"></i>
       <div class="main-text-2">Your new connections will appear here.</div>
       <div class="connection-btn">
         <button class="btn-btn-primary">Get Connected</button>
