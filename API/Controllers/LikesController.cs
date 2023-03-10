@@ -19,7 +19,7 @@ namespace API.Controllers
         public LikesController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-           
+
         }
 
         [HttpPost("{username}")]
@@ -47,6 +47,27 @@ namespace API.Controllers
             if (await _unitOfWork.Complete()) return Ok();
 
             return BadRequest("Failed to like user");
+        }
+
+        [HttpDelete("{username}")]
+        public async Task<ActionResult> RemoveLike(string username)
+        {
+            var sourceUserId = User.GetUserId();
+            var likedUser = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            var sourceUser = await _unitOfWork.LikesRepository.GetUserWithLikes(sourceUserId);
+            if (likedUser == null) return NotFound();
+
+            if (sourceUser.UserName == username) return BadRequest("You cannot remove like from yourself!");
+
+            var userLike = await _unitOfWork.LikesRepository.GetUserLike(sourceUserId, likedUser.Id);
+
+            if (userLike == null) return BadRequest("Could not find user to remove like");
+
+            sourceUser.LikedUsers.Remove(userLike);
+
+            if (await _unitOfWork.Complete()) return Ok();
+
+            return BadRequest("Failed to remove like from the user");
         }
 
         [HttpGet]
