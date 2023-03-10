@@ -21,10 +21,6 @@ export class MemberListComponent implements OnInit {
   members?: Member[];
   userParams?: UserParams;
   user?: User;
-  genderList = [
-    { value: 'male', display: 'Males' },
-    { value: 'female', display: 'Females' },
-  ];
 
   predicate = 'liked';
   pageNumber = 1;

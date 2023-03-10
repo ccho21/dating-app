@@ -40,27 +40,33 @@
 <section class="my-5">
   <div class="container">
     <div class="row">
-      <h2 class="title mb-4">
-        <mat-icon class="me-3">people</mat-icon>
-        Matches
-      </h2>
-      <ng-container *ngIf="members && members.length; else noData">
-        <div
-          class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mb-4"
-          *ngFor="let member of members"
-        >
-          <app-member-card [member]="member"></app-member-card>
+      <!-- <div>
+        <h2 class="title mb-4">
+          <mat-icon class="me-3">people</mat-icon>
+          Matches
+        </h2>
+      </div> -->
+      <div class="offset-md-1 col-md-10">
+        <div class="row">
+          <ng-container *ngIf="members && members.length; else noData">
+            <div
+              class="col-lg-4 col-md-4 col-sm-6 col-xs-6 mb-4"
+              *ngFor="let member of members"
+            >
+              <app-member-card [member]="member"></app-member-card>
+            </div>
+          </ng-container>
+          <ng-template #noData>
+            <div class="no-data">
+              <i class="no-data-icon fa-solid fa-people-group"></i>
+              <div class="main-text-2">NO PEOPLE FOUND</div>
+              <div class="connection-btn">
+                <button class="btn-btn-primary">Please Go Find People!</button>
+              </div>
+            </div>
+          </ng-template>
         </div>
-      </ng-container>
-      <ng-template #noData>
-        <div class="no-data">
-          <i class="no-data-icon fa-solid fa-people-group"></i>
-          <div class="main-text-2">NO PEOPLE FOUND</div>
-          <div class="connection-btn">
-            <button class="btn-btn-primary">Please Go Find People!</button>
-          </div>
-        </div>
-      </ng-template>
+      </div>
     </div>
   </div>
 </section>
