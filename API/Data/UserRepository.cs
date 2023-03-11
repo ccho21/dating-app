@@ -72,27 +72,29 @@ namespace API.Data
             //    }).ToList(),
             //}).AsQueryable();
 
-            query = query.Include(x => x.LikedByUsers).Select(u => new AppUser
-            {
-                Id = u.Id,
-                KnownAs = u.KnownAs,
-                Created = u.Created,
-                LastActive = u.LastActive,
-                Gender = u.Gender,
-                Introduction = u.Introduction,
-                LookingFor = u.LookingFor,
-                Interests = u.Interests,
-                City = u.City,
-                Country = u.Country,
-                Photos = u.Photos,
-                LikedByUsers = u.LikedByUsers,
-            }).AsQueryable();
-
-            // query = userParams.OrderBy switch
+            // query = query.Include(x => x.LikedByUsers).Select(u => new AppUser
             // {
-            //     "created" => query.OrderByDescending(u => u.Created),
-            //     _ => query.OrderByDescending(u => u.LastActive)
-            // };
+            //     Id = u.Id,
+            //     DateOfBirth = u.DateOfBirth,
+            //     KnownAs = u.KnownAs,
+            //     Created = u.Created,
+            //     LastActive = u.LastActive,
+            //     Gender = u.Gender,
+            //     Introduction = u.Introduction,
+            //     LookingFor = u.LookingFor,
+            //     Interests = u.Interests,
+            //     City = u.City,
+            //     Country = u.Country,
+            //     Photos = u.Photos,
+            //     LikedByUsers = u.LikedByUsers,
+            // }).AsQueryable();
+
+            query = query.Include(x => x.LikedByUsers);
+            query = userParams.OrderBy switch
+            {
+                "created" => query.OrderByDescending(u => u.Created),
+                _ => query.OrderByDescending(u => u.LastActive)
+            };
 
             return await PagedList<MemberDto>.CreateAsync(
                 query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(),
