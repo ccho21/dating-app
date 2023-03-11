@@ -13,20 +13,35 @@
         <div class="col-md-6">
           <div class="member-info">
             <div class="member-settings">
-              <span class="member-badge">
-                <i class="action-icon fa-solid fa-user"></i> 89
-              </span>
-              <a href="">
+              <div
+                class="member-badge"
+                [ngClass]="{
+                  'is-liked': isLiked
+                }"
+              >
+                <i class="fa-solid fa-heart me-2"></i>
+                <span class="text-white">
+                  {{ member.likedByUsers.length }}
+                </span>
+              </div>
+              <button class="badge-btn" [matMenuTriggerFor]="menu">
                 <span class="member-badge circle">
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </span>
-              </a>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="addOrRemoveLike(member)">
+                  {{ isLiked ? "Remove Favourite" : "Add Favourite" }}
+                </button>
+                <button mat-menu-item>Send message</button>
+              </mat-menu>
             </div>
             <div class="member-content">
               <div></div>
               <div>
                 <div class="member-name">
-                  Julia, <span class="member-age">35</span>
+                  {{ member.username }},
+                  <span class="member-age">{{ member.age }}</span>
                 </div>
                 <div class="member-job">Occupation</div>
                 <div class="last-visit">
@@ -39,19 +54,19 @@
 
               <div class="action-groups">
                 <div>
-                  <button href="" class="btn btn-primary">
-                    <i class="action-icon fa-solid fa-user"></i>
+                  <button
+                    href=""
+                    class="main-btn"
+                    (click)="addOrRemoveLike(member)"
+                  >
+                    {{ isLiked ? "Remove Favourite" : "Add Favourite" }}
                   </button>
                 </div>
                 <div>
-                  <button class="btn btn-primary">
-                    <i class="action-icon fa-solid fa-users"></i>
-                  </button>
+                  <button class="main-btn">About {{ member.knownAs }}</button>
                 </div>
                 <div>
-                  <button class="btn btn-primary">
-                    <i class="action-icon fa-regular fa-message"></i>
-                  </button>
+                  <button class="main-btn white">Send Message</button>
                 </div>
               </div>
             </div>

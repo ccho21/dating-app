@@ -1,8 +1,8 @@
 <section class="profile" *ngIf="user">
-  <div class="header-background">
+  <div class="header-background mb-5">
     <div class="container profile-content">
       <div class="row">
-        <div class="col-md-12 text-center">
+        <div class="offset-md-1 col-md-10 text-center">
           <div class="thumbnail-box">
             <img
               class="user-thumbnail size-sm user-border mb-4"
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="offset-md-1 col-md-10">
           <div class="action-groups">
             <div>
               <a href="" class="action-link">
@@ -42,91 +42,95 @@
   </div>
   <div class="container">
     <div class="row">
-      <div class="col-md-8">
-        <div class="panel white left">
-          <div class="title mb-4">
-            <mat-icon class="me-3"> mail </mat-icon>
-            <div
-              matBadgeOverlap="false"
-              matBadgeColor="warn"
-              class="demo-section"
-            >
-              Recent Messages
-            </div>
-          </div>
-          <app-message-overview
-            *ngIf="user"
-            class="w-100"
-          ></app-message-overview>
-        </div>
-        <div class="panel white left">
-          <div class="title mb-4">
-            <mat-icon class="me-3">people</mat-icon>
-            Saved Connections
-          </div>
-          <app-connection-overview class="w-100"></app-connection-overview>
-        </div>
-        <div class="panel white left">
-          <div class="visitor">
-            <div class="title">
-              <mat-icon class="me-3">remove_red_eye</mat-icon>
-              Recent Visitors
-            </div>
-            <div class="no-data">
-              <i class="no-data-icon fa-solid fa-eye"></i>
-              <div class="main-text-2">
-                If you have had no visitors to your profile, consider updating
-                your profile
+      <div class="offset-md-1 col-md-10">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="panel white left mb-5">
+              <div class="title mb-4">
+                <mat-icon class="me-3"> mail </mat-icon>
+                <div
+                  matBadgeOverlap="false"
+                  matBadgeColor="warn"
+                  class="demo-section"
+                >
+                  Recent Messages
+                </div>
               </div>
-              <div class="no-data-btn">
-                <button class="btn btn-primary">Update Profile</button>
+              <app-message-overview
+                *ngIf="user"
+                class="w-100"
+              ></app-message-overview>
+            </div>
+            <div class="panel white left mb-5">
+              <div class="title mb-4">
+                <mat-icon class="me-3">people</mat-icon>
+                Saved Connections
+              </div>
+              <app-connection-overview class="w-100"></app-connection-overview>
+            </div>
+            <div class="panel white left mb-5">
+              <div class="visitor">
+                <div class="title">
+                  <mat-icon class="me-3">remove_red_eye</mat-icon>
+                  Recent Visitors
+                </div>
+                <div class="no-data">
+                  <i class="no-data-icon fa-solid fa-eye"></i>
+                  <div class="main-text-2">
+                    If you have had no visitors to your profile, consider
+                    updating your profile
+                  </div>
+                  <div class="no-data-btn mt-5">
+                    <button class="main-btn">Update Profile</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel white left">
-          <div class="options">
-            <div class="title">
-              <mat-icon class="me-3">list_alt</mat-icon>
-              YOUR OPTIONS:
-            </div>
-            <div>
-              <ul class="side-nav">
-                <li class="side-nav-item">
-                  <a href="" class="side-nav-link">
-                    <div class="nav-icon">
-                      <i class="fa-solid fa-file-circle-check me-3"></i>
-                    </div>
-                    <div class="nav-title">Edit Profile</div>
-                  </a>
-                </li>
-                <li class="side-nav-item">
-                  <a href="" class="side-nav-link">
-                    <div class="nav-icon">
-                      <i class="fa-solid fa-diagram-project me-3"></i>
-                    </div>
-                    <div class="nav-title">View Project</div>
-                  </a>
-                </li>
-                <li class="side-nav-item">
-                  <a href="" class="side-nav-link">
-                    <div class="nav-icon">
-                      <i class="fa-solid fa-user-group me-3"></i>
-                    </div>
-                    <div class="nav-title">View Connections</div>
-                  </a>
-                </li>
-                <li class="side-nav-item">
-                  <a href="" class="side-nav-link">
-                    <div class="nav-icon">
-                      <i class="fa-solid fa-gears me-3"></i>
-                    </div>
-                    <div class="nav-title">Go to Settings</div>
-                  </a>
-                </li>
-              </ul>
+          <div class="col-md-4">
+            <div class="panel white left mb-5">
+              <div class="options">
+                <div class="title">
+                  <mat-icon class="me-3">list_alt</mat-icon>
+                  YOUR OPTIONS:
+                </div>
+                <div>
+                  <ul class="side-nav">
+                    <li class="side-nav-item">
+                      <a href="" class="side-nav-link">
+                        <div class="nav-icon">
+                          <i class="fa-solid fa-file-circle-check me-3"></i>
+                        </div>
+                        <div class="nav-title">Edit Profile</div>
+                      </a>
+                    </li>
+                    <li class="side-nav-item">
+                      <a href="" class="side-nav-link">
+                        <div class="nav-icon">
+                          <i class="fa-solid fa-diagram-project me-3"></i>
+                        </div>
+                        <div class="nav-title">View Project</div>
+                      </a>
+                    </li>
+                    <li class="side-nav-item">
+                      <a href="" class="side-nav-link">
+                        <div class="nav-icon">
+                          <i class="fa-solid fa-user-group me-3"></i>
+                        </div>
+                        <div class="nav-title">View Connections</div>
+                      </a>
+                    </li>
+                    <li class="side-nav-item">
+                      <a href="" class="side-nav-link">
+                        <div class="nav-icon">
+                          <i class="fa-solid fa-gears me-3"></i>
+                        </div>
+                        <div class="nav-title">Go to Settings</div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>

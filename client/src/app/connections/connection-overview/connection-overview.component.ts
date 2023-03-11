@@ -17,10 +17,10 @@ export class ConnectionOverviewComponent implements OnInit {
   constructor(private memberService: MemberService) {}
 
   ngOnInit(): void {
-    this.loadLikes();
+    this.loadMembersWithLikes();
   }
 
-  loadLikes() {
+  loadMembersWithLikes() {
     this.memberService
       .getLikes(this.predicate, this.pageNumber, this.pageSize)
       .subscribe((response) => {

@@ -25,7 +25,7 @@ namespace API.Helpers
             CreateMap<UserLike, LikeDto>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.SourceUser.Id))
                 .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.SourceUser.UserName))
-                .ForMember(dest => dest.KnownAs, opt => opt.MapFrom(src => src.SourceUser.KnownAs));
+                .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.SourceUser.Photos.FirstOrDefault(x => x.IsMain).Url));
             CreateMap<Message, MessageDto>()
             .ForMember(dest => dest.SenderPhotoUrl,
                     opt => opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(x => x.IsMain).Url))

@@ -106,9 +106,9 @@ export class MemberService {
       .reduce((arr, elem) => arr.concat(elem.result), [])
       .find((member: Member) => member.username === username);
 
-    if (member) {
-      return of(member);
-    }
+    // if (member) {
+    //   return of(member);
+    // }
     return this.http.get<Member>(this.baseUrl + 'users/' + username);
   }
 
@@ -131,6 +131,10 @@ export class MemberService {
 
   addLike(username: string) {
     return this.http.post(this.baseUrl + 'likes/' + username, {});
+  }
+
+  removeLike(username: string) {
+    return this.http.delete(this.baseUrl + 'likes/' + username, {});
   }
 
   getLikes(predicate: string, pageNumber: number, pageSize: number) {

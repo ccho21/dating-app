@@ -10,11 +10,18 @@
         >
           <mat-button-toggle
             color="primary"
+            (click)="loadMembers()"
+            class="list-search-item"
+          >
+            People
+          </mat-button-toggle>
+          <mat-button-toggle
+            color="primary"
             value="liked"
             (click)="loadLikes()"
             class="list-search-item"
           >
-            Like
+            Following
           </mat-button-toggle>
           <mat-button-toggle
             color="primary"
@@ -22,15 +29,7 @@
             (click)="loadLikes()"
             class="list-search-item"
           >
-            Liked
-          </mat-button-toggle>
-          <mat-button-toggle
-            color="primary"
-            value="likedBy"
-            (click)="loadLikes()"
-            class="list-search-item"
-          >
-            My Favourite
+            Followed
           </mat-button-toggle>
         </mat-button-toggle-group>
       </div>
@@ -61,7 +60,7 @@
               <i class="no-data-icon fa-solid fa-people-group"></i>
               <div class="main-text-2">NO PEOPLE FOUND</div>
               <div class="connection-btn">
-                <button class="btn-btn-primary">Please Go Find People!</button>
+                <button class="main-btn">Please Go Find People!</button>
               </div>
             </div>
           </ng-template>

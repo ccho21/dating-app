@@ -10,8 +10,10 @@
   </a>
   <div class="body">
     <div class="action-btns mb-2">
-      <button mat-icon-button (click)="addLike(member)" class="action-icon">
-        <i class="fa-solid fa-heart"></i>
+      <button (click)="removeLike(member)" class="badge-btn action-icon">
+        <div class="member-badge circle is-liked">
+          <i class="fa-solid fa-heart"></i>
+        </div>
       </button>
     </div>
     <div class="d-flex align-items-center">

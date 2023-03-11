@@ -27,7 +27,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'members', component: MemberListComponent },
-      { path: 'members', component: MemberListComponent },
       {
         path: 'members/:username',
         component: MemberComponent,
@@ -39,11 +38,11 @@ const routes: Routes = [
         canDeactivate: [PreventUnsavedChangesGuard],
       },
       { path: 'lists', component: ListsComponent },
-      // {
-      //   path: 'messages',
-      //   component: MessagesComponent,
-      //   children: [{ path: ':membername', component: MemberMessagesComponent }],
-      // },
+      {
+        path: 'messages',
+        component: MessagesComponent,
+        children: [{ path: ':membername', component: MemberMessagesComponent }],
+      },
       {
         path: 'admin',
         component: AdminPanelComponent,

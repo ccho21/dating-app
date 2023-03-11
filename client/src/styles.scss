@@ -107,14 +107,17 @@ body {
   align-items: center;
   justify-content: center;
   background-color: var(--t-black);
-  padding: 0.2rem 1rem;
+  padding: 0.25rem 1rem;
   border-radius: 10rem;
-
+  color: var(--white);
   &.circle {
     border-radius: 50%;
     width: 3rem;
     height: 3rem;
     padding: 0.5rem;
+  }
+  &.is-liked {
+    color: var(--red) !important;
   }
 }
 
@@ -128,15 +131,6 @@ body {
     height: 20rem;
     margin-bottom: 2rem;
   }
-}
-
-
-.badge-btn {
-  border: none;
-  background-color: transparent;
-  font-size: 1.8rem;
-  color: var(--white);
-  padding: 0;
 }
 
 .mat-icon-button {
@@ -191,6 +185,32 @@ body {
 
 // MAT TOGGLE
 .mat-button-toggle-checked {
-  background-color: transparent;
+  background-color: var(--white);
   border-bottom: 3px solid var(--light-green) !important;
+}
+
+// BUTTONS
+.badge-btn {
+  border: none;
+  background-color: transparent;
+  font-size: 1.8rem;
+  color: var(--white);
+  padding: 0;
+}
+.main-btn {
+  background-color: hsla(184, 91%, 28%, 1);
+  border: none;
+  box-shadow: 0 5px 14px 2px rgb(0, 0, 0, 0.2);
+  color: var(--white);
+  padding: 1rem 3rem;
+  border-radius: 10rem;
+  transform: translateY(-0.2rem);
+  transition: all 0.15s ease-in-out;
+  &.white {
+    background-color: var(--white);
+    color: var(--black);
+  }
+  &:active {
+    transform: translateY(0);
+  }
 }

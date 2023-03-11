@@ -17,4 +17,5 @@ export interface Member {
   country: string;
   photos: Photo[];
   messagesSent: Message[];
+  likedByUsers: Partial<Member[]>;
 }
