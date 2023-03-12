@@ -17,6 +17,7 @@ namespace API.Helpers
             .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url))
             .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
             CreateMap<AppUser, MemberMessageDto>()
+            .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.KnownAs.ToLower()))
             .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url))
             .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
             CreateMap<Photo, PhotoDto>();
@@ -26,11 +27,15 @@ namespace API.Helpers
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.SourceUser.Id))
                 .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.SourceUser.UserName))
                 .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.SourceUser.Photos.FirstOrDefault(x => x.IsMain).Url));
+            CreateMap<UserLike, LikedDto>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.LikedUser.Id))
+                .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.LikedUser.UserName))
+                .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.LikedUser.Photos.FirstOrDefault(x => x.IsMain).Url));
             CreateMap<Message, MessageDto>()
-            .ForMember(dest => dest.SenderPhotoUrl,
-                    opt => opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(x => x.IsMain).Url))
-            .ForMember(dest => dest.RecipientPhotoUrl,
-                    opt => opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
+                .ForMember(dest => dest.SenderPhotoUrl,
+                        opt => opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(x => x.IsMain).Url))
+                .ForMember(dest => dest.RecipientPhotoUrl,
+                        opt => opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
             CreateMap<Project, ProjectDto>();
 
         }

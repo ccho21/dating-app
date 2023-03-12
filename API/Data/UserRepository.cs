@@ -44,52 +44,7 @@ namespace API.Data
             var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
             var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
 
-            // query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
-            //var users = query.Include(x => x.LikedByUsers).Select(u => new MemberDto
-            //{
-            //    Id = u.Id,
-            //    Username = u.UserName,
-            //    PhotoUrl = u.Photos.FirstOrDefault(p => p.IsMain).Url,
-            //    Age = u.DateOfBirth.CalculateAge(),
-            //    KnownAs = u.KnownAs,
-            //    Created = u.Created,
-            //    LastActive = u.LastActive,
-            //    Gender = u.Gender,
-            //    Introduction = u.Introduction,
-            //    LookingFor = u.LookingFor,
-            //    Interests = u.Interests,
-            //    City = u.City,
-            //    Country = u.Country,
-            //    //Photos = u.Photos.,
-            //    LikedByUsers = u.LikedByUsers.Select(u => new LikeDto
-            //    {
-            //        Username = u.SourceUser.UserName,
-            //        KnownAs = u.SourceUser.KnownAs,
-            //        Age = u.SourceUser.DateOfBirth.CalculateAge(),
-            //        PhotoUrl = u.SourceUser.Photos.FirstOrDefault(p => p.IsMain).Url,
-            //        City = u.SourceUser.City,
-            //        Id = u.SourceUser.Id,
-            //    }).ToList(),
-            //}).AsQueryable();
-
-            // query = query.Include(x => x.LikedByUsers).Select(u => new AppUser
-            // {
-            //     Id = u.Id,
-            //     DateOfBirth = u.DateOfBirth,
-            //     KnownAs = u.KnownAs,
-            //     Created = u.Created,
-            //     LastActive = u.LastActive,
-            //     Gender = u.Gender,
-            //     Introduction = u.Introduction,
-            //     LookingFor = u.LookingFor,
-            //     Interests = u.Interests,
-            //     City = u.City,
-            //     Country = u.Country,
-            //     Photos = u.Photos,
-            //     LikedByUsers = u.LikedByUsers,
-            // }).AsQueryable();
-
-            query = query.Include(x => x.LikedByUsers);
+            query = query.Include(x => x.LikedUsers).Include(x => x.LikedByUsers);
             query = userParams.OrderBy switch
             {
                 "created" => query.OrderByDescending(u => u.Created),
@@ -116,11 +71,7 @@ namespace API.Data
 
             // query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
 
-            // query = userParams.OrderBy switch
-            // {
-            //     "created" => query.OrderByDescending(u => u.Created),
-            //     _ => query.OrderByDescending(u => u.LastActive)
-            // };
+
 
             // query = query.Where(u => u.MessagesSent.Where(m => m.RecipientUsername == userParams.CurrentUsername).Count() > 0);
             query = query.Include(u => u.MessagesSent).Select(u => new AppUser
@@ -137,8 +88,14 @@ namespace API.Data
                 City = u.City,
                 Country = u.Country,
                 Photos = u.Photos,
-                MessagesSent = u.MessagesSent.Where(m => m.RecipientUsername == userParams.CurrentUsername).OrderByDescending(m => m.MessageSent).ToList()
-            });
+                MessagesSent = u.MessagesSent.Where(m => m.RecipientUsername == userParams.CurrentUsername).OrderBy(m => m.MessageSent).ToList()
+            }).Where(u => u.MessagesSent.Count > 0);
+
+            query = userParams.OrderBy switch
+            {
+                "created" => query.OrderByDescending(u => u.Created),
+                _ => query.OrderByDescending(u => u.LastActive)
+            };
 
             return await PagedList<MemberMessageDto>.CreateAsync(
                 query.ProjectTo<MemberMessageDto>(_mapper.ConfigurationProvider).AsNoTracking(),
