@@ -113,12 +113,9 @@ export class MessagesComponent implements OnInit, OnDestroy {
         map((res) => {
           let { result } = res;
           const updated = result?.map((member: Member) => {
-            const messageSent = member.messagesSent.filter(
-              (m) => m.recipientUsername === this.user?.username
-            );
             return {
               ...member,
-              messagesSent: messageSent,
+              messagesSent: member.messagesSent,
             };
           });
 

@@ -12,11 +12,12 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AdminGuard } from './_guards/admin.guard';
-import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { MemberMessagesComponent } from './messages/member-messages/member-messages.component';
 import { ProfileComponent } from './profile/profile.component';
-import { MessagesComponent } from './messages/message-list/messages.component';
+import { MessagesComponent } from './messages/messages/messages.component';
 import { MemberResolver } from './_resolvers/member.resolver';
 import { MemberComponent } from './members/member/member.component';
+import { NoDataComponent } from './no-data/no-data/no-data.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -41,7 +42,10 @@ const routes: Routes = [
       {
         path: 'messages',
         component: MessagesComponent,
-        children: [{ path: ':membername', component: MemberMessagesComponent }],
+        children: [
+          { path: '', component: NoDataComponent },
+          { path: ':membername', component: MemberMessagesComponent },
+        ],
       },
       {
         path: 'admin',

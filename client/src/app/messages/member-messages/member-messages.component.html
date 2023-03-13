@@ -1,0 +1,128 @@
+<div class="message-container">
+  <div class="message-contents">
+    <div class="heading d-flex align-items-center" *ngIf="member">
+      <div class="align-self-center">
+        <img
+          class="img-thumbnail"
+          width="40"
+          [src]="member.photoUrl || './assets/user.png'"
+          [alt]="member.username"
+        />
+      </div>
+      <div class="font-weight-bold flex-grow-1 ps-2">
+        <a class="section-link text-md text-black" href="">
+          {{ member.username }}
+        </a>
+      </div>
+      <div class="pr-2"></div>
+
+      <div>
+        <button mat-icon-button (click)="close()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="body" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+      <div *ngIf="(messageService.messageThread$ | async)?.length === 0">
+        <div>No messages yet... Please say HI!</div>
+      </div>
+
+      <div *ngFor="let message of messageService.messageThread$ | async">
+        <div
+          class="message-item"
+          [ngClass]="{
+            'text-end': member?.username !== message.senderUsername
+          }"
+        >
+          <img
+            class="img-thumbnail"
+            width="40"
+            [src]="message?.senderPhotoUrl || './assets/user.png'"
+            [alt]="message?.senderUsername"
+          />
+          <div
+            class="message-line mb-2"
+            [ngClass]="{
+              'justify-content-end': member?.username !== message.senderUsername
+            }"
+          >
+            <div class="message-content">{{ message.content }}</div>
+            <div
+              *ngIf="
+                message.dateRead && message.senderUsername !== member?.username
+              "
+            >
+              <i class="fa-regular fa-circle-check ms-2"></i>
+            </div>
+          </div>
+          <div class="text-muted">
+            <i class="fa fa-clock-o pe-2"> </i>
+            {{ message.messageSent | timeago }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <form
+        action=""
+        #messageForm="ngForm"
+        autocomplete="off"
+        (ngSubmit)="sendMessage()"
+      >
+        <div class="">
+          <div class="input-group p-3">
+            <input
+              type="text"
+              placeholder="Send a message to {{ member?.username }}"
+              aria-describedby=""
+              name="messageContent"
+              [(ngModel)]="messageContent"
+              class="form-control"
+            />
+            <div class="input-group-append">
+              <button
+                matSuffix
+                mat-mini-fab
+                color="green"
+                class="mb-2"
+                aria-label=""
+              >
+                <mat-icon>send</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- <form
+        #messageForm="ngForm"
+        autocomplete="off"
+     
+        (ngSubmit)="sendMessage()"
+      >
+        <mat-form-field class="w-100 px-3 pt-2" appearance="standard">
+          <mat-label>Message</mat-label>
+          <input
+            matInput
+            class=""
+            placeholder="Send a private message"
+            name="messageContent"
+            [(ngModel)]="messageContent"
+            type="text"
+          />
+          <button
+            matSuffix
+            mat-mini-fab
+            color="primary"
+            class="mb-2"
+            aria-label=""
+          >
+            <mat-icon>send</mat-icon>
+          </button>
+        </mat-form-field>
+      </form> -->
+    </div>
+  </div>
+</div>

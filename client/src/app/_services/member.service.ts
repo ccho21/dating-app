@@ -46,10 +46,12 @@ export class MemberService {
   }
 
   getMembers(userParams: UserParams) {
-    var response = this.memberCache.get(Object.values(userParams).join('-'));
-    if (response) {
-      return of(response);
-    }
+    // var response = this.memberCache.get(Object.values(userParams).join('-'));
+    // if (response) {
+    //   return of(response);
+    // }
+    // console.log(Object.values(userParams).join('-'), response);
+    // console.log(this.memberCache);
 
     let params = getPaginationHeaders(
       userParams.pageNumber,
@@ -61,8 +63,7 @@ export class MemberService {
     params = params.append('gender', userParams.gender);
     params = params.append('orderBy', userParams.orderBy);
 
-    console.log(Object.values(userParams).join('-'), response);
-    console.log(this.memberCache);
+    
 
     return getPaginatedResult<Member[]>(
       this.baseUrl + 'users',

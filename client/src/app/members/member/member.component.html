@@ -13,17 +13,19 @@
         <div class="col-md-6">
           <div class="member-info">
             <div class="member-settings">
-              <div
-                class="member-badge"
-                [ngClass]="{
-                  'is-liked': isLiked
-                }"
-              >
-                <i class="fa-solid fa-heart me-2"></i>
-                <span class="text-white">
-                  {{ member.likedByUsers.length }}
-                </span>
-              </div>
+              <button class="badge-btn" (click)="addOrRemoveLike(member)">
+                <div
+                  class="member-badge"
+                  [ngClass]="{
+                    'is-liked': isLiked
+                  }"
+                >
+                  <i class="fa-solid fa-heart me-2"></i>
+                  <span class="text-white">
+                    {{ member.likedByUsers.length }}
+                  </span>
+                </div>
+              </button>
               <button class="badge-btn" [matMenuTriggerFor]="menu">
                 <span class="member-badge circle">
                   <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -47,7 +49,9 @@
                 <div class="last-visit">
                   <span class="member-badge">
                     Last Login:
-                    <strong class="ms-2">Today</strong>
+                    <strong class="ms-2">{{
+                      member.lastActive | timeago
+                    }}</strong>
                   </span>
                 </div>
               </div>

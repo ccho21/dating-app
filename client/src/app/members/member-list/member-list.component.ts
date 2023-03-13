@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/_models/member';
 import { MemberService } from 'src/app/_services/member.service';
 import { Observable } from 'rxjs';
-import { Pagination } from 'src/app/_models/pagination';
+import { PaginatedResult, Pagination } from 'src/app/_models/pagination';
 import { UserParams } from 'src/app/_models/userParams';
 import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs/operators';
@@ -11,13 +11,21 @@ import Driver from 'driver.js';
 import { MatGridList } from '@angular/material/grid-list';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import {
+  Router,
+  Event,
+  NavigationStart,
+  NavigationEnd,
+  NavigationError,
+  ActivatedRoute,
+} from '@angular/router';
 
 @Component({
   selector: 'app-member-list',
   templateUrl: './member-list.component.html',
   styleUrls: ['./member-list.component.scss'],
 })
-export class MemberListComponent implements OnInit {
+export class MemberListComponent implements OnInit, OnDestroy {
   members?: Member[];
   userParams?: UserParams;
   user?: User;
@@ -26,14 +34,29 @@ export class MemberListComponent implements OnInit {
   pageNumber = 1;
   pageSize = 5;
   pagination?: Pagination;
+  activeTab: any;
 
-  constructor(private memberService: MemberService) {
+  constructor(
+    private memberService: MemberService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.userParams = this.memberService.getUserParams();
+  }
+  ngOnDestroy(): void {
+    console.log('### DESTROYED');
   }
 
   ngOnInit(): void {
-    this.loadMembers();
-    // this.startNavigationGuide();
+    this.route.queryParams.subscribe((params) => {
+      if (params) {
+        console.log(' ### PARAMS ', params);
+        this.activeTab = params.tab ? Number(params.tab) : 0;
+        this.predicate = params.predicate;
+
+        this.loadMembers();
+      }
+    });
   }
 
   loadMembers(userParams?: UserParams) {
@@ -42,15 +65,17 @@ export class MemberListComponent implements OnInit {
     }
     if (this.userParams) {
       this.memberService.setUserParams(this.userParams);
-      this.memberService.getMembers(this.userParams).subscribe((response) => {
-        console.log('### RESPONSE', response);
-        this.members = response.result;
-        this.pagination = response.pagination;
+      this.memberService
+        .getMembers(this.userParams)
+        .subscribe((response: PaginatedResult<Member[]>) => {
+          this.members = response.result;
+          this.pagination = response.pagination;
 
-        if (this.pagination) {
-          this.pagination.currentPage = response.pagination.currentPage - 1;
-        }
-      });
+          if (this.pagination) {
+            this.pagination.currentPage =
+              (response?.pagination?.currentPage as number) - 1;
+          }
+        });
     }
   }
 

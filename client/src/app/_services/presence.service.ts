@@ -66,7 +66,9 @@ export class PresenceService {
 
       snackBarRef
         .onAction()
-        .subscribe(() => this.router.navigateByUrl('/members/' + senderUsername + '?tab=3'));
+        .subscribe(() =>
+          this.router.navigateByUrl('/messages/' + senderUsername)
+        );
     });
   }
 

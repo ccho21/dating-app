@@ -68,6 +68,22 @@ body {
   --t-black: hsla(0, 0%, 0%, 0.6);
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ebebeb;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #6d6d6d;
+}
+
 .user-thumbnail {
   width: 150px;
   width: 15rem;
@@ -125,6 +141,11 @@ body {
   color: var(--dark-shadow);
   text-align: center;
   margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
   & .no-data-icon {
     color: var(--light-shadow);
     width: 20rem;
@@ -132,6 +153,8 @@ body {
     margin-bottom: 2rem;
   }
 }
+
+//
 
 .mat-icon-button {
   color: var(--dark-blue) !important;
@@ -147,6 +170,7 @@ body {
   height: 70px;
   height: 7rem;
 }
+
 .mat-form-field-label {
   color: var(--black) !important;
 }

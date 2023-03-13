@@ -9,25 +9,22 @@
           [(ngModel)]="predicate"
         >
           <mat-button-toggle
-            color="primary"
-            (click)="loadMembers()"
             class="list-search-item"
+            [routerLink]="['/members']"
           >
             People
           </mat-button-toggle>
           <mat-button-toggle
-            color="primary"
-            value="liked"
-            (click)="loadLikes()"
+            [routerLink]="['/members']"
+            [queryParams]="{ predicate: 'liked' }"
             class="list-search-item"
           >
             Following
           </mat-button-toggle>
           <mat-button-toggle
-            color="primary"
-            value="likedBy"
-            (click)="loadLikes()"
             class="list-search-item"
+            [routerLink]="['/members']"
+            [queryParams]="{ predicate: 'likedBy' }"
           >
             Followed
           </mat-button-toggle>
