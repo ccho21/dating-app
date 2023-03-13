@@ -1,29 +1,51 @@
 <div class="connection">
   <div *ngIf="members && members.length; else noData">
     <div class="container">
-      <div class="row mb-4">
-        <div
-          class="col-md-4 col-sm-6 col-xs-6 mb-4"
-          *ngFor="let member of members"
-        >
-          <app-connection-card
-            [member]="member"
-            (updateMembers)="loadMembersWithLikes()"
-          ></app-connection-card>
-        </div>
-      </div>
-      <div class="connection-btn">
-        <button class="main-btn">Get Connected</button>
-      </div>
+      <mat-tab-group
+        mat-align-tabs="start"
+        mat-align-tabs="start"
+        (selectedTabChange)="selectTab($event)"
+        [selectedIndex]="activeTab"
+      >
+        <mat-tab label="Following">
+          <div class="row mx-0 my-5">
+            <div
+              class="col-md-4 col-sm-6 col-xs-6 mb-4"
+              *ngFor="let member of members"
+            >
+              <app-connection-card
+                [member]="member"
+                (updateMembers)="loadMembersWithLikes()"
+              ></app-connection-card>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Follwed">
+          <div class="row mx-0 my-5">
+            <div
+              class="col-md-4 col-sm-6 col-xs-6 mb-4"
+              *ngFor="let member of members"
+            >
+              <app-connection-card
+                [member]="member"
+                (updateMembers)="loadMembersWithLikes()"
+              ></app-connection-card>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    <div class="connection-btn">
+      <button class="main-btn">Get Connected</button>
     </div>
   </div>
-  <ng-template #noData>
-    <div class="no-data">
-      <i class="no-data-icon fa-solid fa-people-group"></i>
-      <div class="main-text-2">Your new connections will appear here.</div>
-      <div class="connection-btn">
-        <button class="main-btn">Get Connected</button>
-      </div>
-    </div>
-  </ng-template>
 </div>
+<ng-template #noData>
+  <div class="no-data">
+    <i class="no-data-icon fa-solid fa-people-group"></i>
+    <div class="main-text-2">Your new connections will appear here.</div>
+    <div class="connection-btn">
+      <button class="main-btn">Get Connected</button>
+    </div>
+  </div>
+</ng-template>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Member } from 'src/app/_models/member';
 import { Pagination } from 'src/app/_models/pagination';
 import { MemberService } from 'src/app/_services/member.service';
@@ -14,6 +15,9 @@ export class ConnectionOverviewComponent implements OnInit {
   pageNumber = 1;
   pageSize = 5;
   pagination?: Pagination;
+
+  activeTab: any;
+
   constructor(private memberService: MemberService) {}
 
   ngOnInit(): void {
@@ -30,5 +34,9 @@ export class ConnectionOverviewComponent implements OnInit {
           this.pagination.currentPage = response.pagination.currentPage - 1;
         }
       });
+  }
+
+  selectTab(tab: MatTabChangeEvent) {
+    console.log('### tab', tab);
   }
 }

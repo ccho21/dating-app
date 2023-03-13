@@ -30,9 +30,9 @@ export class MemberListComponent implements OnInit, OnDestroy {
   userParams?: UserParams;
   user?: User;
 
-  predicate = 'liked';
+  predicate?: string | null;
   pageNumber = 1;
-  pageSize = 5;
+  pageSize = 12;
   pagination?: Pagination;
   activeTab: any;
 
@@ -51,37 +51,16 @@ export class MemberListComponent implements OnInit, OnDestroy {
     this.route.queryParams.subscribe((params) => {
       if (params) {
         console.log(' ### PARAMS ', params);
-        this.activeTab = params.tab ? Number(params.tab) : 0;
-        this.predicate = params.predicate;
+        this.predicate = params.predicate ? params.predicate : null;
 
         this.loadMembers();
       }
     });
   }
 
-  loadMembers(userParams?: UserParams) {
-    if (userParams) {
-      this.userParams = userParams;
-    }
-    if (this.userParams) {
-      this.memberService.setUserParams(this.userParams);
-      this.memberService
-        .getMembers(this.userParams)
-        .subscribe((response: PaginatedResult<Member[]>) => {
-          this.members = response.result;
-          this.pagination = response.pagination;
-
-          if (this.pagination) {
-            this.pagination.currentPage =
-              (response?.pagination?.currentPage as number) - 1;
-          }
-        });
-    }
-  }
-
-  loadLikes() {
+  loadMembers() {
     this.memberService
-      .getLikes(this.predicate, this.pageNumber, this.pageSize)
+      .getLikes(this.predicate as string, this.pageNumber, this.pageSize)
       .subscribe((response) => {
         if (response && response.pagination) {
           this.members = response.result as Member[];

@@ -63,8 +63,6 @@ export class MemberService {
     params = params.append('gender', userParams.gender);
     params = params.append('orderBy', userParams.orderBy);
 
-    
-
     return getPaginatedResult<Member[]>(
       this.baseUrl + 'users',
       params,
@@ -140,7 +138,9 @@ export class MemberService {
 
   getLikes(predicate: string, pageNumber: number, pageSize: number) {
     let params = getPaginationHeaders(pageNumber, pageSize);
-    params = params.append('predicate', predicate);
+    if (predicate) {
+      params = params.append('predicate', predicate);
+    }
     return getPaginatedResult<Partial<Member[]>>(
       this.baseUrl + 'likes',
       params,
