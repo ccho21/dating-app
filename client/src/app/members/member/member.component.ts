@@ -7,6 +7,9 @@ import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { MemberService } from 'src/app/_services/member.service';
 import { PresenceService } from 'src/app/_services/presence.service';
+// install Swiper modules
+import SwiperCore, { Pagination, Navigation, SwiperOptions } from 'swiper';
+SwiperCore.use([Navigation, Pagination]);
 
 @Component({
   selector: 'app-member',
@@ -20,6 +23,14 @@ export class MemberComponent implements OnInit, OnDestroy {
 
   currentUser?: User | null;
   isLiked: boolean = false;
+
+  config: SwiperOptions = {
+    slidesPerView: 1,
+    spaceBetween: 50,
+    navigation: true,
+    pagination: { clickable: true },
+    scrollbar: { draggable: true },
+  };
 
   constructor(
     private route: ActivatedRoute,

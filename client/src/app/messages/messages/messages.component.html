@@ -54,7 +54,7 @@
             <td mat-cell *matCellDef="let element">
               <img
                 class="img-circle p-2"
-                [src]="element.senderPhotoUrl || './assets/user.png'"
+                [src]="element.senderPhotoUrl || './assets/shared/user.png'"
                 [alt]="element.senderUsername"
               />
               {{ element.senderUsername | titlecase }}
@@ -72,7 +72,7 @@
             <td mat-cell *matCellDef="let element">
               <img
                 class="img-circle p-2"
-                [src]="element.recipientPhotoUrl || './assets/user.png'"
+                [src]="element.recipientPhotoUrl || './assets/shared/user.png'"
                 [alt]="element.recipientUsername"
               />
               {{ element.recipientUsername | titlecase }}

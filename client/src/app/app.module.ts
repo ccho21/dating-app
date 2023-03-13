@@ -42,7 +42,7 @@ import { ConnectionOverviewComponent } from './connections/connection-overview/c
 import { MemberComponent } from './members/member/member.component';
 import { ConnectionCardComponent } from './connections/connection-card/connection-card.component';
 import { NoDataComponent } from './no-data/no-data/no-data.component';
-
+import { CareerComponent } from './career/career.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,6 +77,7 @@ import { NoDataComponent } from './no-data/no-data/no-data.component';
     MemberComponent,
     ConnectionCardComponent,
     NoDataComponent,
+    CareerComponent,
   ],
   imports: [
     BrowserModule,

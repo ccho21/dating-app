@@ -238,3 +238,9 @@ body {
     transform: translateY(0);
   }
 }
+
+.mySwiper {
+  .swiper-pagination-bullet-active {
+    background-color: var(--light-green) !important;
+  }
+}
