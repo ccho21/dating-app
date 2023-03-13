@@ -19,7 +19,7 @@ namespace API.Controllers
     [Authorize]
     public class ProjectsController : BaseApiController
     {
-        private readonly DataContext _context;
+        //private readonly DataContext _context;
         private readonly IMapper _mapper;
         private readonly IPhotoService _photoService;
         private readonly IUnitOfWork _unitOfWork;

@@ -44,7 +44,7 @@ namespace API.Data
             var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
             var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
 
-            query = query.Include(x => x.LikedUsers).Include(x => x.LikedByUsers);
+            query = query.Include(x => x.LikedUsers);
             query = userParams.OrderBy switch
             {
                 "created" => query.OrderByDescending(u => u.Created),
@@ -61,19 +61,6 @@ namespace API.Data
             var query = _context.Users.AsQueryable();
             query = query.Where(u => u.UserName != userParams.CurrentUsername);
 
-            // if (!string.IsNullOrEmpty(userParams.Gender))
-            // {
-            //     query = query.Where(u => u.Gender == userParams.Gender);
-            // }
-
-            // var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
-            // var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
-
-            // query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
-
-
-
-            // query = query.Where(u => u.MessagesSent.Where(m => m.RecipientUsername == userParams.CurrentUsername).Count() > 0);
             query = query.Include(u => u.MessagesSent).Select(u => new AppUser
             {
                 Id = u.Id,

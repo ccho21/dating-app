@@ -7,16 +7,21 @@ using API.Entities;
 using API.Extensions;
 using API.Helpers;
 using API.interfaces;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
     public class LikesRepository : ILikesRepository
     {
+        private readonly IMapper _mapper;
         private readonly DataContext _context;
-        public LikesRepository(DataContext context)
+        public LikesRepository(DataContext context, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
+
         }
 
         public async Task<UserLike> GetUserLike(int sourceUserId, int likedUserId)
@@ -24,7 +29,7 @@ namespace API.Data
             return await _context.Likes.FindAsync(sourceUserId, likedUserId);
         }
 
-        public async Task<PagedList<LikeDto>> GetUserLikes(LikesParams likesParams)
+        public async Task<PagedList<MemberDto>> GetUserLikes(LikesParams likesParams)
         {
             var users = _context.Users.OrderBy(u => u.UserName).AsQueryable();
             var likes = _context.Likes.AsQueryable();
@@ -41,17 +46,7 @@ namespace API.Data
                 users = likes.Select(like => like.SourceUser);
             }
 
-            var likedUsers = users.Select(user => new LikeDto
-            {
-                Username = user.UserName,
-                KnownAs = user.KnownAs,
-                Age = user.DateOfBirth.CalculateAge(),
-                PhotoUrl = user.Photos.FirstOrDefault(p => p.IsMain).Url,
-                City = user.City,
-                Id = user.Id
-            });
-
-            return await PagedList<LikeDto>.CreateAsync(likedUsers, likesParams.PageNumber, likesParams.PageSize);
+            return await PagedList<MemberDto>.CreateAsync(users.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(), likesParams.PageNumber, likesParams.PageSize);
         }
 
         public async Task<AppUser> GetUserWithLikes(int userId)
