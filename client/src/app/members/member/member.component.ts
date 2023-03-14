@@ -19,18 +19,11 @@ SwiperCore.use([Navigation, Pagination]);
 export class MemberComponent implements OnInit, OnDestroy {
   member?: Member;
   galleryImages?: any[];
-  activeTab?: number;
 
   currentUser?: User | null;
   isLiked: boolean = false;
 
-  config: SwiperOptions = {
-    slidesPerView: 1,
-    spaceBetween: 50,
-    navigation: true,
-    pagination: { clickable: true },
-    scrollbar: { draggable: true },
-  };
+ 
 
   constructor(
     private route: ActivatedRoute,

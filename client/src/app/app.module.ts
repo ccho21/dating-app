@@ -43,6 +43,8 @@ import { MemberComponent } from './members/member/member.component';
 import { ConnectionCardComponent } from './connections/connection-card/connection-card.component';
 import { NoDataComponent } from './no-data/no-data/no-data.component';
 import { CareerComponent } from './career/career.component';
+import { ProjectListComponent } from './projects/project-list/project-list.component';
+import { ProjectComponent } from './projects/project/project.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +80,8 @@ import { CareerComponent } from './career/career.component';
     ConnectionCardComponent,
     NoDataComponent,
     CareerComponent,
+    ProjectListComponent,
+    ProjectComponent,
   ],
   imports: [
     BrowserModule,

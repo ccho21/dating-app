@@ -132,12 +132,12 @@
   }
 }
 
-.member-card {
-  padding: 20px;
-  border-radius: 20px;
-  border: solid 10px hsla(0, 0%, 94%, 1);
-  margin: 4px 0 20px 0;
-  width: 100%;
-  text-align: left;
+.tech-item {
+  min-width: 12rem;
+  font-weight: 500;
+  &::before {
+    content: "✔";
+    display: inline;
+    padding-right: 0.5rem;
+  }
 }
-

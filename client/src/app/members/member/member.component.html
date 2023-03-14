@@ -3,27 +3,30 @@
     <div class="container">
       <div class="row">
         <div class="offset-md-1 col-md-4">
-          <swiper
-            [pagination]="{
-              dynamicBullets: true,
-              clickable: true
-            }"
-            [spaceBetween]="20"
-            class="mySwiper"
-          >
-            <ng-template
-              swiperSlide
-              *ngFor="let image of member.photos; let i = index"
+          <div *ngIf="member.photos && member.photos.length; else noPhoto">
+            <swiper
+              [pagination]="{
+                dynamicBullets: true,
+                clickable: true
+              }"
+              [spaceBetween]="20"
+              class="mySwiper"
             >
-              <img [src]="image.url" alt="" class="user-thumbnail square" />
-            </ng-template>
-          </swiper>
-          <!-- <img
-            class="user-thumbnail square"
-            width="40"
-            [src]="member.photoUrl || './assets/shared/user.png'"
-            [alt]="member.username"
-          /> -->
+              <ng-template
+                swiperSlide
+                *ngFor="let image of member.photos; let i = index"
+              >
+                <img [src]="image.url" alt="" class="user-thumbnail square" />
+              </ng-template>
+            </swiper>
+          </div>
+          <ng-template #noPhoto>
+            <img
+              src="./assets/shared/user.png"
+              alt=""
+              class="user-thumbnail square"
+            />
+          </ng-template>
         </div>
         <div class="col-md-6">
           <div class="member-info">
@@ -105,43 +108,79 @@
     </div>
   </div>
   <div class="container move-over">
-    <div class="row">
-      <div class="offset-md-1 col-md-10">
-        <div class="panel white bg-white">
-          <div class="row">
-            <div class="col-md-8">
-              <div>
-                <h2 class="text-start">ABOUT ME</h2>
-                <article class="member-card">
-                  {{ member.introduction }}
-                </article>
-                <article class="member-card">{{ member.interests }}</article>
-                <article class="member-card">{{ member.lookingFor }}</article>
-              </div>
-              <div>
-                <h2 class="text-start">PROJECT</h2>
-                <article class="member-card">
-                  {{ member.introduction }}
-                </article>
-                <article class="member-card">{{ member.interests }}</article>
-                <article class="member-card">{{ member.lookingFor }}</article>
-              </div>
-              <div>
-                <h2 class="text-start">CAREER</h2>
-                <article class="member-card">
-                  <app-career></app-career>
-                </article>
-              </div>
-            </div>
+    <div class="panel white bg-white d-block">
+      <div class="row">
+        <div class="col-xl-9">
+          <div>
+            <article class="member-card">
+              <h2 class="text-start">ABOUT ME</h2>
+              <p>
+                {{ member.introduction }}
+              </p>
+              <p>
+                {{ member.interests }}
+              </p>
+              <p>
+                {{ member.lookingFor }}
+              </p>
+            </article>
+          </div>
+          <div>
+            <article class="member-card">
+              <h2 class="text-start">PROJECT</h2>
+              <app-project-list> </app-project-list>
+            </article>
+          </div>
+          <div>
+            <article class="member-card">
+              <h2 class="text-start">CAREER</h2>
+              <app-career></app-career>
+            </article>
+          </div>
+        </div>
 
-            <div class="col-md-4">
+        <div class="col-xl-3">
+          <div>
+            <article class="member-card">
+              <h2 class="text-start">SKILLS</h2>
               <div>
-                <h2 class="text-start">SKILLS</h2>
-                <article class="member-card">
-                  {{ member.introduction }}
-                </article>
+                <h3 class="mb-0">FRONT END</h3>
+                <div class="tech-item">HTML5</div>
+                <div class="tech-item">CSS</div>
+                <div class="tech-item">JavaScript</div>
+                <div class="tech-item">HTML5</div>
               </div>
-            </div>
+
+              <hr />
+              <div>
+                <h3 class="mb-0">BACK END</h3>
+                <div class="tech-item">Node Js</div>
+                <div class="tech-item">.NET</div>
+                <div class="tech-item">Java</div>
+                <div class="tech-item">Firebase</div>
+                <div class="tech-item">PostgreSQL</div>
+              </div>
+              <hr />
+              <div>
+                <h3 class="mb-0">DEPLOYEMENT</h3>
+                <div class="tech-item">Heroku</div>
+                <div class="tech-item">Firebase</div>
+                <div class="tech-item">Docker</div>
+              </div>
+              <hr />
+              <div>
+                <h3 class="mb-0">VERSION CONTROL</h3>
+                <div class="tech-item">Git</div>
+                <div class="tech-item">Github</div>
+                <div class="tech-item">BitBucket</div>
+              </div>
+              <hr />
+              <div>
+                <h3 class="mb-0">COMMUNICATION</h3>
+                <div class="tech-item">Jira</div>
+                <div class="tech-item">Confluence</div>
+              </div>
+            </article>
           </div>
         </div>
       </div>

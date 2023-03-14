@@ -92,30 +92,50 @@ body {
   &.square {
     border-radius: 3rem;
     width: 100%;
+    height: auto;
   }
   &.size-xl {
     width: 300px;
     width: 30rem;
+    height: 300px;
+    height: 30rem;
   }
   &.size-lg {
     width: 250px;
     width: 25rem;
+    height: 250px;
+    height: 25rem;
   }
   &.size-md {
     width: 200px;
     width: 20rem;
+    height: 200px;
+    height: 20rem;
   }
   &.size-sm {
     width: 150px;
     width: 15rem;
+    height: 150px;
+    height: 15rem;
   }
   &.size-xs {
     width: 70px;
     width: 7rem;
+    height: 70px;
+    height: 7rem;
   }
   &.user-border {
     border: 0.2rem solid var(--white);
   }
+}
+
+.member-card {
+  padding: 20px;
+  border-radius: 20px;
+  border: solid 10px hsla(0, 0%, 94%, 1);
+  margin: 4px 0 20px 0;
+  width: 100%;
+  text-align: left;
 }
 
 .member-badge {
