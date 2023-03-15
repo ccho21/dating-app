@@ -29,13 +29,13 @@ namespace API.Data
             _mapper = mapper;
             _context = context;
         }
-        public async Task<PagedList<ProjectDto>> GetProjectsAsync(UserParams userParams)
+        public async Task<PagedList<ProjectDto>> GetProjectsAsync(ProjectParams projectParams)
         {
             var query = _context.Projects.AsQueryable();
 
             return await PagedList<ProjectDto>.CreateAsync(
                 query.ProjectTo<ProjectDto>(_mapper.ConfigurationProvider).AsNoTracking(),
-                userParams.PageNumber, userParams.PageSize);
+                projectParams.PageNumber, projectParams.PageSize);
         }
         public async Task<Project> GetProjectByIdAsync(int id)
         {

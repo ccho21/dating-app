@@ -11,6 +11,7 @@ namespace API.interfaces
         IMessageRepository MessageRepository { get; }
         ILikesRepository LikesRepository { get; }
         IProjectRepository ProjectRepository { get; }
+        IExperienceRepository ExperienceRepository { get; }
 
         Task<bool> Complete();
         bool HasChanges();

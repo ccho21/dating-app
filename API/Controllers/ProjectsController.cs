@@ -30,31 +30,31 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> getProjectbyId(int id)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjects([FromQuery] ProjectParams projectParams)
         {
-            var projects = await _unitOfWork.ProjectRepository.GetProjectByIdAsync(id);
+
+            var projects = await _unitOfWork.ProjectRepository.GetProjectsAsync(projectParams);
+
+            Response.AddPaginationHeader(projects.CurrentPage, projects.PageSize, projects.TotalCount, projects.TotalPages);
 
             return Ok(projects);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjects([FromQuery] UserParams userParams)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<MemberDto>>> getProject(int id)
         {
+            var project = await _unitOfWork.ProjectRepository.GetProjectByIdAsync(id);
 
-            var users = await _unitOfWork.ProjectRepository.GetProjectsAsync(userParams);
-
-            Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
-
-            return Ok(users);
+            return Ok(project);
         }
+
 
         [HttpPost]
         public async Task<ActionResult<ProjectDto>> CreateProject(ProjectDto createProjectDto)
         {
             var username = User.GetUsername();
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
-
 
             var project = new Project
             {
@@ -80,21 +80,79 @@ namespace API.Controllers
             return BadRequest("Failed to send message");
         }
 
+        [HttpPost("{id}/add-photo")]
+        public async Task<ActionResult<PhotoDto>> AddPhoto(int id, IFormFile file)
+        {
+            var project = await _unitOfWork.ProjectRepository.GetProjectByIdAsync(id);
+
+            var result = await _photoService.AddPhotoAsync(file);
+
+            if (result.Error != null) return BadRequest(result.Error.Message);
+
+            var photo = new Photo
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId
+            };
+
+            if (project.Images.Count == 0)
+            {
+                photo.IsMain = true;
+            }
+
+            project.Images.Add(photo);
+
+            if (await _unitOfWork.Complete())
+            {
+                // return CreatedAtRoute("GetUser", _mapper.Map<PhotoDto>(photo));
+                return CreatedAtRoute("getProject", new { id = project.Id }, _mapper.Map<PhotoDto>(photo));
+            }
+
+            return BadRequest("Problem adding photo");
+        }
+
+
+        [HttpPut("{id}/set-main-photo/{photoId}")]
+        public async Task<ActionResult<PhotoDto>> SetMainPhoto(int id, int photoId)
+        {
+            var project = await _unitOfWork.ProjectRepository.GetProjectByIdAsync(id);
+
+            var photo = project.Images.FirstOrDefault(x => x.Id == photoId);
+
+            if (photo.IsMain) return BadRequest("This is already your main photo");
+
+            var currentMain = project.Images.FirstOrDefault(x => x.IsMain);
+
+            if (currentMain != null) currentMain.IsMain = false;
+            photo.IsMain = true;
+
+            if (await _unitOfWork.Complete()) return NoContent();
+
+            return BadRequest("Failed to set main photo");
+        }
+
+        [HttpDelete("{id}/delete-photo/{photoId}")]
+        public async Task<ActionResult> DeletePhoto(int id, int photoId)
+        {
+            var project = await _unitOfWork.ProjectRepository.GetProjectByIdAsync(id);
+
+            var photo = project.Images.FirstOrDefault(x => x.Id == photoId);
+
+            if (photo == null) return NotFound();
+
+            if (photo.IsMain) return BadRequest("You cannot delete your main photo");
+
+            if (photo.PublicId != null)
+            {
+                var result = await _photoService.DeletePhotoAsync(photo.PublicId);
+                if (result.Error != null) return BadRequest(result.Error.Message);
+            }
+
+            project.Images.Remove(photo);
+            if (await _unitOfWork.Complete()) return Ok();
+            return BadRequest("Failed to delete the photo");
+
+        }
     }
 
-    // [HttpPut]
-    // public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
-    // {
-
-    //     var username = User.GetUsername();
-    //     var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
-
-    //     _mapper.Map(memberUpdateDto, user);
-
-    //     _unitOfWork.UserRepository.Update(user);
-
-    //     if (await _unitOfWork.Complete()) return NoContent();
-
-    //     return BadRequest("Failed to update user");
-    // }
 }

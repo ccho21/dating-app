@@ -209,7 +209,22 @@ namespace API.Data.Migrations
                     b.Property<int>("AppUserId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("Ended")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Intro")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("LogoId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Position")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Started")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Url")
@@ -218,6 +233,8 @@ namespace API.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
+
+                    b.HasIndex("LogoId");
 
                     b.ToTable("Experiences");
                 });
@@ -230,6 +247,53 @@ namespace API.Data.Migrations
                     b.HasKey("Name");
 
                     b.ToTable("Groups");
+                });
+
+            modelBuilder.Entity("API.Entities.JobDescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("Ended")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ExperienceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Position")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Started")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExperienceId");
+
+                    b.ToTable("JobDescriptions");
+                });
+
+            modelBuilder.Entity("API.Entities.JobDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("JobDescriptionId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobDescriptionId");
+
+                    b.ToTable("JobDetails");
                 });
 
             modelBuilder.Entity("API.Entities.Message", b =>
@@ -500,7 +564,27 @@ namespace API.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("API.Entities.Photo", "Logo")
+                        .WithMany()
+                        .HasForeignKey("LogoId");
+
                     b.Navigation("AppUser");
+
+                    b.Navigation("Logo");
+                });
+
+            modelBuilder.Entity("API.Entities.JobDescription", b =>
+                {
+                    b.HasOne("API.Entities.Experience", null)
+                        .WithMany("JobDescriptions")
+                        .HasForeignKey("ExperienceId");
+                });
+
+            modelBuilder.Entity("API.Entities.JobDetail", b =>
+                {
+                    b.HasOne("API.Entities.JobDescription", null)
+                        .WithMany("Details")
+                        .HasForeignKey("JobDescriptionId");
                 });
 
             modelBuilder.Entity("API.Entities.Message", b =>
@@ -629,9 +713,19 @@ namespace API.Data.Migrations
                     b.Navigation("educations");
                 });
 
+            modelBuilder.Entity("API.Entities.Experience", b =>
+                {
+                    b.Navigation("JobDescriptions");
+                });
+
             modelBuilder.Entity("API.Entities.Group", b =>
                 {
                     b.Navigation("Connections");
+                });
+
+            modelBuilder.Entity("API.Entities.JobDescription", b =>
+                {
+                    b.Navigation("Details");
                 });
 
             modelBuilder.Entity("API.Entities.Project", b =>

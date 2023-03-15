@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Data.Migrations
 {
-    public partial class ProjectAdded : Migration
+    public partial class ExperienceAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,9 +44,14 @@ namespace API.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Intro = table.Column<string>(type: "TEXT", nullable: true),
+                    Position = table.Column<string>(type: "TEXT", nullable: true),
+                    CompanyName = table.Column<string>(type: "TEXT", nullable: true),
                     Url = table.Column<string>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    AppUserId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Started = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Ended = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    AppUserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    LogoId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -57,6 +62,11 @@ namespace API.Data.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Experiences_Photos_LogoId",
+                        column: x => x.LogoId,
+                        principalTable: "Photos",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -90,6 +100,47 @@ namespace API.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "JobDescriptions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Position = table.Column<string>(type: "TEXT", nullable: true),
+                    Started = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Ended = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ExperienceId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobDescriptions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_JobDescriptions_Experiences_ExperienceId",
+                        column: x => x.ExperienceId,
+                        principalTable: "Experiences",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JobDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    JobDescriptionId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_JobDetails_JobDescriptions_JobDescriptionId",
+                        column: x => x.JobDescriptionId,
+                        principalTable: "JobDescriptions",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_ProjectId",
                 table: "Photos",
@@ -104,6 +155,21 @@ namespace API.Data.Migrations
                 name: "IX_Experiences_AppUserId",
                 table: "Experiences",
                 column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Experiences_LogoId",
+                table: "Experiences",
+                column: "LogoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobDescriptions_ExperienceId",
+                table: "JobDescriptions",
+                column: "ExperienceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobDetails_JobDescriptionId",
+                table: "JobDetails",
+                column: "JobDescriptionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_AppUserId",
@@ -128,10 +194,16 @@ namespace API.Data.Migrations
                 name: "Educations");
 
             migrationBuilder.DropTable(
-                name: "Experiences");
+                name: "JobDetails");
 
             migrationBuilder.DropTable(
                 name: "Projects");
+
+            migrationBuilder.DropTable(
+                name: "JobDescriptions");
+
+            migrationBuilder.DropTable(
+                name: "Experiences");
 
             migrationBuilder.DropIndex(
                 name: "IX_Photos_ProjectId",

@@ -24,6 +24,8 @@ namespace API.Data
         public ILikesRepository LikesRepository => new LikesRepository(_context, _mapper);
 
         public IProjectRepository ProjectRepository => new ProjectRepository(_context, _mapper);
+        
+        public IExperienceRepository ExperienceRepository => new ExperienceRepository(_context, _mapper);
 
         public async Task<bool> Complete()
         {
