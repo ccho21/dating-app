@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -64,8 +65,18 @@ namespace API.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Url = table.Column<string>(type: "TEXT", nullable: true),
+                    Intro = table.Column<string>(type: "TEXT", nullable: true),
+                    ProjectWith = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
+                    MainFeature = table.Column<string>(type: "TEXT", nullable: true),
+                    Url = table.Column<string>(type: "TEXT", nullable: true),
+                    GithubUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    FrontEnd = table.Column<string>(type: "TEXT", nullable: true),
+                    BackEnd = table.Column<string>(type: "TEXT", nullable: true),
+                    Database = table.Column<string>(type: "TEXT", nullable: true),
+                    Deployement = table.Column<string>(type: "TEXT", nullable: true),
+                    ProjectStarted = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ProjectEnded = table.Column<DateTime>(type: "TEXT", nullable: true),
                     AppUserId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

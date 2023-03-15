@@ -26,5 +26,6 @@ namespace API.DTOs
         public ICollection<PhotoDto> Photos { get; set; }
         public ICollection<LikeDto> LikedByUsers { get; set; }
         // public ICollection<LikedDto> LikedUsers { get; set; }
+        public ICollection<ProjectDto> Projects { get; set; }
     }
 }

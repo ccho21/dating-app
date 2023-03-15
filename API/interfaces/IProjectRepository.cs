@@ -10,8 +10,8 @@ namespace API.interfaces
 {
     public interface IProjectRepository
     {
-        Task<Project> GetProjectByIdAsync(int id);
-
-        Task<PagedList<ProjectDto>> GetProjectsAsync(UserParams userParams);
+        void AddProject(Project project);
+        public Task<PagedList<ProjectDto>> GetProjectsAsync(UserParams userParams);
+        public Task<Project> GetProjectByIdAsync(int id);
     }
 }

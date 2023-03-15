@@ -313,7 +313,37 @@ namespace API.Data.Migrations
                     b.Property<int>("AppUserId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("BackEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Database")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Deployement")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FrontEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GithubUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Intro")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MainFeature")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ProjectEnded")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ProjectStarted")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProjectWith")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Url")
@@ -501,7 +531,7 @@ namespace API.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("API.Entities.Project", null)
-                        .WithMany("Photos")
+                        .WithMany("Images")
                         .HasForeignKey("ProjectId");
 
                     b.Navigation("AppUser");
@@ -606,7 +636,7 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.Project", b =>
                 {
-                    b.Navigation("Photos");
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

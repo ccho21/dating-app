@@ -18,6 +18,12 @@ namespace API.Data
         private readonly DataContext _context;
         private readonly IMapper _mapper;
 
+        public void AddProject(Project project)
+        {
+            _context.Projects.Add(project);
+        }
+
+
         public ProjectRepository(DataContext context, IMapper mapper)
         {
             _mapper = mapper;
