@@ -45,6 +45,11 @@ import { NoDataComponent } from './no-data/no-data/no-data.component';
 import { CareerComponent } from './career/career.component';
 import { ProjectListComponent } from './projects/project-list/project-list.component';
 import { ProjectComponent } from './projects/project/project.component';
+import { ProjectOverviewComponent } from './projects/project-overview/project-overview.component';
+import { VisitorOverviewComponent } from './visitors/visitor-overview/visitor-overview.component';
+
+import { SlicePipe } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +87,8 @@ import { ProjectComponent } from './projects/project/project.component';
     CareerComponent,
     ProjectListComponent,
     ProjectComponent,
+    ProjectOverviewComponent,
+    VisitorOverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,6 +104,7 @@ import { ProjectComponent } from './projects/project/project.component';
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    SlicePipe,
   ],
   bootstrap: [AppComponent],
 })

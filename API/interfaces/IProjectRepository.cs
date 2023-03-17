@@ -11,6 +11,7 @@ namespace API.interfaces
     public interface IProjectRepository
     {
         void AddProject(Project project);
+        void UpdateProject(Project project);
         public Task<PagedList<ProjectDto>> GetProjectsAsync(ProjectParams projectParams);
         public Task<Project> GetProjectByIdAsync(int id);
     }

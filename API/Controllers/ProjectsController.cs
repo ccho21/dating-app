@@ -59,6 +59,7 @@ namespace API.Controllers
             var project = new Project
             {
                 Intro = createProjectDto.Intro,
+                Name = createProjectDto.Name,
                 ProjectWith = createProjectDto.ProjectWith,
                 Description = createProjectDto.Description,
                 MainFeature = createProjectDto.MainFeature,
@@ -79,6 +80,24 @@ namespace API.Controllers
 
             return BadRequest("Failed to send message");
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ProjectDto>> UpdateProject(int id, ProjectDto updateProjectDto)
+        {
+            var project = await _unitOfWork.ProjectRepository.GetProjectByIdAsync(id);
+
+            if (project == null)
+                return BadRequest("This is already your main photo");
+
+            project = _mapper.Map<Project>(updateProjectDto);
+
+            _unitOfWork.ProjectRepository.UpdateProject(project);
+
+            if (await _unitOfWork.Complete()) return Ok(_mapper.Map<ProjectDto>(project));
+
+            return BadRequest("Failed to update project");
+        }
+
 
         [HttpPost("{id}/add-photo")]
         public async Task<ActionResult<PhotoDto>> AddPhoto(int id, IFormFile file)

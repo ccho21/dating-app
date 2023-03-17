@@ -23,6 +23,11 @@ namespace API.Data
             _context.Projects.Add(project);
         }
 
+        public void UpdateProject(Project project)
+        {
+            _context.Projects.Update(project);
+        }
+
 
         public ProjectRepository(DataContext context, IMapper mapper)
         {

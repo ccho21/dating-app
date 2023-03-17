@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230315203205_ExperienceAdded")]
+    [Migration("20230317023944_ExperienceAdded")]
     partial class ExperienceAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -401,6 +401,9 @@ namespace API.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("MainFeature")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("ProjectEnded")

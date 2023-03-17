@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import SwiperCore, { Pagination, Navigation, SwiperOptions } from 'swiper';
 SwiperCore.use([Navigation, Pagination]);
 
@@ -8,6 +8,7 @@ SwiperCore.use([Navigation, Pagination]);
   styleUrls: ['./project.component.scss'],
 })
 export class ProjectComponent implements OnInit {
+  @Input() project?: any;
   config: SwiperOptions = {
     slidesPerView: 1,
     spaceBetween: 50,

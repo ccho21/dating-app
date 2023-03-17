@@ -401,6 +401,9 @@ namespace API.Data.Migrations
                     b.Property<string>("MainFeature")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("ProjectEnded")
                         .HasColumnType("TEXT");
 

@@ -1,0 +1,24 @@
+<div class="project">
+  <div *ngIf="projects && projects.length; else noData">
+    <div class="container">
+      <div class="row mx-0 my-5">
+        <div class="cols-12 mb-4" *ngFor="let project of projects">
+          <app-project [project]="project"></app-project>
+          <hr />
+        </div>
+      </div>
+    </div>
+    <div class="connection-btn">
+      <button class="main-btn">Get Connected</button>
+    </div>
+  </div>
+</div>
+<ng-template #noData>
+  <div class="no-data">
+    <i class="no-data-icon fa-solid fa-people-group"></i>
+    <div class="main-text-2">Your new connections will appear here.</div>
+    <div class="connection-btn">
+      <button class="main-btn">Get Connected</button>
+    </div>
+  </div>
+</ng-template>
