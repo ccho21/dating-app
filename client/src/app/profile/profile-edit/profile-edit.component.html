@@ -1,0 +1,288 @@
+<div class="container">
+  <div class="row flex-nowrap">
+    <div class="col-auto col-md-3 col-xl-3 px-sm-2 px-0 bg-dark">
+      <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
+        <a
+          href="/"
+          class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+        >
+          <svg class="bi me-2" width="40" height="32">
+            <use xlink:href="#bootstrap"></use>
+          </svg>
+          <span class="fs-4">Sidebar</span>
+        </a>
+        <hr />
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a href="#" class="nav-link active" aria-current="page">
+              <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#home"></use>
+              </svg>
+              About
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link text-white">
+              <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#speedometer2"></use>
+              </svg>
+              My Projects
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link text-white">
+              <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#table"></use>
+              </svg>
+              Experiences
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link text-white">
+              <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#grid"></use>
+              </svg>
+              Skills
+            </a>
+          </li>
+        </ul>
+        <hr />
+        <div class="dropdown">
+          <a
+            href="#"
+            class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+            id="dropdownUser1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="https://github.com/mdo.png"
+              alt=""
+              width="32"
+              height="32"
+              class="rounded-circle me-2"
+            />
+            <strong>mdo</strong>
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-dark text-small shadow"
+            aria-labelledby="dropdownUser1"
+          >
+            <li><a class="dropdown-item" href="#">New project...</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col px-0">
+      <section class="profile" *ngIf="user">
+        <div class="header-background">
+          <div class="container profile-content">
+            <div class="row">
+              <div class="offset-xl-1 col-xl-10 text-center">
+                <div class="thumbnail-box">
+                  <img
+                    class="user-thumbnail size-xl user-border mb-4"
+                    width="40"
+                    [src]="user.photoUrl || './assets/shared/user.png'"
+                    [alt]="user.username"
+                  />
+                  <a class="edit-icon-link">
+                    <i class="fa-solid fa-pen"></i>
+                  </a>
+                </div>
+                <h2 class="main-text-2">Welcome {{ user.knownAs }}!</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="profile-edit" *ngIf="member">
+        <div class="sec1" class="m-3">
+          <div
+            class="panel white left mb-5"
+            style="background-color: #ccc !important"
+          >
+            <div class="title mb-4">
+              <mat-icon class="me-3"> mail </mat-icon>
+              <div
+                matBadgeOverlap="false"
+                matBadgeColor="warn"
+                class="demo-section"
+              >
+                Details
+              </div>
+            </div>
+            <div class="w-100">
+              <form
+                #editForm="ngForm"
+                id="editForm"
+                (ngSubmit)="updateMember()"
+              >
+                <div class="row align-items-center">
+                  <div class="col-md-3">Name</div>
+                  <div class="col-md-7">
+                    <app-text-input
+                      [type]="'text'"
+                      [label]="'name'"
+                      [formControl]="
+                        registerForm.controls['name'] | formControl
+                      "
+                      class="theme-green"
+                    >
+                    </app-text-input>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-3">
+                    <h4 class="mt-2">City</h4>
+                  </div>
+                  <div class="col-md-7">
+                    <app-text-input
+                      [type]="'text'"
+                      [formControl]="
+                        registerForm.controls['city'] | formControl
+                      "
+                      class="theme-green"
+                    >
+                    </app-text-input>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <h4 class="mt-2">Country</h4>
+                  </div>
+                  <div class="col-md-7">
+                    <app-text-input
+                      [type]="'text'"
+                      [formControl]="
+                        registerForm.controls['country'] | formControl
+                      "
+                      class="theme-green"
+                    >
+                    </app-text-input>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <h4>Description</h4>
+                  </div>
+                  <div class="col-md-7">
+                    <textarea
+                      class="form-control"
+                      [(ngModel)]="member.introduction"
+                      name="introduction"
+                      rows="6"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <h4>Looking for</h4>
+                  </div>
+                  <div class="col-md-7">
+                    <textarea
+                      class="form-control"
+                      [(ngModel)]="member.lookingFor"
+                      name="lookingFor"
+                      rows="6"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <h4 class="mt-2">Interests</h4>
+                  </div>
+                  <div class="col-md-7">
+                    <textarea
+                      class="form-control"
+                      [(ngModel)]="member.interests"
+                      name="interests"
+                      rows="6"
+                    ></textarea>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="panel white left mb-5">
+            <div class="title mb-4">
+              <mat-icon class="me-3"> mail </mat-icon>
+              <div
+                matBadgeOverlap="false"
+                matBadgeColor="warn"
+                class="demo-section"
+              >
+                Interests
+              </div>
+            </div>
+            <div>edit icons</div>
+          </div>
+          <mat-card class="member-detail-card">
+            <!-- <mat-card-header> </mat-card-header> -->
+            <!-- <img
+                src="{{ member.photoUrl || './assets/shared/user.png' }}"
+                alt="{{ member.knownAs }}"
+                class="img-fluid w-100"
+              /> -->
+            <mat-card-content>
+              <div class="card-body">
+                <div>
+                  <strong>Location:</strong>
+                  <p>{{ member.city }}, {{ member.country }}</p>
+                </div>
+                <div>
+                  <strong>Age:</strong>
+                  <p>{{ member.age }}</p>
+                </div>
+                <div>
+                  <strong>Last Active:</strong>
+                  <p>{{ member.lastActive | timeago }}</p>
+                </div>
+                <div>
+                  <strong>Member since:</strong>
+                  <p>{{ member.created | date : "dd MMM yyyy" }}</p>
+                </div>
+              </div>
+            </mat-card-content>
+            <mat-card-actions>
+              <button
+                [disabled]="!editForm?.dirty"
+                form="editForm"
+                type="submit"
+                class="btn btn-success btn-block"
+              >
+                Save Changes
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+        <div class="" class="m-3">
+          <div class="alert alert-info" *ngIf="editForm.dirty">
+            <strong>Information: </strong> You have made changes. Any unsaved
+            changes will be lost
+          </div>
+          <mat-tab-group
+            mat-align-tabs="start"
+            (selectedTabChange)="selectTab($event)"
+            [selectedIndex]="activeTab"
+          >
+            <mat-tab label="About"> </mat-tab>
+            <mat-tab label="Edit Photo">
+              <app-photo-editor [member]="member"></app-photo-editor>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container"> -->
+
+<!-- </div> -->

@@ -19,7 +19,6 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
-import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
@@ -35,7 +34,6 @@ import { LoginComponent } from './login/login.component';
 import { SwiperModule } from 'swiper/angular';
 import { FormControlPipe } from './_pipes/form-control.pipe';
 import { MemberSearchComponent } from './members/member-search/member-search.component';
-import { ProfileComponent } from './profile/profile.component';
 import { MessagesComponent } from './messages/messages/messages.component';
 import { MessageOverviewComponent } from './messages/message-overview/message-overview.component';
 import { ConnectionOverviewComponent } from './connections/connection-overview/connection-overview.component';
@@ -50,7 +48,9 @@ import { VisitorOverviewComponent } from './visitors/visitor-overview/visitor-ov
 import { SlicePipe } from '@angular/common';
 import { ExperienceListComponent } from './experiences/experience-list/experience-list.component';
 import { ExperienceComponent } from './experiences/experience/experience.component';
-
+import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
+import { ProfileComponent } from './profile/profile/profile.component';
+import { TextareaInputComponent } from './_forms/textarea-input/textarea-input.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +64,6 @@ import { ExperienceComponent } from './experiences/experience/experience.compone
     NotFoundComponent,
     ServerErrorComponent,
     MemberCardComponent,
-    MemberEditComponent,
     PhotoEditorComponent,
     TextInputComponent,
     DateInputComponent,
@@ -91,6 +90,8 @@ import { ExperienceComponent } from './experiences/experience/experience.compone
     VisitorOverviewComponent,
     ExperienceListComponent,
     ExperienceComponent,
+    ProfileEditComponent,
+    TextareaInputComponent,
   ],
   imports: [
     BrowserModule,

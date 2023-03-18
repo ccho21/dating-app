@@ -4,20 +4,29 @@ import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { MemberService } from 'src/app/_services/member.service';
 import { take } from 'rxjs/operators';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
-  selector: 'app-member-edit',
-  templateUrl: './member-edit.component.html',
-  styleUrls: ['./member-edit.component.scss'],
+  selector: 'app-profile-edit',
+  templateUrl: './profile-edit.component.html',
+  styleUrls: ['./profile-edit.component.scss'],
 })
-export class MemberEditComponent implements OnInit {
+export class ProfileEditComponent implements OnInit {
   @ViewChild('editForm') editForm?: NgForm;
   member?: Member;
   user?: User;
   activeTab?: number;
+
+  registerForm: FormGroup = this.fb.group({
+    gender: ['male'],
+    name: [''],
+    knownAs: [''],
+    dateOfBirth: [''],
+    city: [''],
+    country: [''],
+  });
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification(
     $event: any
@@ -30,7 +39,8 @@ export class MemberEditComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private memberService: MemberService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private fb: FormBuilder
   ) {
     this.accountService.currentUser$
       .pipe(take(1))

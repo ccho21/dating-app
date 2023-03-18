@@ -1,0 +1,29 @@
+<mat-form-field
+  class="text-input"
+  appearance="fill"
+  *ngIf="ngControl.control"
+  color="black"
+>
+  <mat-label>{{ label }}</mat-label>
+  <mat-icon matSuffix>verified_user</mat-icon>
+  <textarea
+    matInput
+    [class.is-invalid]="ngControl.touched && ngControl.invalid"
+    [formControl]="ngControl.control | formControl"
+    placeholder="{{ label }}"
+  ></textarea>
+  <mat-error *ngIf="ngControl.control?.errors?.required">
+    Please enter a {{ label }}
+  </mat-error>
+  <mat-error *ngIf="ngControl.control?.errors?.minlength">
+    {{ label }} must be at least
+    {{ ngControl.control.errors?.minlength["requiredLength"] }}
+  </mat-error>
+  <mat-error *ngIf="ngControl.control?.errors?.maxlength">
+    {{ label }} must be at most
+    {{ ngControl.control.errors?.maxlength["requiredLength"] }}
+  </mat-error>
+  <mat-error *ngIf="ngControl.control?.errors?.isMatching">
+    Passwords do not match
+  </mat-error>
+</mat-form-field>
