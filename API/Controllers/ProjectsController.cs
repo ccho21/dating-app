@@ -41,14 +41,15 @@ namespace API.Controllers
             return Ok(projects);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> getProject(int id)
+        [HttpGet("{username}", Name = "GetProjectsByUsername")]
+        public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjectsByUsername(string username)
         {
-            var project = await _unitOfWork.ProjectRepository.GetProjectByIdAsync(id);
+            var projects = await _unitOfWork.ProjectRepository.GetProjectsByUsernameAsync(username);
 
-            return Ok(project);
+            Response.AddPaginationHeader(projects.CurrentPage, projects.PageSize, projects.TotalCount, projects.TotalPages);
+
+            return Ok(projects);
         }
-
 
         [HttpPost]
         public async Task<ActionResult<ProjectDto>> CreateProject(ProjectDto createProjectDto)

@@ -14,6 +14,7 @@ namespace API.DTOs
         public string CompanyName { get; set; }
         public ICollection<JobDescriptionDto> JobDescriptions { get; set; }
         public string Url { get; set; }
+        public int AppUserId { get; set; }
         public DateTime Started { get; set; }
         public DateTime? Ended { get; set; }
         public PhotoDto Logo { get; set; }

@@ -10,9 +10,7 @@ namespace API.DTOs
 
         public int Id { get; set; }
         public string Username { get; set; }
-
         public string PhotoUrl { get; set; }
-
         public int Age { get; set; }
         public string KnownAs { get; set; }
         public DateTime Created { get; set; }
@@ -25,7 +23,7 @@ namespace API.DTOs
         public string Country { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
         public ICollection<LikeDto> LikedByUsers { get; set; }
-        // public ICollection<LikedDto> LikedUsers { get; set; }
         public ICollection<ProjectDto> Projects { get; set; }
+        public ICollection<ExperienceDto> Experiences { get; set; }
     }
 }

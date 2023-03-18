@@ -12,6 +12,7 @@ namespace API.interfaces
     {
         void AddExperience(Experience experience);
         public Task<PagedList<ExperienceDto>> GetExperiencesAsync(ExperienceParams experienceParams);
+        public Task<PagedList<ExperienceDto>> GetExperiencesByUsernameAsync(string username);
         public Task<Experience> GetExperienceByIdAsync(int id);
     }
 }

@@ -37,10 +37,23 @@ namespace API.Data
         public async Task<PagedList<ProjectDto>> GetProjectsAsync(ProjectParams projectParams)
         {
             var query = _context.Projects.AsQueryable();
+            if (!string.IsNullOrEmpty(projectParams.CurrentUsername))
+            {
+                query = query.Where(x => x.AppUser.UserName == projectParams.CurrentUsername);
+            }
 
             return await PagedList<ProjectDto>.CreateAsync(
                 query.ProjectTo<ProjectDto>(_mapper.ConfigurationProvider).AsNoTracking(),
                 projectParams.PageNumber, projectParams.PageSize);
+        }
+        public async Task<PagedList<ProjectDto>> GetProjectsByUsernameAsync(string username)
+        {
+            var query = _context.Projects.AsQueryable();
+            query = query.Where(x => x.AppUser.UserName == username);
+
+            return await PagedList<ProjectDto>.CreateAsync(
+                query.ProjectTo<ProjectDto>(_mapper.ConfigurationProvider).AsNoTracking(),
+                1, 10);
         }
         public async Task<Project> GetProjectByIdAsync(int id)
         {

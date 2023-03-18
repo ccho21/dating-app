@@ -22,7 +22,7 @@ namespace API.Data
         {
             _context.Experiences.Add(experience);
         }
-     
+
         public ExperienceRepository(DataContext context, IMapper mapper)
         {
             _mapper = mapper;
@@ -36,6 +36,17 @@ namespace API.Data
                 query.ProjectTo<ExperienceDto>(_mapper.ConfigurationProvider).AsNoTracking(),
                 experienceParams.PageNumber, experienceParams.PageSize);
         }
+
+        public async Task<PagedList<ExperienceDto>> GetExperiencesByUsernameAsync(string username)
+        {
+            var query = _context.Experiences.AsQueryable();
+            query = query.Where(x => x.AppUser.UserName == username);
+
+            return await PagedList<ExperienceDto>.CreateAsync(
+               query.ProjectTo<ExperienceDto>(_mapper.ConfigurationProvider).AsNoTracking(),
+               1, 10);
+        }
+
         public async Task<Experience> GetExperienceByIdAsync(int id)
         {
             return await _context.Experiences.FindAsync(id);

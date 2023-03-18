@@ -41,14 +41,23 @@ namespace API.Controllers
             return Ok(experiences);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> getExperience(int id)
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<IEnumerable<MemberDto>>> getExperience(int id)
+        // {
+        //     var project = await _unitOfWork.ExperienceRepository.GetExperienceByIdAsync(id);
+
+        //     return Ok(project);
+        // }
+
+        [HttpGet("{username}", Name = "GetExperiencesByUsername")]
+        public async Task<ActionResult<IEnumerable<ProjectDto>>> GetExperiencesByUsername(string username)
         {
-            var project = await _unitOfWork.ExperienceRepository.GetExperienceByIdAsync(id);
+            var experiences = await _unitOfWork.ExperienceRepository.GetExperiencesByUsernameAsync(username);
 
-            return Ok(project);
+            Response.AddPaginationHeader(experiences.CurrentPage, experiences.PageSize, experiences.TotalCount, experiences.TotalPages);
+
+            return Ok(experiences);
         }
-
 
         [HttpPost]
         public async Task<ActionResult<ExperienceDto>> CreateExperience(ExperienceDto createExperienceDto)
