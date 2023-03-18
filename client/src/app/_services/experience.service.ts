@@ -4,16 +4,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Member } from '../_models/member';
 import { of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
 import { User } from '../_models/user';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
-import { ProjectParams } from '../_models/projectParams';
+import { ExperienceParams } from '../_models/experienceParams';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProjectService {
+export class ExperienceService {
   baseUrl = environment.apiUrl;
   project?: any;
   user?: User;
@@ -29,11 +28,11 @@ export class ProjectService {
       });
   }
 
-  getProjects(projectParams?: ProjectParams) {
+  getExperiences(experienceParams?: ExperienceParams) {
     let params = getPaginationHeaders(1, 10);
 
     return getPaginatedResult<any[]>(
-      this.baseUrl + 'projects/' + this.user?.username,
+      this.baseUrl + 'experiences/' + this.user?.username,
       params,
       this.http
     ).pipe(

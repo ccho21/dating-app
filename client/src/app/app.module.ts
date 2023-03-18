@@ -42,13 +42,14 @@ import { ConnectionOverviewComponent } from './connections/connection-overview/c
 import { MemberComponent } from './members/member/member.component';
 import { ConnectionCardComponent } from './connections/connection-card/connection-card.component';
 import { NoDataComponent } from './no-data/no-data/no-data.component';
-import { CareerComponent } from './career/career.component';
 import { ProjectListComponent } from './projects/project-list/project-list.component';
 import { ProjectComponent } from './projects/project/project.component';
 import { ProjectOverviewComponent } from './projects/project-overview/project-overview.component';
 import { VisitorOverviewComponent } from './visitors/visitor-overview/visitor-overview.component';
 
 import { SlicePipe } from '@angular/common';
+import { ExperienceListComponent } from './experiences/experience-list/experience-list.component';
+import { ExperienceComponent } from './experiences/experience/experience.component';
 
 @NgModule({
   declarations: [
@@ -84,11 +85,12 @@ import { SlicePipe } from '@angular/common';
     MemberComponent,
     ConnectionCardComponent,
     NoDataComponent,
-    CareerComponent,
     ProjectListComponent,
     ProjectComponent,
     ProjectOverviewComponent,
     VisitorOverviewComponent,
+    ExperienceListComponent,
+    ExperienceComponent,
   ],
   imports: [
     BrowserModule,

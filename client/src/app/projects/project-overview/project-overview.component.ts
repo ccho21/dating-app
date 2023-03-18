@@ -26,7 +26,6 @@ export class ProjectOverviewComponent implements OnInit {
       .subscribe((response) => {
         if (response && response.pagination) {
           this.projects = response.result;
-          console.log('### this.projects', this.projects);
           this.pagination = response.pagination;
           this.pagination.currentPage = response.pagination.currentPage - 1;
         }
