@@ -1,7 +1,11 @@
-.mat-form-field.mat-black {
-  color: var(--dark-blue, --black);
+.form-control {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+  color: var(--black);
+  flex: 0 1 355px;
+  font-size: 1.4rem;
+  height: 32px;
+  padding: 0 10px;
+  width: 100%;
 }
-
-// .mat-raised-button.mat-black {
-//   color: var(--dark-blue, --black);
-// }

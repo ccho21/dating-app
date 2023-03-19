@@ -1,6 +1,7 @@
-@import "~swiper/css/effect-fade";
-@import "~swiper/css/navigation";
-@import "~swiper/css/pagination";
+@import "swiper/scss";
+@import "swiper/scss/effect-fade";
+@import "swiper/scss/navigation";
+@import "swiper/scss/pagination";
 
 .member-detail-card {
   margin-top: 47px;

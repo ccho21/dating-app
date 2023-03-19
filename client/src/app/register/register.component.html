@@ -20,7 +20,7 @@
       <div class="col-md-7">
         <app-text-input
           [formControl]="registerForm.controls['username'] | formControl"
-        [label]="'Username'"
+          [label]="'Username'"
           class="theme-green"
         >
         </app-text-input>
@@ -43,9 +43,7 @@
         ></app-text-input>
       </div>
       <div class="col-md-7">
-        <button mat-raised-button cdkFocusInitial (click)="register()">
-          Register
-        </button>
+        <button class="main-btn" (click)="register()">Register</button>
       </div>
     </div>
 

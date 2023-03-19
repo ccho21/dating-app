@@ -1,4 +1,25 @@
 <div class="container profile-photos">
+  <section class="profile" *ngIf="user">
+    <div class="header-background">
+      <div class="container profile-content">
+        <div class="row">
+          <div class="offset-xl-1 col-xl-10 text-center">
+            <div class="thumbnail-box">
+              <img
+                class="user-thumbnail size-xl user-border mb-4"
+                width="40"
+                [src]="user.photoUrl || './assets/shared/user.png'"
+                [alt]="user.username"
+              />
+            </div>
+            <h2 class="main-text-2">Main Profile Image!</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="my-5" />
   <div class="row">
     <div class="offset-xl-1 col-xl-10">
       <div class="row mt-3" *ngIf="uploader">
@@ -63,7 +84,6 @@
               </tr>
             </tbody>
           </table>
-
           <div>
             <div class="mb-3">
               Queue progress:
@@ -105,9 +125,10 @@
         </div>
       </div>
 
+      <hr class="my-5" />
       <div class="row" *ngIf="member">
         <div
-          class="col-3 d-flex flex-column"
+          class="col-md-3 d-flex flex-column"
           *ngFor="let photo of member.photos"
         >
           <img

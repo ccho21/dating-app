@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
 import { PresenceService } from './_services/presence.service';
+import { setTheme } from 'ngx-bootstrap/utils';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    setTheme('bs5');
     this.setCurrentUser();
   }
 

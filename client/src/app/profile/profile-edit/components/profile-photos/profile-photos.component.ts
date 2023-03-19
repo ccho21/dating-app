@@ -52,6 +52,8 @@ export class ProfilePhotosComponent implements OnInit {
       if (this.user && this.member) {
         this.user.photoUrl = photo.url;
         this.accountService.setCurrentUser(this.user);
+
+        //TODO: NGRX
         this.member.photoUrl = photo.url;
         this.member.photos.forEach((p) => {
           if (p.isMain) p.isMain = false;
@@ -64,6 +66,7 @@ export class ProfilePhotosComponent implements OnInit {
   deletePhoto(photoId: number) {
     this.memberService.deletePhoto(photoId).subscribe(() => {
       if (this.member) {
+        //TODO: NGRX
         this.member.photos = this.member.photos.filter((x) => x.id !== photoId);
       }
     });

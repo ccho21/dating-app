@@ -1,29 +1,49 @@
-import { Component, Input, OnInit, Self } from '@angular/core';
-import { NgControl } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnInit,
+  Output,
+  Self,
+} from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-text-input',
   templateUrl: './text-input.component.html',
   styleUrls: ['./text-input.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TextInputComponent),
+      multi: true,
+    },
+  ],
 })
-export class TextInputComponent implements OnInit {
+export class TextInputComponent implements OnInit, ControlValueAccessor {
   @Input() label?: string;
   @Input() type = 'text';
+  @Input() formControl: any;
+  @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(@Self() public ngControl: NgControl) {
-    this.ngControl.valueAccessor = this;
+  onChange: any = () => {};
+  onTouched: any = () => {};
+
+  constructor() {}
+  ngOnInit() {
+    console.log('### form control', this.formControl);
   }
-  ngOnInit() {}
 
-  writeValue(obj: any): void {
-    // console.log('### obj', obj);
+  writeValue(value: any): void {
+    this.formControl.setValue(value);
   }
 
   registerOnChange(fn: any): void {
-    // console.log('### register on change', fn);
+    this.onChange = fn;
   }
 
   registerOnTouched(fn: any): void {
-    // console.log('### register on touched', fn);
+    this.onTouched = fn;
   }
 }

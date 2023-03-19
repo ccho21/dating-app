@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -56,6 +57,8 @@ import { ProfileProjectsComponent } from './profile/profile-edit/components/prof
 import { ProfileExperiencesComponent } from './profile/profile-edit/components/profile-experiences/profile-experiences.component';
 import { ProfileSkillsComponent } from './profile/profile-edit/components/profile-skills/profile-skills.component';
 import { ProfilePhotosComponent } from './profile/profile-edit/components/profile-photos/profile-photos.component';
+import { TextInputOneComponent } from './_forms/text-input-one/text-input-one.component';
+import { ProjectEditComponent } from './profile/profile-edit/components/profile-projects/components/project-edit/project-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -102,6 +105,8 @@ import { ProfilePhotosComponent } from './profile/profile-edit/components/profil
     ProfileExperiencesComponent,
     ProfileSkillsComponent,
     ProfilePhotosComponent,
+    TextInputOneComponent,
+    ProjectEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,6 +117,7 @@ import { ProfilePhotosComponent } from './profile/profile-edit/components/profil
     ReactiveFormsModule,
     SharedModule,
     SwiperModule,
+    BsDatepickerModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
