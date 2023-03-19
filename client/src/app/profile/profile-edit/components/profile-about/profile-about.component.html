@@ -1,0 +1,182 @@
+<div class="profile-edit" *ngIf="member">
+  <div class="row">
+    <div class="offset-xl-1 col-xl-10">
+      <div class="p-3">
+        <div class="alert alert-info" *ngIf="editForm.dirty">
+          <strong>Information: </strong> You have made changes. Any unsaved
+          changes will be lost
+        </div>
+      </div>
+
+      <div class="py-5">
+        <!-- <div class="title mb-4">
+            <mat-icon class="me-3"> mail </mat-icon>
+            <div matBadgeOverlap="false" matBadgeColor="warn" class="demo-section">
+              Details
+            </div>
+          </div> -->
+        <div class="w-100">
+          <form
+            [formGroup]="editForm"
+            id="editForm"
+            (ngSubmit)="updateMember()"
+          >
+            <div class="row align-items-start mb-3">
+              <div class="col-md-2 text-end">Name</div>
+              <div class="offset-md-1 col-md-6">
+                <app-text-input
+                  [type]="'text'"
+                  [label]="'name'"
+                  [formControl]="editForm.controls['name'] | formControl"
+                  class="theme-green"
+                >
+                </app-text-input>
+                <p class="main-text-1 description">
+                  Help people discover your account by using the name you're
+                  known by: either your full name, nickname, or business name.
+                </p>
+                <p class="main-text-1 description">
+                  You can only change your name twice within 14 days.
+                </p>
+              </div>
+            </div>
+            <div class="row align-items-start mb-3">
+              <div class="col-md-2 text-end">Website</div>
+              <div class="offset-md-1 col-md-6">
+                <app-text-input
+                  [type]="'text'"
+                  [label]="'website'"
+                  [formControl]="editForm.controls['website'] | formControl"
+                  class="theme-green"
+                >
+                </app-text-input>
+                <p class="main-text-1 description">
+                  Editing your links is only available on mobile. Visit the
+                  Instagram app and edit your profile to change the websites in
+                  your bio.
+                </p>
+              </div>
+            </div>
+            <div class="row align-items-start mb-3">
+              <div class="col-md-2 text-end">Email</div>
+              <div class="offset-md-1 col-md-6">
+                <p class="main-text-1 description">
+                  Provide your personal information, even if the account is used
+                  for a business, a pet or something else. This won't be a part
+                  of your public profile.
+                </p>
+                <app-text-input
+                  [type]="'email'"
+                  [label]="'email'"
+                  [formControl]="editForm.controls['website'] | formControl"
+                  class="theme-green"
+                >
+                </app-text-input>
+                <p class="main-text-1 description">
+                  Editing your links is only available on mobile. Visit the
+                  Instagram app and edit your profile to change the websites in
+                  your bio.
+                </p>
+              </div>
+            </div>
+            <div class="row align-items-center mb-3">
+              <div class="col-md-2 text-end">Gender</div>
+              <div class="offset-md-1 col-md-6">
+                <app-text-input
+                  [type]="'text'"
+                  [label]="'gender'"
+                  [formControl]="editForm.controls['gender'] | formControl"
+                  class="theme-green"
+                >
+                </app-text-input>
+              </div>
+            </div>
+
+            <div class="row align-items-center mb-3">
+              <div class="col-md-2 text-end">City</div>
+              <div class="offset-md-1 col-md-6">
+                <app-text-input
+                  [type]="'text'"
+                  [label]="'city'"
+                  [formControl]="editForm.controls['city'] | formControl"
+                  class="theme-green"
+                >
+                </app-text-input>
+              </div>
+            </div>
+            <div class="row align-items-center mb-3">
+              <div class="col-md-2 text-end">Country</div>
+              <div class="offset-md-1 col-md-6">
+                <app-text-input
+                  [type]="'text'"
+                  [label]="'country'"
+                  [formControl]="editForm.controls['country'] | formControl"
+                  class="theme-green"
+                >
+                </app-text-input>
+              </div>
+            </div>
+            <div class="row align-items-center mb-3">
+              <div class="col-md-2 text-end"></div>
+              <div class="offset-md-1 col-md-6 my-5">
+                <hr />
+              </div>
+            </div>
+            <div class="row align-items-start mb-3">
+              <div class="col-md-2 text-end">Introduction</div>
+              <div class="offset-md-1 col-md-6">
+                <app-textarea-input
+                  [rows]="6"
+                  [label]="'Tell me about your self'"
+                  [formControl]="
+                    editForm.controls['introduction'] | formControl
+                  "
+                  class="theme-green"
+                >
+                </app-textarea-input>
+              </div>
+            </div>
+            <div class="row align-items-start mb-3">
+              <div class="col-md-2 text-end">Looking For</div>
+              <div class="offset-md-1 col-md-6">
+                <app-textarea-input
+                  [rows]="6"
+                  [label]="
+                    'Please tell me what you are looking for in this app'
+                  "
+                  [formControl]="editForm.controls['lookingFor'] | formControl"
+                  class="theme-green"
+                >
+                </app-textarea-input>
+              </div>
+            </div>
+            <div class="row align-items-start mb-3">
+              <div class="col-md-2 text-end">Interests</div>
+              <div class="offset-md-1 col-md-6">
+                <app-textarea-input
+                  [rows]="6"
+                  [label]="'Anything Interesting to you'"
+                  [formControl]="editForm.controls['interests'] | formControl"
+                  class="theme-green"
+                >
+                </app-textarea-input>
+              </div>
+            </div>
+            <div class="row align-items-start mb-3">
+              <div class="col-md-8 text-end">
+                <button
+                  [disabled]="!editForm?.dirty"
+                  form="editForm"
+                  type="submit"
+                  class="btn btn-success btn-block"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

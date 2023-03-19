@@ -18,6 +18,11 @@ import { MemberComponent } from './members/member/member.component';
 import { NoDataComponent } from './no-data/no-data/no-data.component';
 import { ProfileComponent } from './profile/profile/profile.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
+import { ProfileAboutComponent } from './profile/profile-edit/components/profile-about/profile-about.component';
+import { ProfileProjectsComponent } from './profile/profile-edit/components/profile-projects/profile-projects.component';
+import { ProfileExperiencesComponent } from './profile/profile-edit/components/profile-experiences/profile-experiences.component';
+import { ProfileSkillsComponent } from './profile/profile-edit/components/profile-skills/profile-skills.component';
+import { ProfilePhotosComponent } from './profile/profile-edit/components/profile-photos/profile-photos.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,8 +40,22 @@ const routes: Routes = [
       },
       {
         path: 'profile/edit',
+        redirectTo: 'profile/edit/about',
+      },
+      {
+        path: 'profile/edit',
         component: ProfileEditComponent,
-        canDeactivate: [PreventUnsavedChangesGuard],
+        children: [
+          {
+            path: 'about',
+            component: ProfileAboutComponent,
+            canDeactivate: [PreventUnsavedChangesGuard],
+          },
+          { path: 'photos', component: ProfilePhotosComponent },
+          { path: 'projects', component: ProfileProjectsComponent },
+          { path: 'experiences', component: ProfileExperiencesComponent },
+          { path: 'skills', component: ProfileSkillsComponent },
+        ],
       },
       { path: 'lists', component: ListsComponent },
       {

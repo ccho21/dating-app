@@ -1,4 +1,42 @@
-<mat-form-field class="text-input" appearance="fill" *ngIf="ngControl.control" color="black">
+<div *ngIf="ngControl.control">
+  <input
+    [class.is-invalid]="ngControl.touched && ngControl.invalid"
+    type="{{ type }}"
+    class="form-control"
+    [formControl]="ngControl.control | formControl"
+    placeholder="{{ label }}"
+  />
+  <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">
+    Please enter a {{ label }}
+  </div>
+  <div *ngIf="ngControl.control.errors?.minlength" class="invalid-feedback">
+    {{ label }} must be at least
+    {{ ngControl.control.errors?.minlength["requiredLength"] }}
+  </div>
+  <div *ngIf="ngControl.control.errors?.maxlength" class="invalid-feedback">
+    {{ label }} must be at most
+    {{ ngControl.control.errors?.maxlength["requiredLength"] }}
+  </div>
+  <div *ngIf="ngControl.control.errors?.isMatching" class="invalid-feedback">
+    Passwords do not match
+  </div>
+</div>
+
+<!-- <div>
+  *ngIf="ngControl.control" color="black"
+  <label for="validationCustom03">{{ label }}</label>
+  <input
+    type="text"
+    class="form-control"
+    [formControl]="ngControl.control | formControl"
+    id="validationCustom03"
+    [placeholder]="label"
+    [class.is-invalid]="ngControl.touched && ngControl.invalid"
+  />
+  <div class="invalid-feedback">Please provide a valid city.</div>
+</div> -->
+
+<!-- <mat-form-field class="text-input" appearance="fill" *ngIf="ngControl.control" color="black">
   <mat-label>{{ label }}</mat-label>
   <mat-icon matSuffix>verified_user</mat-icon>
   <input
@@ -22,7 +60,7 @@
   <mat-error *ngIf="ngControl.control?.errors?.isMatching">
     Passwords do not match
   </mat-error>
-</mat-form-field>
+</mat-form-field> -->
 
 <!-- <div class="mb-3">
   <input

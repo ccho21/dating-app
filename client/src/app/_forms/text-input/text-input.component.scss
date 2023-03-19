@@ -1,12 +1,11 @@
-.text-input {
+.form-control {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+  color: var(--black);
+  flex: 0 1 355px;
+  font-size: 1.4rem;
+  height: 32px;
+  padding: 0 10px;
   width: 100%;
-  height: 72px;
-
-  :host-context(.theme-green) {
-    //    checking what is working
-  }
-}
-
-.mat-form-field.mat-black {
-  color: var(--dark-blue, --black);
 }

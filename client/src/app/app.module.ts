@@ -51,6 +51,11 @@ import { ExperienceComponent } from './experiences/experience/experience.compone
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { ProfileComponent } from './profile/profile/profile.component';
 import { TextareaInputComponent } from './_forms/textarea-input/textarea-input.component';
+import { ProfileAboutComponent } from './profile/profile-edit/components/profile-about/profile-about.component';
+import { ProfileProjectsComponent } from './profile/profile-edit/components/profile-projects/profile-projects.component';
+import { ProfileExperiencesComponent } from './profile/profile-edit/components/profile-experiences/profile-experiences.component';
+import { ProfileSkillsComponent } from './profile/profile-edit/components/profile-skills/profile-skills.component';
+import { ProfilePhotosComponent } from './profile/profile-edit/components/profile-photos/profile-photos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,6 +97,11 @@ import { TextareaInputComponent } from './_forms/textarea-input/textarea-input.c
     ExperienceComponent,
     ProfileEditComponent,
     TextareaInputComponent,
+    ProfileAboutComponent,
+    ProfileProjectsComponent,
+    ProfileExperiencesComponent,
+    ProfileSkillsComponent,
+    ProfilePhotosComponent,
   ],
   imports: [
     BrowserModule,
