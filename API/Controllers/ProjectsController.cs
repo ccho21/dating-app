@@ -104,6 +104,7 @@ namespace API.Controllers
         public async Task<ActionResult<PhotoDto>> AddPhoto(int id, IFormFile file)
         {
             var project = await _unitOfWork.ProjectRepository.GetProjectByIdAsync(id);
+            var username = User.GetUsername();
 
             var result = await _photoService.AddPhotoAsync(file);
 
@@ -125,7 +126,7 @@ namespace API.Controllers
             if (await _unitOfWork.Complete())
             {
                 // return CreatedAtRoute("GetUser", _mapper.Map<PhotoDto>(photo));
-                return CreatedAtRoute("getProject", new { id = project.Id }, _mapper.Map<PhotoDto>(photo));
+                return CreatedAtRoute("GetProjectsByUsername", new { username = username }, _mapper.Map<PhotoDto>(photo));
             }
 
             return BadRequest("Problem adding photo");

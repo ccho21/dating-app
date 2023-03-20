@@ -9,8 +9,20 @@ namespace API.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Photos_AspNetUsers_AppUserId",
+                table: "Photos");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "AppUserId",
+                table: "Photos",
+                type: "INTEGER",
+                nullable: true,
+                oldClrType: typeof(int),
+                oldType: "INTEGER");
+
             migrationBuilder.AddColumn<int>(
-                name: "ProjectId",
+                name: "projectId",
                 table: "Photos",
                 type: "INTEGER",
                 nullable: true);
@@ -143,9 +155,9 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Photos_ProjectId",
+                name: "IX_Photos_projectId",
                 table: "Photos",
-                column: "ProjectId");
+                column: "projectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Educations_AppUserId",
@@ -178,9 +190,16 @@ namespace API.Data.Migrations
                 column: "AppUserId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Photos_Projects_ProjectId",
+                name: "FK_Photos_AspNetUsers_AppUserId",
                 table: "Photos",
-                column: "ProjectId",
+                column: "AppUserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Photos_Projects_projectId",
+                table: "Photos",
+                column: "projectId",
                 principalTable: "Projects",
                 principalColumn: "Id");
         }
@@ -188,7 +207,11 @@ namespace API.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Photos_Projects_ProjectId",
+                name: "FK_Photos_AspNetUsers_AppUserId",
+                table: "Photos");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Photos_Projects_projectId",
                 table: "Photos");
 
             migrationBuilder.DropTable(
@@ -207,12 +230,30 @@ namespace API.Data.Migrations
                 name: "Experiences");
 
             migrationBuilder.DropIndex(
-                name: "IX_Photos_ProjectId",
+                name: "IX_Photos_projectId",
                 table: "Photos");
 
             migrationBuilder.DropColumn(
-                name: "ProjectId",
+                name: "projectId",
                 table: "Photos");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "AppUserId",
+                table: "Photos",
+                type: "INTEGER",
+                nullable: false,
+                defaultValue: 0,
+                oldClrType: typeof(int),
+                oldType: "INTEGER",
+                oldNullable: true);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Photos_AspNetUsers_AppUserId",
+                table: "Photos",
+                column: "AppUserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
     }
 }

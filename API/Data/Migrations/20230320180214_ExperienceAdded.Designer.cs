@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230317023944_ExperienceAdded")]
+    [Migration("20230320180214_ExperienceAdded")]
     partial class ExperienceAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -346,13 +346,10 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AppUserId")
+                    b.Property<int?>("AppUserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsMain")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("ProjectId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("PublicId")
@@ -361,11 +358,14 @@ namespace API.Data.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("projectId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("projectId");
 
                     b.ToTable("Photos");
                 });
@@ -615,15 +615,15 @@ namespace API.Data.Migrations
                 {
                     b.HasOne("API.Entities.AppUser", "AppUser")
                         .WithMany("Photos")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AppUserId");
 
-                    b.HasOne("API.Entities.Project", null)
+                    b.HasOne("API.Entities.Project", "Project")
                         .WithMany("Images")
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("projectId");
 
                     b.Navigation("AppUser");
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("API.Entities.Project", b =>

@@ -35,9 +35,7 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
   onTouched: any = () => {};
 
   constructor() {}
-  ngOnInit() {
-    console.log(this.formControl);
-  }
+  ngOnInit() {}
 
   writeValue(value: any): void {
     // this.formControl?.setValue(value);
