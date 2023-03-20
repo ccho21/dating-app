@@ -58,8 +58,10 @@ import { ProfileProjectsComponent } from './profile/profile-edit/components/prof
 import { ProfileExperiencesComponent } from './profile/profile-edit/components/profile-experiences/profile-experiences.component';
 import { ProfileSkillsComponent } from './profile/profile-edit/components/profile-skills/profile-skills.component';
 import { ProfilePhotosComponent } from './profile/profile-edit/components/profile-photos/profile-photos.component';
-import { TextInputOneComponent } from './_forms/text-input-one/text-input-one.component';
 import { ProjectEditComponent } from './profile/profile-edit/components/profile-projects/components/project-edit/project-edit.component';
+import { ExperienceEditComponent } from './profile/profile-edit/components/profile-experiences/components/experience-edit/experience-edit.component';
+import { JobDescriptionEditComponent } from './profile/profile-edit/components/profile-experiences/components/job-description-edit/job-description-edit.component';
+import { JobDetailEditComponent } from './profile/profile-edit/components/profile-experiences/components/job-detail-edit/job-detail-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -107,8 +109,10 @@ import { ProjectEditComponent } from './profile/profile-edit/components/profile-
     ProfileExperiencesComponent,
     ProfileSkillsComponent,
     ProfilePhotosComponent,
-    TextInputOneComponent,
     ProjectEditComponent,
+    ExperienceEditComponent,
+    JobDescriptionEditComponent,
+    JobDetailEditComponent,
   ],
   imports: [
     BrowserModule,

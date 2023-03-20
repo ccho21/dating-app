@@ -1,0 +1,128 @@
+<div *ngIf="experienceForm">
+  <div class="row align-items-start mb-4">
+    <div class="offset-md-1 col-md-8">
+      <div class="alert alert-info" *ngIf="experienceForm.dirty">
+        <strong>Information: </strong> You have made changes. Any unsaved
+        changes will be lost
+      </div>
+    </div>
+  </div>
+  <div class="row align-items-start mb-3">
+    <div class="col-md-2 text-end">
+      <label for="position" class="label"> Position </label>
+    </div>
+    <div class="offset-md-1 col-md-6">
+      <app-text-input
+        [type]="'text'"
+        [label]="'position'"
+        [formControl]="experienceForm.controls['position'] | formControl"
+        class="theme-green"
+      >
+      </app-text-input>
+      <p class="main-text-1 description">
+        The position when you are / were working
+      </p>
+    </div>
+  </div>
+  <div class="row align-items-start mb-3">
+    <div class="col-md-2 text-end">
+      <label for="intro" class="label"> Introduction </label>
+    </div>
+    <div class="offset-md-1 col-md-6">
+      <app-textarea-input
+        [rows]="4"
+        [label]="'intro'"
+        [formControl]="experienceForm.controls['intro'] | formControl"
+        class="theme-green"
+      >
+      </app-textarea-input>
+      <p class="main-text-1 description">
+        Please give us a brief introduction about the company and your work
+      </p>
+    </div>
+  </div>
+  <div class="row align-items-start mb-3">
+    <div class="col-md-2 text-end">
+      <label for="employer" class="label"> Employer </label>
+    </div>
+    <div class="offset-md-1 col-md-6">
+      <app-text-input
+        [type]="'text'"
+        [label]="'companyName'"
+        [formControl]="experienceForm.controls['companyName'] | formControl"
+        class="theme-green"
+      >
+      </app-text-input>
+      <p class="main-text-1 description">
+        The position when you are / were working
+      </p>
+    </div>
+  </div>
+  <div class="row align-items-center mb-3">
+    <div class="col-md-2 text-end">
+      <label for="url" class="label"> Url </label>
+    </div>
+    <div class="offset-md-1 col-md-6">
+      <app-text-input
+        [type]="'text'"
+        [label]="'Url'"
+        [formControl]="experienceForm.controls['url'] | formControl"
+        class="theme-green"
+      >
+      </app-text-input>
+    </div>
+  </div>
+  <div class="row align-items-start mb-3">
+    <div class="col-md-2 text-end">
+      <label for="started" class="label"> Job Started </label>
+    </div>
+    <div class="offset-md-1 col-md-6">
+      <app-date-input
+        [label]="'Job started'"
+        [maxDate]="maxDate"
+        [formControl]="experienceForm.controls['started'] | formControl"
+        class="theme-green"
+      >
+      </app-date-input>
+    </div>
+  </div>
+
+  <div class="row align-items-start mb-3">
+    <div class="col-md-2 text-end">
+      <label for="ended" class="label"> Job Ended </label>
+    </div>
+    <div class="offset-md-1 col-md-6">
+      <app-date-input
+        [label]="'Job Ended'"
+        [maxDate]="maxDate"
+        [formControl]="experienceForm.controls['ended'] | formControl"
+        class="theme-green"
+      >
+      </app-date-input>
+    </div>
+  </div>
+
+  <div [formGroup]="experienceForm">
+    <div formArrayName="jobDescriptions">
+      <ng-container
+        *ngFor="let jdForm of jobDescriptions.controls; let j = index"
+        [formGroup]="jdForm | formGroup"
+      >
+        <app-job-description-edit [jdForm]="jdForm | formGroup">
+        </app-job-description-edit>
+      </ng-container>
+    </div>
+  </div>
+  <div class="row align-items-start mb-3">
+    <div class="col-md-9 text-end">
+      <button
+        [disabled]="!experienceForm.dirty"
+        form="experiencesForm"
+        type="submit"
+        class="btn btn-success btn-block"
+      >
+        Save Changes
+      </button>
+    </div>
+  </div>
+</div>

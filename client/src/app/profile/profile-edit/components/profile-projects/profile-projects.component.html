@@ -11,7 +11,7 @@
             <div formArrayName="projects">
               <ng-container
                 *ngFor="let projectForm of projects.controls; let i = index"
-                [formGroupName]="i"
+                [formGroup]="projectForm | formGroup"
               >
                 <fieldset class="fieldset">
                   <legend class="legend">PROJECT #{{ i + 1 }}</legend>

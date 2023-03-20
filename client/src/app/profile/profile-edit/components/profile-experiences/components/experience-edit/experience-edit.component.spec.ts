@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TextInputOneComponent } from './text-input-one.component';
+import { ExperienceEditComponent } from './experience-edit.component';
 
-describe('TextInputOneComponent', () => {
-  let component: TextInputOneComponent;
-  let fixture: ComponentFixture<TextInputOneComponent>;
+describe('ExperienceEditComponent', () => {
+  let component: ExperienceEditComponent;
+  let fixture: ComponentFixture<ExperienceEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TextInputOneComponent ]
+      declarations: [ ExperienceEditComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TextInputOneComponent);
+    fixture = TestBed.createComponent(ExperienceEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

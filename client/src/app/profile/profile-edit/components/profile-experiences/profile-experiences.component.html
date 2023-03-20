@@ -1,1 +1,29 @@
-<p>profile-experiences works!</p>
+<div class="profile-edit" *ngIf="member">
+  <div class="row">
+    <div class="offset-xl-1 col-xl-10">
+      <div class="py-5">
+        <div class="w-100">
+          <form
+            [formGroup]="experiencesForm"
+            id="experiencesForm"
+            (ngSubmit)="updateExperience()"
+          >
+            <div formArrayName="experiences">
+              <ng-container
+                *ngFor="let experienceForm of experiences.controls; let i = index"
+                [formGroup]="experienceForm | formGroup"
+              >
+                <fieldset class="fieldset">
+                  <legend class="legend">Experience #{{ i + 1 }}</legend>
+                  <app-experience-edit
+                    [experienceForm]="experienceForm | formGroup"
+                  ></app-experience-edit>
+                </fieldset>
+              </ng-container>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

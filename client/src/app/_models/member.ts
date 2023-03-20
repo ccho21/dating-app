@@ -1,5 +1,7 @@
+import { Experience } from './experience';
 import { Message } from './message';
 import { Photo } from './photo';
+import { Project } from './project';
 
 export interface Member {
   id: number;
@@ -19,6 +21,6 @@ export interface Member {
   photos: Photo[];
   messagesSent: Message[];
   likedByUsers: Partial<Member[]>;
-  projects: any[];
-  experiences: any[];
+  projects: Project[];
+  experiences: Experience[];
 }

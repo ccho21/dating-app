@@ -4,14 +4,9 @@ import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { MemberService } from 'src/app/_services/member.service';
 import { take } from 'rxjs/operators';
-import {
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  NgForm,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Project } from 'src/app/_models/project';
 
 @Component({
   selector: 'app-profile-projects',
@@ -33,7 +28,6 @@ export class ProfileProjectsComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private memberService: MemberService,
-    private _snackBar: MatSnackBar,
     private fb: FormBuilder
   ) {
     this.accountService.currentUser$
@@ -46,7 +40,7 @@ export class ProfileProjectsComponent implements OnInit {
     this.loadMember();
   }
 
-  addProject(project?: any) {
+  addProject(project?: Project) {
     let newItem;
     if (project) {
       newItem = this.fb.group({
@@ -79,7 +73,7 @@ export class ProfileProjectsComponent implements OnInit {
       .getMember(this.user?.username as string)
       .subscribe((member) => {
         this.member = member;
-        this.member.projects.forEach((project) => {
+        this.member.projects.forEach((project: Project) => {
           this.addProject(project);
         });
       });
