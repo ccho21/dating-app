@@ -20,4 +20,5 @@ export interface Member {
   messagesSent: Message[];
   likedByUsers: Partial<Member[]>;
   projects: any[];
+  experiences: any[];
 }
