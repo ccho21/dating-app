@@ -1,22 +1,51 @@
-import { Component, Input, OnInit, Self } from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-textarea-input',
   templateUrl: './textarea-input.component.html',
   styleUrls: ['./textarea-input.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TextareaInputComponent),
+      multi: true,
+    },
+  ],
 })
-export class TextareaInputComponent implements ControlValueAccessor {
+export class TextareaInputComponent implements OnInit, ControlValueAccessor {
   @Input() label?: string;
   @Input() rows?: number;
 
-  constructor(@Self() public ngControl: NgControl) {
-    this.ngControl.valueAccessor = this;
+  @Input() formControl?: FormControl;
+  @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
+
+  onChange: any = () => {};
+  onTouched: any = () => {};
+
+  constructor() {}
+  ngOnInit() {}
+
+  writeValue(value: any): void {
+    this.formControl?.setValue(value);
   }
 
-  writeValue(obj: any): void {}
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
 
-  registerOnChange(fn: any): void {}
-
-  registerOnTouched(fn: any): void {}
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
 }

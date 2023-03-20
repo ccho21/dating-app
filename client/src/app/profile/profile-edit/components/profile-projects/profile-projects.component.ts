@@ -26,15 +26,6 @@ export class ProfileProjectsComponent implements OnInit {
     projects: this.fb.array([]),
   });
 
-  @HostListener('window:beforeunload', ['$event']) unloadNotification(
-    $event: any
-  ) {
-    console.log('### event', $event);
-    if (this.projectsForm?.dirty) {
-      $event.returnValue = true;
-    }
-  }
-
   get projects(): FormArray {
     return this.projectsForm.get('projects') as FormArray;
   }
@@ -55,38 +46,31 @@ export class ProfileProjectsComponent implements OnInit {
     this.loadMember();
   }
 
-  addProject(project: any) {
-    const {
-      name,
-      intro,
-      projectWith,
-      description,
-      mainFeature,
-      url,
-      githubUrl,
-      frontEnd,
-      backEnd,
-      database,
-      deployement,
-      projectStarted,
-      projectEnded,
-    } = project;
-
-    const newItem = this.fb.group({
-      name,
-      intro,
-      projectWith,
-      description,
-      mainFeature,
-      url,
-      githubUrl,
-      frontEnd,
-      backEnd,
-      database,
-      deployement,
-      projectStarted,
-      projectEnded,
-    }) as FormGroup;
+  addProject(project?: any) {
+    let newItem;
+    if (project) {
+      newItem = this.fb.group({
+        ...project,
+        projectStarted: new Date(project.projectStarted),
+        projectEnded: new Date(project.projectEnded),
+      }) as FormGroup;
+    } else {
+      newItem = this.fb.group({
+        name: [''],
+        intro: [''],
+        projectWith: [''],
+        description: [''],
+        mainFeature: [''],
+        url: [''],
+        githubUrl: [''],
+        frontEnd: [''],
+        backEnd: [''],
+        database: [''],
+        deployement: [''],
+        projectStarted: [''],
+        projectEnded: [''],
+      }) as FormGroup;
+    }
 
     this.projects.push(newItem);
   }
@@ -95,7 +79,6 @@ export class ProfileProjectsComponent implements OnInit {
       .getMember(this.user?.username as string)
       .subscribe((member) => {
         this.member = member;
-        // this.updateForm(this.member);
         this.member.projects.forEach((project) => {
           this.addProject(project);
         });
@@ -103,7 +86,13 @@ export class ProfileProjectsComponent implements OnInit {
   }
 
   updateForm(member: Member) {
-    // console.log('### this.register form', this.projectsForm?.value);
+    const projectForms = member.projects.map((project) => {
+      return this.fb.group({
+        ...project,
+      }) as FormGroup;
+    });
+
+    this.projectsForm.patchValue(projectForms);
   }
 
   updateProject() {

@@ -34,6 +34,7 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
 import { LoginComponent } from './login/login.component';
 import { SwiperModule } from 'swiper/angular';
 import { FormControlPipe } from './_pipes/form-control.pipe';
+import { FormGroupPipe } from './_pipes/form-group.pipe';
 import { MemberSearchComponent } from './members/member-search/member-search.component';
 import { MessagesComponent } from './messages/messages/messages.component';
 import { MessageOverviewComponent } from './messages/message-overview/message-overview.component';
@@ -84,6 +85,7 @@ import { ProjectEditComponent } from './profile/profile-edit/components/profile-
     ConfirmDialogComponent,
     LoginComponent,
     FormControlPipe,
+    FormGroupPipe,
     MemberSearchComponent,
     ProfileComponent,
     MessagesComponent,

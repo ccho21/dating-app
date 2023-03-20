@@ -7,7 +7,11 @@ import {
   Output,
   Self,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-text-input',
@@ -24,19 +28,17 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class TextInputComponent implements OnInit, ControlValueAccessor {
   @Input() label?: string;
   @Input() type = 'text';
-  @Input() formControl: any;
+  @Input() formControl?: FormControl;
   @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
   onChange: any = () => {};
   onTouched: any = () => {};
 
   constructor() {}
-  ngOnInit() {
-    console.log('### form control', this.formControl);
-  }
+  ngOnInit() {}
 
   writeValue(value: any): void {
-    this.formControl.setValue(value);
+    // this.formControl?.setValue(value);
   }
 
   registerOnChange(fn: any): void {

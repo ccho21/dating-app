@@ -1,4 +1,13 @@
 <div *ngIf="projectForm">
+  <div class="row align-items-start mb-4">
+    <div class="offset-md-1 col-md-8">
+      <div class="alert alert-info" *ngIf="projectForm.dirty">
+        <strong>Information: </strong> You have made changes. Any unsaved
+        changes will be lost
+      </div>
+    </div>
+  </div>
+
   <div class="row align-items-start mb-3">
     <div class="col-md-2 text-end">
       <label for="website" class="label"> Name </label>
@@ -200,6 +209,18 @@
         class="theme-green"
       >
       </app-text-input>
+    </div>
+  </div>
+  <div class="row align-items-start mb-3">
+    <div class="col-md-9 text-end">
+      <button
+        [disabled]="!projectForm.dirty"
+        form="projectsForm"
+        type="submit"
+        class="btn btn-success btn-block"
+      >
+        Save Changes
+      </button>
     </div>
   </div>
 </div>

@@ -1,11 +1,12 @@
 import {
   Component,
+  HostListener,
   Input,
   OnChanges,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-project-edit',
@@ -13,14 +14,20 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./project-edit.component.scss'],
 })
 export class ProjectEditComponent implements OnInit, OnChanges {
-  @Input() projectForm?: any;
+  @Input() projectForm?: FormGroup;
   maxDate?: Date;
+
+  @HostListener('window:beforeunload', ['$event']) unloadNotification(
+    $event: any
+  ) {
+    console.log('### event', $event);
+    if (this.projectForm?.dirty) {
+      $event.returnValue = true;
+    }
+  }
 
   constructor() {}
 
   ngOnInit(): void {}
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-    console.log('### project form ', this.projectForm as FormGroup);
-  }
+  ngOnChanges(changes: SimpleChanges): void {}
 }

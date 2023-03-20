@@ -49,13 +49,13 @@
   </div>
 </div> -->
 
-<div class="mb-3">
+<div class="mb-3" *ngIf="formControl">
   <div class="input-group">
     <input
       type="text"
-      [class.is-invalid]="control.touched && control.invalid"
+      [class.is-invalid]="formControl.touched && formControl.invalid"
       class="form-control"
-      [formControl]="control"
+      [formControl]="formControl | formControl"
       placeholder="{{ label }}"
       bsDatepicker
       [bsConfig]="bsConfig"
@@ -63,7 +63,7 @@
     />
     <span class="input-group-text"><i class="fa-regular fa-calendar"></i></span>
   </div>
-  <div *ngIf="control.errors?.['required']" class="invalid-feedback">
+  <div *ngIf="formControl.errors?.['required']" class="invalid-feedback">
     {{ label }} is required
   </div>
 </div>
