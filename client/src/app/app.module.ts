@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { CommonModule } from '@angular/common';
+import { GalleryModule } from 'ng-gallery';
+import { LightboxModule } from 'ng-gallery/lightbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -62,6 +65,7 @@ import { ProjectEditComponent } from './profile/profile-edit/components/profile-
 import { ExperienceEditComponent } from './profile/profile-edit/components/profile-experiences/components/experience-edit/experience-edit.component';
 import { JobDescriptionEditComponent } from './profile/profile-edit/components/profile-experiences/components/job-description-edit/job-description-edit.component';
 import { JobDetailEditComponent } from './profile/profile-edit/components/profile-experiences/components/job-detail-edit/job-detail-edit.component';
+import { PhotoUploadComponent } from './photos/photo-upload/photo-upload.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -113,6 +117,7 @@ import { JobDetailEditComponent } from './profile/profile-edit/components/profil
     ExperienceEditComponent,
     JobDescriptionEditComponent,
     JobDetailEditComponent,
+    PhotoUploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,6 +129,12 @@ import { JobDetailEditComponent } from './profile/profile-edit/components/profil
     SharedModule,
     SwiperModule,
     BsDatepickerModule.forRoot(),
+    CommonModule,
+
+    GalleryModule.withConfig({
+      // thumbView: 'contain',
+    }),
+    LightboxModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

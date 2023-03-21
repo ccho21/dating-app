@@ -8,6 +8,17 @@
     </div>
   </div>
 
+  <div class="row">
+    <app-photo-upload
+      *ngIf="project"
+      [photos]="project.images"
+      [projectId]="project.id"
+      (setMain)="setMainPhoto($event)"
+      (delete)="deletePhoto($event)"
+      (updatePhoto)="updatePhoto($event)"
+    ></app-photo-upload>
+  </div>
+
   <div class="row align-items-start mb-3">
     <div class="col-md-2 text-end">
       <label for="website" class="label"> Name </label>

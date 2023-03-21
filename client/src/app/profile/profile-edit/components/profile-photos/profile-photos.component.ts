@@ -15,6 +15,7 @@ import { Photo } from 'src/app/_models/photo';
 })
 export class ProfilePhotosComponent implements OnInit {
   @Input() member?: Member;
+  photos: Photo[] = [];
   uploader?: FileUploader;
   user?: User;
 
@@ -31,7 +32,6 @@ export class ProfilePhotosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initializeUploader();
     this.loadMember();
   }
 
@@ -41,10 +41,6 @@ export class ProfilePhotosComponent implements OnInit {
       .subscribe((member) => {
         this.member = member;
       });
-  }
-
-  fileOverBase(e: any) {
-    this.hasBaseDropzoneOver = e;
   }
 
   setMainPhoto(photo: Photo) {
@@ -63,6 +59,17 @@ export class ProfilePhotosComponent implements OnInit {
     });
   }
 
+  updatePhoto(photo: Photo) {
+    //TODO: NGRX
+    if (photo && this.user && this.member) {
+      if (photo.isMain) {
+        this.user.photoUrl = photo.url;
+        this.member.photoUrl = photo.url;
+        this.accountService.setCurrentUser(this.user);
+      }
+    }
+  }
+
   deletePhoto(photoId: number) {
     this.memberService.deletePhoto(photoId).subscribe(() => {
       if (this.member) {
@@ -70,33 +77,5 @@ export class ProfilePhotosComponent implements OnInit {
         this.member.photos = this.member.photos.filter((x) => x.id !== photoId);
       }
     });
-  }
-
-  initializeUploader() {
-    this.uploader = new FileUploader({
-      url: this.baseUrl + 'users/add-photo',
-      authToken: 'Bearer ' + this.user?.token,
-      isHTML5: true,
-      allowedFileType: ['image'],
-      removeAfterUpload: true,
-      autoUpload: false,
-      maxFileSize: 10 * 1024 * 1024,
-    });
-
-    this.uploader.onAfterAddingFile = (file) => {
-      file.withCredentials = false;
-    };
-
-    this.uploader.onSuccessItem = (item, response, status, headers) => {
-      if (response && this.user && this.member) {
-        const photo: Photo = JSON.parse(response);
-        this.member.photos.push(photo);
-        if (photo.isMain) {
-          this.user.photoUrl = photo.url;
-          this.member.photoUrl = photo.url;
-          this.accountService.setCurrentUser(this.user);
-        }
-      }
-    };
   }
 }

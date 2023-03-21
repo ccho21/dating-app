@@ -42,4 +42,10 @@ export class ProjectService {
       })
     );
   }
+
+  deletePhoto(projectId: number, photoId: number) {
+    return this.http.delete(
+      this.baseUrl + 'projects/' + projectId + '/delete-photo/' + photoId
+    );
+  }
 }

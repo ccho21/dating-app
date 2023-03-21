@@ -65,7 +65,6 @@ export class ProfileProjectsComponent implements OnInit {
         projectEnded: [''],
       }) as FormGroup;
     }
-
     this.projects.push(newItem);
   }
   loadMember() {

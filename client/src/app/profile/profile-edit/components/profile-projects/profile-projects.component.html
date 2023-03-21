@@ -17,6 +17,7 @@
                   <legend class="legend">PROJECT #{{ i + 1 }}</legend>
                   <app-project-edit
                     [projectForm]="projectForm | formGroup"
+                    [project]="member.projects[i]"
                   ></app-project-edit>
                 </fieldset>
               </ng-container>
