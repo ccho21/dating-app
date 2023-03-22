@@ -83,18 +83,23 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ProjectDto>> UpdateProject(int id, ProjectDto updateProjectDto)
+        public async Task<ActionResult<ProjectDto>> UpdateProject(int id, ProjectUpdateDto updateProjectDto)
         {
+            var username = User.GetUsername();
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+
             var project = await _unitOfWork.ProjectRepository.GetProjectByIdAsync(id);
 
             if (project == null)
-                return BadRequest("This is already your main photo");
+                return BadRequest("Project not found");
 
-            project = _mapper.Map<Project>(updateProjectDto);
+            if (user.Id != project.AppUserId)
+                return BadRequest("You don't have permission to update this project");
 
-            _unitOfWork.ProjectRepository.UpdateProject(project);
+            _mapper.Map(updateProjectDto, project);
 
-            if (await _unitOfWork.Complete()) return Ok(_mapper.Map<ProjectDto>(project));
+            if (await _unitOfWork.Complete())
+                return Ok(_mapper.Map<ProjectDto>(project));
 
             return BadRequest("Failed to update project");
         }
