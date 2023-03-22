@@ -1,28 +1,36 @@
 <div class="profile-edit" *ngIf="member">
   <div class="row">
     <div class="offset-xl-1 col-xl-10">
+      <div class="text-end">
+        <button class="main-btn" (click)="addProject()">addProject</button>
+      </div>
       <div class="py-5">
-        <div class="w-100">
-          <form
-            [formGroup]="projectsForm"
-            id="projectsForm"
-            (ngSubmit)="updateProject()"
+        <div class="w-100" [formGroup]="projectsForm" id="projectsForm">
+          <div
+            formArrayName="projects"
+          
           >
-            <div formArrayName="projects">
-              <ng-container
-                *ngFor="let projectForm of projects.controls; let i = index"
-                [formGroup]="projectForm | formGroup"
-              >
-                <fieldset class="fieldset">
-                  <legend class="legend">PROJECT #{{ i + 1 }}</legend>
-                  <app-project-edit
-                    [projectForm]="projectForm | formGroup"
-                    [project]="member.projects[i]"
-                  ></app-project-edit>
-                </fieldset>
-              </ng-container>
-            </div>
-          </form>
+            <ng-container
+              *ngFor="let projectForm of projects.controls; let i = index"
+              [formGroup]="projectForm | formGroup"
+            >
+              <fieldset class="fieldset">
+                <div class="delete-box">
+                  <button
+                    (click)="deleteProjectForm(projectForm, i)"
+                    class="icon-btn"
+                  >
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+                <legend class="legend">PROJECT #{{ i + 1 }}</legend>
+                <app-project-edit
+                  [projectForm]="projectForm | formGroup"
+                  [project]="member.projects[i]"
+                ></app-project-edit>
+              </fieldset>
+            </ng-container>
+          </div>
         </div>
       </div>
     </div>

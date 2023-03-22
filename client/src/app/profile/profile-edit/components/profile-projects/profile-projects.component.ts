@@ -50,6 +50,7 @@ export class ProfileProjectsComponent implements OnInit {
       }) as FormGroup;
     } else {
       newItem = this.fb.group({
+        id: null,
         name: [''],
         intro: [''],
         projectWith: [''],
@@ -88,13 +89,14 @@ export class ProfileProjectsComponent implements OnInit {
     this.projectsForm.patchValue(projectForms);
   }
 
-  updateProject() {
-    // this.memberService.updateMember(this.member as Member).subscribe(() => {
-    //   this._snackBar.open(`Profile updated successfully`, 'okay', {
-    //     duration: 5000,
-    //     verticalPosition: 'bottom',
-    //   });
-    //   this.projectsForm?.reset(this.member);
-    // });
+  deleteProjectForm(projectForm: any, index: number) {
+    console.log('### delete project form', projectForm);
+    if (projectForm.get('id').value) {
+      console.log('### existing', index);
+      this.projects.removeAt(index);
+    } else {
+      console.log('### new', index);
+      this.projects.removeAt(index);
+    }
   }
 }

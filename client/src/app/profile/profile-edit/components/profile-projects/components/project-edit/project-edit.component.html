@@ -1,237 +1,242 @@
 <div *ngIf="projectForm">
-  <div class="row align-items-start mb-4">
-    <div class="offset-md-1 col-md-8">
-      <div class="alert alert-info" *ngIf="projectForm.dirty">
-        <strong>Information: </strong> You have made changes. Any unsaved
-        changes will be lost
+  <form
+
+    (ngSubmit)="updateProject()"
+  >
+    <div class="row align-items-start mb-4">
+      <div class="offset-md-1 col-md-8">
+        <div class="alert alert-info" *ngIf="projectForm.dirty">
+          <strong>Information: </strong> You have made changes. Any unsaved
+          changes will be lost
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <app-photo-upload
-      *ngIf="project"
-      [photos]="project.images"
-      [projectId]="project.id"
-      (setMain)="setMainPhoto($event)"
-      (delete)="deletePhoto($event)"
-      (updatePhoto)="updatePhoto($event)"
-    ></app-photo-upload>
-  </div>
+    <div class="row align-items-start mb-3">
+      <div class="col-md-2 text-end">
+        <label for="website" class="label"> Name </label>
+      </div>
+      <div class="offset-md-1 col-md-6">
+        <app-text-input
+          [type]="'text'"
+          [label]="'name'"
+          [formControl]="projectForm.controls['name'] | formControl"
+          class="theme-green"
+        >
+        </app-text-input>
+        <p class="main-text-1 description">
+          Project name or Github repository name
+        </p>
+        <p class="main-text-1 description">
+          You can only change your name twice within 14 days.
+        </p>
+      </div>
+    </div>
 
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="website" class="label"> Name </label>
+    <div class="row align-items-start mb-3">
+      <div class="col-md-2 text-end">
+        <label for="intro" class="label"> Introduction </label>
+      </div>
+      <div class="offset-md-1 col-md-6">
+        <app-textarea-input
+          [rows]="4"
+          [label]="'intro'"
+          [formControl]="projectForm.controls['intro'] | formControl"
+          class="theme-green"
+        >
+        </app-textarea-input>
+        <p class="main-text-1 description">
+          Please give us a brief introduction about the project
+        </p>
+      </div>
     </div>
-    <div class="offset-md-1 col-md-6">
-      <app-text-input
-        [type]="'text'"
-        [label]="'name'"
-        [formControl]="projectForm.controls['name'] | formControl"
-        class="theme-green"
-      >
-      </app-text-input>
-      <p class="main-text-1 description">
-        Project name or Github repository name
-      </p>
-      <p class="main-text-1 description">
-        You can only change your name twice within 14 days.
-      </p>
-    </div>
-  </div>
 
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="intro" class="label"> Introduction </label>
+    <div class="row align-items-start mb-3">
+      <div class="col-md-2 text-end">
+        <label for="website" class="label"> Project With </label>
+      </div>
+      <div class="offset-md-1 col-md-6">
+        <app-text-input
+          [type]="'text'"
+          [label]="'projectWith'"
+          [formControl]="projectForm.controls['projectWith'] | formControl"
+          class="theme-green"
+        >
+        </app-text-input>
+        <p class="main-text-1 description">
+          ex) Individual project or team project
+        </p>
+      </div>
     </div>
-    <div class="offset-md-1 col-md-6">
-      <app-textarea-input
-        [rows]="4"
-        [label]="'intro'"
-        [formControl]="projectForm.controls['intro'] | formControl"
-        class="theme-green"
-      >
-      </app-textarea-input>
-      <p class="main-text-1 description">
-        Please give us a brief introduction about the project
-      </p>
+    <div class="row align-items-start mb-3">
+      <div class="col-md-2 text-end">
+        <label for="projectStarted" class="label"> Project Started </label>
+      </div>
+      <div class="offset-md-1 col-md-6">
+        <app-date-input
+          [label]="'Project started'"
+          [maxDate]="maxDate"
+          [formControl]="projectForm.controls['projectStarted'] | formControl"
+          class="theme-green"
+        >
+        </app-date-input>
+      </div>
     </div>
-  </div>
 
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="website" class="label"> Project With </label>
+    <div class="row align-items-start mb-3">
+      <div class="col-md-2 text-end">
+        <label for="projectEnded" class="label"> Project Ended </label>
+      </div>
+      <div class="offset-md-1 col-md-6">
+        <app-date-input
+          [label]="'Project Ended'"
+          [maxDate]="maxDate"
+          [formControl]="projectForm.controls['projectEnded'] | formControl"
+          class="theme-green"
+        >
+        </app-date-input>
+      </div>
     </div>
-    <div class="offset-md-1 col-md-6">
-      <app-text-input
-        [type]="'text'"
-        [label]="'projectWith'"
-        [formControl]="projectForm.controls['projectWith'] | formControl"
-        class="theme-green"
-      >
-      </app-text-input>
-      <p class="main-text-1 description">
-        ex) Individual project or team project
-      </p>
+    <div class="row align-items-start mb-3">
+      <div class="col-md-2 text-end">
+        <label for="website" class="label"> Description </label>
+      </div>
+      <div class="offset-md-1 col-md-6">
+        <app-textarea-input
+          [rows]="4"
+          [label]="' Description about purpose, technologies of the project.'"
+          [formControl]="projectForm.controls['description'] | formControl"
+          class="theme-green"
+        >
+        </app-textarea-input>
+        <p class="main-text-1 description">
+          Description about purpose, technologies of the project.
+        </p>
+      </div>
     </div>
-  </div>
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="projectStarted" class="label"> Project Started </label>
-    </div>
-    <div class="offset-md-1 col-md-6">
-      <app-date-input
-        [label]="'Project started'"
-        [maxDate]="maxDate"
-        [formControl]="projectForm.controls['projectStarted'] | formControl"
-        class="theme-green"
-      >
-      </app-date-input>
-    </div>
-  </div>
 
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="projectEnded" class="label"> Project Ended </label>
+    <div class="row align-items-center mb-3">
+      <div class="col-md-2 text-end">
+        <label for="mainFeature" class="label"> mainFeature </label>
+      </div>
+      <div class="offset-md-1 col-md-6">
+        <app-text-input
+          [type]="'text'"
+          [label]="'mainFeature'"
+          [formControl]="projectForm.controls['mainFeature'] | formControl"
+          class="theme-green"
+        >
+        </app-text-input>
+        <p class="main-text-1 description">Main features the project has</p>
+      </div>
     </div>
-    <div class="offset-md-1 col-md-6">
-      <app-date-input
-        [label]="'Project Ended'"
-        [maxDate]="maxDate"
-        [formControl]="projectForm.controls['projectEnded'] | formControl"
-        class="theme-green"
-      >
-      </app-date-input>
+    <div class="row align-items-center mb-3">
+      <div class="col-md-2 text-end">
+        <label for="url" class="label"> Url </label>
+      </div>
+      <div class="offset-md-1 col-md-6">
+        <app-text-input
+          [type]="'text'"
+          [label]="'Url'"
+          [formControl]="projectForm.controls['url'] | formControl"
+          class="theme-green"
+        >
+        </app-text-input>
+      </div>
     </div>
-  </div>
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="website" class="label"> Description </label>
-    </div>
-    <div class="offset-md-1 col-md-6">
-      <app-textarea-input
-        [rows]="4"
-        [label]="' Description about purpose, technologies of the project.'"
-        [formControl]="projectForm.controls['description'] | formControl"
-        class="theme-green"
-      >
-      </app-textarea-input>
-      <p class="main-text-1 description">
-        Description about purpose, technologies of the project.
-      </p>
-    </div>
-  </div>
 
-  <div class="row align-items-center mb-3">
-    <div class="col-md-2 text-end">
-      <label for="mainFeature" class="label"> mainFeature </label>
+    <div class="row align-items-start mb-3">
+      <div class="col-md-2 text-end">
+        <label for="githubUrl" class="label"> GithubUrl </label>
+      </div>
+      <div class="offset-md-1 col-md-6">
+        <app-text-input
+          [type]="'text'"
+          [label]="'githubUrl'"
+          [formControl]="projectForm.controls['githubUrl'] | formControl"
+          class="theme-green"
+        >
+        </app-text-input>
+      </div>
     </div>
-    <div class="offset-md-1 col-md-6">
-      <app-text-input
-        [type]="'text'"
-        [label]="'mainFeature'"
-        [formControl]="projectForm.controls['mainFeature'] | formControl"
-        class="theme-green"
-      >
-      </app-text-input>
-      <p class="main-text-1 description">Main features the project has</p>
+    <div class="row align-items-start mb-3">
+      <div class="col-md-2 text-end">
+        <label for="frontEnd" class="label"> FrontEnd </label>
+      </div>
+      <div class="offset-md-1 col-md-6">
+        <app-text-input
+          [type]="'text'"
+          [label]="'frontEnd'"
+          [formControl]="projectForm.controls['frontEnd'] | formControl"
+          class="theme-green"
+        >
+        </app-text-input>
+      </div>
     </div>
-  </div>
-  <div class="row align-items-center mb-3">
-    <div class="col-md-2 text-end">
-      <label for="url" class="label"> Url </label>
+    <div class="row align-items-start mb-3">
+      <div class="col-md-2 text-end">
+        <label for="backEnd" class="label"> Backend </label>
+      </div>
+      <div class="offset-md-1 col-md-6">
+        <app-text-input
+          [type]="'text'"
+          [label]="'backEnd'"
+          [formControl]="projectForm.controls['backEnd'] | formControl"
+          class="theme-green"
+        >
+        </app-text-input>
+      </div>
     </div>
-    <div class="offset-md-1 col-md-6">
-      <app-text-input
-        [type]="'text'"
-        [label]="'Url'"
-        [formControl]="projectForm.controls['url'] | formControl"
-        class="theme-green"
-      >
-      </app-text-input>
+    <div class="row align-items-start mb-3">
+      <div class="col-md-2 text-end">
+        <label for="database" class="label"> Database </label>
+      </div>
+      <div class="offset-md-1 col-md-6">
+        <app-text-input
+          [type]="'text'"
+          [label]="'database'"
+          [formControl]="projectForm.controls['database'] | formControl"
+          class="theme-green"
+        >
+        </app-text-input>
+      </div>
     </div>
-  </div>
 
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="githubUrl" class="label"> GithubUrl </label>
+    <div class="row align-items-start mb-3">
+      <div class="col-md-2 text-end">
+        <label for="deployement" class="label"> Deployment </label>
+      </div>
+      <div class="offset-md-1 col-md-6">
+        <app-text-input
+          [label]="'Vercel, AWS (EC2, RDS, Route 53), etc..'"
+          [formControl]="projectForm.controls['deployement'] | formControl"
+          class="theme-green"
+        >
+        </app-text-input>
+      </div>
     </div>
-    <div class="offset-md-1 col-md-6">
-      <app-text-input
-        [type]="'text'"
-        [label]="'githubUrl'"
-        [formControl]="projectForm.controls['githubUrl'] | formControl"
-        class="theme-green"
-      >
-      </app-text-input>
+    <div class="row mb-5">
+      <div class="offset-md-1 col-md-9">
+        <app-photo-upload
+          *ngIf="project"
+          [photos]="project.images"
+          [projectId]="project.id"
+          (delete)="deletePhoto($event)"
+        ></app-photo-upload>
+      </div>
     </div>
-  </div>
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="frontEnd" class="label"> FrontEnd </label>
+    <!-- <hr class="my-5" /> -->
+    <div class="row align-items-start mb-3">
+      <div class="col-md-9 text-end">
+        <button
+          [disabled]="!projectForm.dirty"
+          form="projectsForm"
+          type="submit"
+          class="btn btn-success btn-block"
+        >
+          Save Changes
+        </button>
+      </div>
     </div>
-    <div class="offset-md-1 col-md-6">
-      <app-text-input
-        [type]="'text'"
-        [label]="'frontEnd'"
-        [formControl]="projectForm.controls['frontEnd'] | formControl"
-        class="theme-green"
-      >
-      </app-text-input>
-    </div>
-  </div>
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="backEnd" class="label"> Backend </label>
-    </div>
-    <div class="offset-md-1 col-md-6">
-      <app-text-input
-        [type]="'text'"
-        [label]="'backEnd'"
-        [formControl]="projectForm.controls['backEnd'] | formControl"
-        class="theme-green"
-      >
-      </app-text-input>
-    </div>
-  </div>
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="database" class="label"> Database </label>
-    </div>
-    <div class="offset-md-1 col-md-6">
-      <app-text-input
-        [type]="'text'"
-        [label]="'database'"
-        [formControl]="projectForm.controls['database'] | formControl"
-        class="theme-green"
-      >
-      </app-text-input>
-    </div>
-  </div>
-
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="deployement" class="label"> Deployment </label>
-    </div>
-    <div class="offset-md-1 col-md-6">
-      <app-text-input
-        [label]="'Vercel, AWS (EC2, RDS, Route 53), etc..'"
-        [formControl]="projectForm.controls['deployement'] | formControl"
-        class="theme-green"
-      >
-      </app-text-input>
-    </div>
-  </div>
-  <div class="row align-items-start mb-3">
-    <div class="col-md-9 text-end">
-      <button
-        [disabled]="!projectForm.dirty"
-        form="projectsForm"
-        type="submit"
-        class="btn btn-success btn-block"
-      >
-        Save Changes
-      </button>
-    </div>
-  </div>
+  </form>
 </div>

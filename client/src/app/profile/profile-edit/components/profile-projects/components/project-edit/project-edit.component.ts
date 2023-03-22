@@ -30,36 +30,6 @@ export class ProjectEditComponent implements OnInit {
     console.log('### ngOnInit project: ', this.project);
   }
 
-  setMainPhoto(photo: Photo) {
-    console.log('### setMainPhoto: ', photo);
-    // this.memberService.setMainPhoto(photo.id).subscribe(() => {
-    //   if (this.user && this.member) {
-    //     this.user.photoUrl = photo.url;
-    //     this.accountService.setCurrentUser(this.user);
-
-    //     //TODO: NGRX
-    //     this.member.photoUrl = photo.url;
-    //     this.member.photos.forEach((p) => {
-    //       if (p.isMain) p.isMain = false;
-    //       if (p.id === photo.id) p.isMain = true;
-    //     });
-    //   }
-    // });
-  }
-
-  updatePhoto(photo: Photo) {
-    console.log('### updatePhoto: ', photo);
-
-    // //TODO: NGRX
-    if (photo) {
-      // if (photo.isMain) {
-      //   this.user.photoUrl = photo.url;
-      //   this.member.photoUrl = photo.url;
-      //   this.accountService.setCurrentUser(this.user);
-      // }
-    }
-  }
-
   deletePhoto(photoId: number) {
     console.log('### deletePhoto: ', photoId);
     if (this.project && photoId) {
@@ -74,11 +44,15 @@ export class ProjectEditComponent implements OnInit {
           }
         });
     }
-    // this.memberService.deletePhoto(photoId).subscribe(() => {
-    //   if (this.member) {
-    //     //TODO: NGRX
-    //     this.member.photos = this.member.photos.filter((x) => x.id !== photoId);
-    //   }
+  }
+
+  updateProject() {
+    // this.memberService.updateMember(this.member as Member).subscribe(() => {
+    //   this._snackBar.open(`Profile updated successfully`, 'okay', {
+    //     duration: 5000,
+    //     verticalPosition: 'bottom',
+    //   });
+    //   this.projectsForm?.reset(this.member);
     // });
   }
 }
