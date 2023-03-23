@@ -108,7 +108,7 @@ namespace API.Controllers
         [HttpPost("{id}/add-photo")]
         public async Task<ActionResult<PhotoDto>> AddPhoto(int id, IFormFile file)
         {
-            var project = await _unitOfWork.ProjectRepository.GetProjectByIdAsync(id);
+            var project = await _unitOfWork.ProjectRepository.GetProjectWithImagesByIdAsync(id);
             var username = User.GetUsername();
 
             var result = await _photoService.AddPhotoAsync(file);

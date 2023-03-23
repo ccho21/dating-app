@@ -15,5 +15,6 @@ namespace API.interfaces
         public Task<PagedList<ProjectDto>> GetProjectsAsync(ProjectParams projectParams);
         public Task<PagedList<ProjectDto>> GetProjectsByUsernameAsync(string username);
         public Task<Project> GetProjectByIdAsync(int id);
+        public Task<Project> GetProjectWithImagesByIdAsync(int id);
     }
 }
