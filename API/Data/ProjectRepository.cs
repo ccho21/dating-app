@@ -57,7 +57,7 @@ namespace API.Data
         }
         public async Task<Project> GetProjectByIdAsync(int id)
         {
-            return await _context.Projects.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Projects.Include(x=> x.Images).FirstOrDefaultAsync(x => x.Id == id);
         }
 
     }
