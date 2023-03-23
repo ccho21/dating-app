@@ -105,6 +105,22 @@ namespace API.Controllers
         }
 
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteProject(int id)
+        {
+            var project = await _unitOfWork.ProjectRepository.GetProjectWithImagesByIdAsync(id);
+
+            if (project == null) return NotFound();
+
+            _unitOfWork.ProjectRepository.DeleteProject(project);
+
+            if (await _unitOfWork.Complete()) return Ok();
+            
+            return BadRequest("Failed to delete the project");
+
+        }
+
+
         [HttpPost("{id}/add-photo")]
         public async Task<ActionResult<PhotoDto>> AddPhoto(int id, IFormFile file)
         {

@@ -28,6 +28,11 @@ namespace API.Data
             _context.Projects.Update(project);
         }
 
+        public void DeleteProject(Project project)
+        {
+            _context.Projects.Remove(project);
+        }
+
 
         public ProjectRepository(DataContext context, IMapper mapper)
         {

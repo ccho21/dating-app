@@ -12,6 +12,7 @@ namespace API.interfaces
     {
         void AddProject(Project project);
         void UpdateProject(Project project);
+        void DeleteProject(Project project);
         public Task<PagedList<ProjectDto>> GetProjectsAsync(ProjectParams projectParams);
         public Task<PagedList<ProjectDto>> GetProjectsByUsernameAsync(string username);
         public Task<Project> GetProjectByIdAsync(int id);
