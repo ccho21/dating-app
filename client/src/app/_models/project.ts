@@ -2,7 +2,7 @@ import { Message } from './message';
 import { Photo } from './photo';
 
 export interface Project {
-  id: number;
+  id?: number;
   name: string;
   intro: string;
   projectWith: string;

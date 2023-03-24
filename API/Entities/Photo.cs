@@ -12,6 +12,8 @@ namespace API.Entities
         public AppUser AppUser { get; set; }
         public int? AppUserId { get; set; }
         public Project Project { get; set; }
-        public int? projectId { get; set; }
+        public int? ProjectId { get; set; }
+        public Experience Experience { get; set; }
+        public int? ExperienceId { get; set; }
     }
 }

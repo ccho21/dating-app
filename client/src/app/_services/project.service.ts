@@ -9,13 +9,14 @@ import { AccountService } from './account.service';
 import { User } from '../_models/user';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 import { ProjectParams } from '../_models/projectParams';
+import { Project } from '../_models/project';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectService {
   baseUrl = environment.apiUrl;
-  project?: any;
+  projects?: Project[];
   user?: User;
 
   constructor(
@@ -41,6 +42,32 @@ export class ProjectService {
         return response;
       })
     );
+  }
+
+  createProject(project: Project) {
+    return this.http.post(`${this.baseUrl}projects`, project).pipe(
+      map(() => {
+        if (this.projects) {
+          const index = this.projects?.indexOf(project);
+          this.projects[index] = project;
+        }
+      })
+    );
+  }
+
+  updateProject(project: Project, projectId: number) {
+    return this.http.put(`${this.baseUrl}projects/${projectId}`, project).pipe(
+      map(() => {
+        if (this.projects) {
+          const index = this.projects?.indexOf(project);
+          this.projects[index] = project;
+        }
+      })
+    );
+  }
+
+  deleteProject(projectId: number) {
+    return this.http.delete(this.baseUrl + 'projects/' + projectId);
   }
 
   deletePhoto(projectId: number, photoId: number) {

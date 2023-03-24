@@ -6,19 +6,16 @@ import {
   Output,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { Member } from 'src/app/_models/member';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { AccountService } from 'src/app/_services/account.service';
 import { User } from 'src/app/_models/user';
 import { take } from 'rxjs/operators';
-import { MemberService } from 'src/app/_services/member.service';
 import { Photo } from 'src/app/_models/photo';
 
 import {
   Gallery,
   GalleryItem,
-  ImageItem,
   ThumbnailsPosition,
   ImageSize,
 } from 'ng-gallery';
@@ -34,7 +31,9 @@ export class PhotoUploadComponent implements OnInit {
   uploader?: FileUploader;
   user?: User;
   @Input() photos?: Photo[];
+  @Input() photo?: Photo;
   @Input() projectId?: number;
+  @Input() experienceId?: number;
   @Output() setMain: EventEmitter<Photo> = new EventEmitter<Photo>();
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
   @Output() updatePhoto: EventEmitter<Photo> = new EventEmitter<Photo>();
@@ -60,12 +59,9 @@ export class PhotoUploadComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('### photo came in?');
     this.initializeUploader();
 
-    /** Lightbox Example */
-
-    // Get a lightbox gallery ref
-    // this.imageData = this.getGalerryPhotos();
     const lightboxRef = this.gallery.ref('lightbox');
 
     // Add custom gallery config to the lightbox (optional)
@@ -92,28 +88,10 @@ export class PhotoUploadComponent implements OnInit {
 
   setMainPhoto(photo: Photo) {
     this.setMain.emit(photo);
-    // this.memberService.setMainPhoto(photo.id).subscribe(() => {
-    //   if (this.user && this.member) {
-    //     this.user.photoUrl = photo.url;
-    //     this.accountService.setCurrentUser(this.user);
-    //     //TODO: NGRX
-    //     this.member.photoUrl = photo.url;
-    //     this.member.photos.forEach((p) => {
-    //       if (p.isMain) p.isMain = false;
-    //       if (p.id === photo.id) p.isMain = true;
-    //     });
-    //   }
-    // });
   }
 
   deletePhoto(photoId: number) {
     this.delete.emit(photoId);
-    // this.memberService.deletePhoto(photoId).subscribe(() => {
-    //   if (this.member) {
-    //     //TODO: NGRX
-    //     this.member.photos = this.member.photos.filter((x) => x.id !== photoId);
-    //   }
-    // });
   }
 
   initializeUploader() {
@@ -122,6 +100,8 @@ export class PhotoUploadComponent implements OnInit {
     let url = '';
     if (this.projectId) {
       url = `${this.baseUrl}projects/${this.projectId}/add-photo`;
+    } else if (this.experienceId) {
+      url = `${this.baseUrl}experiences/${this.experienceId}/add-photo`;
     } else {
       url = `${this.baseUrl}users/add-photo`;
     }
@@ -143,10 +123,14 @@ export class PhotoUploadComponent implements OnInit {
     };
 
     this.uploader.onSuccessItem = (item, response, status, headers) => {
-      console.log('## onSuccessItem');
+      console.log('## onSuccessItem', response);
 
       const photo: Photo = JSON.parse(response);
-      this.photos?.push(photo);
+      if (this.photos && this.photos.length) {
+        this.photos?.push(photo);
+      } else {
+        this.photo = photo;
+      }
       this.updatePhoto.emit(photo);
     };
   }

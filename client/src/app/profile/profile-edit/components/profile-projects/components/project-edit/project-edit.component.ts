@@ -14,6 +14,7 @@ export class ProjectEditComponent implements OnInit {
   @Input() project?: Project;
   maxDate?: Date;
   photos: Photo[] = [];
+  mode: string = 'EDIT';
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification(
     $event: any
@@ -28,13 +29,18 @@ export class ProjectEditComponent implements OnInit {
   ngOnInit(): void {
     console.log('### ngOnInit projectForm: ', this.projectForm);
     console.log('### ngOnInit project: ', this.project);
+    this.mode = this.getMode(this.project);
+  }
+
+  getMode(project: Project | undefined) {
+    return project ? 'EDIT' : 'CREATE';
   }
 
   deletePhoto(photoId: number) {
     console.log('### deletePhoto: ', photoId);
     if (this.project && photoId) {
       this.projectService
-        .deletePhoto(this.project.id, photoId)
+        .deletePhoto(this.project.id as number, photoId)
         .subscribe(() => {
           if (this.project) {
             //TODO: NGRX
@@ -46,13 +52,57 @@ export class ProjectEditComponent implements OnInit {
     }
   }
 
-  updateProject() {
-    // this.memberService.updateMember(this.member as Member).subscribe(() => {
-    //   this._snackBar.open(`Profile updated successfully`, 'okay', {
-    //     duration: 5000,
-    //     verticalPosition: 'bottom',
-    //   });
-    //   this.projectsForm?.reset(this.member);
-    // });
+  updatePhoto(photo: Photo) {
+    console.log('### updatePhoto: ', photo);
+
+    // //TODO: NGRX
+    if (photo) {
+      // this.project?.images.push(photo);
+      // if (photo.isMain) {
+      //   this.user.photoUrl = photo.url;
+      //   this.member.photoUrl = photo.url;
+      //   this.accountService.setCurrentUser(this.user);
+      // }
+    }
   }
+
+  saveProject() {
+    const { projectEnded, projectStarted, images } = this.projectForm?.value;
+
+    const form: Project = {
+      ...this.projectForm?.value,
+      projectEnded: new Date(projectStarted).toISOString(),
+      projectStarted: new Date(projectStarted).toISOString(),
+      images: this.project?.images,
+    };
+
+    if (this.mode === 'EDIT') {
+      this.updateProject(form);
+    } else {
+      this.createProject(form);
+    }
+  }
+
+  updateProject(form: Project) {
+    console.log('### ngOnInit projectForm: ', this.projectForm?.value);
+
+    const { id } = form;
+    console.log('### form', form);
+    console.log('### id', id);
+
+    this.projectService.updateProject(form, id as number).subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  createProject(form: Project) {
+    console.log('### ngOnInit projectForm: ', this.projectForm?.value);
+    console.log('### form', form);
+    delete form.id;
+    this.projectService.createProject(form).subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  deleteProject() {}
 }

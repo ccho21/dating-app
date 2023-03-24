@@ -1,4 +1,32 @@
 <div *ngIf="experienceForm">
+  <div class="row mb-5">
+    <div class="offset-md-1 col-md-9">
+      <app-photo-upload
+        *ngIf="experience"
+        [photo]="experience.logo"
+        [experienceId]="experience.id"
+        (delete)="deletePhoto($event)"
+        (updatePhoto)="updatePhoto($event)"
+      ></app-photo-upload>
+    </div>
+  </div>
+  <div class="row align-items-start mb-3">
+    <div class="col-md-2 text-end">
+      <label for="employer" class="label"> Company </label>
+    </div>
+    <div class="offset-md-1 col-md-6">
+      <app-text-input
+        [type]="'text'"
+        [label]="'companyName'"
+        [formControl]="experienceForm.controls['companyName'] | formControl"
+        class="theme-green"
+      >
+      </app-text-input>
+      <p class="main-text-1 description">
+        The position when you are / were working
+      </p>
+    </div>
+  </div>
   <div class="row align-items-start mb-4">
     <div class="offset-md-1 col-md-8">
       <div class="alert alert-info" *ngIf="experienceForm.dirty">
@@ -41,23 +69,7 @@
       </p>
     </div>
   </div>
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="employer" class="label"> Employer </label>
-    </div>
-    <div class="offset-md-1 col-md-6">
-      <app-text-input
-        [type]="'text'"
-        [label]="'companyName'"
-        [formControl]="experienceForm.controls['companyName'] | formControl"
-        class="theme-green"
-      >
-      </app-text-input>
-      <p class="main-text-1 description">
-        The position when you are / were working
-      </p>
-    </div>
-  </div>
+
   <div class="row align-items-center mb-3">
     <div class="col-md-2 text-end">
       <label for="url" class="label"> Url </label>

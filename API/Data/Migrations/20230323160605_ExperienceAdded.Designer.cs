@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230320180214_ExperienceAdded")]
+    [Migration("20230323160605_ExperienceAdded")]
     partial class ExperienceAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -220,9 +220,6 @@ namespace API.Data.Migrations
                     b.Property<string>("Intro")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("LogoId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Position")
                         .HasColumnType("TEXT");
 
@@ -235,8 +232,6 @@ namespace API.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
-
-                    b.HasIndex("LogoId");
 
                     b.ToTable("Experiences");
                 });
@@ -349,7 +344,13 @@ namespace API.Data.Migrations
                     b.Property<int?>("AppUserId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("ExperienceId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<bool>("IsMain")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ProjectId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("PublicId")
@@ -358,14 +359,14 @@ namespace API.Data.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("projectId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("projectId");
+                    b.HasIndex("ExperienceId")
+                        .IsUnique();
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Photos");
                 });
@@ -569,13 +570,7 @@ namespace API.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Entities.Photo", "Logo")
-                        .WithMany()
-                        .HasForeignKey("LogoId");
-
                     b.Navigation("AppUser");
-
-                    b.Navigation("Logo");
                 });
 
             modelBuilder.Entity("API.Entities.JobDescription", b =>
@@ -617,11 +612,17 @@ namespace API.Data.Migrations
                         .WithMany("Photos")
                         .HasForeignKey("AppUserId");
 
+                    b.HasOne("API.Entities.Experience", "Experience")
+                        .WithOne("Logo")
+                        .HasForeignKey("API.Entities.Photo", "ExperienceId");
+
                     b.HasOne("API.Entities.Project", "Project")
                         .WithMany("Images")
-                        .HasForeignKey("projectId");
+                        .HasForeignKey("ProjectId");
 
                     b.Navigation("AppUser");
+
+                    b.Navigation("Experience");
 
                     b.Navigation("Project");
                 });
@@ -721,6 +722,8 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Experience", b =>
                 {
                     b.Navigation("JobDescriptions");
+
+                    b.Navigation("Logo");
                 });
 
             modelBuilder.Entity("API.Entities.Group", b =>

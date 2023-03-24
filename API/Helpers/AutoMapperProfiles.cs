@@ -35,9 +35,15 @@ namespace API.Helpers
                         opt => opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
             CreateMap<Project, ProjectDto>();
             CreateMap<ProjectUpdateDto, Project>();
+            
             CreateMap<Experience, ExperienceDto>();
+            CreateMap<ExperienceUpdateDto, Experience>();
+
             CreateMap<JobDescription, JobDescriptionDto>();
             CreateMap<JobDetail, JobDetailDto>();
+
+            CreateMap<JobDescriptionDto, JobDescription>();
+            CreateMap<JobDetailDto, JobDetail>();
         }
     }
 }

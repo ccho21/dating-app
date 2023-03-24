@@ -53,7 +53,6 @@ export class ProfileAboutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('### this edit form?', this.editForm);
     this.loadMember();
   }
 

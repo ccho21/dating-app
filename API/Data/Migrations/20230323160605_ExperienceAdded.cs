@@ -22,7 +22,13 @@ namespace API.Data.Migrations
                 oldType: "INTEGER");
 
             migrationBuilder.AddColumn<int>(
-                name: "projectId",
+                name: "ExperienceId",
+                table: "Photos",
+                type: "INTEGER",
+                nullable: true);
+
+            migrationBuilder.AddColumn<int>(
+                name: "ProjectId",
                 table: "Photos",
                 type: "INTEGER",
                 nullable: true);
@@ -62,8 +68,7 @@ namespace API.Data.Migrations
                     Url = table.Column<string>(type: "TEXT", nullable: true),
                     Started = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Ended = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    AppUserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    LogoId = table.Column<int>(type: "INTEGER", nullable: true)
+                    AppUserId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,11 +79,6 @@ namespace API.Data.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Experiences_Photos_LogoId",
-                        column: x => x.LogoId,
-                        principalTable: "Photos",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -155,9 +155,15 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Photos_projectId",
+                name: "IX_Photos_ExperienceId",
                 table: "Photos",
-                column: "projectId");
+                column: "ExperienceId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photos_ProjectId",
+                table: "Photos",
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Educations_AppUserId",
@@ -168,11 +174,6 @@ namespace API.Data.Migrations
                 name: "IX_Experiences_AppUserId",
                 table: "Experiences",
                 column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Experiences_LogoId",
-                table: "Experiences",
-                column: "LogoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_JobDescriptions_ExperienceId",
@@ -197,9 +198,16 @@ namespace API.Data.Migrations
                 principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Photos_Projects_projectId",
+                name: "FK_Photos_Experiences_ExperienceId",
                 table: "Photos",
-                column: "projectId",
+                column: "ExperienceId",
+                principalTable: "Experiences",
+                principalColumn: "Id");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Photos_Projects_ProjectId",
+                table: "Photos",
+                column: "ProjectId",
                 principalTable: "Projects",
                 principalColumn: "Id");
         }
@@ -211,7 +219,11 @@ namespace API.Data.Migrations
                 table: "Photos");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Photos_Projects_projectId",
+                name: "FK_Photos_Experiences_ExperienceId",
+                table: "Photos");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Photos_Projects_ProjectId",
                 table: "Photos");
 
             migrationBuilder.DropTable(
@@ -230,11 +242,19 @@ namespace API.Data.Migrations
                 name: "Experiences");
 
             migrationBuilder.DropIndex(
-                name: "IX_Photos_projectId",
+                name: "IX_Photos_ExperienceId",
+                table: "Photos");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Photos_ProjectId",
                 table: "Photos");
 
             migrationBuilder.DropColumn(
-                name: "projectId",
+                name: "ExperienceId",
+                table: "Photos");
+
+            migrationBuilder.DropColumn(
+                name: "ProjectId",
                 table: "Photos");
 
             migrationBuilder.AlterColumn<int>(

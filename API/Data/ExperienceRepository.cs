@@ -18,16 +18,27 @@ namespace API.Data
         private readonly DataContext _context;
         private readonly IMapper _mapper;
 
-        public void AddExperience(Experience experience)
-        {
-            _context.Experiences.Add(experience);
-        }
-
         public ExperienceRepository(DataContext context, IMapper mapper)
         {
             _mapper = mapper;
             _context = context;
         }
+
+        public void AddExperience(Experience experience)
+        {
+            _context.Experiences.Add(experience);
+        }
+
+        public void UpdateExperience(Experience experience)
+        {
+            _context.Experiences.Update(experience);
+        }
+
+        public void DeleteExperience(Experience experience)
+        {
+            _context.Experiences.Remove(experience);
+        }
+
         public async Task<PagedList<ExperienceDto>> GetExperiencesAsync(ExperienceParams experienceParams)
         {
             var query = _context.Experiences.AsQueryable();
@@ -50,6 +61,14 @@ namespace API.Data
         public async Task<Experience> GetExperienceByIdAsync(int id)
         {
             return await _context.Experiences.FindAsync(id);
+        }
+        public async Task<Experience> GetExperienceWithLogoByIdAsync(int id)
+        {
+            return await _context.Experiences.Include(x => x.Logo).SingleOrDefaultAsync(x => x.Id == id);
+        }
+        public async Task<Experience> GetExperienceWithDetailsByIdAsync(int id)
+        {
+            return await _context.Experiences.Include(x => x.JobDescriptions).ThenInclude(x => x.Details).SingleOrDefaultAsync(x => x.Id == id);
         }
 
     }

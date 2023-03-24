@@ -1,8 +1,5 @@
 <div *ngIf="projectForm">
-  <form
-
-    (ngSubmit)="updateProject()"
-  >
+  <form [formGroup]="projectForm" id="projectForm">
     <div class="row align-items-start mb-4">
       <div class="offset-md-1 col-md-8">
         <div class="alert alert-info" *ngIf="projectForm.dirty">
@@ -222,6 +219,7 @@
           [photos]="project.images"
           [projectId]="project.id"
           (delete)="deletePhoto($event)"
+          (updatePhoto)="updatePhoto($event)"
         ></app-photo-upload>
       </div>
     </div>
@@ -230,11 +228,12 @@
       <div class="col-md-9 text-end">
         <button
           [disabled]="!projectForm.dirty"
-          form="projectsForm"
+          form="projectForm"
           type="submit"
           class="btn btn-success btn-block"
+          (click)="saveProject()"
         >
-          Save Changes
+          {{ mode === "EDIT" ? "Save Changes" : "Save Project" }}
         </button>
       </div>
     </div>

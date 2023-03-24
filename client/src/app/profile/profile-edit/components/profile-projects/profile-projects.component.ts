@@ -7,6 +7,7 @@ import { take } from 'rxjs/operators';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Project } from 'src/app/_models/project';
+import { ProjectService } from 'src/app/_services/project.service';
 
 @Component({
   selector: 'app-profile-projects',
@@ -28,6 +29,7 @@ export class ProfileProjectsComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private memberService: MemberService,
+    private projectService: ProjectService,
     private fb: FormBuilder
   ) {
     this.accountService.currentUser$
@@ -51,17 +53,17 @@ export class ProfileProjectsComponent implements OnInit {
     } else {
       newItem = this.fb.group({
         id: null,
-        name: [''],
-        intro: [''],
-        projectWith: [''],
-        description: [''],
-        mainFeature: [''],
-        url: [''],
-        githubUrl: [''],
-        frontEnd: [''],
-        backEnd: [''],
-        database: [''],
-        deployement: [''],
+        name: ['creating a project'],
+        intro: ['this project is just a same ple one'],
+        projectWith: ['I build this app all by my self'],
+        description: ['to learn c# and Angular'],
+        mainFeature: ['Searching, finding, message, looking for people, CRUD projects, photos, experiences'],
+        url: ['localhost:4200'],
+        githubUrl: ['github.com/ccho21'],
+        frontEnd: ['angular, rxjs, ngrx'],
+        backEnd: ['dotnet c#'],
+        database: ['postgresSQL'],
+        deployement: ['Heroku'],
         projectStarted: [''],
         projectEnded: [''],
       }) as FormGroup;
@@ -91,9 +93,12 @@ export class ProfileProjectsComponent implements OnInit {
 
   deleteProjectForm(projectForm: any, index: number) {
     console.log('### delete project form', projectForm);
-    if (projectForm.get('id').value) {
+    const { id } = projectForm.value;
+    if (id) {
       console.log('### existing', index);
-      this.projects.removeAt(index);
+      this.projectService.deleteProject(id).subscribe(() => {
+        this.projects.removeAt(index);
+      });
     } else {
       console.log('### new', index);
       this.projects.removeAt(index);
