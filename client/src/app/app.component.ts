@@ -12,7 +12,7 @@ import { setTheme } from 'ngx-bootstrap/utils';
 })
 export class AppComponent implements OnInit {
   title = 'The Dating app';
-  users: any;
+  user?: User;
 
   constructor(
     private accountService: AccountService,
@@ -25,10 +25,10 @@ export class AppComponent implements OnInit {
   }
 
   setCurrentUser() {
-    const user: User = JSON.parse(localStorage.getItem('user') as string);
-    if (user) {
-      this.accountService.setCurrentUser(user);
-      this.presence.createHubConnection(user);
+    this.user = JSON.parse(localStorage.getItem('user') as string);
+    if (this.user) {
+      this.accountService.setCurrentUser(this.user);
+      this.presence.createHubConnection(this.user);
     }
   }
 }

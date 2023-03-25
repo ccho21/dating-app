@@ -17,7 +17,7 @@
     </div> -->
 
     <div class="row">
-      <div class="col-md-7">
+      <div class="col-md-12">
         <app-text-input
           [formControl]="registerForm.controls['username'] | formControl"
           [label]="'Username'"
@@ -30,19 +30,19 @@
           [type]="'password'"
         >
         </app-text-input>
-        <app-date-input
+        <!-- <app-date-input
           [formControl]="registerForm.controls['dateOfBirth'] | formControl"
           [label]="'Date Of Birth'"
           [maxDate]="maxDate"
-        ></app-date-input>
+        ></app-date-input> -->
       </div>
-      <div class="col-md-7">
+      <div class="col-md-12">
         <app-text-input
           [formControl]="registerForm.controls['country'] | formControl"
           [label]="'Country'"
         ></app-text-input>
       </div>
-      <div class="col-md-7">
+      <div class="col-md-12">
         <button class="main-btn" (click)="register()">Register</button>
       </div>
     </div>

@@ -1,8 +1,56 @@
-<div>
-  <h2>Login</h2>
+<div class="login">
+  <app-panel>
+    <form class="w-100" [formGroup]="form">
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <app-text-input
+            [formControl]="form.controls['username'] | formControl"
+            [label]="'Username'"
+            [size]="'lg'"
+            class="theme-green"
+          >
+          </app-text-input>
+        </div>
+      </div>
+      <div class="row align-items-start mb-3">
+        <div class="col-md-12">
+          <app-text-input
+            [formControl]="form.controls['password'] | formControl"
+            [type]="hide ? 'password' : 'text'"
+            [size]="'lg'"
+            [label]="'Password'"
+            [type]="'password'"
+          >
+          </app-text-input>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <app-button
+          icon="fa fa-plus"
+          customClass="full text-white btn-lg"
+          (onClick)="login()"
+        >
+          Login
+        </app-button>
+      </div>
+    </form>
+    <div class="col-md-12 mb-4">
+      <div><a href=""> Need to Login? </a></div>
+      <hr />
+    </div>
+
+    <div class="col-md-12">
+      <app-button
+        icon="fa fa-plus"
+        customClass="full text-white btn-lg"
+        routerLink="/register"
+      >
+        Register
+      </app-button>
+    </div>
+  </app-panel>
 </div>
-<form class="" [formGroup]="form">
-  <mat-form-field class="example-full-width" appearance="fill">
+<!-- <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Username</mat-label>
     <input
       matInput
@@ -10,9 +58,9 @@
       placeholder="Username"
       formControlName="username"
     />
-  </mat-form-field>
+  </mat-form-field> -->
 
-  <mat-form-field class="example-full-width" appearance="fill">
+<!-- <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Enter your password</mat-label>
     <input
       matInput
@@ -28,12 +76,11 @@
     >
       <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
-  </mat-form-field>
-</form>
+  </mat-form-field> -->
 
-<mat-dialog-actions align="end">
+<!-- <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-raised-button cdkFocusInitial color="primary" (click)="login()">
     Login
   </button>
-</mat-dialog-actions>
+</mat-dialog-actions> -->

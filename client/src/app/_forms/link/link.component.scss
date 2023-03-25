@@ -1,0 +1,49 @@
+.main-link {
+  border: none;
+  // color: hsla(184, 91%, 28%, 1);
+  color: var(--black);
+  background-color: transparent;
+  border-radius: 0.5rem;
+  transform: translateY(-0.2rem);
+  transition: all 0.15s ease-in-out;
+  font-size: 1.6rem;
+  font-weight: 400;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &.circle {
+    padding: 0.5rem;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+  }
+
+  &.white {
+    background-color: var(--white);
+    color: var(--black);
+  }
+
+  &.full {
+    width: 100%;
+  }
+  &.btn-lg {
+    font-size: 1.65rem;
+  }
+
+  .icon {
+    font-size: 3rem;
+    border: 1px solid var(--black);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    padding: 0.5rem;
+    color: var(--black);
+  }
+}

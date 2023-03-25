@@ -3,14 +3,19 @@
 
 .home {
   position: relative;
-  color: var(--white);
+  height: 100%;
+  .logo {
+    max-width: 15rem;
+  }
+
   .home-background {
     width: 100%;
     position: relative;
-    background: url("/assets/home-background-1.jpg");
+    background: url("/assets/shared/home-bg-1.jpg");
     background-position: center center;
     background-size: cover;
-    min-height: calc(80vh - 64px);
+    height: 100%;
+    min-height: calc(100vh - 20rem);
 
     z-index: 1;
     &::before {
@@ -23,157 +28,13 @@
       left: 0;
       z-index: -1;
     }
-  }
-
-  .home-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 10;
-    transform: translate(-50%, -50%);
-    text-align: left;
-    width: 90%;
-
-    .main-left {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-    .main-right {
-    }
+    // @media screen and (max-width: 768px) {
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   height: 100%;
+    //   z-index: -1;
+    // }
   }
 }
-
-// // Carousel
-// .swiper {
-//   width: 100%;
-//   height: 100%;
-// }
-
-// .swiper-slide {
-//   background: #f1f1f1;
-//   color: #000;
-//   text-align: center;
-//   line-height: 300px;
-// }
-
-// .swiper-slide {
-//   background-position: center;
-//   background-size: cover;
-// }
-
-// .swiper-slide img {
-//   display: block;
-//   width: 100%;
-//   max-width: 300px;
-// }
-
-.member-link {
-  border: none;
-  background: none;
-}
-
-//
-
-.member {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  @media screen and (max-width: 1200px) {
-    flex-wrap: wrap;
-  }
-
-  // position: absolute;
-  &-box-left {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    z-index: 0;
-    border-radius: 8px;
-
-    &:before {
-      content: "";
-      display: block;
-      padding-top: 100%;
-    }
-
-    & .head {
-      display: flex;
-      align-items: center;
-      background-color: var(--peach);
-      width: 100%;
-
-      & .status {
-        font-size: 12px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: gray;
-        margin-left: 0.3rem;
-        &.is-online {
-          color: green;
-          animation-name: example;
-          animation-duration: 3s;
-          animation-iteration-count: infinite;
-        }
-      }
-
-      @keyframes example {
-        0% {
-          color: gray;
-        }
-        30% {
-          color: green;
-        }
-        90% {
-          color: green;
-        }
-        100% {
-          color: gray;
-        }
-      }
-    }
-
-    & .body {
-      width: 100%;
-    }
-    & .member-content {
-      display: flex;
-      align-items: center;
-      background-color: var(--champagne);
-      flex-direction: column;
-      position: absolute;
-      height: 100%;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-    }
-  }
-
-  &-box-right {
-    width: 100%;
-    margin-left: 2rem;
-    border-radius: 8px;
-    position: relative;
-  }
-
-  & .picsum-img-wrapper {
-    display: flex;
-    align-items: center;
-    & img {
-      height: auto;
-    }
-  }
-
-  &-img {
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-}
-
-//

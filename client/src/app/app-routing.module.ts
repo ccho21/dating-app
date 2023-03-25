@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
-import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { ListsComponent } from './lists/lists.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
@@ -23,56 +22,64 @@ import { ProfileProjectsComponent } from './profile/profile-edit/components/prof
 import { ProfileExperiencesComponent } from './profile/profile-edit/components/profile-experiences/profile-experiences.component';
 import { ProfileSkillsComponent } from './profile/profile-edit/components/profile-skills/profile-skills.component';
 import { ProfilePhotosComponent } from './profile/profile-edit/components/profile-photos/profile-photos.component';
+import { MainComponent } from './main/main/main.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'profile', component: ProfileComponent },
   {
-    path: '',
-    runGuardsAndResolvers: 'always',
+    path: 'main',
+    component: MainComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'members', component: MemberListComponent },
+      { path: '', component: ProfileComponent },
       {
-        path: 'members/:username',
-        component: MemberComponent,
-        resolve: { member: MemberResolver },
-      },
-      {
-        path: 'profile/edit',
-        redirectTo: 'profile/edit/about',
-      },
-      {
-        path: 'profile/edit',
-        component: ProfileEditComponent,
+        path: '',
+        runGuardsAndResolvers: 'always',
         children: [
+          { path: 'members', component: MemberListComponent },
           {
-            path: 'about',
-            component: ProfileAboutComponent,
-            canDeactivate: [PreventUnsavedChangesGuard],
+            path: 'members/:username',
+            component: MemberComponent,
+            resolve: { member: MemberResolver },
           },
-          { path: 'photos', component: ProfilePhotosComponent },
-          { path: 'projects', component: ProfileProjectsComponent },
-          { path: 'experiences', component: ProfileExperiencesComponent },
-          { path: 'skills', component: ProfileSkillsComponent },
+          {
+            path: 'profile/edit',
+            redirectTo: 'profile/edit/about',
+          },
+          {
+            path: 'profile/edit',
+            component: ProfileEditComponent,
+            children: [
+              {
+                path: 'about',
+                component: ProfileAboutComponent,
+                canDeactivate: [PreventUnsavedChangesGuard],
+              },
+              { path: 'photos', component: ProfilePhotosComponent },
+              { path: 'projects', component: ProfileProjectsComponent },
+              { path: 'experiences', component: ProfileExperiencesComponent },
+              { path: 'skills', component: ProfileSkillsComponent },
+            ],
+          },
+          { path: 'lists', component: ListsComponent },
+          {
+            path: 'messages',
+            component: MessagesComponent,
+            children: [
+              { path: '', component: NoDataComponent },
+              { path: ':membername', component: MemberMessagesComponent },
+            ],
+          },
+          {
+            path: 'admin',
+            component: AdminPanelComponent,
+            canActivate: [AdminGuard],
+          },
         ],
-      },
-      { path: 'lists', component: ListsComponent },
-      {
-        path: 'messages',
-        component: MessagesComponent,
-        children: [
-          { path: '', component: NoDataComponent },
-          { path: ':membername', component: MemberMessagesComponent },
-        ],
-      },
-      {
-        path: 'admin',
-        component: AdminPanelComponent,
-        canActivate: [AdminGuard],
       },
     ],
   },
+
   { path: 'errors', component: TestErrorsComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },

@@ -9,5 +9,7 @@ export class ExperienceComponent implements OnInit {
   @Input() experience?: any;
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('### experience', this.experience);
+  }
 }

@@ -1,0 +1,36 @@
+.panel {
+  border-radius: 10px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  min-height: 15rem;
+  &.left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  &.right {
+    align-items: flex-end;
+  }
+
+  &.white {
+    color: var(--black);
+    background-color: var(--white);
+    border: 2px solid var(--white);
+  }
+  &.green {
+    color: var(--champagne);
+    background-color: var(--light-green);
+
+    border: 2px solid var(--light-green);
+  }
+
+  @media screen and (max-width: 768px) {
+    margin: 3rem;
+  }
+}

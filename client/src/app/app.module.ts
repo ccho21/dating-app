@@ -2,10 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 import { CommonModule } from '@angular/common';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
+
+// Bootstrap module
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -66,6 +72,12 @@ import { ExperienceEditComponent } from './profile/profile-edit/components/profi
 import { JobDescriptionEditComponent } from './profile/profile-edit/components/profile-experiences/components/job-description-edit/job-description-edit.component';
 import { JobDetailEditComponent } from './profile/profile-edit/components/profile-experiences/components/job-detail-edit/job-detail-edit.component';
 import { PhotoUploadComponent } from './photos/photo-upload/photo-upload.component';
+import { ButtonComponent } from './_forms/button/button.component';
+import { PanelComponent } from './_layouts/panel/panel.component';
+import { FooterComponent } from './_layouts/footer/footer.component';
+import { MainComponent } from './main/main/main.component';
+import { HeaderComponent } from './_layouts/header/header.component';
+import { LinkComponent } from './_forms/link/link.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -118,6 +130,12 @@ import { PhotoUploadComponent } from './photos/photo-upload/photo-upload.compone
     JobDescriptionEditComponent,
     JobDetailEditComponent,
     PhotoUploadComponent,
+    ButtonComponent,
+    PanelComponent,
+    FooterComponent,
+    MainComponent,
+    HeaderComponent,
+    LinkComponent,
   ],
   imports: [
     BrowserModule,
@@ -128,9 +146,12 @@ import { PhotoUploadComponent } from './photos/photo-upload/photo-upload.compone
     ReactiveFormsModule,
     SharedModule,
     SwiperModule,
-    BsDatepickerModule.forRoot(),
     CommonModule,
 
+    BsDropdownModule,
+    CollapseModule,
+    BsDatepickerModule.forRoot(),
+    TooltipModule.forRoot(),
     GalleryModule.withConfig({
       // thumbView: 'contain',
     }),

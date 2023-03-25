@@ -13,31 +13,61 @@
     <span class="example-spacer"></span>
     <div class="d-none d-md-block">
       <ng-container *ngIf="accountService.currentUser$ | async">
+        <div class="btn-group" dropdown>
+          <button
+            id="button-basic"
+            dropdownToggle
+            type="button"
+            class=""
+            aria-controls="dropdown-basic"
+          >
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <ul
+            id="dropdown-basic"
+            *dropdownMenu
+            class="dropdown-menu"
+            role="menu"
+            aria-labelledby="button-basic"
+          >
+            <li role="menuitem">
+              <div class="p-5" style="width: 400px">
+                <div>I can create what ever I want from here right?</div>
+                <div>And then I also want to create de other</div>
+                <h1>What else? LOL</h1>
+                <div>
+                  <button class="btn btn-primary">LOL</button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
         <a
-          class="nav-link-1"
+          class="link-dark"
           mat-button
-          routerLink="/members"
+          routerLink="/main/members"
           routerLinkActive="active"
           >People
         </a>
         <a
-          class="nav-link-1"
+          class="link-dark"
           mat-button
-          routerLink="/lists"
+          routerLink="/main/lists"
           routerLinkActive="active"
           >Lists</a
         >
         <a
-          class="nav-link-1"
+          class="link-dark"
           mat-button
-          routerLink="/messages"
+          routerLink="/main/messages"
           routerLinkActive="active"
           >Messages</a
         >
         <a
-          class="nav-link-1"
+          class="link-dark"
           mat-button
-          routerLink="/admin"
+          routerLink="/main/admin"
           routerLinkActive="active"
           *appHasRole="['Admin', 'Moderator']"
         >
@@ -45,18 +75,12 @@
         </a>
       </ng-container>
       <a
-        class="nav-link-1 d-none"
+        class="link-dark d-none"
         mat-button
         routerLink="/errors"
         routerLinkActive="active"
         >Errors</a
       >
-      <a
-        mat-button
-        (click)="openLogin()"
-        *ngIf="(accountService.currentUser$ | async) === null"
-        >Login
-      </a>
     </div>
 
     <ng-container *ngIf="accountService.currentUser$ | async as user">

@@ -13,6 +13,16 @@ import { ViewportScroller } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { PresenceService } from '../_services/presence.service';
 
+import { TooltipConfig } from 'ngx-bootstrap/tooltip';
+export function getAlertConfig(): TooltipConfig {
+  return Object.assign(new TooltipConfig(), {
+    placement: 'right',
+    container: 'body',
+    delay: 500
+  });
+}
+
+
 const enterTransition = transition(':enter', [
   style({
     opacity: 0,
@@ -63,9 +73,11 @@ export class HomeComponent implements OnInit {
     this.accountService.currentUser$.subscribe((res) => {
       this.user = res!;
       if (this.user) {
-        this.router.navigate(['profile']);
+        this.router.navigate(['main']);
       }
     });
+
+    
   }
 
   // selectTab() {
