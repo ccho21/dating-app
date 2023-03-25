@@ -29,6 +29,7 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
   @Input() label?: string;
   @Input() type = 'text';
   @Input() formControl?: FormControl;
+  @Input() size?: string;
   @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
   onChange: any = () => {};

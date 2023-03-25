@@ -1,6 +1,7 @@
 <div *ngIf="formControl" class="mb-3">
   <input
     [class.is-invalid]="formControl.touched && formControl.invalid"
+    [ngClass]="{ 'size-lg': size }"
     type="{{ type }}"
     class="form-control"
     [formControl]="formControl | formControl"

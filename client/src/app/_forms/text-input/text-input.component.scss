@@ -1,6 +1,6 @@
 .form-control {
-  border: 1px solid #ccc;
-  border-radius: 3px;
+  border: .1rem solid #ccc;
+  border-radius: .5rem;
   box-sizing: border-box;
   color: var(--black);
   flex: 0 1 355px;
@@ -8,4 +8,9 @@
   height: 32px;
   padding: 0 10px;
   width: 100%;
+}
+
+.size-lg {
+  height: 52px;
+  font-size: 17px;
 }
