@@ -1,144 +1,97 @@
-<section class="profile" *ngIf="user">
-  <div class="header-background mb-5">
-    <div class="container profile-content">
-      <div class="row">
-        <div class="offset-xl-1 col-xl-10 text-center">
-          <div class="thumbnail-box">
-            <img
-              class="user-thumbnail size-sm user-border mb-4"
-              width="40"
-              [src]="user.photoUrl || './assets/shared/user.png'"
-              [alt]="user.username"
-            />
-            <a class="edit-icon-link" routerLink="/profile/edit">
-              <i class="fa-solid fa-pen"></i>
-            </a>
-          </div>
-          <h2 class="main-text-2">Welcome {{ user.knownAs }}!</h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="offset-xl-1 col-xl-10">
-          <div class="action-groups">
-            <div>
-              <a href="" class="action-link">
-                <i class="action-icon fa-solid fa-user"></i>
-              </a>
-            </div>
-            <div>
-              <a href="" class="action-link">
-                <i class="action-icon fa-solid fa-users"></i>
-              </a>
-            </div>
-            <div>
-              <a href="" class="action-link" routerLink="/messages">
-                <i class="action-icon fa-regular fa-message"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container">
+<div class="profile" *ngIf="user">
+  <section class="header-background">
     <div class="row">
-      <div class="offset-xl-2 col-xl-10">
-        <div class="row">
-          <div class="col-xl-9">
-            <div class="panel white left mb-5">
-              <div class="title mb-4">
-                <mat-icon class="me-3"> mail </mat-icon>
-                <div
-                  matBadgeOverlap="false"
-                  matBadgeColor="warn"
-                  class="demo-section"
-                >
-                  Recent Messages
-                </div>
-              </div>
-              <app-message-overview
-                *ngIf="user"
-                class="w-100"
-              ></app-message-overview>
-            </div>
-            <div class="panel white left mb-5">
-              <div class="title mb-4">
-                <mat-icon class="me-3">people</mat-icon>
-                Saved Connections
-              </div>
-              <app-connection-overview class="w-100"></app-connection-overview>
-            </div>
-            <div class="panel white left mb-5">
-              <div class="title">
-                <mat-icon class="me-3">remove_red_eye</mat-icon>
-                My Projects
-              </div>
-              <app-project-overview class="w-100"></app-project-overview>
-            </div>
-            <div class="panel white left mb-5">
-              <div class="title">
-                <mat-icon class="me-3">remove_red_eye</mat-icon>
-                Recent Visitors
-              </div>
-              <app-visitor-overview class="w-100"></app-visitor-overview>
-            </div>
-
-            <div class="panel white left mb-5">
-              <div class="title">
-                <mat-icon class="me-3">remove_red_eye</mat-icon>
-                My Career
-              </div>
-              <app-experience-list class="w-100"></app-experience-list>
-            </div>
+      <div class="col-xl-2 text-center">
+        <div class="thumbnail-box">
+          <img
+            class="user-thumbnail size-sm user-border"
+            width="40"
+            [src]="user.photoUrl || './assets/shared/user.png'"
+            [alt]="user.username"
+          />
+          <a class="edit-icon" routerLink="/profile/edit">
+            <i class="fa-solid fa-pen"></i>
+          </a>
+        </div>
+      </div>
+      <div class="col-xl-10 mt-auto">
+        <div class="profile-content">
+          <div>
+            <h1 class="heading-1">Changsoo Cho</h1>
+            <span class="sub-heading-1">2 friends</span>
           </div>
-          <div class="col-xl-3">
-            <div class="panel white left mb-5">
-              <div class="options">
-                <div class="title">
-                  <mat-icon class="me-3">list_alt</mat-icon>
-                  YOUR OPTIONS:
-                </div>
-                <div>
-                  <ul class="side-nav">
-                    <li class="side-nav-item">
-                      <a href="" class="side-nav-link">
-                        <div class="nav-icon">
-                          <i class="fa-solid fa-file-circle-check me-3"></i>
-                        </div>
-                        <div class="nav-title">Edit Profile</div>
-                      </a>
-                    </li>
-                    <li class="side-nav-item">
-                      <a href="" class="side-nav-link">
-                        <div class="nav-icon">
-                          <i class="fa-solid fa-diagram-project me-3"></i>
-                        </div>
-                        <div class="nav-title">View Project</div>
-                      </a>
-                    </li>
-                    <li class="side-nav-item">
-                      <a href="" class="side-nav-link">
-                        <div class="nav-icon">
-                          <i class="fa-solid fa-user-group me-3"></i>
-                        </div>
-                        <div class="nav-title">View Connections</div>
-                      </a>
-                    </li>
-                    <li class="side-nav-item">
-                      <a href="" class="side-nav-link">
-                        <div class="nav-icon">
-                          <i class="fa-solid fa-gears me-3"></i>
-                        </div>
-                        <div class="nav-title">Go to Settings</div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+          <div class="btn-box">
+            <app-button icon="fa fa-plus" customClass="">
+              Add Project
+            </app-button>
+            <app-button icon="fa fa-plus" customClass="">
+              Add Experience
+            </app-button>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section>
+    <tabset class="tabset" type="pills" #profileTabs>
+      <tab heading="Overview" (selectTab)="activateTab($event)" #tabA="tab">
+        <div class="p-5">
+          <app-profile-overview *ngIf="tabA.active"></app-profile-overview>
+        </div>
+      </tab>
+
+      <tab heading="About" (selectTab)="activateTab($event)"> TAB2 app- </tab>
+      <tab heading="Message" (selectTab)="activateTab($event)">
+        TAB3
+
+        <!-- <sub-component
+            name="C"
+            *ngIf="tabC.active"
+            (onInit)="message('Sub-Component C activated')"
+            (onDestroy)="message('Sub-Component C destroyed')"
+          ></sub-component> -->
+      </tab>
+      <tab heading="Projects" (selectTab)="activateTab($event)">
+        TAB3
+
+        <!-- <sub-component
+            name="C"
+            *ngIf="tabC.active"
+            (onInit)="message('Sub-Component C activated')"
+            (onDestroy)="message('Sub-Component C destroyed')"
+          ></sub-component> -->
+      </tab>
+      <tab heading="Experiences" (selectTab)="activateTab($event)">
+        TAB3
+
+        <!-- <sub-component
+            name="C"
+            *ngIf="tabC.active"
+            (onInit)="message('Sub-Component C activated')"
+            (onDestroy)="message('Sub-Component C destroyed')"
+          ></sub-component> -->
+      </tab>
+      <tab heading="Education" (selectTab)="activateTab($event)">
+        TAB3
+
+        <!-- <sub-component
+            name="C"
+            *ngIf="tabC.active"
+            (onInit)="message('Sub-Component C activated')"
+            (onDestroy)="message('Sub-Component C destroyed')"
+          ></sub-component> -->
+      </tab>
+      <tab heading="Skills" (selectTab)="activateTab($event)">
+        TAB3
+
+        <!-- <sub-component
+            name="C"
+            *ngIf="tabC.active"
+            (onInit)="message('Sub-Component C activated')"
+            (onDestroy)="message('Sub-Component C destroyed')"
+          ></sub-component> -->
+      </tab>
+    </tabset>
+  </section>
+</div>

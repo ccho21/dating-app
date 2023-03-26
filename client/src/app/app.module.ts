@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 // Bootstrap module
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -78,6 +79,8 @@ import { FooterComponent } from './_layouts/footer/footer.component';
 import { MainComponent } from './main/main/main.component';
 import { HeaderComponent } from './_layouts/header/header.component';
 import { LinkComponent } from './_forms/link/link.component';
+import { ProfileOverviewComponent } from './profile/components/profile-overview/profile-overview.component';
+import { DynamicComponentComponent } from './_layouts/dynamic-component/dynamic-component.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -136,6 +139,8 @@ import { LinkComponent } from './_forms/link/link.component';
     MainComponent,
     HeaderComponent,
     LinkComponent,
+    ProfileOverviewComponent,
+    DynamicComponentComponent,
   ],
   imports: [
     BrowserModule,
@@ -150,8 +155,10 @@ import { LinkComponent } from './_forms/link/link.component';
 
     BsDropdownModule,
     CollapseModule,
+    TabsModule,
     BsDatepickerModule.forRoot(),
     TooltipModule.forRoot(),
+
     GalleryModule.withConfig({
       // thumbView: 'contain',
     }),

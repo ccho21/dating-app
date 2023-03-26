@@ -2,6 +2,7 @@
 @import "../node_modules/swiper/swiper-bundle.css";
 @import "../node_modules/@angular/cdk/overlay-prebuilt.css";
 @import "./assets/scss/typography";
+@import "./assets/scss/tabs";
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -42,10 +43,11 @@ body {
   font-size: 1.6rem;
   position: relative;
   height: 100%;
-  background-color: var(--main-bg-white);
+  background-color: var(--ivory);
+  color: var(--black);
 
   margin: 0;
-  font-family: Roboto, sans-serif;
+  font-family: "Rubik", sans-serif;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 
@@ -128,7 +130,7 @@ body {
     height: 7rem;
   }
   &.user-border {
-    border: 0.2rem solid var(--white);
+    border: 0.3rem solid var(--white);
   }
 }
 
@@ -252,34 +254,28 @@ body {
   border-bottom: 3px solid var(--light-green) !important;
 }
 
-// BUTTONS
-.badge-btn {
-  border: none;
-  background-color: transparent;
-  font-size: 1.8rem;
-  color: var(--white);
-  padding: 0;
-}
-.main-btn {
-  background-color: hsla(184, 91%, 28%, 1);
-  border: none;
-  box-shadow: 0 5px 14px 2px rgb(0, 0, 0, 0.2);
-  color: var(--white);
-  padding: 1rem 3rem;
-  border-radius: 10rem;
-  transform: translateY(-0.2rem);
-  transition: all 0.15s ease-in-out;
-  &.white {
-    background-color: var(--white);
-    color: var(--black);
-  }
-  &:active {
-    transform: translateY(0);
-  }
-}
-
 .mySwiper {
   .swiper-pagination-bullet-active {
     background-color: var(--light-green) !important;
   }
+}
+
+//  TEMP SOLUTION
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0 #{"/* rtl:ignore */"};
+}
+
+.popover-arrow {
+  position: absolute;
+}
+
+.tooltip {
+  position: absolute;
+  font-size: 1.4rem;
+}
+
+.tooltip-arrow {
+  position: absolute;
 }
