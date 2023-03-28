@@ -27,6 +27,7 @@
     transition: 0.2s all ease;
     border-left-width: 0;
     border-right-width: 0;
+    padding-left: 0;
     &:hover {
       background-color: hsla(0, 0%, 0%, 0.02);
     }
@@ -41,7 +42,6 @@
     cursor: pointer;
     color: var(--black);
     .thumbnail-box {
-      padding-left: 1rem;
       flex-basis: 12%;
       .member-thumbnail {
         max-width: 100%;
@@ -72,4 +72,3 @@
     }
   }
 }
-

@@ -1,5 +1,5 @@
 <div class="connection-card" *ngIf="member">
-  <a href="" class="member-link" routerLink="/members/{{ member.username }}">
+  <a href="" class="member-link" routerLink="/main/members/{{ member.username }}">
     <div class="image">
       <img
         class="w-100"
@@ -10,19 +10,29 @@
   </a>
   <div class="body">
     <div class="action-btns mb-2">
-      <button (click)="removeLike(member)" class="badge-btn action-icon">
+      <app-button
+        icon="fa-solid fa-heart"
+        customClass="circle icon"
+        label="Heart"
+        (click)="removeLike(member)"
+      >
+      </app-button>
+      <!-- <button
+        icon=""
+        (click)="removeLike(member)"
+        class="badge-btn action-icon"
+      >
         <div class="member-badge circle is-liked">
           <i class="fa-solid fa-heart"></i>
         </div>
-      </button>
+      </button> -->
     </div>
     <div class="d-flex align-items-center">
-      <a href="" class="name-link" routerLink="/members/{{ member.username }}">
+      <a href="" class="name-link" routerLink="/main/asmembers/{{ member.username }}">
         {{ member.username }}
       </a>
     </div>
-    <div class="city">
-      <!-- {{ member.city }} -->
+    <div class="job">
       Software Developer
     </div>
     <div class="status">

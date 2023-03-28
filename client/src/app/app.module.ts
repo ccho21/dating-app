@@ -13,6 +13,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -81,6 +82,7 @@ import { HeaderComponent } from './_layouts/header/header.component';
 import { LinkComponent } from './_forms/link/link.component';
 import { ProfileOverviewComponent } from './profile/components/profile-overview/profile-overview.component';
 import { DynamicComponentComponent } from './_layouts/dynamic-component/dynamic-component.component';
+import { ExperienceOverviewComponent } from './experiences/experience-overview/experience-overview.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -141,6 +143,7 @@ import { DynamicComponentComponent } from './_layouts/dynamic-component/dynamic-
     LinkComponent,
     ProfileOverviewComponent,
     DynamicComponentComponent,
+    ExperienceOverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -158,6 +161,7 @@ import { DynamicComponentComponent } from './_layouts/dynamic-component/dynamic-
     TabsModule,
     BsDatepickerModule.forRoot(),
     TooltipModule.forRoot(),
+    CarouselModule.forRoot(),
 
     GalleryModule.withConfig({
       // thumbView: 'contain',

@@ -1,21 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
-
-interface ITab {
-  title: string;
-  content: string;
-  removable: boolean;
-  disabled: boolean;
-  active?: boolean;
-  customClass?: string;
-}
 
 @Component({
   selector: 'app-profile-overview',

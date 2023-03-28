@@ -1,49 +1,58 @@
 <div class="row">
-  <div class="col-md-6">
-    <div class="panel white left mb-5">
-      <div class="title mb-4">
-        <mat-icon class="me-3"> mail </mat-icon>
-        <div matBadgeOverlap="false" matBadgeColor="warn" class="demo-section">
-          Recent Messages
+  <div class="offset-md-1 col-md-10">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel white left mb-5">
+          <div class="title mb-4">
+            <i class="fa-solid fa-list-check"></i>
+            <div
+              matBadgeOverlap="false"
+              matBadgeColor="warn"
+              class="demo-section"
+            >
+              Recent Messages
+            </div>
+          </div>
+          <app-message-overview class="w-100"></app-message-overview>
         </div>
       </div>
-      <app-message-overview class="w-100"></app-message-overview>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="panel white left mb-5">
-      <div class="title mb-4">
-        <mat-icon class="me-3">people</mat-icon>
-        Saved Connections
+      <div class="col-md-6">
+        <div class="panel white left mb-5">
+          <div class="title mb-4">
+            <i class="fa-solid fa-list-check"></i>
+            Saved Connections
+          </div>
+          <app-connection-overview class="w-100"></app-connection-overview>
+        </div>
       </div>
-      <app-connection-overview class="w-100"></app-connection-overview>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="panel white left mb-5">
-      <div class="title">
-        <mat-icon class="me-3">remove_red_eye</mat-icon>
-        My Projects
+
+      <div class="col-md-12">
+        <div class="mb-4">
+          <app-panel>
+            <app-project-overview class="w-100"></app-project-overview>
+          </app-panel>
+        </div>
       </div>
-      <app-project-overview class="w-100"></app-project-overview>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="panel white left mb-5">
-      <div class="title">
-        <mat-icon class="me-3">remove_red_eye</mat-icon>
-        My Career
+
+      <div class="col-md-8">
+        <div class="panel white left mb-5">
+          <div class="title">
+            <i class="fa-solid fa-list-check"></i>
+            My Career
+          </div>
+          <!-- <app-experience-list class="w-100"></app-experience-list> -->
+          <app-experience-overview class="w-100"></app-experience-overview>
+        </div>
       </div>
-      <app-experience-list class="w-100"></app-experience-list>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="panel white left mb-5">
-      <div class="title">
-        <mat-icon class="me-3">remove_red_eye</mat-icon>
-        Recent Visitors
+      <div class="col-md-6">
+        <div class="panel white left mb-5">
+          <div class="title">
+            <i class="fa-solid fa-list-check"></i>
+            Recent Visitors
+          </div>
+          <app-visitor-overview class="w-100"></app-visitor-overview>
+        </div>
       </div>
-      <app-visitor-overview class="w-100"></app-visitor-overview>
     </div>
   </div>
 </div>
