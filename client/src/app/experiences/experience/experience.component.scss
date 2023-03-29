@@ -1,4 +1,22 @@
 .experience {
+  text-align: left;
+  position: relative;
+  .body {
+    position: relative;
+    margin-left: 3rem;
+  }
+  .img-box {
+    position: relative;
+    padding-right: 3rem;
+    &::before {
+      content: " ";
+      position: absolute;
+      height: 100%;
+      width: .1rem;
+      right: 0;
+      background-color: #ccc;
+    }
+  }
   & img {
     background-color: #ccc;
     padding: 1rem;
@@ -33,6 +51,7 @@
     }
     .job-list {
       padding-left: 1rem;
+      list-style: none;
       margin: 1rem 0;
       .job-item {
       }

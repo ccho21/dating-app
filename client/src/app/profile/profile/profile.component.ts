@@ -1,14 +1,10 @@
-import {
-  Component,
-  ComponentFactoryResolver,
-  OnInit,
-  ViewChild,
-  ViewContainerRef,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
+import { MemberService } from 'src/app/_services/member.service';
+import { Member } from 'src/app/_models/member';
 
 interface ITab {
   title: string;
@@ -30,73 +26,10 @@ export class ProfileComponent implements OnInit {
 
   container?: ViewContainerRef;
   user?: User;
-
-  tabs: ITab[] = [
-    {
-      title: 'Overview',
-      content: 'Dynamic content 1',
-      component: 'ProfileOverview',
-      removable: false,
-      disabled: false,
-      active: false,
-    },
-    {
-      title: 'About',
-      content: 'Dynamic content 2',
-      component: 'ProfileOverview',
-
-      removable: false,
-      disabled: false,
-      active: false,
-    },
-    {
-      title: 'Message',
-      content: 'Dynamic content 3',
-      component: 'ProfileOverview',
-
-      removable: true,
-      disabled: false,
-      active: false,
-    },
-    {
-      title: 'Projects',
-      content: 'Dynamic content 3',
-      component: 'ProfileOverview',
-
-      removable: true,
-      disabled: false,
-      active: false,
-    },
-    {
-      title: 'Experiences',
-      content: 'Dynamic content 3',
-      component: 'ProfileOverview',
-
-      removable: true,
-      disabled: false,
-      active: false,
-    },
-    {
-      title: 'Education',
-      content: 'Dynamic content 3',
-      component: 'ProfileOverview',
-
-      removable: true,
-      disabled: false,
-      active: false,
-    },
-    {
-      title: 'Skills',
-      content: 'Dynamic content 3',
-      component: 'ProfileOverview',
-
-      removable: true,
-      disabled: false,
-      active: false,
-    },
-  ];
+  member?: Member;
   constructor(
     private accountService: AccountService,
+    private memberService: MemberService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -113,17 +46,20 @@ export class ProfileComponent implements OnInit {
       if (user) {
         this.user = user;
         console.log('### this.user', this.user);
+
+        this.memberService.getMember(this.user.username).subscribe((member) => {
+          this.member = member;
+        });
       }
     });
 
     console.log('### profile tabs', this.profileTabs);
   }
 
-  selectTab(title: string) {
-    console.log(title);
-    this.tabs.find(
-      (x) => x.title.toLowerCase() === title.toLowerCase()
-    )!.active = true;
+  selectTab(heading: string) {
+    if (this.profileTabs) {
+      this.profileTabs.tabs.find((x) => x.heading === heading)!.active = true;
+    }
   }
 
   activateTab(tab: TabDirective) {

@@ -122,15 +122,17 @@ export class MemberMessagesComponent implements OnInit, OnChanges, OnDestroy {
   sendMessage() {
     this.loading = true;
     console.log(this.messageContent);
-    this.messageService
-      .sendMessage(
-        this.member?.username as string,
-        this.messageContent as string
-      )
-      .then(() => {
-        this.messageForm?.reset();
-      })
-      .finally(() => (this.loading = false));
+    if (this.messageContent)
+      this.messageService
+        .sendMessage(
+          this.member?.username as string,
+          this.messageContent as string
+        )
+        .then(() => {
+          this.messageForm?.reset();
+        })
+        .finally(() => (this.loading = false));
+    else alert('please enter message');
   }
 
   resetMessageService() {
@@ -141,7 +143,7 @@ export class MemberMessagesComponent implements OnInit, OnChanges, OnDestroy {
   close() {
     console.log('### emit the close ');
     this.resetMessageService();
-    this.router.navigate(['messages']);
+    this.router.navigate(['/main/messages']);
   }
 
   ngOnDestroy(): void {

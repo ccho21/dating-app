@@ -65,6 +65,7 @@
         padding: 0.75rem;
         border-radius: 0.5rem;
         max-width: 350px;
+        font-size: 1.2rem;
       }
       .message-line {
         display: flex;
@@ -73,8 +74,11 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          font-size: 15px;
+          font-size: 1.4rem;
         }
+      }
+      .message-date {
+        font-size: 1rem;
       }
     }
   }
@@ -86,7 +90,7 @@
     }
     .form-control {
       border: none;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       background-color: transparent;
     }
     .form-control:focus {
@@ -101,7 +105,7 @@
     }
 
     .form-control::placeholder {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
     }
   }
 }

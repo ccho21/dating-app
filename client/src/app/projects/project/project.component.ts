@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Project } from 'src/app/_models/project';
 import SwiperCore, { Pagination, Navigation, SwiperOptions } from 'swiper';
 SwiperCore.use([Navigation, Pagination]);
 
@@ -8,7 +9,7 @@ SwiperCore.use([Navigation, Pagination]);
   styleUrls: ['./project.component.scss'],
 })
 export class ProjectComponent implements OnInit {
-  @Input() project?: any;
+  @Input() project?: Project;
   config: SwiperOptions = {
     slidesPerView: 1,
     spaceBetween: 50,
@@ -33,5 +34,7 @@ export class ProjectComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('### projectng init', this.project);
+  }
 }

@@ -1,3 +1,5 @@
-<div *ngFor="let i of [1]">
-  <app-project></app-project>
-</div>
+<section class="my-5">
+  <div *ngFor="let project of projects">
+    <app-project [project]="project"></app-project>
+  </div>
+</section>

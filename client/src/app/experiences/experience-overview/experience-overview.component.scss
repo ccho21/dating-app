@@ -11,7 +11,7 @@ $dot-diameter: 8px;
     content: "";
     position: absolute;
     top: 0px;
-    left: calc(11rem);
+    left: calc(10rem);
     bottom: 0px;
     width: 0.3rem;
     background: #ddd;
@@ -33,7 +33,8 @@ $dot-diameter: 8px;
     padding-right: 3rem;
     position: relative;
     text-align: right;
-    flex-basis: 10.2rem;
+    flex-basis: 9.7rem;
+    flex-shrink: 0;
     &:before {
       content: "";
       position: absolute;
@@ -56,8 +57,12 @@ $dot-diameter: 8px;
     }
   }
   .body {
-    width: 66%;
     padding-left: 3rem;
+    .logo {
+      max-width: 100px;
+      margin-bottom: 0.5rem;
+      margin-top: 0.5rem;
+    }
 
     ul {
       color: #aaa;

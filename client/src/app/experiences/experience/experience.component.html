@@ -1,43 +1,56 @@
-<div class="experience my-5" *ngIf="experience">
-  <div class="row">
-    <div class="col-md-4">
-      <div>
-        <img
-          class="user-thumbnail square size-sm"
-          width="40"
-          [src]="experience.logo.url"
-          [alt]="experience.companyName"
-        />
-      </div>
-    </div>
-    <div class="col-md-8">
-      <div class="company-name">{{ experience.companyName }}</div>
-      <div class="working-date">
-        {{ experience.projectStarted | date : "MMM y" }} -
-        {{ experience.projectEnded | date : "MMM y" }}
-      </div>
-      <div class="company-description">
-        {{ experience.intro }}
-      </div>
-      <hr />
-      <div
-        class="work-detail"
-        *ngFor="let jobDescription of experience.jobDescriptions"
-      >
-        <div class="job-description">▎ {{ jobDescription.description }}</div>
-        <div class="job-date">
-          {{ jobDescription.started | date : "MMM y" }} ~
-          {{ jobDescription.ended | date : "MMM y" }}
+<app-panel>
+  <div class="experience my-5" *ngIf="experience">
+    <div class="row">
+      <div class="col-md-4 img-box">
+        <div class="">
+          <img
+            class="user-thumbnail square size-sm"
+            width="40"
+            [src]="
+              experience.logo && experience.logo.url
+                ? experience.logo.url
+                : './assets/shared/user.png'
+            "
+            [alt]="experience.companyName"
+          />
         </div>
-        <ul class="job-list">
-          <li class="job-item" *ngFor="let detail of jobDescription.details">
-            {{ detail.description }}
-          </li>
-        </ul>
+      </div>
+      <div class="col-md-8">
+        <div class="body">
+          <div class="company-name">{{ experience.companyName }}</div>
+          <div class="working-date">
+            {{ experience.projectStarted | date : "MMM y" }} -
+            {{ experience.projectEnded | date : "MMM y" }}
+          </div>
+          <div class="company-description">
+            {{ experience.intro }}
+          </div>
+          <hr />
+          <div
+            class="work-detail"
+            *ngFor="let jobDescription of experience.jobDescriptions"
+          >
+            <div class="job-description">
+              ▎ {{ jobDescription.description }}
+            </div>
+            <div class="job-date">
+              {{ jobDescription.started | date : "MMM y" }} ~
+              {{ jobDescription.ended | date : "MMM y" }}
+            </div>
+            <ul class="job-list">
+              <li
+                class="job-item"
+                *ngFor="let detail of jobDescription.details"
+              >
+                {{ detail.description }}
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</app-panel>
 
 <!-- <div class="experience">
   <div class="row">
