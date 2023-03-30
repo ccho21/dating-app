@@ -13,9 +13,15 @@ export class ProjectComponent implements OnInit {
   config: SwiperOptions = {
     slidesPerView: 1,
     spaceBetween: 50,
-    navigation: true,
-    pagination: { clickable: true },
+    navigation: false,
+    pagination: { clickable: true, dynamicBullets: true, },
     scrollbar: { draggable: true },
+    // [pagination]="{
+      
+    //   clickable: true
+    // }"
+    // [slidesPerView]="1"
+    // [spaceBetween]="50"
   };
 
   member = {

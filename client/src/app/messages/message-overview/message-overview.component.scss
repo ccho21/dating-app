@@ -44,6 +44,7 @@
     color: var(--black);
     .thumbnail-box {
       flex-basis: 12%;
+      flex-shrink: 0;
       .member-thumbnail {
         max-width: 100%;
       }

@@ -2,6 +2,7 @@
   <nav
     class="navbar navbar-expand bg-white shadow-lg"
     [ngClass]="{ 'fixed-top': navbarFixed }"
+    *ngIf="user"
   >
     <div class="container">
       <a class="navbar-brand" routerLink="/">
@@ -48,15 +49,18 @@
             </app-link>
           </li>
           <li class="nav-item">
-            <app-link
-              customClass=""
-              icon="fa-regular fa-envelope"
-              [label]="'Messages'"
-              tooltip="Messages"
-              routerLink="/main/messages"
-              routerLinkActive="active"
+            <app-dropdown-link
+              label="Message"
+              customClass="dropdown-menu-right messsage-dropdown"
+              tooltip="Message"
+              ariaControls="message-dropdown"
+              id="message-dropdown"
             >
-            </app-link>
+              <li class="dw-item" role="menuitem">Chats</li>
+              <li class="dw-item" role="menuitem">
+                <app-message-overview></app-message-overview>
+              </li>
+            </app-dropdown-link>
           </li>
 
           <li class="nav-item" *appHasRole="['Admin', 'Moderator']">
@@ -74,39 +78,37 @@
             </app-link>
           </li>
           <li class="nav-item">
-            <div class="btn-group" dropdown>
-              <a
-                href
-                dropdownToggle
-                (click)="(false)"
-                tooltip="Account"
-                aria-controls="basic-link-dropdown"
-              >
+            <app-dropdown-link
+              [thumbnail]="user.photoUrl"
+              customClass="dropdown-menu-right"
+              ariaControls="account-dropdown"
+              id="account-dropdown"
+            >
+              <li class="dw-item" role="menuitem">
                 <img
-                  src="https://github.com/mdo.png"
+                  [src]="user.photoUrl"
                   alt=""
                   width="37"
                   heigh="37"
-                  class="rounded-circle"
+                  class="rounded-circle me-2"
                 />
-              </a>
-              <ul
-                id="dropdown-basic"
-                *dropdownMenu
-                class="dropdown-menu dropdown-menu-right"
-                role="menu"
-                aria-labelledby="button-basic"
-              >
-                <li role="menuitem">
-                  <a class="dropdown-item" routerLink="/main/profile/edit"
-                    >Edit Profile</a
-                  >
-                </li>
-                <li role="menuitem">
-                  <a class="dropdown-item" (click)="logout()">Logout</a>
-                </li>
-              </ul>
-            </div>
+                Changsoo Cho
+              </li>
+              <li class="dw-item" class="divider dropdown-divider"></li>
+              <li class="dw-item" role="menuitem">
+                <app-link label="Edit Profile" routerLink="/main/profile/edit">
+                </app-link>
+              </li>
+              <li class="dw-item" class="divider dropdown-divider"></li>
+              <li class="dw-item" role="menuitem logout">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div><i class="fa-solid fa-globe me-2"></i> English</div>
+                  <app-button customClass="ms-auto" (click)="logout()">
+                    Logout
+                  </app-button>
+                </div>
+              </li>
+            </app-dropdown-link>
           </li>
         </ul>
       </div>

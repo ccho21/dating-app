@@ -22,7 +22,6 @@ import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
-import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { ListsComponent } from './lists/lists.component';
 import { SharedModule } from './_modules/shared.module';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
@@ -83,6 +82,8 @@ import { LinkComponent } from './_forms/link/link.component';
 import { ProfileOverviewComponent } from './profile/components/profile-overview/profile-overview.component';
 import { DynamicComponentComponent } from './_layouts/dynamic-component/dynamic-component.component';
 import { ExperienceOverviewComponent } from './experiences/experience-overview/experience-overview.component';
+import { DropdownLinkComponent } from './_forms/dropdown-link/dropdown-link.component';
+import { SideNavComponent } from './_layouts/side-nav/side-nav.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +91,6 @@ import { ExperienceOverviewComponent } from './experiences/experience-overview/e
     HomeComponent,
     RegisterComponent,
     MemberListComponent,
-    MemberDetailComponent,
     ListsComponent,
     TestErrorsComponent,
     NotFoundComponent,
@@ -144,6 +144,8 @@ import { ExperienceOverviewComponent } from './experiences/experience-overview/e
     ProfileOverviewComponent,
     DynamicComponentComponent,
     ExperienceOverviewComponent,
+    DropdownLinkComponent,
+    SideNavComponent,
   ],
   imports: [
     BrowserModule,

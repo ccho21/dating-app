@@ -1,93 +1,103 @@
-<div class="profile">
-  <section class="header-background" *ngIf="user">
-    <div class="row">
-      <div class="col-xl-2 text-center">
-        <div class="thumbnail-box">
-          <img
-            class="user-thumbnail size-sm user-border"
-            width="40"
-            [src]="user.photoUrl || './assets/shared/user.png'"
-            [alt]="user.username"
-          />
-          <a class="edit-icon" routerLink="/main/profile/edit">
-            <i class="fa-solid fa-pen"></i>
-          </a>
-        </div>
-      </div>
-      <div class="col-xl-10 mt-auto">
-        <div class="profile-content">
-          <div>
-            <h1 class="heading-1">Changsoo Cho</h1>
-            <span class="sub-heading-1">2 friends</span>
+<div class="container">
+  <div class="p-xl-5">
+    <div class="profile">
+      <section class="header-background" *ngIf="user">
+        <div class="row">
+          <div class="col-xl-2 text-center">
+            <div class="thumbnail-box">
+              <img
+                class="user-thumbnail size-sm user-border"
+                width="40"
+                [src]="user.photoUrl || './assets/shared/user.png'"
+                [alt]="user.username"
+              />
+              <a class="edit-icon" routerLink="/main/profile/edit">
+                <i class="fa-solid fa-pen"></i>
+              </a>
+            </div>
           </div>
-          <div class="btn-box">
-            <app-button icon="fa fa-plus" customClass="">
-              Add Project
-            </app-button>
-            <app-button icon="fa fa-plus" customClass="">
-              Add Experience
-            </app-button>
+          <div class="col-xl-10 mt-auto">
+            <div class="profile-content">
+              <div>
+                <h1 class="heading-1">Changsoo Cho</h1>
+                <span class="sub-heading-1">2 friends</span>
+              </div>
+              <div class="btn-box">
+                <app-button icon="fa fa-plus" customClass="">
+                  Add Project
+                </app-button>
+                <app-button icon="fa fa-plus" customClass="">
+                  Add Experience
+                </app-button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section>
+        <tabset class="tabset" type="pills" #profileTabs>
+          <tab
+            heading="Overview"
+            (selectTab)="activateTab($event)"
+            #overviewTab="tab"
+          >
+            <div class="py-5 px-xl-5">
+              <app-profile-overview
+                *ngIf="overviewTab.active"
+              ></app-profile-overview>
+            </div>
+          </tab>
+
+          <tab
+            heading="About"
+            (selectTab)="activateTab($event)"
+            #projectTab="tab"
+          >
+            TAB2 app-
+          </tab>
+          <tab
+            heading="Projects"
+            (selectTab)="activateTab($event)"
+            #projectTab="tab"
+          >
+            <app-project-list
+              *ngIf="member?.projects"
+              [projects]="member?.projects"
+            >
+            </app-project-list>
+          </tab>
+          <tab
+            heading="Experiences"
+            (selectTab)="activateTab($event)"
+            #experienceTab="tab"
+          >
+            <app-experience-list
+              *ngIf="experienceTab.active"
+            ></app-experience-list>
+          </tab>
+          <tab heading="Education" (selectTab)="activateTab($event)">
+            TAB3
+
+            <!-- <sub-component
+                name="C"
+                *ngIf="tabC.active"
+                (onInit)="message('Sub-Component C activated')"
+                (onDestroy)="message('Sub-Component C destroyed')"
+              ></sub-component> -->
+          </tab>
+          <tab heading="Skills" (selectTab)="activateTab($event)">
+            TAB3
+
+            <!-- <sub-component
+                name="C"
+                *ngIf="tabC.active"
+                (onInit)="message('Sub-Component C activated')"
+                (onDestroy)="message('Sub-Component C destroyed')"
+              ></sub-component> -->
+          </tab>
+        </tabset>
+      </section>
     </div>
-  </section>
-
-  <section>
-    <tabset class="tabset" type="pills" #profileTabs>
-      <tab
-        heading="Overview"
-        (selectTab)="activateTab($event)"
-        #overviewTab="tab"
-      >
-        <div class="p-5">
-          <app-profile-overview
-            *ngIf="overviewTab.active"
-          ></app-profile-overview>
-        </div>
-      </tab>
-
-      <tab heading="About" (selectTab)="activateTab($event)" #projectTab="tab">
-        TAB2 app-
-      </tab>
-      <tab
-        heading="Projects"
-        (selectTab)="activateTab($event)"
-        #projectTab="tab"
-      >
-        <app-project-list
-          *ngIf="member?.projects"
-          [projects]="member?.projects"
-        >
-        </app-project-list>
-      </tab>
-      <tab
-        heading="Experiences"
-        (selectTab)="activateTab($event)"
-        #experienceTab="tab"
-      >
-        <app-experience-list *ngIf="experienceTab.active"></app-experience-list>
-      </tab>
-      <tab heading="Education" (selectTab)="activateTab($event)">
-        TAB3
-
-        <!-- <sub-component
-            name="C"
-            *ngIf="tabC.active"
-            (onInit)="message('Sub-Component C activated')"
-            (onDestroy)="message('Sub-Component C destroyed')"
-          ></sub-component> -->
-      </tab>
-      <tab heading="Skills" (selectTab)="activateTab($event)">
-        TAB3
-
-        <!-- <sub-component
-            name="C"
-            *ngIf="tabC.active"
-            (onInit)="message('Sub-Component C activated')"
-            (onDestroy)="message('Sub-Component C destroyed')"
-          ></sub-component> -->
-      </tab>
-    </tabset>
-  </section>
+  </div>
 </div>

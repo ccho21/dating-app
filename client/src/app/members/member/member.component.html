@@ -53,7 +53,7 @@
                 <button mat-menu-item (click)="addOrRemoveLike(member)">
                   {{ isLiked ? "Remove Favourite" : "Add Favourite" }}
                 </button>
-                <button mat-menu-item>Send message</button>
+                <button mat-menu-item routerLink="/main/messages/{{member.username}}">Send message</button>
               </mat-menu>
             </div>
             <div class="member-content">

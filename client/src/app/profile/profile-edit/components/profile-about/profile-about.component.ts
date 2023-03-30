@@ -6,6 +6,7 @@ import { MemberService } from 'src/app/_services/member.service';
 import { take } from 'rxjs/operators';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Photo } from 'src/app/_models/photo';
 
 @Component({
   selector: 'app-profile-about',
@@ -96,6 +97,42 @@ export class ProfileAboutComponent implements OnInit {
         verticalPosition: 'bottom',
       });
       this.editForm?.reset(this.member);
+    });
+  }
+
+  setMainPhoto(photo: Photo) {
+    this.memberService.setMainPhoto(photo.id).subscribe(() => {
+      if (this.user && this.member) {
+        this.user.photoUrl = photo.url;
+        this.accountService.setCurrentUser(this.user);
+
+        //TODO: NGRX
+        this.member.photoUrl = photo.url;
+        this.member.photos.forEach((p) => {
+          if (p.isMain) p.isMain = false;
+          if (p.id === photo.id) p.isMain = true;
+        });
+      }
+    });
+  }
+
+  updatePhoto(photo: Photo) {
+    //TODO: NGRX
+    if (photo && this.user && this.member) {
+      if (photo.isMain) {
+        this.user.photoUrl = photo.url;
+        this.member.photoUrl = photo.url;
+        this.accountService.setCurrentUser(this.user);
+      }
+    }
+  }
+
+  deletePhoto(photoId: number) {
+    this.memberService.deletePhoto(photoId).subscribe(() => {
+      if (this.member) {
+        //TODO: NGRX
+        this.member.photos = this.member.photos.filter((x) => x.id !== photoId);
+      }
     });
   }
 }

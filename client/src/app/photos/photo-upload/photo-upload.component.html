@@ -1,4 +1,128 @@
-<div *ngIf="photos; else single">
+<div *ngIf="photos">
+  <div class="row photo-upload">
+    <div class="col-xl-12">
+      <div class="row" gallerize>
+        <ng-container *ngFor="let photo of photos; let i = index">
+          <div class="col-md-2 d-flex flex-column mb-4">
+            <div class="photo-box">
+              <img
+                src="{{ photo.url }}"
+                alt="{{ photo.url }}"
+                class="user-thumbnail square"
+              />
+              <div class="photo-delete">
+                <!-- <button
+                  [disabled]="photo.isMain"
+                  (click)="setMainPhoto(photo)"
+                  [ngClass]="
+                    photo.isMain ? 'btn-success active' : 'btn-outline-success'
+                  "
+                  class="main-btn"
+                >
+                  Set as main
+                </button> -->
+                <button
+                  [disabled]="photo.isMain && !projectId"
+                  (click)="deletePhoto(photo.id)"
+                  class="icon-btn"
+                >
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <div class="col-md-2" *ngIf="uploader">
+          <div class="upload-files-container">
+            <div
+              ng2FileDrop
+              [ngClass]="{ 'nv-file-over': hasBaseDropzoneOver }"
+              (fileOver)="fileOverBase($event)"
+              [uploader]="uploader"
+              class="dropzone"
+            >
+              <div class="dropzone-icon">
+                <input
+                  type="file"
+                  class="default-file-input d-none"
+                  ng2FileSelect
+                  [uploader]="uploader"
+                  [multiple]="experienceId ? false : true"
+                />
+                <span class="material-symbols-outlined"> add </span>
+              </div>
+              <!-- <div class="dynamic-message mb-3">Drag & drop any file here</div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="uploader">
+        <div class="col-12 mb-5" *ngIf="uploader?.queue?.length">
+          <h3>Upload queue</h3>
+          <p>Queue length: {{ uploader.queue.length }}</p>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="50%">Name</th>
+                <th>Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of uploader.queue">
+                <td>
+                  <strong>{{ item?.file?.name }}</strong>
+                </td>
+                <td *ngIf="uploader.options.isHTML5" nowrap>
+                  {{ item?.file?.size / 1024 / 1024 | number : ".2" }} MB
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <div class="mb-3">
+              Queue progress:
+              <div class="progress">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  [ngStyle]="{ width: uploader.progress + '%' }"
+                ></div>
+              </div>
+            </div>
+            <div class="">
+              <button
+                type="button"
+                class="main-btn"
+                (click)="uploader.uploadAll()"
+                [disabled]="!uploader.getNotUploadedItems().length"
+              >
+                <span class="fa fa-upload"></span> Upload all
+              </button>
+              <button
+                type="button"
+                class="main-btn"
+                (click)="uploader.cancelAll()"
+                [disabled]="!uploader.isUploading"
+              >
+                <span class="fa fa-ban"></span> Cancel all
+              </button>
+              <button
+                type="button"
+                class="main-btn"
+                (click)="uploader.clearQueue()"
+                [disabled]="!uploader.queue.length"
+              >
+                <span class="fa fa-trash"></span> Remove all
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div *ngIf="photos; else single">
   <div class="row photo-upload">
     <div class="offset-xl-1 col-xl-10">
       <div class="row my-3" *ngIf="uploader">
@@ -109,7 +233,7 @@
               class="user-thumbnail square"
             />
             <div class="photo-delete">
-              <!-- <button
+              <button
                 [disabled]="photo.isMain"
                 (click)="setMainPhoto(photo)"
                 [ngClass]="
@@ -118,7 +242,7 @@
                 class="main-btn"
               >
                 Set as main
-              </button> -->
+              </button>
               <button
                 [disabled]="photo.isMain && !projectId"
                 (click)="deletePhoto(photo.id)"
@@ -148,7 +272,7 @@
                   class="user-thumbnail square"
                 />
                 <div class="photo-delete">
-                  <!-- <button
+                  <button
                       [disabled]="photo.isMain"
                       (click)="setMainPhoto(photo)"
                       [ngClass]="
@@ -157,7 +281,7 @@
                       class="main-btn"
                     >
                       Set as main
-                    </button> -->
+                    </button>
                   <button
                     [disabled]="photo.isMain && !projectId"
                     (click)="deletePhoto(photo.id)"
@@ -243,4 +367,4 @@
       </div>
     </div>
   </div>
-</ng-template>
+</ng-template> -->
