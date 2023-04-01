@@ -1,100 +1,104 @@
 <div class="table-responsive p-3">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>
-            <span class="custom-checkbox">
-              <input
-                type="checkbox"
-                id="selectAll"
-                [(ngModel)]="allChecked"
-                (click)="selectAll()"
-              />
-              <label for="selectAll"></label>
-            </span>
-          </th>
-          <th></th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Features</th>
-          <th>Started</th>
-          <th>Completed</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="let project of projects"
-          [class.selectedRow]="rowIsSelected(project.id)"
-          class="table-row"
-        >
-          <td>
-            <span class="custom-checkbox">
-              <input
-                type="checkbox"
-                [(ngModel)]="project.isChecked"
-                value="1"
-                (click)="onRowClick(project.id)"
-              />
-              <label for="checkbox1"></label>
-            </span>
-          </td>
-          <td>
-            <div
-              class="table-image"
-              [ngStyle]="{
-                'background-image': project.images.length
-                  ? 'url(' + project.images[0].url + ')'
-                  : 'url(' + '/assets/shared/user.png' + ')'
-              }"
-            ></div>
-          </td>
-          <td>{{ project.name }}</td>
-          <td>{{ project.description }}</td>
-          <td>{{ project.mainFeature }}</td>
-          <td>{{ project.projectStarted | date : "dd MMM yyyy" }}</td>
-          <td>{{ project.projectEnded | date : "dd MMM yyyy" }}</td>
-          <td>
-            <div class="btn-group" dropdown>
-              <button
-                id="project-action"
-                dropdownToggle
-                type="button"
-                class="btn"
-                aria-controls="project-action"
-              >
-                <i class="fa-solid fa-ellipsis"></i>
-              </button>
-              <ul
-                id="project-action"
-                *dropdownMenu
-                class="dropdown-menu dropdown-menu-right"
-                role="menu"
-                aria-labelledby="project-action"
-              >
-                <li role="menuitem">
-                  <a class="dropdown-item" href="#">View project</a>
-                </li>
-                <li role="menuitem">
-                  <a class="dropdown-item" href="#">Set as private</a>
-                </li>
-                <li role="menuitem">
-                  <a class="dropdown-item" routerLink="/main/dashboard/projects/1"
-                    >Edit project</a
-                  >
-                </li>
-                <li role="menuitem">
-                  <a class="dropdown-item" href="#">Dlete project</a>
-                </li>
-              </ul>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-  <!-- <div class="project">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>
+          <span class="custom-checkbox">
+            <input
+              type="checkbox"
+              id="selectAll"
+              [(ngModel)]="allChecked"
+              (click)="selectAll()"
+            />
+            <label for="selectAll"></label>
+          </span>
+        </th>
+        <th></th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Features</th>
+        <th>Started</th>
+        <th>Completed</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let project of projects"
+        [class.selectedRow]="rowIsSelected(project.id)"
+        class="table-row"
+      >
+        <td>
+          <span class="custom-checkbox">
+            <input
+              type="checkbox"
+              [(ngModel)]="project.isChecked"
+              value="1"
+              (click)="onRowClick(project.id)"
+            />
+            <label for="checkbox1"></label>
+          </span>
+        </td>
+        <td>
+          <div
+            class="table-image"
+            [ngStyle]="{
+              'background-image': project.images.length
+                ? 'url(' + project.images[0].url + ')'
+                : 'url(' + '/assets/shared/user.png' + ')'
+            }"
+          ></div>
+        </td>
+        <td>{{ project.name }}</td>
+        <td>{{ project.description }}</td>
+        <td>{{ project.mainFeature }}</td>
+        <td>{{ project.projectStarted | date : "dd MMM yyyy" }}</td>
+        <td>{{ project.projectEnded | date : "dd MMM yyyy" }}</td>
+        <td>
+          <div class="btn-group" dropdown>
+            <button
+              id="project-action"
+              dropdownToggle
+              type="button"
+              class="btn"
+              aria-controls="project-action"
+            >
+              <i class="fa-solid fa-ellipsis"></i>
+            </button>
+            <ul
+              id="project-action"
+              *dropdownMenu
+              class="dropdown-menu dropdown-menu-right"
+              role="menu"
+              aria-labelledby="project-action"
+            >
+              <li role="menuitem">
+                <a
+                  class="dropdown-item"
+                  [routerLink]="'/main/projects/' + project.id"
+                  >View project</a
+                >
+              </li>
+              <li role="menuitem">
+                <a class="dropdown-item" href="#">Set as private</a>
+              </li>
+              <li role="menuitem">
+                <a class="dropdown-item" routerLink="/main/dashboard/projects/1"
+                  >Edit project</a
+                >
+              </li>
+              <li role="menuitem">
+                <a class="dropdown-item" href="#">Dlete project</a>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- <div class="project">
     <div *ngIf="projects && projects.length; else noData">
       <div class="container">
         <div class="row mx-0 my-5">
@@ -118,4 +122,3 @@
       </div>
     </div>
   </ng-template> -->
-  

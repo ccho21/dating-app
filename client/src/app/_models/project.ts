@@ -1,3 +1,4 @@
+import { Member } from './member';
 import { Message } from './message';
 import { Photo } from './photo';
 
@@ -17,4 +18,5 @@ export interface Project {
   projectStarted: string;
   projectEnded: string;
   images: Photo[];
+  user: Member;
 }

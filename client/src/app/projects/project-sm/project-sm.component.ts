@@ -11,16 +11,10 @@ export class ProjectSmComponent implements OnInit {
   @Input() project?: Project;
   config: SwiperOptions = {
     slidesPerView: 1,
-    spaceBetween: 50,
+    spaceBetween: 10,
     navigation: false,
     pagination: { clickable: true, dynamicBullets: true },
     scrollbar: { draggable: true },
-    // [pagination]="{
-
-    //   clickable: true
-    // }"
-    // [slidesPerView]="1"
-    // [spaceBetween]="50"
   };
 
   constructor() {}

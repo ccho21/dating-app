@@ -1,80 +1,109 @@
-<div class="container my-5">
-  <app-panel>
-    <div class="project-container" *ngIf="project$ | async as project">
-      <div class="row">
-        <div class="col-12 text-center">
-          <div>
-            <h3 class="title">{{ project.name }}</h3>
-            <div class="date">
-              {{ project.projectStarted | date : "MMM y" }} -
-              {{ project.projectEnded | date : "MMM y" }}
-              {{ project.projectWith }}
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-6 mb-5">
-          <div class="p-xl-5">
-            <swiper class="mySwiperOne" [config]="config">
-              <ng-template
-                swiperSlide
-                *ngFor="let image of member.photos; let i = index"
-              >
-                <img [src]="image.url" alt="" class="user-thumbnail square" />
-              </ng-template>
-            </swiper>
-          </div>
-        </div>
-        <div class="col-xl-6 mb-5">
-          <div class="p-xl-5">
-            <div class="intro mb-4">
-              {{ project.intro }}
-            </div>
-            <div class="description mb-4">{{ project.description }}</div>
+<div class="container my-5" *ngIf="project$ | async as project">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="project container">
+        <app-panel [title]="'Project\'s Info'">
+          <div class="project-container">
+            <div class="row">
+              <div class="col-12 text-center">
+                <div>
+                  <h3 class="title">{{ project.name }}</h3>
+                  <div class="date">
+                    {{ project.projectStarted | date : "MMM y" }} -
+                    {{ project.projectEnded | date : "MMM y" }}
+                    {{ project.projectWith }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6 mb-5">
+                <div class="p-xl-5">
+                  <swiper class="mySwiperOne" [config]="config">
+                    <ng-template
+                      swiperSlide
+                      *ngFor="let image of member.photos; let i = index"
+                    >
+                      <img
+                        [src]="image.url"
+                        alt=""
+                        class="user-thumbnail square"
+                      />
+                    </ng-template>
+                  </swiper>
+                </div>
+              </div>
+              <div class="col-xl-6 mb-5">
+                <div class="p-xl-5">
+                  <div class="intro mb-4">
+                    {{ project.intro }}
+                  </div>
+                  <div class="description mb-4">{{ project.description }}</div>
 
-            <hr />
+                  <hr />
 
-            <div class="tech-item">
-              <div class="label">Main Feature</div>
-              <div class="text-field">
-                내가 생각하는 나의 성격 검사하기, 친구에게 나의 성격 평가
-                부탁하기, 나의 성격에 대한 나와 친구의 검사 결과 비교하기
+                  <div class="tech-item">
+                    <div class="label">Main Feature</div>
+                    <div class="text-field">
+                      내가 생각하는 나의 성격 검사하기, 친구에게 나의 성격 평가
+                      부탁하기, 나의 성격에 대한 나와 친구의 검사 결과 비교하기
+                    </div>
+                  </div>
+                  <div class="tech-item">
+                    <div class="label">Github</div>
+                    <div class="">
+                      <a href="">{{ project.githubUrl }}</a>
+                    </div>
+                  </div>
+                  <div class="tech-item">
+                    <div class="label">URL</div>
+                    <div>
+                      <a [href]="project.url">{{ project.url }}</a>
+                    </div>
+                  </div>
+                  <div class="tech-item">
+                    <div class="label">Frontend</div>
+                    <div>{{ project.frontEnd }}</div>
+                  </div>
+                  <div class="tech-item">
+                    <div class="label">Backend</div>
+                    <div>{{ project.backEnd }}</div>
+                  </div>
+                  <div class="tech-item">
+                    <div class="label">Database</div>
+                    <div>{{ project.database }}</div>
+                  </div>
+
+                  <div class="tech-item">
+                    <div class="label">Deployment</div>
+                    <div>{{ project.deployement }}</div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="tech-item">
-              <div class="label">Github</div>
-              <div class="">
-                <a href="">{{ project.githubUrl }}</a>
-              </div>
-            </div>
-            <div class="tech-item">
-              <div class="label">URL</div>
-              <div>
-                <a [href]="project.url">{{ project.url }}</a>
-              </div>
-            </div>
-            <div class="tech-item">
-              <div class="label">Frontend</div>
-              <div>{{ project.frontEnd }}</div>
-            </div>
-            <div class="tech-item">
-              <div class="label">Backend</div>
-              <div>{{ project.backEnd }}</div>
-            </div>
-            <div class="tech-item">
-              <div class="label">Database</div>
-              <div>{{ project.database }}</div>
-            </div>
-
-            <div class="tech-item">
-              <div class="label">Deployment</div>
-              <div>{{ project.deployement }}</div>
+          </div>
+        </app-panel>
+        <app-panel title="Project's Gallery">
+          <div class="row">
+            <div class="col-md-3 mb-3" *ngFor="let image of project.images">
+              <img [src]="image.url" alt="" class="w-100" />
             </div>
           </div>
-        </div>
+        </app-panel>
+        <app-panel [title]="project.user.username + '\'s Other Projects'">
+          <div class="row">
+            <div class="col-md-3" *ngFor="let p of project.user.projects">
+              <app-project-sm [project]="p"></app-project-sm>
+            </div>
+          </div>
+        </app-panel>
       </div>
     </div>
-    <div class="text-end">
-      <app-button (click)="goBack()">Go back to projects</app-button>
+    <div class="col-md-4">
+      <app-panel title="Project Owner - {{ project.user.username }}">
+        <app-member-card [member]="project.user"></app-member-card>
+      </app-panel>
     </div>
-  </app-panel>
+  </div>
+  <div class="text-end">
+    <app-button (click)="goBack()">Go back to projects</app-button>
+  </div>
 </div>

@@ -41,7 +41,7 @@ namespace API.Data
         }
         public async Task<PagedList<ProjectDto>> GetProjectsAsync(ProjectParams projectParams)
         {
-            var query = _context.Projects.Include(x => x.Images).AsQueryable();
+            var query = _context.Projects.Include(x => x.AppUser).Include(x => x.Images).AsQueryable();
             if (!string.IsNullOrEmpty(projectParams.CurrentUsername))
             {
                 query = query.Where(x => x.AppUser.UserName == projectParams.CurrentUsername);

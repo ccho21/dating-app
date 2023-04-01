@@ -20,6 +20,7 @@ namespace API.DTOs
         public string Database { get; set; }
         public string Deployement { get; set; }
         public int AppUserId { get; set; }
+        public MemberDto User { get; set; }
         public DateTime? ProjectStarted { get; set; }
         public DateTime? ProjectEnded { get; set; }
         public ICollection<PhotoDto> Images { get; set; }

@@ -10,12 +10,12 @@
         >
           <mat-button-toggle
             class="list-search-item"
-            [routerLink]="['/members']"
+            [routerLink]="['/main/members']"
           >
             People
           </mat-button-toggle>
           <mat-button-toggle
-            [routerLink]="['/members']"
+            [routerLink]="['/main/members']"
             [queryParams]="{ predicate: 'liked' }"
             class="list-search-item"
           >
@@ -23,7 +23,7 @@
           </mat-button-toggle>
           <mat-button-toggle
             class="list-search-item"
-            [routerLink]="['/members']"
+            [routerLink]="['/main/members']"
             [queryParams]="{ predicate: 'likedBy' }"
           >
             Followed

@@ -38,13 +38,11 @@ const routes: Routes = [
         path: 'members',
         component: MemberListComponent,
         runGuardsAndResolvers: 'always',
-        children: [
-          {
-            path: 'members/:username',
-            component: MemberComponent,
-            resolve: { member: MemberResolver },
-          },
-        ],
+      },
+      {
+        path: 'members/:username',
+        component: MemberComponent,
+        resolve: { member: MemberResolver },
       },
       {
         path: 'dashboard',

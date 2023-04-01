@@ -1,11 +1,63 @@
 <div class="card" *ngIf="project">
-  <!-- <img
-    class="card-img-top"
-    [src]="
-      project.images.length ? project.images[0].url : './assets/shared/user.png'
-    "
-    alt="Card image cap"
-  /> -->
+  <div class="card-header" *ngIf="project.user as member">
+    <div class="header-content">
+      <div class="img-container">
+        <img
+          src="{{ member.photoUrl || './assets/shared/user.png' }}"
+          [alt]="member.username"
+          class="user-thumbnail size-xs"
+        />
+      </div>
+      <div class="user">
+        <app-link
+          [label]="'@' + member.username"
+          [routerLink]="['/main/members/', member.username]"
+        ></app-link>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="btn-group" dropdown>
+        <button
+          id="project-action"
+          dropdownToggle
+          type="button"
+          class="btn"
+          aria-controls="project-action"
+        >
+          <i class="fa-solid fa-ellipsis"></i>
+        </button>
+        <ul
+          id="project-action"
+          *dropdownMenu
+          class="dropdown-menu dropdown-menu-right"
+          role="menu"
+          aria-labelledby="project-action"
+        >
+          <li role="menuitem">
+            <a
+              class="dropdown-item"
+              [routerLink]="'/main/projects/' + project.id"
+              >View project</a
+            >
+          </li>
+          <li role="menuitem">
+            <a
+              class="dropdown-item"
+              [routerLink]="'/main/projects/' + project.id"
+              >Edit project</a
+            >
+          </li>
+          <li role="menuitem">
+            <a
+              class="dropdown-item"
+              [routerLink]="'/main/projects/' + project.id"
+              >Delete project</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <swiper
     class="gallery"
     [config]="config"
