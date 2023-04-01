@@ -26,6 +26,8 @@ export class ProfileProjectsComponent implements OnInit {
     return this.projectsForm.get('projects') as FormArray;
   }
 
+  btns?: Array<any>;
+
   constructor(
     private accountService: AccountService,
     private memberService: MemberService,
@@ -40,6 +42,19 @@ export class ProfileProjectsComponent implements OnInit {
   ngOnInit(): void {
     this.maxDate = new Date();
     this.loadMember();
+
+    this.btns = [
+      {
+        btnLabel: 'Add Project',
+        btnLink: '/main/dashboard/projects/create',
+        customClass: '',
+      },
+      {
+        btnLabel: 'View All Project',
+        btnLink: '/',
+        customClass: '',
+      },
+    ];
   }
 
   addProject(project?: Project) {
@@ -57,7 +72,9 @@ export class ProfileProjectsComponent implements OnInit {
         intro: ['this project is just a same ple one'],
         projectWith: ['I build this app all by my self'],
         description: ['to learn c# and Angular'],
-        mainFeature: ['Searching, finding, message, looking for people, CRUD projects, photos, experiences'],
+        mainFeature: [
+          'Searching, finding, message, looking for people, CRUD projects, photos, experiences',
+        ],
         url: ['localhost:4200'],
         githubUrl: ['github.com/ccho21'],
         frontEnd: ['angular, rxjs, ngrx'],

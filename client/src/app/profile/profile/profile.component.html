@@ -11,7 +11,7 @@
                 [src]="user.photoUrl || './assets/shared/user.png'"
                 [alt]="user.username"
               />
-              <a class="edit-icon" routerLink="/main/profile/edit">
+              <a class="edit-icon" routerLink="/main/dashboard">
                 <i class="fa-solid fa-pen"></i>
               </a>
             </div>
@@ -42,7 +42,7 @@
             (selectTab)="activateTab($event)"
             #overviewTab="tab"
           >
-            <div class="py-5 px-xl-5">
+            <div class="py-5">
               <app-profile-overview
                 *ngIf="overviewTab.active"
               ></app-profile-overview>
@@ -61,11 +61,11 @@
             (selectTab)="activateTab($event)"
             #projectTab="tab"
           >
-            <app-project-list
+            <!-- <app-project-list
               *ngIf="member?.projects"
               [projects]="member?.projects"
             >
-            </app-project-list>
+            </app-project-list> -->
           </tab>
           <tab
             heading="Experiences"

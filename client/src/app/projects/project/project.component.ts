@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Project } from 'src/app/_models/project';
+import { ProjectService } from 'src/app/_services/project.service';
 import SwiperCore, { Pagination, Navigation, SwiperOptions } from 'swiper';
 SwiperCore.use([Navigation, Pagination]);
 
@@ -9,15 +13,16 @@ SwiperCore.use([Navigation, Pagination]);
   styleUrls: ['./project.component.scss'],
 })
 export class ProjectComponent implements OnInit {
-  @Input() project?: Project;
+  project?: Project;
+
   config: SwiperOptions = {
     slidesPerView: 1,
     spaceBetween: 50,
     navigation: false,
-    pagination: { clickable: true, dynamicBullets: true, },
+    pagination: { clickable: true, dynamicBullets: true },
     scrollbar: { draggable: true },
     // [pagination]="{
-      
+
     //   clickable: true
     // }"
     // [slidesPerView]="1"
@@ -38,9 +43,29 @@ export class ProjectComponent implements OnInit {
     ],
   };
 
-  constructor() {}
+  project$?: Observable<Project>;
+  constructor(
+    private projectService: ProjectService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private location: Location
+  ) {}
 
   ngOnInit(): void {
-    console.log('### projectng init', this.project);
+    const projectId = parseInt(this.route.snapshot.params['id'], 10);
+    if (!isNaN(projectId)) {
+      this.project$ = this.projectService.getProject(projectId);
+    } else {
+      this.router.navigate(['main', 'projects']);
+    }
+  }
+  private getProject(id: number): void {
+    this.projectService.getProject(id).subscribe((project) => {
+      this.project = project;
+    });
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

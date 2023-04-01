@@ -1,7 +1,20 @@
 <div class="panel white" [class]="customClass">
   <div class="header" *ngIf="title">
-    <div class="title">{{ title }}</div>
-    <div class="sub">{{ sub }}</div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="title">{{ title }}</div>
+        <div class="sub">{{ sub }}</div>
+      </div>
+      <div class="col-md-6 text-end">
+        <div class="btn-group" *ngIf="btns && btns.length">
+          <ng-container *ngFor="let btn of btns">
+            <app-button [routerLink]="btn.btnLink">{{
+              btn.btnLabel
+            }}</app-button>
+          </ng-container>
+        </div>
+      </div>
+    </div>
   </div>
   <hr *ngIf="title" />
   <div class="p-4">

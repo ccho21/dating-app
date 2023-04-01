@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Member } from '../_models/member';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
 import { User } from '../_models/user';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
@@ -18,6 +16,7 @@ export class ProjectService {
   baseUrl = environment.apiUrl;
   projects?: Project[];
   user?: User;
+  projectParams?: ProjectParams;
 
   constructor(
     private http: HttpClient,
@@ -27,17 +26,37 @@ export class ProjectService {
       .pipe(take(1))
       .subscribe((user: User | null) => {
         this.user = user as User;
+        this.projectParams = {
+          pageNumber: 0,
+          pageSize: 10,
+        };
       });
   }
 
-  getProjects(projectParams?: ProjectParams) {
-    let params = getPaginationHeaders(1, 10);
+  getProjects(projectParams: ProjectParams) {
+    let params = getPaginationHeaders(
+      projectParams.pageNumber,
+      projectParams.pageSize
+    );
 
-    return getPaginatedResult<any[]>(
-      this.baseUrl + 'projects/' + this.user?.username,
+    console.log('## project parms', projectParams);
+    if (projectParams.currentUsername) {
+      params = params.append('currentusername', projectParams.currentUsername);
+    }
+
+    return getPaginatedResult<Project[]>(
+      this.baseUrl + 'projects/',
       params,
       this.http
     ).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
+  getProject(id: number): Observable<Project> {
+    return this.http.get<Project>(this.baseUrl + 'projects/' + id).pipe(
       map((response) => {
         return response;
       })
@@ -66,6 +85,13 @@ export class ProjectService {
     );
   }
 
+  getUsername() {
+    return this.user?.username;
+  }
+
+  getProjectParams(): ProjectParams {
+    return this.projectParams as ProjectParams;
+  }
   deleteProject(projectId: number) {
     return this.http.delete(this.baseUrl + 'projects/' + projectId);
   }

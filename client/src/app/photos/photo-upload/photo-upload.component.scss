@@ -16,10 +16,14 @@
   }
   .dropzone {
     border: 1.3px dashed hsl(184deg, 91%, 28%);
+    color: hsl(184deg, 91%, 28%);
     border-radius: 2rem;
     width: 100%;
     text-align: center;
     height: 100%;
+    cursor: pointer;
+    text-decoration: none !important;
+    display: block;
   }
   .dropzone-icon {
     width: 100%;

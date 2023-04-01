@@ -9,6 +9,7 @@ export class PanelComponent implements OnInit {
   @Input() customClass?: string;
   @Input() title?: string;
   @Input() sub?: string;
+  @Input() btns?: Array<any>;
   constructor() {}
 
   ngOnInit(): void {}

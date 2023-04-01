@@ -8,7 +8,8 @@
   transition: all 0.15s ease-in-out;
   font-size: 1.2rem;
   color: var(--black);
-
+  margin: 0 0.25rem;
+  display: inline-block;
   // border-color: #4eb7f5 !important;
   // color: #4eb7f5 !important;
   &.filled {

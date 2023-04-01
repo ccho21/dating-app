@@ -5,7 +5,6 @@ import { AccountService } from 'src/app/_services/account.service';
 import { MemberService } from 'src/app/_services/member.service';
 import { take } from 'rxjs/operators';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
@@ -14,18 +13,42 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
   styleUrls: ['./profile-edit.component.scss'],
 })
 export class ProfileEditComponent implements OnInit {
-  @ViewChild('editForm') editForm?: NgForm;
-  member?: Member;
-  user?: User;
-  activeTab?: number;
+  @ViewChild('editForm') editForm: NgForm | undefined;
+  member: Member | undefined;
+  user: User | undefined;
+  activeTab: number | undefined;
 
-  constructor(private accountService: AccountService) {
-    this.accountService.currentUser$
-      .pipe(take(1))
-      .subscribe((user) => (this.user = user as User));
+  constructor(
+    private accountService: AccountService,
+    private memberService: MemberService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadUser();
   }
 
-  ngOnInit(): void {}
+  selectTab(tab: MatTabChangeEvent): void {
+    this.activeTab = tab.index;
+  }
 
-  selectTab(tab: MatTabChangeEvent) {}
+  loadUser(): void {
+    this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
+      this.user = user as User;
+      this.loadMember(this.user.username);
+    });
+  }
+
+  loadMember(username: string): void {
+    this.memberService.getMember(username).subscribe((member) => {
+      this.member = member;
+    });
+  }
+
+  updateMember(): void {
+    if (this.member) {
+      this.memberService.updateMember(this.member).subscribe(() => {
+        this.editForm?.resetForm(this.member);
+      });
+    }
+  }
 }

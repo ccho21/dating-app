@@ -41,15 +41,22 @@ namespace API.Controllers
             return Ok(projects);
         }
 
-        [HttpGet("{username}", Name = "GetProjectsByUsername")]
-        public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjectsByUsername(string username)
+
+        [HttpGet("{id}", Name = "getProject")]
+        public async Task<ActionResult<ProjectDto>> GetProject(int id)
         {
-            var projects = await _unitOfWork.ProjectRepository.GetProjectsByUsernameAsync(username);
-
-            Response.AddPaginationHeader(projects.CurrentPage, projects.PageSize, projects.TotalCount, projects.TotalPages);
-
-            return Ok(projects);
+            return await _unitOfWork.ProjectRepository.GetProjectAsync(id);
         }
+
+        // [HttpGet("{username}", Name = "GetProjectsByUsername")]
+        // public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjectsByUsername(string username)
+        // {
+        //     var projects = await _unitOfWork.ProjectRepository.GetProjectsByUsernameAsync(username);
+
+        //     Response.AddPaginationHeader(projects.CurrentPage, projects.PageSize, projects.TotalCount, projects.TotalPages);
+
+        //     return Ok(projects);
+        // }
 
         [HttpPost]
         public async Task<ActionResult<ProjectDto>> CreateProject(ProjectDto createProjectDto)
@@ -115,7 +122,7 @@ namespace API.Controllers
             _unitOfWork.ProjectRepository.DeleteProject(project);
 
             if (await _unitOfWork.Complete()) return Ok();
-            
+
             return BadRequest("Failed to delete the project");
 
         }

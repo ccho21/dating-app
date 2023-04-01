@@ -1,0 +1,37 @@
+<div class="card" *ngIf="project">
+  <!-- <img
+    class="card-img-top"
+    [src]="
+      project.images.length ? project.images[0].url : './assets/shared/user.png'
+    "
+    alt="Card image cap"
+  /> -->
+  <swiper
+    class="gallery"
+    [config]="config"
+    *ngIf="project.images.length; else noImage"
+  >
+    <ng-template
+      swiperSlide
+      *ngFor="let image of project.images; let i = index"
+    >
+      <img [src]="image.url" alt="" class="project-img" />
+    </ng-template>
+  </swiper>
+  <ng-template #noImage>
+    <img
+      class="card-img-top"
+      src="./assets/shared/user.png"
+      alt="Card image cap"
+    />
+  </ng-template>
+  <div class="card-body">
+    <h5 class="card-title">{{ project.name }}</h5>
+    <p class="card-text">
+      {{ project.description }}
+    </p>
+    <app-button [routerLink]="'/main/projects/' + project.id">
+      View Project
+    </app-button>
+  </div>
+</div>

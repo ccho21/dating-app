@@ -16,13 +16,10 @@
                 "
                 [formGroup]="experienceForm | formGroup"
               >
-                <fieldset class="fieldset">
-                  <legend class="legend">Experience #{{ i + 1 }}</legend>
-                  <app-experience-edit
-                    [experience]="member.experiences[i]"
-                    [experienceForm]="experienceForm | formGroup"
-                  ></app-experience-edit>
-                </fieldset>
+                <app-experience-edit
+                  [experience]="member.experiences[i]"
+                  [experienceForm]="experienceForm | formGroup"
+                ></app-experience-edit>
               </ng-container>
             </div>
           </form>

@@ -51,6 +51,15 @@ namespace API.Data
                 query.ProjectTo<ProjectDto>(_mapper.ConfigurationProvider).AsNoTracking(),
                 projectParams.PageNumber, projectParams.PageSize);
         }
+
+        public async Task<ProjectDto> GetProjectAsync(int id)
+        {
+            return await _context.Projects
+                .Where(x => x.Id == id)
+                .ProjectTo<ProjectDto>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
+        }
+
         public async Task<PagedList<ProjectDto>> GetProjectsByUsernameAsync(string username)
         {
             var query = _context.Projects.AsQueryable();

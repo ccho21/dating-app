@@ -49,6 +49,17 @@
             </app-link>
           </li>
           <li class="nav-item">
+            <app-link
+              customClass=""
+              icon="fa-regular fa-square-caret-down"
+              [label]="'Projects'"
+              tooltip="Projects"
+              routerLink="/main/projects"
+              routerLinkActive="active"
+            >
+            </app-link>
+          </li>
+          <li class="nav-item">
             <app-dropdown-link
               label="Message"
               customClass="dropdown-menu-right messsage-dropdown"
@@ -96,7 +107,7 @@
               </li>
               <li class="dw-item" class="divider dropdown-divider"></li>
               <li class="dw-item" role="menuitem">
-                <app-link label="Edit Profile" routerLink="/main/profile/edit">
+                <app-link label="Edit Profile" routerLink="/main/dashboard">
                 </app-link>
               </li>
               <li class="dw-item" class="divider dropdown-divider"></li>

@@ -1,4 +1,4 @@
-<div *ngIf="photos">
+<div>
   <div class="row photo-upload">
     <div class="col-xl-12">
       <div class="row" gallerize>
@@ -34,12 +34,13 @@
         </ng-container>
         <div class="col-md-2" *ngIf="uploader">
           <div class="upload-files-container">
-            <div
+            <a
               ng2FileDrop
               [ngClass]="{ 'nv-file-over': hasBaseDropzoneOver }"
               (fileOver)="fileOverBase($event)"
               [uploader]="uploader"
               class="dropzone"
+              (click)="fileInput.click()"
             >
               <div class="dropzone-icon">
                 <input
@@ -47,12 +48,13 @@
                   class="default-file-input d-none"
                   ng2FileSelect
                   [uploader]="uploader"
-                  [multiple]="experienceId ? false : true"
+                  [multiple]="single ? false : true"
+                  #fileInput
                 />
                 <span class="material-symbols-outlined"> add </span>
               </div>
               <!-- <div class="dynamic-message mb-3">Drag & drop any file here</div> -->
-            </div>
+            </a>
           </div>
         </div>
       </div>

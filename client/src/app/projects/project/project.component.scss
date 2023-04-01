@@ -1,10 +1,10 @@
-.project {
+.project-container {
   width: 100%;
   .title {
-    font-weight: 900;
-    font-size: 2rem;
-    color: #222;
-    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
   }
   .date {
     margin-bottom: 2rem;
@@ -15,8 +15,15 @@
     opacity: 0.8;
   }
   .intro {
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom: 10px;
   }
+
   .description {
+    font-size: 1.6rem;
+    font-weight: normal;
+    margin-bottom: 30px;
   }
   .tech-item {
     display: flex;

@@ -34,6 +34,7 @@ export class PhotoUploadComponent implements OnInit {
   @Input() photo?: Photo;
   @Input() projectId?: number;
   @Input() experienceId?: number;
+  @Input() single?: boolean;
   @Output() setMain: EventEmitter<Photo> = new EventEmitter<Photo>();
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
   @Output() updatePhoto: EventEmitter<Photo> = new EventEmitter<Photo>();

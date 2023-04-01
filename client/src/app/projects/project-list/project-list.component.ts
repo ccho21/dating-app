@@ -1,5 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Project } from 'src/app/_models/project';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { PaginatedResult } from '../../_models/pagination';
+import { Project } from '../../_models/project';
+import { ProjectParams } from '../../_models/projectParams';
+import { ProjectService } from '../../_services/project.service';
 
 @Component({
   selector: 'app-project-list',
@@ -7,10 +13,18 @@ import { Project } from 'src/app/_models/project';
   styleUrls: ['./project-list.component.scss'],
 })
 export class ProjectListComponent implements OnInit {
-  @Input() projects?: Project[];
-  constructor() {}
+  projects: Project[] = [];
+
+  constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    console.log('### projects', this.projects);
+    this.getProjects();
+  }
+
+  private getProjects(): void {
+    const params: ProjectParams = this.projectService.getProjectParams();
+    this.projectService.getProjects(params).subscribe((res) => {
+      this.projects = res.result as Project[];
+    });
   }
 }

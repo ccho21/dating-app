@@ -1,6 +1,6 @@
-<app-panel>
-  <div class="project" *ngIf="project">
-    <div class="container">
+<div class="container my-5">
+  <app-panel>
+    <div class="project-container" *ngIf="project$ | async as project">
       <div class="row">
         <div class="col-12 text-center">
           <div>
@@ -73,5 +73,8 @@
         </div>
       </div>
     </div>
-  </div>
-</app-panel>
+    <div class="text-end">
+      <app-button (click)="goBack()">Go back to projects</app-button>
+    </div>
+  </app-panel>
+</div>

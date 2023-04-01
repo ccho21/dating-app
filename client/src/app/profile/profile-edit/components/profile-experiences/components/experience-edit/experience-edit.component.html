@@ -1,132 +1,199 @@
 <div *ngIf="experienceForm">
-  <div class="row mb-5">
-    <div class="offset-md-1 col-md-9">
-      <app-photo-upload
-        *ngIf="experience"
-        [photo]="experience.logo"
-        [experienceId]="experience.id"
-        (delete)="deletePhoto($event)"
-        (updatePhoto)="updatePhoto($event)"
-      ></app-photo-upload>
-    </div>
-  </div>
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="employer" class="label"> Company </label>
-    </div>
-    <div class="offset-md-1 col-md-6">
-      <app-text-input
-        [type]="'text'"
-        [label]="'companyName'"
-        [formControl]="experienceForm.controls['companyName'] | formControl"
-        class="theme-green"
-      >
-      </app-text-input>
-      <p class="main-text-1 description">
-        The position when you are / were working
-      </p>
-    </div>
-  </div>
-  <div class="row align-items-start mb-4">
-    <div class="offset-md-1 col-md-8">
+  <div class="row">
+    <div class="col-md-8">
       <div class="alert alert-info" *ngIf="experienceForm.dirty">
         <strong>Information: </strong> You have made changes. Any unsaved
         changes will be lost
       </div>
     </div>
   </div>
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="position" class="label"> Position </label>
-    </div>
-    <div class="offset-md-1 col-md-6">
-      <app-text-input
-        [type]="'text'"
-        [label]="'position'"
-        [formControl]="experienceForm.controls['position'] | formControl"
-        class="theme-green"
-      >
-      </app-text-input>
-      <p class="main-text-1 description">
-        The position when you are / were working
-      </p>
-    </div>
-  </div>
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="intro" class="label"> Introduction </label>
-    </div>
-    <div class="offset-md-1 col-md-6">
-      <app-textarea-input
-        [rows]="4"
-        [label]="'intro'"
-        [formControl]="experienceForm.controls['intro'] | formControl"
-        class="theme-green"
-      >
-      </app-textarea-input>
-      <p class="main-text-1 description">
-        Please give us a brief introduction about the company and your work
-      </p>
-    </div>
-  </div>
+  <form [formGroup]="experienceForm" id="experienceForm">
+    <div class="row">
+      <div class="col-md-8">
+        <app-panel
+          title="Experience Info"
+          sub="Give a quick overview about your experience"
+        >
+          <div class="row align-items-start mb-3">
+            <div class="col-md-2 text-end">
+              <label for="employer" class="label"> Company </label>
+            </div>
+            <div class="offset-md-1 col-md-6">
+              <app-text-input
+                [type]="'text'"
+                [label]="'companyName'"
+                [formControl]="
+                  experienceForm.controls['companyName'] | formControl
+                "
+                class="theme-green"
+              >
+              </app-text-input>
+              <p class="main-text-1 description">
+                The position when you are / were working
+              </p>
+            </div>
+          </div>
 
-  <div class="row align-items-center mb-3">
-    <div class="col-md-2 text-end">
-      <label for="url" class="label"> Url </label>
+          <div class="row align-items-start mb-3">
+            <div class="col-md-2 text-end">
+              <label for="position" class="label"> Position </label>
+            </div>
+            <div class="offset-md-1 col-md-6">
+              <app-text-input
+                [type]="'text'"
+                [label]="'position'"
+                [formControl]="
+                  experienceForm.controls['position'] | formControl
+                "
+                class="theme-green"
+              >
+              </app-text-input>
+              <p class="main-text-1 description">
+                The position when you are / were working
+              </p>
+            </div>
+          </div>
+          <div class="row align-items-start mb-3">
+            <div class="col-md-2 text-end">
+              <label for="intro" class="label"> Introduction </label>
+            </div>
+            <div class="offset-md-1 col-md-6">
+              <app-textarea-input
+                [rows]="4"
+                [label]="'intro'"
+                [formControl]="experienceForm.controls['intro'] | formControl"
+                class="theme-green"
+              >
+              </app-textarea-input>
+              <p class="main-text-1 description">
+                Please give us a brief introduction about the company and your
+                work
+              </p>
+            </div>
+          </div>
+        </app-panel>
+        <app-panel
+          title="Project Info"
+          sub="Name this project and describe it to your visitors"
+        >
+          <div class="row align-items-center mb-3">
+            <div class="col-md-2 text-end">
+              <label for="url" class="label"> Url </label>
+            </div>
+            <div class="offset-md-1 col-md-6">
+              <app-text-input
+                [type]="'text'"
+                [label]="'Url'"
+                [formControl]="experienceForm.controls['url'] | formControl"
+                class="theme-green"
+              >
+              </app-text-input>
+            </div>
+          </div>
+          <div class="row align-items-start mb-3">
+            <div class="col-md-2 text-end">
+              <label for="started" class="label"> Job Started </label>
+            </div>
+            <div class="offset-md-1 col-md-6">
+              <app-date-input
+                [label]="'Job started'"
+                [maxDate]="maxDate"
+                [formControl]="experienceForm.controls['started'] | formControl"
+                class="theme-green"
+              >
+              </app-date-input>
+            </div>
+          </div>
+
+          <div class="row align-items-start mb-3">
+            <div class="col-md-2 text-end">
+              <label for="ended" class="label"> Job Ended </label>
+            </div>
+            <div class="offset-md-1 col-md-6">
+              <app-date-input
+                [label]="'Job Ended'"
+                [maxDate]="maxDate"
+                [formControl]="experienceForm.controls['ended'] | formControl"
+                class="theme-green"
+              >
+              </app-date-input>
+            </div>
+          </div>
+        </app-panel>
+        <app-panel
+          title="Job Description Info"
+          sub="Name this project and describe it to your visitors"
+        >
+          <div [formGroup]="experienceForm">
+            <div formArrayName="jobDescriptions">
+              <ng-container
+                *ngFor="let jdForm of jobDescriptions.controls; let j = index"
+                [formGroup]="jdForm | formGroup"
+              >
+                <app-job-description-edit [jdForm]="jdForm | formGroup">
+                </app-job-description-edit>
+              </ng-container>
+            </div>
+          </div>
+        </app-panel>
+
+        <app-panel
+          title="Experience Images"
+          sub="Upload image that represents your experience."
+          customClass="no-height"
+        >
+          <div class="row mb-5">
+            <div class="col-md-12">
+              <app-photo-upload
+                *ngIf="experience"
+                [photo]="experience.logo"
+                [single]="true"
+                [experienceId]="experience.id"
+                (delete)="deletePhoto($event)"
+                (updatePhoto)="updatePhoto($event)"
+              ></app-photo-upload>
+            </div>
+          </div>
+        </app-panel>
+      </div>
+      <div class="col-md-4">
+        <app-panel customClass="no-height">
+          <div class="d-flex align-items-center">
+            <div>
+              Hide this project
+              <i class="ms-2 fa-regular fa-circle-question"></i>
+            </div>
+            <div class="ms-auto">
+              <button>a</button>
+            </div>
+          </div>
+        </app-panel>
+
+        <app-panel customClass="no-height">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="">
+                <p>
+                  NEED Help?
+                  <i class="ms-2 fa-regular fa-circle-question"></i>
+                </p>
+                <p>
+                  Get phone support or start a live chat with our Customer Care
+                  team.
+                </p>
+                <div>
+                  <app-link label="Contact Support"></app-link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </app-panel>
+      </div>
     </div>
-    <div class="offset-md-1 col-md-6">
-      <app-text-input
-        [type]="'text'"
-        [label]="'Url'"
-        [formControl]="experienceForm.controls['url'] | formControl"
-        class="theme-green"
-      >
-      </app-text-input>
-    </div>
-  </div>
-  <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="started" class="label"> Job Started </label>
-    </div>
-    <div class="offset-md-1 col-md-6">
-      <app-date-input
-        [label]="'Job started'"
-        [maxDate]="maxDate"
-        [formControl]="experienceForm.controls['started'] | formControl"
-        class="theme-green"
-      >
-      </app-date-input>
-    </div>
-  </div>
+  </form>
 
   <div class="row align-items-start mb-3">
-    <div class="col-md-2 text-end">
-      <label for="ended" class="label"> Job Ended </label>
-    </div>
-    <div class="offset-md-1 col-md-6">
-      <app-date-input
-        [label]="'Job Ended'"
-        [maxDate]="maxDate"
-        [formControl]="experienceForm.controls['ended'] | formControl"
-        class="theme-green"
-      >
-      </app-date-input>
-    </div>
-  </div>
-
-  <div [formGroup]="experienceForm">
-    <div formArrayName="jobDescriptions">
-      <ng-container
-        *ngFor="let jdForm of jobDescriptions.controls; let j = index"
-        [formGroup]="jdForm | formGroup"
-      >
-        <app-job-description-edit [jdForm]="jdForm | formGroup">
-        </app-job-description-edit>
-      </ng-container>
-    </div>
-  </div>
-  <div class="row align-items-start mb-3">
-    <div class="col-md-9 text-end">
+    <div class="col-md-12 text-end">
       <button
         [disabled]="!experienceForm.dirty"
         form="experiencesForm"

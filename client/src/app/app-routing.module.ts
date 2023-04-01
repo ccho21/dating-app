@@ -21,8 +21,10 @@ import { ProfileAboutComponent } from './profile/profile-edit/components/profile
 import { ProfileProjectsComponent } from './profile/profile-edit/components/profile-projects/profile-projects.component';
 import { ProfileExperiencesComponent } from './profile/profile-edit/components/profile-experiences/profile-experiences.component';
 import { ProfileSkillsComponent } from './profile/profile-edit/components/profile-skills/profile-skills.component';
-import { ProfilePhotosComponent } from './profile/profile-edit/components/profile-photos/profile-photos.component';
 import { MainComponent } from './main/main/main.component';
+import { ProjectEditComponent } from './profile/profile-edit/components/profile-projects/components/project-edit/project-edit.component';
+import { ProjectListComponent } from './projects/project-list/project-list.component';
+import { ProjectComponent } from './projects/project/project.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,49 +35,64 @@ const routes: Routes = [
     children: [
       { path: '', component: ProfileComponent },
       {
-        path: '',
+        path: 'members',
+        component: MemberListComponent,
         runGuardsAndResolvers: 'always',
         children: [
-          { path: 'members', component: MemberListComponent },
           {
             path: 'members/:username',
             component: MemberComponent,
             resolve: { member: MemberResolver },
           },
-          {
-            path: 'profile/edit',
-            redirectTo: 'profile/edit/about',
-          },
-          {
-            path: 'profile/edit',
-            component: ProfileEditComponent,
-            children: [
-              {
-                path: 'about',
-                component: ProfileAboutComponent,
-                canDeactivate: [PreventUnsavedChangesGuard],
-              },
-              { path: 'photos', component: ProfilePhotosComponent },
-              { path: 'projects', component: ProfileProjectsComponent },
-              { path: 'experiences', component: ProfileExperiencesComponent },
-              { path: 'skills', component: ProfileSkillsComponent },
-            ],
-          },
-          { path: 'lists', component: ListsComponent },
-          {
-            path: 'messages',
-            component: MessagesComponent,
-            children: [
-              { path: '', component: NoDataComponent },
-              { path: ':membername', component: MemberMessagesComponent },
-            ],
-          },
-          {
-            path: 'admin',
-            component: AdminPanelComponent,
-            canActivate: [AdminGuard],
-          },
         ],
+      },
+      {
+        path: 'dashboard',
+        component: ProfileEditComponent,
+        children: [
+          {
+            path: 'about',
+            component: ProfileAboutComponent,
+            canDeactivate: [PreventUnsavedChangesGuard],
+          },
+          {
+            path: 'projects',
+            component: ProfileProjectsComponent,
+          },
+          {
+            path: 'projects/create',
+            component: ProjectEditComponent,
+          },
+          {
+            path: 'projects/:id',
+            component: ProjectEditComponent,
+          },
+          { path: 'experiences', component: ProfileExperiencesComponent },
+          { path: 'skills', component: ProfileSkillsComponent },
+        ],
+      },
+      {
+        path: 'projects',
+        component: ProjectListComponent,
+        children: [{ path: '', component: NoDataComponent }],
+      },
+      {
+        path: 'projects/:id',
+        component: ProjectComponent,
+        children: [{ path: '', component: NoDataComponent }],
+      },
+      {
+        path: 'messages',
+        component: MessagesComponent,
+        children: [
+          { path: '', component: NoDataComponent },
+          { path: ':membername', component: MemberMessagesComponent },
+        ],
+      },
+      {
+        path: 'admin',
+        component: AdminPanelComponent,
+        canActivate: [AdminGuard],
       },
     ],
   },

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProfilePhotosComponent } from './profile-photos.component';
+import { ProjectSmComponent } from './project-sm.component';
 
-describe('ProfilePhotosComponent', () => {
-  let component: ProfilePhotosComponent;
-  let fixture: ComponentFixture<ProfilePhotosComponent>;
+describe('ProjectSmComponent', () => {
+  let component: ProjectSmComponent;
+  let fixture: ComponentFixture<ProjectSmComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProfilePhotosComponent ]
+      declarations: [ ProjectSmComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ProfilePhotosComponent);
+    fixture = TestBed.createComponent(ProjectSmComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

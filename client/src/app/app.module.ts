@@ -54,7 +54,6 @@ import { ConnectionCardComponent } from './connections/connection-card/connectio
 import { NoDataComponent } from './no-data/no-data/no-data.component';
 import { ProjectListComponent } from './projects/project-list/project-list.component';
 import { ProjectComponent } from './projects/project/project.component';
-import { ProjectOverviewComponent } from './projects/project-overview/project-overview.component';
 import { VisitorOverviewComponent } from './visitors/visitor-overview/visitor-overview.component';
 
 import { SlicePipe } from '@angular/common';
@@ -67,7 +66,6 @@ import { ProfileAboutComponent } from './profile/profile-edit/components/profile
 import { ProfileProjectsComponent } from './profile/profile-edit/components/profile-projects/profile-projects.component';
 import { ProfileExperiencesComponent } from './profile/profile-edit/components/profile-experiences/profile-experiences.component';
 import { ProfileSkillsComponent } from './profile/profile-edit/components/profile-skills/profile-skills.component';
-import { ProfilePhotosComponent } from './profile/profile-edit/components/profile-photos/profile-photos.component';
 import { ProjectEditComponent } from './profile/profile-edit/components/profile-projects/components/project-edit/project-edit.component';
 import { ExperienceEditComponent } from './profile/profile-edit/components/profile-experiences/components/experience-edit/experience-edit.component';
 import { JobDescriptionEditComponent } from './profile/profile-edit/components/profile-experiences/components/job-description-edit/job-description-edit.component';
@@ -84,6 +82,9 @@ import { DynamicComponentComponent } from './_layouts/dynamic-component/dynamic-
 import { ExperienceOverviewComponent } from './experiences/experience-overview/experience-overview.component';
 import { DropdownLinkComponent } from './_forms/dropdown-link/dropdown-link.component';
 import { SideNavComponent } from './_layouts/side-nav/side-nav.component';
+import { ProjectTableComponent } from './projects/project-table/project-table.component';
+import { ProjectSmComponent } from './projects/project-sm/project-sm.component';
+import { SearchComponent } from './_layouts/search/search.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -119,7 +120,6 @@ import { SideNavComponent } from './_layouts/side-nav/side-nav.component';
     NoDataComponent,
     ProjectListComponent,
     ProjectComponent,
-    ProjectOverviewComponent,
     VisitorOverviewComponent,
     ExperienceListComponent,
     ExperienceComponent,
@@ -129,7 +129,6 @@ import { SideNavComponent } from './_layouts/side-nav/side-nav.component';
     ProfileProjectsComponent,
     ProfileExperiencesComponent,
     ProfileSkillsComponent,
-    ProfilePhotosComponent,
     ProjectEditComponent,
     ExperienceEditComponent,
     JobDescriptionEditComponent,
@@ -146,6 +145,9 @@ import { SideNavComponent } from './_layouts/side-nav/side-nav.component';
     ExperienceOverviewComponent,
     DropdownLinkComponent,
     SideNavComponent,
+    ProjectTableComponent,
+    ProjectSmComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

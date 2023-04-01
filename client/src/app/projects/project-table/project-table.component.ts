@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from 'src/app/_models/member';
 import { Pagination } from 'src/app/_models/pagination';
+import { ProjectParams } from 'src/app/_models/projectParams';
 import { ProjectService } from 'src/app/_services/project.service';
 
 @Component({
-  selector: 'app-project-overview',
-  templateUrl: './project-overview.component.html',
-  styleUrls: ['./project-overview.component.scss'],
+  selector: 'app-project-table',
+  templateUrl: './project-table.component.html',
+  styleUrls: ['./project-table.component.scss'],
 })
-export class ProjectOverviewComponent implements OnInit {
+export class ProjectTableComponent implements OnInit {
   projects?: Partial<any[]>;
   pageNumber = 1;
   pageSize = 5;
@@ -23,15 +23,16 @@ export class ProjectOverviewComponent implements OnInit {
   }
 
   loadProjects() {
-    this.projectService
-      .getProjects({ pageNumber: this.pageNumber, pageSize: this.pageSize })
-      .subscribe((response) => {
-        if (response && response.pagination) {
-          this.projects = response.result;
-          this.pagination = response.pagination;
-          this.pagination.currentPage = response.pagination.currentPage - 1;
-        }
-      });
+    const params = this.projectService.getProjectParams() as ProjectParams;
+    params.currentUsername = this.projectService.getUsername();
+
+    this.projectService.getProjects(params).subscribe((response) => {
+      if (response && response.pagination) {
+        this.projects = response.result;
+        this.pagination = response.pagination;
+        this.pagination.currentPage = response.pagination.currentPage - 1;
+      }
+    });
   }
 
   onRowClick(id: number) {
@@ -61,7 +62,7 @@ export class ProjectOverviewComponent implements OnInit {
   rowIsSelected(id: number) {
     return this.selectedRowIds.has(id);
   }
-  
+
   allRowsChecked(): boolean {
     if (this.selectedRowIds.size === this.projects?.length) {
       return true;
