@@ -2,7 +2,10 @@
   <div class="row">
     <div class="col-md-8">
       <div class="project container">
-        <app-panel [title]="'Project\'s Info'">
+        <app-panel
+          [title]="'Project\'s Info'"
+          [sub]="'Please check details about the project'"
+        >
           <div class="project-container">
             <div class="row">
               <div class="col-12 text-center">
@@ -20,7 +23,7 @@
                   <swiper class="mySwiperOne" [config]="config">
                     <ng-template
                       swiperSlide
-                      *ngFor="let image of member.photos; let i = index"
+                      *ngFor="let image of project.images; let i = index"
                     >
                       <img
                         [src]="image.url"
@@ -81,29 +84,56 @@
             </div>
           </div>
         </app-panel>
-        <app-panel title="Project's Gallery">
-          <div class="row">
-            <div class="col-md-3 mb-3" *ngFor="let image of project.images">
+        <app-panel
+          title="Project's Gallery"
+          sub="This is to give you an idea about how the project has developed and the final product"
+        >
+          <div class="row" gallerize>
+            <div
+              class="col-md-3 mb-3"
+              *ngFor="let image of project.images"
+              gallerize
+            >
               <img [src]="image.url" alt="" class="w-100" />
             </div>
           </div>
         </app-panel>
-        <app-panel [title]="project.user.username + '\'s Other Projects'">
-          <div class="row">
-            <div class="col-md-3" *ngFor="let p of project.user.projects">
-              <app-project-sm [project]="p"></app-project-sm>
-            </div>
-          </div>
-        </app-panel>
+      </div>
+      <div class="text-end">
+        <app-button (click)="goBack()">Go back to projects</app-button>
       </div>
     </div>
+
     <div class="col-md-4">
-      <app-panel title="Project Owner - {{ project.user.username }}">
-        <app-member-card [member]="project.user"></app-member-card>
+      <app-panel [customClass]="'no-padding'">
+        <!-- <app-member-card [member]="project.user"></app-member-card>
+         -->
+        <app-connection-card [member]="project.user"></app-connection-card>
+      </app-panel>
+
+      <app-panel [title]="project.user.username + '\'s Other Projects'">
+        <div class="row pb-4">
+          <swiper
+            [pagination]="{
+              clickable: true
+            }"
+            [navigation]="true"
+            [slidesPerView]="2"
+            [spaceBetween]="15"
+            [centeredSlides]="false"
+            [centeredSlidesBounds]="false"
+            [preventClicks]="false"
+            [preventClicksPropagation]="false"
+            class="mySwiper"
+          >
+            <ng-template swiperSlide *ngFor="let p of project.user.projects">
+              <div>
+                <app-project-card [project]="p"></app-project-card>
+              </div>
+            </ng-template>
+          </swiper>
+        </div>
       </app-panel>
     </div>
-  </div>
-  <div class="text-end">
-    <app-button (click)="goBack()">Go back to projects</app-button>
   </div>
 </div>

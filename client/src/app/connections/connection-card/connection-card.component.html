@@ -1,3 +1,88 @@
+<div class="card" *ngIf="member">
+  <div class="card-header">
+    <div class="header-content">
+      <div class="img-container">
+        <img
+          src="{{ member.photoUrl || './assets/shared/user.png' }}"
+          [alt]="member.username"
+          class="user-thumbnail size-xs"
+        />
+      </div>
+      <div class="user">
+        <app-link
+          [label]="'@' + member.username"
+          [routerLink]="['/main/members/', member.username]"
+        ></app-link>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="status">
+        <div
+          *ngIf="
+            (presence.onlineUsers$ | async)!.includes(member.username);
+            else offline
+          "
+        >
+          <div>
+            <i class="fa-solid fa-circle is-online"></i>
+            <span class="ps-2">ONLINE</span>
+          </div>
+        </div>
+        <ng-template #offline>
+          <div>
+            <i class="fa-regular fa-circle"></i>
+            <span class="ps-2">OFFLINE</span>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-image">
+    <img
+      src="{{ member.photoUrl || './assets/shared/user.png' }}"
+      [alt]="member.username"
+      class=""
+    />
+  </div>
+  <div class="card-body">
+    <div class="d-flex align-items-center">
+      <div>
+        <app-link
+          [label]="member.knownAs"
+          routerLink="/main/members/{{ member.username }}"
+          customClass="link-lg"
+        ></app-link>
+      </div>
+      <div class="ms-auto">
+        <div>
+          <i class="fa-solid fa-heart"></i> {{ member.likedByUsers.length }}
+        </div>
+      </div>
+    </div>
+    <div>Software developer, Accentury Inc.</div>
+
+    <!-- <div class="card-text" [tooltip]="member.introduction">
+      {{ member.introduction | truncate : 50 }},
+    </div> -->
+
+    <div>
+      <span class="badge bg-dark me-2">Angular</span>
+      <span class="badge bg-dark me-2">React</span>
+      <span class="badge bg-dark me-2">.NET</span>
+    </div>
+    <small class="text-muted"
+      >Last visited {{ member.lastActive | timeago }}
+    </small>
+    <div class="text-end">
+      <app-button
+        >{{ getLikedUserIndex(member) === -1 ? "Add to" : "Remove from" }} my
+        connection</app-button
+      >
+    </div>
+  </div>
+</div>
+<!-- 
 <div class="connection-card" *ngIf="member">
   <a href="" class="member-link" routerLink="/members/{{ member.username }}">
     <div class="image">
@@ -17,7 +102,7 @@
         (click)="removeLike(member)"
       >
       </app-button>
-      <!-- <button
+      <button
         icon=""
         (click)="removeLike(member)"
         class="badge-btn action-icon"
@@ -25,16 +110,18 @@
         <div class="member-badge circle is-liked">
           <i class="fa-solid fa-heart"></i>
         </div>
-      </button> -->
+      </button>
     </div>
     <div class="d-flex align-items-center">
-      <a href="" class="name-link" routerLink="/main/asmembers/{{ member.username }}">
+      <a
+        href=""
+        class="name-link"
+        routerLink="/main/asmembers/{{ member.username }}"
+      >
         {{ member.username }}
       </a>
     </div>
-    <div class="job">
-      Software Developer
-    </div>
+    <div class="job">Software Developer</div>
     <div class="status">
       <div
         *ngIf="
@@ -54,4 +141,4 @@
       </ng-template>
     </div>
   </div>
-</div>
+</div> -->

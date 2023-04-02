@@ -23,8 +23,6 @@ export class MemberComponent implements OnInit, OnDestroy {
   currentUser?: User | null;
   isLiked: boolean = false;
 
- 
-
   constructor(
     private route: ActivatedRoute,
     private memberService: MemberService,
@@ -82,12 +80,6 @@ export class MemberComponent implements OnInit, OnDestroy {
   }
 
   getLikedUserIndex(member: Member): number {
-    console.log(
-      '### like',
-      member.likedByUsers.findIndex(
-        (user) => user?.username === this.currentUser?.username
-      )
-    );
     return member.likedByUsers
       ? member.likedByUsers.findIndex(
           (user) => user?.username === this.currentUser?.username

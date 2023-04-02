@@ -3,11 +3,11 @@ import { Project } from 'src/app/_models/project';
 import { SwiperOptions } from 'swiper';
 
 @Component({
-  selector: 'app-project-sm',
-  templateUrl: './project-sm.component.html',
-  styleUrls: ['./project-sm.component.scss'],
+  selector: 'app-project-card',
+  templateUrl: './project-card.component.html',
+  styleUrls: ['./project-card.component.scss'],
 })
-export class ProjectSmComponent implements OnInit {
+export class ProjectCardComponent implements OnInit {
   @Input() project?: Project;
   config: SwiperOptions = {
     slidesPerView: 1,

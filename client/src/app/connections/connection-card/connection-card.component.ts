@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Member } from 'src/app/_models/member';
+import { User } from 'src/app/_models/user';
+import { AccountService } from 'src/app/_services/account.service';
 import { MemberService } from 'src/app/_services/member.service';
 import { PresenceService } from 'src/app/_services/presence.service';
 
@@ -12,14 +14,20 @@ import { PresenceService } from 'src/app/_services/presence.service';
 export class ConnectionCardComponent implements OnInit {
   @Input() member?: Member;
   @Output() updateMembers: EventEmitter<string> = new EventEmitter();
+  currentUser?: User | null;
 
   constructor(
     private memberService: MemberService,
+    private accountService: AccountService,
     public presence: PresenceService,
     private _snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.accountService.currentUser$.subscribe((res: User | null) => {
+      this.currentUser = res;
+    });
+  }
 
   removeLike(member: Member) {
     this.memberService.removeLike(member.username).subscribe(() => {
@@ -36,5 +44,11 @@ export class ConnectionCardComponent implements OnInit {
         }
       );
     });
+  }
+
+  getLikedUserIndex(member: Member): number {
+    return member.likedByUsers.findIndex(
+      (user) => user?.username === this.currentUser?.username
+    );
   }
 }

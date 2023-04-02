@@ -83,8 +83,10 @@ import { ExperienceOverviewComponent } from './experiences/experience-overview/e
 import { DropdownLinkComponent } from './_forms/dropdown-link/dropdown-link.component';
 import { SideNavComponent } from './_layouts/side-nav/side-nav.component';
 import { ProjectTableComponent } from './projects/project-table/project-table.component';
-import { ProjectSmComponent } from './projects/project-sm/project-sm.component';
 import { SearchComponent } from './_layouts/search/search.component';
+import { ProjectCardComponent } from './projects/project-card/project-card.component';
+import { TruncatePipe } from './_pipes/truncate.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -146,8 +148,9 @@ import { SearchComponent } from './_layouts/search/search.component';
     DropdownLinkComponent,
     SideNavComponent,
     ProjectTableComponent,
-    ProjectSmComponent,
+    ProjectCardComponent,
     SearchComponent,
+    TruncatePipe,
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,8 @@
   position: relative;
   aspect-ratio: 2 / 3;
   color: var(--white);
+  border-radius: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 
   & .member-link {
     text-decoration: none;
@@ -19,7 +21,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 2rem;
+    border-radius: 1rem;
     position: relative;
     z-index: 0;
     &::before {
@@ -29,8 +31,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      filter: blur(1px);
-      border-radius: 2rem;
+      // filter: blur(1px);
+      border-radius: 1rem;
       background-color: rgba(0, 0, 0, 0.4);
       z-index: -1;
     }
@@ -70,12 +72,12 @@
     }
     & .distance {
       padding: 0.1rem 0.75rem;
-      border-radius: 2rem;
+      border-radius: 1rem;
       background-image: linear-gradient(90deg, hsla(4, 82%, 63%, 1), #f89637);
     }
     & .city {
       padding: 0.1rem 0.75rem;
-      border-radius: 2rem;
+      border-radius: 1rem;
       background-image: linear-gradient(90deg, hsla(4, 82%, 63%, 1), #f89637);
     }
   }

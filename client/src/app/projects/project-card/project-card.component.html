@@ -79,11 +79,25 @@
   </ng-template>
   <div class="card-body">
     <h5 class="card-title">{{ project.name }}</h5>
-    <p class="card-text">
-      {{ project.description }}
-    </p>
-    <app-button [routerLink]="'/main/projects/' + project.id">
-      View Project
-    </app-button>
+    <div class="card-text">
+      {{ project.description | truncate : 30 }}
+    </div>
+    <div>
+      <small> {{ project.projectStarted | date : "MMM y" }} </small> -
+      <small> {{ project.projectEnded | date : "MMM y" }} </small>
+    </div>
+    <div class="mb-4">
+      <div>
+        <span class="badge bg-dark me-2">Angular</span>
+        <span class="badge bg-dark me-2">React</span>
+        <span class="badge bg-dark me-2">.NET</span>
+      </div>
+    </div>
+    <hr />
+    <div class="">
+      <app-button [routerLink]="'/main/projects/' + project.id">
+        View Project
+      </app-button>
+    </div>
   </div>
 </div>

@@ -7,6 +7,15 @@ import { ProjectService } from 'src/app/_services/project.service';
 import SwiperCore, { Pagination, Navigation, SwiperOptions } from 'swiper';
 SwiperCore.use([Navigation, Pagination]);
 
+import {
+  Gallery,
+  GalleryItem,
+  ThumbnailsPosition,
+  ImageSize,
+} from 'ng-gallery';
+import { Lightbox } from 'ng-gallery/lightbox';
+import { Photo } from 'src/app/_models/photo';
+
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -21,44 +30,53 @@ export class ProjectComponent implements OnInit {
     navigation: false,
     pagination: { clickable: true, dynamicBullets: true },
     scrollbar: { draggable: true },
-    // [pagination]="{
-
-    //   clickable: true
-    // }"
-    // [slidesPerView]="1"
-    // [spaceBetween]="50"
-  };
-
-  member = {
-    photos: [
-      {
-        url: './assets/shared/home-background-1.jpg',
-      },
-      {
-        url: './assets/shared/home-background-2.jpg',
-      },
-      {
-        url: './assets/shared/home-background-3.jpg',
-      },
-    ],
   };
 
   project$?: Observable<Project>;
+  //
+  items: GalleryItem[] = [];
+
+  //
+
   constructor(
     private projectService: ProjectService,
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location
+    private location: Location,
+    public gallery: Gallery
   ) {}
 
   ngOnInit(): void {
-    const projectId = parseInt(this.route.snapshot.params['id'], 10);
-    if (!isNaN(projectId)) {
-      this.project$ = this.projectService.getProject(projectId);
-    } else {
-      this.router.navigate(['main', 'projects']);
-    }
+    this.route.params.subscribe((params) => {
+      const projectId = parseInt(params['id'], 10);
+
+      if (!isNaN(projectId)) {
+        this.project$ = this.projectService.getProject(projectId);
+      } else {
+        this.router.navigate(['main', 'projects']);
+      }
+    });
+
+    const lightboxRef = this.gallery.ref('lightbox');
+
+    // Add custom gallery config to the lightbox (optional)
+    lightboxRef.setConfig({
+      imageSize: ImageSize.Cover,
+      thumbPosition: ThumbnailsPosition.Top,
+    });
+
+    // Load items into the lightbox gallery ref
+    lightboxRef.load(this.items);
   }
+
+  getGalerryPhotos() {
+    return this.project?.images?.map((photo: Photo) => ({
+      id: photo.id,
+      srcUrl: photo.url,
+      previewUrl: photo.url,
+    }));
+  }
+
   private getProject(id: number): void {
     this.projectService.getProject(id).subscribe((project) => {
       this.project = project;

@@ -48,6 +48,7 @@ body {
 
   margin: 0;
   font-family: "Rubik", sans-serif;
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 
@@ -95,7 +96,7 @@ body {
   max-width: 100%;
   aspect-ratio: 1;
   &.square {
-    border-radius: 2rem;
+    border-radius: 1rem;
     width: 100%;
     height: auto;
   }
@@ -108,15 +109,6 @@ body {
   &.border {
     border: 0.3rem solid var(--white);
   }
-}
-
-.member-card {
-  padding: 20px;
-  border-radius: 20px;
-  border: solid 10px hsla(0, 0%, 94%, 1);
-  margin: 4px 0 20px 0;
-  width: 100%;
-  text-align: left;
 }
 
 .member-badge {
@@ -175,6 +167,10 @@ body {
   }
   .swiper-pagination {
     bottom: -2rem;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: var(--light-green) !important;
   }
 }
 
