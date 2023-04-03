@@ -18,5 +18,5 @@ export interface Project {
   projectStarted: string;
   projectEnded: string;
   images: Photo[];
-  user: Member;
+  user: Partial<Member>;
 }

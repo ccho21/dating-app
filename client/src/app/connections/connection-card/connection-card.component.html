@@ -19,7 +19,7 @@
       <div class="status">
         <div
           *ngIf="
-            (presence.onlineUsers$ | async)!.includes(member.username);
+            (presence.onlineUsers$ | async)!.includes(member.username!);
             else offline
           "
         >
@@ -56,7 +56,7 @@
       </div>
       <div class="ms-auto">
         <div>
-          <i class="fa-solid fa-heart"></i> {{ member.likedByUsers.length }}
+          <i class="fa-solid fa-heart"></i> {{ member.likedByUsers?.length }}
         </div>
       </div>
     </div>

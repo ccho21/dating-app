@@ -12,7 +12,7 @@ import { PresenceService } from 'src/app/_services/presence.service';
   styleUrls: ['./connection-card.component.scss'],
 })
 export class ConnectionCardComponent implements OnInit {
-  @Input() member?: Member;
+  @Input() member?: Partial<Member>;
   @Output() updateMembers: EventEmitter<string> = new EventEmitter();
   currentUser?: User | null;
 
@@ -46,9 +46,11 @@ export class ConnectionCardComponent implements OnInit {
     });
   }
 
-  getLikedUserIndex(member: Member): number {
-    return member.likedByUsers.findIndex(
-      (user) => user?.username === this.currentUser?.username
-    );
+  getLikedUserIndex(member: Partial<Member>): number {
+    return member && member.likedByUsers
+      ? member.likedByUsers.findIndex(
+          (user) => user?.username === this.currentUser?.username
+        )
+      : -1;
   }
 }
