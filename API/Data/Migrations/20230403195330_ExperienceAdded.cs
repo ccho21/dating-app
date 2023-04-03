@@ -43,7 +43,8 @@ namespace API.Data.Migrations
                     Program = table.Column<string>(type: "TEXT", nullable: true),
                     Degree = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    AppUserId = table.Column<int>(type: "INTEGER", nullable: false)
+                    AppUserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,6 +69,7 @@ namespace API.Data.Migrations
                     Url = table.Column<string>(type: "TEXT", nullable: true),
                     Started = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Ended = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     AppUserId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -100,7 +102,8 @@ namespace API.Data.Migrations
                     Deployement = table.Column<string>(type: "TEXT", nullable: true),
                     ProjectStarted = table.Column<DateTime>(type: "TEXT", nullable: true),
                     ProjectEnded = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    AppUserId = table.Column<int>(type: "INTEGER", nullable: false)
+                    AppUserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -123,6 +126,7 @@ namespace API.Data.Migrations
                     Position = table.Column<string>(type: "TEXT", nullable: true),
                     Started = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Ended = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ExperienceId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>

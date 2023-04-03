@@ -14,5 +14,7 @@ namespace API.Entities
         public string Description { get; set; }
         public AppUser AppUser { get; set; }
         public int AppUserId { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+        public DateTime? UpdatedDate { get; set; }
     }
 }

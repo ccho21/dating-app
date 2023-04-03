@@ -48,15 +48,6 @@ namespace API.Controllers
             return await _unitOfWork.ProjectRepository.GetProjectAsync(id);
         }
 
-        // [HttpGet("{username}", Name = "GetProjectsByUsername")]
-        // public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjectsByUsername(string username)
-        // {
-        //     var projects = await _unitOfWork.ProjectRepository.GetProjectsByUsernameAsync(username);
-
-        //     Response.AddPaginationHeader(projects.CurrentPage, projects.PageSize, projects.TotalCount, projects.TotalPages);
-
-        //     return Ok(projects);
-        // }
 
         [HttpPost]
         public async Task<ActionResult<ProjectDto>> CreateProject(ProjectDto createProjectDto)

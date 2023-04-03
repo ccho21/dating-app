@@ -16,5 +16,7 @@ namespace API.Entities
         public ICollection<JobDetail> Details { get; set; }
         public DateTime Started { get; set; }
         public DateTime? Ended { get; set; }
+       public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+        public DateTime? UpdatedDate { get; set; }
     }
 }
