@@ -1,8 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
-import { PaginatedResult } from '../../_models/pagination';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Project } from '../../_models/project';
 import { ProjectParams } from '../../_models/projectParams';
 import { ProjectService } from '../../_services/project.service';
@@ -12,7 +8,7 @@ import { ProjectService } from '../../_services/project.service';
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
 })
-export class ProjectListComponent implements OnInit {
+export class ProjectListComponent implements OnInit, OnDestroy {
   projects: Project[] = [];
 
   constructor(private projectService: ProjectService) {}
@@ -22,9 +18,24 @@ export class ProjectListComponent implements OnInit {
   }
 
   private getProjects(): void {
-    const params: ProjectParams = this.projectService.getProjectParams();
+    const params: ProjectParams = {
+      pageSize: 10,
+      pageNumber: 0,
+    };
     this.projectService.getProjects(params).subscribe((res) => {
       this.projects = res.result as Project[];
     });
+  }
+
+  search(params: ProjectParams) {
+    console.log('### CAME HERE?', params);
+    this.projectService.getProjects(params).subscribe((res) => {
+      console.log('### working?', res);
+      this.projects = res.result as Project[];
+    });
+  }
+
+  ngOnDestroy(): void {
+    console.log('### project list destroyed');
   }
 }

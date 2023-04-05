@@ -84,8 +84,8 @@ export class MemberService {
     // }
 
     let params = getPaginationHeaders(
-      userParams.pageNumber!,
-      userParams.pageSize!
+      userParams.pageNumber as number,
+      userParams.pageSize as number
     );
 
     return getPaginatedResult<Member[]>(

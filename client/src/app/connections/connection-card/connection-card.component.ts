@@ -15,6 +15,7 @@ export class ConnectionCardComponent implements OnInit {
   @Input() member?: Partial<Member>;
   @Output() updateMembers: EventEmitter<string> = new EventEmitter();
   currentUser?: User | null;
+  @Input() noImage?: boolean = false;
 
   constructor(
     private memberService: MemberService,

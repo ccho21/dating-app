@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Pagination } from 'src/app/_models/pagination';
 import { ProjectParams } from 'src/app/_models/projectParams';
+import { User } from 'src/app/_models/user';
+import { AccountService } from 'src/app/_services/account.service';
 import { ProjectService } from 'src/app/_services/project.service';
 
 @Component({
@@ -10,21 +12,34 @@ import { ProjectService } from 'src/app/_services/project.service';
 })
 export class ProjectTableComponent implements OnInit {
   projects?: Partial<any[]>;
-  pageNumber = 1;
+  pageNumber = 0;
   pageSize = 5;
   pagination?: Pagination;
   selectedRowIds: Set<number> = new Set<number>();
   allChecked: boolean = false;
 
-  constructor(private projectService: ProjectService) {}
+  user?: User;
+  constructor(
+    private projectService: ProjectService,
+    private accountService: AccountService
+  ) {
+    this.accountService.currentUser$.subscribe((user: User | null) => {
+      if (user) {
+        this.user = user;
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.loadProjects();
   }
 
   loadProjects() {
-    const params = this.projectService.getProjectParams() as ProjectParams;
-    params.currentUsername = this.projectService.getUsername();
+    const params: ProjectParams = {
+      pageSize: 5,
+      pageNumber: 0,
+      currentUsername: this.user?.username || undefined,
+    };
 
     this.projectService.getProjects(params).subscribe((response) => {
       if (response && response.pagination) {

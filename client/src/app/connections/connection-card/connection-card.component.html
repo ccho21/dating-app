@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <div class="card-image">
+  <div class="card-image" *ngIf="!noImage">
     <img
       src="{{ member.photoUrl || './assets/shared/user.png' }}"
       [alt]="member.username"

@@ -16,7 +16,7 @@ export class ConnectionOverviewComponent implements OnInit {
 
   members?: Partial<Member[]>;
   predicate = 'liked';
-  pageNumber = 1;
+  pageNumber = 0;
   pageSize = 5;
   pagination?: Pagination;
 
@@ -44,9 +44,9 @@ export class ConnectionOverviewComponent implements OnInit {
   activateTab(tab: TabDirective) {
     console.log('### tab', tab);
     if (tab.heading === 'Follwing') {
-      this.predicate = 'like';
-    } else {
       this.predicate = 'liked';
+    } else {
+      this.predicate = 'likedBy';
     }
     console.log(this.predicate);
     this.loadMembersWithLikes(this.predicate);

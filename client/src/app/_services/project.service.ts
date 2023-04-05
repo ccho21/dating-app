@@ -16,7 +16,6 @@ export class ProjectService {
   baseUrl = environment.apiUrl;
   projects?: Project[];
   user?: User;
-  projectParams?: ProjectParams;
 
   constructor(
     private http: HttpClient,
@@ -26,10 +25,6 @@ export class ProjectService {
       .pipe(take(1))
       .subscribe((user: User | null) => {
         this.user = user as User;
-        this.projectParams = {
-          pageNumber: 0,
-          pageSize: 10,
-        };
       });
   }
 
@@ -40,9 +35,14 @@ export class ProjectService {
     );
 
     console.log('## project parms', projectParams);
-    if (projectParams.currentUsername) {
-      params = params.append('currentusername', projectParams.currentUsername);
-    }
+    // if (projectParams.currentUsername) {
+    //   params = params.append('currentusername', projectParams.currentUsername);
+    // }
+    Object.keys(projectParams).forEach((key) => {
+      console.log(key);
+      const value = projectParams[key] as string;
+      params = params.append(key, value);
+    });
 
     return getPaginatedResult<Project[]>(
       this.baseUrl + 'projects/',
@@ -85,13 +85,6 @@ export class ProjectService {
     );
   }
 
-  getUsername() {
-    return this.user?.username;
-  }
-
-  getProjectParams(): ProjectParams {
-    return this.projectParams as ProjectParams;
-  }
   deleteProject(projectId: number) {
     return this.http.delete(this.baseUrl + 'projects/' + projectId);
   }

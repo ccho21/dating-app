@@ -23,8 +23,8 @@ export class MessageOverviewComponent implements OnInit, OnDestroy {
   members?: Member[];
   pagination?: Pagination;
   container = 'Inbox';
-  pageNumber = 1;
-  pageSize = 20;
+  pageNumber = 0;
+  pageSize = 10;
   loading = false;
 
   user?: User;
