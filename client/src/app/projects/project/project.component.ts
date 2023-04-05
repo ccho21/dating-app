@@ -72,17 +72,16 @@ export class ProjectComponent implements OnInit {
             concatMap((project: Project) => {
               this.project = project;
               const { user } = project;
-              const params: ProjectParams = {
-                pageSize: 10,
-                pageNumber: 0,
-              };
-
+              const params: ProjectParams =
+                this.projectService.getProjectParams();
               params.currentUsername = user.username;
               return this.projectService.getProjects(params);
             })
           )
           .subscribe((res: PaginatedResult<Project[]>) => {
             this.otherProjects = res.result;
+
+            this.projectService.resetProjectParams();
           });
       } else {
         this.router.navigate(['main', 'projects']);

@@ -49,12 +49,38 @@ namespace API.Data
             }
 
             // Check if the keyword is for username or project name
-            if (!string.IsNullOrEmpty(projectParams.Keyword))
+            if (!string.IsNullOrEmpty(projectParams.Username))
             {
-                query = query.Where(x => x.Name.ToLower().Contains(projectParams.Keyword.ToLower()) || x.AppUser.UserName.ToLower().Contains(projectParams.Keyword.ToLower()));
+                query = query.Where(x => x.AppUser.UserName.ToLower().Contains(projectParams.Title.ToLower()));
             }
 
-            query.OrderBy(x => x.ProjectStarted);
+            // Check if the keyword is for username or project name
+            if (!string.IsNullOrEmpty(projectParams.Title))
+            {
+                query = query.Where(x => x.Name.ToLower().Contains(projectParams.Title.ToLower()));
+            }
+
+            if (!string.IsNullOrEmpty(projectParams.OrderBy))
+            {
+                var param = projectParams.OrderBy.Trim().ToLower();
+
+                switch (param)
+                {
+                    case "projectDate":
+                        query = query.OrderBy(x => x.ProjectStarted);
+                        break;
+                    case "title":
+                        query = query.OrderBy(x => x.Name);
+                        break;
+                    case "username":
+                        query = query.OrderBy(x => x.AppUser.UserName);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+
             return await PagedList<ProjectDto>.CreateAsync(
                 query.ProjectTo<ProjectDto>(_mapper.ConfigurationProvider).AsNoTracking(),
                 projectParams.PageNumber, projectParams.PageSize);

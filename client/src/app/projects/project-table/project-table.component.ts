@@ -35,11 +35,8 @@ export class ProjectTableComponent implements OnInit {
   }
 
   loadProjects() {
-    const params: ProjectParams = {
-      pageSize: 5,
-      pageNumber: 0,
-      currentUsername: this.user?.username || undefined,
-    };
+    const params: ProjectParams = this.projectService.getProjectParams();
+    params.currentUsername = this.user?.username || undefined;
 
     this.projectService.getProjects(params).subscribe((response) => {
       if (response && response.pagination) {
@@ -47,6 +44,7 @@ export class ProjectTableComponent implements OnInit {
         this.pagination = response.pagination;
         this.pagination.currentPage = response.pagination.currentPage - 1;
       }
+      this.projectService.resetProjectParams();
     });
   }
 

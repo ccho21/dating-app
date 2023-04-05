@@ -7,7 +7,12 @@ import {
   Output,
   Self,
 } from '@angular/core';
-import { ControlValueAccessor, FormControl, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NgControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
@@ -27,6 +32,7 @@ export class DateInputComponent implements OnInit, ControlValueAccessor {
   @Input() maxDate?: Date;
   bsConfig: Partial<BsDatepickerConfig> | undefined;
   @Input() formControl?: FormControl;
+  @Input() customClass: string = '';
   @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
   onChange: any = () => {};
@@ -45,5 +51,9 @@ export class DateInputComponent implements OnInit, ControlValueAccessor {
 
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
+  }
+
+  onValueChange(value: Date): void {
+    this.valueChange.emit(value);
   }
 }

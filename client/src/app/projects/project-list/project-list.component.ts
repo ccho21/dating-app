@@ -18,10 +18,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   }
 
   private getProjects(): void {
-    const params: ProjectParams = {
-      pageSize: 10,
-      pageNumber: 0,
-    };
+    const params: ProjectParams = this.projectService.getProjectParams();
     this.projectService.getProjects(params).subscribe((res) => {
       this.projects = res.result as Project[];
     });

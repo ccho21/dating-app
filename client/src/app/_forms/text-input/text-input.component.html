@@ -1,4 +1,4 @@
-<div *ngIf="formControl" class="mb-3">
+<div *ngIf="formControl" class="">
   <input
     [class.is-invalid]="formControl.touched && formControl.invalid"
     [ngClass]="{ 'size-lg': size }"
@@ -6,6 +6,7 @@
     class="form-control"
     [formControl]="formControl | formControl"
     placeholder="{{ label }}"
+    [class]="customClass"
   />
   <div *ngIf="formControl.errors?.required" class="invalid-feedback">
     Please enter a {{ label }}

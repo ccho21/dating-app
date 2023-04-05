@@ -16,6 +16,7 @@ export class ProjectService {
   baseUrl = environment.apiUrl;
   projects?: Project[];
   user?: User;
+  ProjectParams?: ProjectParams;
 
   constructor(
     private http: HttpClient,
@@ -26,23 +27,32 @@ export class ProjectService {
       .subscribe((user: User | null) => {
         this.user = user as User;
       });
+
+    this.ProjectParams = new ProjectParams();
+  }
+
+  getProjectParams(): ProjectParams {
+    return this.ProjectParams as ProjectParams;
+  }
+
+  setProjectParams(params: ProjectParams) {
+    this.ProjectParams = params;
+  }
+
+  resetProjectParams() {
+    this.ProjectParams = new ProjectParams();
+    return this.ProjectParams;
   }
 
   getProjects(projectParams: ProjectParams) {
-    let params = getPaginationHeaders(
-      projectParams.pageNumber,
-      projectParams.pageSize
-    );
+    let params = new HttpParams();
 
-    console.log('## project parms', projectParams);
-    // if (projectParams.currentUsername) {
-    //   params = params.append('currentusername', projectParams.currentUsername);
-    // }
-    Object.keys(projectParams).forEach((key) => {
-      console.log(key);
-      const value = projectParams[key] as string;
+    Object.keys(projectParams).forEach((key: string) => {
+      const value: string = projectParams.getValue(key);
       params = params.append(key, value);
     });
+
+    console.log('###  parms', params);
 
     return getPaginatedResult<Project[]>(
       this.baseUrl + 'projects/',
@@ -95,3 +105,18 @@ export class ProjectService {
     );
   }
 }
+
+// interface ProjectParams {
+//   pageNumber: number;
+//   pageSize: number;
+//   minDate?: Date;
+//   maxDate?: Date;
+//   currentUsername?: string;
+//   projectStatus?: string;
+//   projectId?: number;
+//   projectName?: string;
+//   projectDescription?: string;
+//   sort?: string;
+//   isSortAscending?: boolean;
+//   [key: string]: any;
+// }

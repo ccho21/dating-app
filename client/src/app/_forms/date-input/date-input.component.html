@@ -49,7 +49,7 @@
   </div>
 </div> -->
 
-<div class="mb-3" *ngIf="formControl">
+<div class="" *ngIf="formControl">
   <div class="input-group">
     <input
       type="text"
@@ -60,6 +60,8 @@
       bsDatepicker
       [bsConfig]="bsConfig"
       [maxDate]="maxDate"
+      [class]="customClass"
+      (bsValueChange)="onValueChange($event)"
     />
     <span class="input-group-text"><i class="fa-regular fa-calendar"></i></span>
   </div>
