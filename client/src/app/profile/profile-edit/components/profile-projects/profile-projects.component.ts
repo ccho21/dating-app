@@ -50,8 +50,8 @@ export class ProfileProjectsComponent implements OnInit {
         customClass: '',
       },
       {
-        btnLabel: 'View All Project',
-        btnLink: '/',
+        btnLabel: 'View All Projects',
+        btnLink: '/main/projects',
         customClass: '',
       },
     ];

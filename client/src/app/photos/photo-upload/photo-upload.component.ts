@@ -1,6 +1,7 @@
 import {
   Component,
   OnInit,
+  OnChanges,
   Input,
   EventEmitter,
   Output,
@@ -20,6 +21,8 @@ import {
   ImageSize,
 } from 'ng-gallery';
 import { Lightbox } from 'ng-gallery/lightbox';
+import { Project } from 'src/app/_models/project';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-photo-upload',
@@ -27,12 +30,12 @@ import { Lightbox } from 'ng-gallery/lightbox';
   styleUrls: ['./photo-upload.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PhotoUploadComponent implements OnInit {
+export class PhotoUploadComponent implements OnInit, OnChanges {
   uploader?: FileUploader;
   user?: User;
   @Input() photos?: Photo[];
   @Input() photo?: Photo;
-  @Input() projectId?: number;
+  @Input() project?: Project;
   @Input() experienceId?: number;
   @Input() single?: boolean;
   @Output() setMain: EventEmitter<Photo> = new EventEmitter<Photo>();
@@ -43,7 +46,7 @@ export class PhotoUploadComponent implements OnInit {
   baseUrl = environment.apiUrl;
 
   //
-
+  previewPath?: any;
   items: GalleryItem[] = [];
   imageData: any = [];
 
@@ -52,7 +55,8 @@ export class PhotoUploadComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     public gallery: Gallery,
-    public lightbox: Lightbox
+    public lightbox: Lightbox,
+    private sanitizer: DomSanitizer
   ) {
     this.accountService.currentUser$
       .pipe(take(1))
@@ -60,7 +64,7 @@ export class PhotoUploadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('### photo came in?');
+    console.log('### coming her?', this.project);
     this.initializeUploader();
 
     const lightboxRef = this.gallery.ref('lightbox');
@@ -73,6 +77,10 @@ export class PhotoUploadComponent implements OnInit {
 
     // Load items into the lightbox gallery ref
     lightboxRef.load(this.items);
+  }
+
+  ngOnChanges(changes: any) {
+    console.log('### change', changes);
   }
 
   getGalerryPhotos() {
@@ -99,8 +107,8 @@ export class PhotoUploadComponent implements OnInit {
     console.log('## initializeUploader');
 
     let url = '';
-    if (this.projectId) {
-      url = `${this.baseUrl}projects/${this.projectId}/add-photo`;
+    if (this.project && this.project.id) {
+      url = `${this.baseUrl}projects/${this.project.id}/add-photo`;
     } else if (this.experienceId) {
       url = `${this.baseUrl}experiences/${this.experienceId}/add-photo`;
     } else {
@@ -116,10 +124,16 @@ export class PhotoUploadComponent implements OnInit {
       autoUpload: false,
       maxFileSize: 10 * 1024 * 1024,
     });
+    console.log('### this.uploader', this.uploader);
 
     this.uploader.onAfterAddingFile = (file) => {
       console.log('## onAfterAddingFile');
+      // this.previewPath = this.sanitizer.bypassSecurityTrustUrl(
+      //   window.URL.createObjectURL(file._file)
+      // );
 
+      console.log('### FIlE', file._file);
+      console.log('### this', this.uploader?.queue[0]._file);
       file.withCredentials = false;
     };
 
@@ -134,5 +148,15 @@ export class PhotoUploadComponent implements OnInit {
       }
       this.updatePhoto.emit(photo);
     };
+  }
+  getSanitizedUrl(queue: any) {
+    if (queue) {
+      let previewPath = this.sanitizer.bypassSecurityTrustUrl(
+        window.URL.createObjectURL(queue._file)
+      );
+      return previewPath;
+    } else {
+      return '';
+    }
   }
 }

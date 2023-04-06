@@ -44,6 +44,7 @@ const routes: Routes = [
         component: MemberComponent,
         resolve: { member: MemberResolver },
       },
+      { path: 'dashboard', redirectTo: 'dashboard/about' },
       {
         path: 'dashboard',
         component: ProfileEditComponent,

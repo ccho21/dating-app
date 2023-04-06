@@ -42,7 +42,8 @@ export class DateInputComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {}
 
   writeValue(value: any): void {
-    this.formControl?.setValue(value);
+    console.log('### value', value);
+    // this.formControl?.setValue(value);
   }
 
   registerOnChange(fn: any): void {

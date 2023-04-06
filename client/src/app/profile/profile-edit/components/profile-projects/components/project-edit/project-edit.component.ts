@@ -1,6 +1,6 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Photo } from 'src/app/_models/photo';
 import { Project } from 'src/app/_models/project';
 import { ProjectService } from 'src/app/_services/project.service';
@@ -28,7 +28,8 @@ export class ProjectEditComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -66,7 +67,11 @@ export class ProjectEditComponent implements OnInit {
 
   private getProject(id: number): void {
     this.projectService.getProject(id).subscribe((project) => {
+      if (!project) {
+        this.router.navigateByUrl('/main');
+      }
       this.project = project;
+      console.log('### project', this.project);
       this.fillForm();
     });
   }

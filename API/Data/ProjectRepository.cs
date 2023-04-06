@@ -63,7 +63,6 @@ namespace API.Data
             if (!string.IsNullOrEmpty(projectParams.OrderBy))
             {
                 var param = projectParams.OrderBy.Trim().ToLower();
-
                 switch (param)
                 {
                     case "projectDate":
@@ -79,7 +78,6 @@ namespace API.Data
                         break;
                 }
             }
-
 
             return await PagedList<ProjectDto>.CreateAsync(
                 query.ProjectTo<ProjectDto>(_mapper.ConfigurationProvider).AsNoTracking(),

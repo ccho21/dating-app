@@ -237,6 +237,7 @@
         <app-panel
           title="Link Info"
           sub="Give visitors to explore the projects through the link"
+          customClass="no-height"
         >
           <div class="row align-items-center mb-3">
             <div class="col-md-2 text-end">
@@ -257,13 +258,13 @@
         <app-panel
           title="Project Images"
           sub="Name this project and describe it to your visitors"
+          customClass="no-height"
         >
           <div class="row mb-5">
             <div class="col-md-12">
               <app-photo-upload
-                *ngIf="project"
-                [photos]="project.images"
-                [projectId]="project.id"
+                [photos]="project?.images"
+                [project]="project"
                 (delete)="deletePhoto($event)"
                 (updatePhoto)="updatePhoto($event)"
               ></app-photo-upload>

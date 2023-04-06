@@ -38,7 +38,7 @@ export class TextareaInputComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {}
 
   writeValue(value: any): void {
-    this.formControl?.setValue(value);
+    // this.formControl?.setValue(value);
   }
 
   registerOnChange(fn: any): void {
