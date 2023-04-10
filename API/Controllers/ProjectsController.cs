@@ -123,7 +123,6 @@ namespace API.Controllers
         public async Task<ActionResult<PhotoDto>> AddPhoto(int id, IFormFile file)
         {
             var project = await _unitOfWork.ProjectRepository.GetProjectWithImagesByIdAsync(id);
-            var username = User.GetUsername();
 
             var result = await _photoService.AddPhotoAsync(file);
 
@@ -145,7 +144,7 @@ namespace API.Controllers
             if (await _unitOfWork.Complete())
             {
                 // return CreatedAtRoute("GetUser", _mapper.Map<PhotoDto>(photo));
-                return CreatedAtRoute("GetProjectsByUsername", new { username = username }, _mapper.Map<PhotoDto>(photo));
+                return CreatedAtRoute("GetProject", new { id = project.Id }, _mapper.Map<PhotoDto>(photo));
             }
 
             return BadRequest("Problem adding photo");
@@ -174,7 +173,7 @@ namespace API.Controllers
         [HttpDelete("{id}/delete-photo/{photoId}")]
         public async Task<ActionResult> DeletePhoto(int id, int photoId)
         {
-            var project = await _unitOfWork.ProjectRepository.GetProjectByIdAsync(id);
+            var project = await _unitOfWork.ProjectRepository.GetProjectWithImagesByIdAsync(id);
 
             var photo = project.Images.FirstOrDefault(x => x.Id == photoId);
 

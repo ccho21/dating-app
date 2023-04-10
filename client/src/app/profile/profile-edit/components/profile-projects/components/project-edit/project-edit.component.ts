@@ -1,9 +1,19 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FileUploader } from 'ng2-file-upload';
+import { tap } from 'rxjs';
 import { Photo } from 'src/app/_models/photo';
 import { Project } from 'src/app/_models/project';
 import { ProjectService } from 'src/app/_services/project.service';
+import { PhotoUploadComponent } from 'src/app/photos/photo-upload/photo-upload.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-project-edit',
@@ -11,10 +21,13 @@ import { ProjectService } from 'src/app/_services/project.service';
   styleUrls: ['./project-edit.component.scss'],
 })
 export class ProjectEditComponent implements OnInit {
+  @ViewChild('photoUpload') photoUpload?: PhotoUploadComponent;
+
+  baseUrl = environment.apiUrl;
   projectForm!: FormGroup;
   maxDate?: Date;
   photos: Photo[] = [];
-  mode: string = 'EDIT';
+  mode?: string;
 
   project?: Project;
   @HostListener('window:beforeunload', ['$event']) unloadNotification(
@@ -24,6 +37,8 @@ export class ProjectEditComponent implements OnInit {
       $event.returnValue = true;
     }
   }
+
+  uploader?: FileUploader;
 
   constructor(
     private projectService: ProjectService,
@@ -36,10 +51,15 @@ export class ProjectEditComponent implements OnInit {
     this.initForm();
     this.route.params.subscribe(({ id }) => {
       if (id) {
-        this.getProject(id);
-        this.mode = 'EDIT';
-      } else {
-        this.mode = 'CREATE';
+        this.projectService.getProject(id).subscribe((project) => {
+          if (!project) {
+            this.router.navigateByUrl('/main');
+          }
+          this.project = project;
+          console.log('### project', this.project);
+          this.fillForm();
+          this.mode = this.project ? 'EDIT' : 'ADD';
+        });
       }
     });
   }
@@ -62,17 +82,6 @@ export class ProjectEditComponent implements OnInit {
       deployement: ['Heroku'],
       projectStarted: [''],
       projectEnded: [''],
-    });
-  }
-
-  private getProject(id: number): void {
-    this.projectService.getProject(id).subscribe((project) => {
-      if (!project) {
-        this.router.navigateByUrl('/main');
-      }
-      this.project = project;
-      console.log('### project', this.project);
-      this.fillForm();
     });
   }
 
@@ -155,10 +164,29 @@ export class ProjectEditComponent implements OnInit {
     console.log(`### ngOnInit projectForm: ${this.projectForm.value}`);
     console.log(`### form: ${form}`);
     delete form.id;
-    this.projectService.createProject(form).subscribe((res) => {
-      console.log(res);
-    });
+    this.projectService
+      .createProject(form)
+      .pipe(
+        tap((res: Project) => {
+          this.project = res;
+          console.log('##3 project updated');
+        })
+      )
+      .subscribe((res: Project) => {
+        // const url = `${this.baseUrl}projects/${res.id}/add-photo`;
+        // if (this.uploader) {
+        //   this.uploader.options.url = url;
+        //   this.uploader.uploadAll();
+        // }
+        console.log('### project result');
+        this.photoUpload?.uploadAll();
+      });
   }
 
   public deleteProject(): void {}
+
+  uploadImages(uploader: FileUploader) {
+    console.log('### uploader', uploader);
+    this.uploader = uploader;
+  }
 }
