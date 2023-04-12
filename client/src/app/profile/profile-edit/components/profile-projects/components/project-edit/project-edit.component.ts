@@ -8,9 +8,11 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
-import { tap } from 'rxjs';
+import { take, tap } from 'rxjs';
 import { Photo } from 'src/app/_models/photo';
 import { Project } from 'src/app/_models/project';
+import { User } from 'src/app/_models/user';
+import { AccountService } from 'src/app/_services/account.service';
 import { ProjectService } from 'src/app/_services/project.service';
 import { PhotoUploadComponent } from 'src/app/photos/photo-upload/photo-upload.component';
 import { environment } from 'src/environments/environment';
@@ -28,6 +30,7 @@ export class ProjectEditComponent implements OnInit {
   maxDate?: Date;
   photos: Photo[] = [];
   mode?: string;
+  user?: User;
 
   project?: Project;
   @HostListener('window:beforeunload', ['$event']) unloadNotification(
@@ -44,8 +47,13 @@ export class ProjectEditComponent implements OnInit {
     private projectService: ProjectService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
-  ) {}
+    private router: Router,
+    private accountService: AccountService
+  ) {
+    this.accountService.currentUser$
+      .pipe(take(1))
+      .subscribe((user) => (this.user = user as User));
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -59,7 +67,10 @@ export class ProjectEditComponent implements OnInit {
           console.log('### project', this.project);
           this.fillForm();
           this.mode = this.project ? 'EDIT' : 'ADD';
+          this.initializeUploader(id);
         });
+      } else {
+        this.initializeUploader();
       }
     });
   }
@@ -80,8 +91,8 @@ export class ProjectEditComponent implements OnInit {
       backEnd: ['dotnet c#'],
       database: ['postgresSQL'],
       deployement: ['Heroku'],
-      projectStarted: [''],
-      projectEnded: [''],
+      projectStarted: [new Date()],
+      projectEnded: [new Date()],
     });
   }
 
@@ -161,8 +172,8 @@ export class ProjectEditComponent implements OnInit {
   }
 
   private createProject(form: Project): void {
-    console.log(`### ngOnInit projectForm: ${this.projectForm.value}`);
-    console.log(`### form: ${form}`);
+    console.log('### ngOnInit projectForm: ', this.projectForm.value);
+    console.log('### form:', form);
     delete form.id;
     this.projectService
       .createProject(form)
@@ -173,20 +184,24 @@ export class ProjectEditComponent implements OnInit {
         })
       )
       .subscribe((res: Project) => {
-        // const url = `${this.baseUrl}projects/${res.id}/add-photo`;
-        // if (this.uploader) {
-        //   this.uploader.options.url = url;
-        //   this.uploader.uploadAll();
-        // }
-        console.log('### project result');
+        const url = `${this.baseUrl}projects/${res.id}/add-photo`;
+        this.photoUpload?.updateUrl(url);
         this.photoUpload?.uploadAll();
       });
   }
 
   public deleteProject(): void {}
 
-  uploadImages(uploader: FileUploader) {
-    console.log('### uploader', uploader);
-    this.uploader = uploader;
+  initializeUploader(id?: number) {
+    let url = `${this.baseUrl}projects/${id}/add-photo`;
+    this.uploader = new FileUploader({
+      url: url,
+      authToken: 'Bearer ' + this.user?.token,
+      isHTML5: true,
+      allowedFileType: ['image'],
+      removeAfterUpload: true,
+      autoUpload: false,
+      maxFileSize: 10 * 1024 * 1024,
+    });
   }
 }
