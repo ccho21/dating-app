@@ -73,13 +73,14 @@ export class ProjectService {
     );
   }
 
-  createProject(project: Project) {
-    return this.http.post(`${this.baseUrl}projects`, project).pipe(
-      map(() => {
+  createProject(project: Project): Observable<Project> {
+    return this.http.post<Project>(`${this.baseUrl}projects`, project).pipe(
+      map((res: Project) => {
         if (this.projects) {
           const index = this.projects?.indexOf(project);
           this.projects[index] = project;
         }
+        return res;
       })
     );
   }

@@ -1,63 +1,50 @@
 <div class="row photo-upload">
   <div class="col-xl-12" *ngIf="uploader">
     <div class="row">
-      <input
-        type="file"
-        class="default-file-input d-none"
-        ng2FileSelect
-        [uploader]="uploader"
-        [multiple]="single ? false : true"
-        #fileInput
-      />
-      <ng-container *ngFor="let photo of photos; let i = index" gallerize>
-        <div class="col-md-2 d-flex flex-column mb-4">
+      <ng-container
+        gallerize
+        *ngIf="updatedPhotos && updatedPhotos.length; else noImage"
+      >
+        <div
+          class="col-md-2 d-flex flex-column mb-4"
+          *ngFor="let photo of updatedPhotos; let i = index"
+        >
           <div class="photo-box">
             <img
               [src]="photo.url"
               [alt]="photo.url"
               class="user-thumbnail square"
             />
-            <div class="photo-delete"></div>
+            <div class="photo-delete">
+              <button
+                *ngIf="photo.id"
+                (click)="deletePhoto(photo.id)"
+                class="icon-btn"
+              >
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </ng-container>
-      <ng-container
-        *ngFor="let queue of uploader?.queue; let i = index"
-        gallerize
-      >
-        <div class="col-md-2 d-flex flex-column mb-4">
-          <div class="photo-box">
-            <img [src]="getSanitizedUrl(queue)" class="user-thumbnail square" />
-            <div class="photo-delete"></div>
+        <div class="col-md-2">
+          <div class="upload-files-container">
+            <a
+              ng2FileDrop
+              [ngClass]="{ 'nv-file-over': hasBaseDropzoneOver }"
+              (fileOver)="fileOverBase($event)"
+              [uploader]="uploader"
+              class="dropzone"
+              (click)="fileInput.click()"
+            >
+              <div class="dropzone-icon">
+                <span class="material-symbols-outlined"> add </span>
+              </div>
+            </a>
           </div>
         </div>
       </ng-container>
 
-      <div class="col-md-2" *ngIf="uploader.queue?.length; else noImage">
-        <div class="upload-files-container">
-          <a
-            ng2FileDrop
-            [ngClass]="{ 'nv-file-over': hasBaseDropzoneOver }"
-            (fileOver)="fileOverBase($event)"
-            [uploader]="uploader"
-            class="dropzone"
-            (click)="fileInput.click()"
-          >
-            <div class="dropzone-icon">
-              <span class="material-symbols-outlined"> add </span>
-            </div>
-            <!-- <div class="dynamic-message mb-3">Drag & drop any file here</div> -->
-          </a>
-        </div>
-      </div>
       <ng-template #noImage>
-        <!-- <div>
-          <img
-            [src]="getSanitizedUrl(queue)"
-            alt="Avatar"
-            class="contribution-image"
-          />
-        </div> -->
         <div class="col">
           <div class="text-center my-4">
             No images to show. Please upload some photos.
@@ -69,6 +56,14 @@
           </div>
         </div>
       </ng-template>
+      <input
+        type="file"
+        class="default-file-input d-none"
+        ng2FileSelect
+        [uploader]="uploader"
+        [multiple]="single ? false : true"
+        #fileInput
+      />
     </div>
     <div class="row">
       <div class="col-12 mb-5" *ngIf="uploader?.queue?.length">
@@ -105,14 +100,14 @@
             </div>
           </div>
           <div class="">
-            <button
+            <!-- <button
               type="button"
               class="main-btn"
               (click)="uploader.uploadAll()"
               [disabled]="!uploader.getNotUploadedItems().length"
             >
               <span class="fa fa-upload"></span> Upload all
-            </button>
+            </button> -->
             <button
               type="button"
               class="main-btn"
@@ -124,7 +119,7 @@
             <button
               type="button"
               class="main-btn"
-              (click)="uploader.clearQueue()"
+              (click)="removeAll()"
               [disabled]="!uploader.queue.length"
             >
               <span class="fa fa-trash"></span> Remove all

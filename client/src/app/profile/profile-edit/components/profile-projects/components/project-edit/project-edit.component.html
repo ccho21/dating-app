@@ -263,6 +263,8 @@
           <div class="row mb-5">
             <div class="col-md-12">
               <app-photo-upload
+                *ngIf="uploader"
+                #photoUpload
                 [photos]="project?.images"
                 [project]="project"
                 (delete)="deletePhoto($event)"
@@ -275,7 +277,7 @@
         <div class="row align-items-start mb-3">
           <div class="col-md-9 text-end">
             <button
-              [disabled]="!projectForm.dirty"
+              [disabled]="!projectForm.dirty && !uploader?.queue"
               form="projectForm"
               type="submit"
               class="btn btn-success btn-block"

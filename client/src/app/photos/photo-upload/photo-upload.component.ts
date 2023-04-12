@@ -6,8 +6,9 @@ import {
   EventEmitter,
   Output,
   ChangeDetectionStrategy,
+  SimpleChanges,
 } from '@angular/core';
-import { FileUploader } from 'ng2-file-upload';
+import { FileItem, FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { AccountService } from 'src/app/_services/account.service';
 import { User } from 'src/app/_models/user';
@@ -22,7 +23,7 @@ import {
 } from 'ng-gallery';
 import { Lightbox } from 'ng-gallery/lightbox';
 import { Project } from 'src/app/_models/project';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-photo-upload',
@@ -31,19 +32,25 @@ import { DomSanitizer } from '@angular/platform-browser';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhotoUploadComponent implements OnInit, OnChanges {
-  uploader?: FileUploader;
+  @Input() uploader?: FileUploader;
   user?: User;
-  @Input() photos?: Photo[];
+  @Input() photos?: Photo[] = [];
   @Input() photo?: Photo;
+
   @Input() project?: Project;
   @Input() experienceId?: number;
+
   @Input() single?: boolean;
+
   @Output() setMain: EventEmitter<Photo> = new EventEmitter<Photo>();
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
   @Output() updatePhoto: EventEmitter<Photo> = new EventEmitter<Photo>();
+  @Output() fileUploader: EventEmitter<FileUploader> =
+    new EventEmitter<FileUploader>();
 
   hasBaseDropzoneOver = false;
   baseUrl = environment.apiUrl;
+  updatedPhotos?: Array<Photo | Partial<Photo>>;
 
   //
   previewPath?: any;
@@ -62,11 +69,16 @@ export class PhotoUploadComponent implements OnInit, OnChanges {
       .pipe(take(1))
       .subscribe((user) => (this.user = user as User));
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    // console.log('### changes', changes);
+    // const { project } = changes;
+    // if (project.currentValue) {
+    //   console.log('### ONE MORE TIME CALL');
+    //   this.initUploader();
+    // }
+  }
 
   ngOnInit(): void {
-    console.log('### coming her?', this.project);
-    this.initializeUploader();
-
     const lightboxRef = this.gallery.ref('lightbox');
 
     // Add custom gallery config to the lightbox (optional)
@@ -77,10 +89,15 @@ export class PhotoUploadComponent implements OnInit, OnChanges {
 
     // Load items into the lightbox gallery ref
     lightboxRef.load(this.items);
-  }
 
-  ngOnChanges(changes: any) {
-    console.log('### change', changes);
+    this.initUploader();
+    console.log('### this uploader', this.uploader);
+  }
+  initUploader() {
+    this.initializeUploader();
+    if (this.photos) {
+      this.updatedPhotos = this.photos.slice();
+    }
   }
 
   getGalerryPhotos() {
@@ -105,6 +122,7 @@ export class PhotoUploadComponent implements OnInit, OnChanges {
 
   initializeUploader() {
     console.log('## initializeUploader');
+    console.log('## Project', this.project);
 
     let url = '';
     if (this.project && this.project.id) {
@@ -124,39 +142,77 @@ export class PhotoUploadComponent implements OnInit, OnChanges {
       autoUpload: false,
       maxFileSize: 10 * 1024 * 1024,
     });
-    console.log('### this.uploader', this.uploader);
 
-    this.uploader.onAfterAddingFile = (file) => {
-      console.log('## onAfterAddingFile');
-      // this.previewPath = this.sanitizer.bypassSecurityTrustUrl(
-      //   window.URL.createObjectURL(file._file)
-      // );
+    if (this.uploader) {
+      this.uploader.onAfterAddingFile = (file) => {
+        console.log('## onAfterAddingFile');
 
-      console.log('### FIlE', file._file);
-      console.log('### this', this.uploader?.queue[0]._file);
-      file.withCredentials = false;
-    };
+        file.withCredentials = false;
 
-    this.uploader.onSuccessItem = (item, response, status, headers) => {
-      console.log('## onSuccessItem', response);
+        if (this.uploader) {
+          const previewImages: Partial<Photo>[] = this.uploader?.queue.map(
+            (q) => {
+              return this.getPreviewImages(q);
+            }
+          );
 
-      const photo: Photo = JSON.parse(response);
-      if (this.photos && this.photos.length) {
-        this.photos?.push(photo);
-      } else {
-        this.photo = photo;
-      }
-      this.updatePhoto.emit(photo);
+          this.updatedPhotos = previewImages.slice();
+          if (this.photos) {
+            this.updatedPhotos = [...this.updatedPhotos, ...this.photos];
+          }
+        }
+      };
+
+      this.uploader.onSuccessItem = (item, response, status, headers) => {
+        console.log('## onSuccessItem', response);
+
+        const photo: Photo = JSON.parse(response);
+        if (this.photos && this.photos.length) {
+          this.photos?.push(photo);
+        } else {
+          this.photo = photo;
+        }
+        this.updatePhoto.emit(photo);
+      };
+    }
+  }
+
+  updateUrl(url: string) {
+    this.uploader?.queue.forEach((elem) => {
+      elem.url = url;
+      console.log('### elem');
+    });
+  }
+  uploadAll() {
+    if (this.uploader && this.uploader.queue) {
+      console.log('### uploader', this.uploader);
+      console.log('### this.uploader.queue', this.uploader.queue);
+      this.uploader.uploadAll();
+    }
+  }
+
+  removeAll() {
+    console.log('### uploader');
+    this.updatedPhotos = this.photos ? this.photos.slice() : [];
+    this.uploader?.clearQueue();
+  }
+
+  getPreviewImages(queue: FileItem): Partial<Photo> {
+    return {
+      id: undefined,
+      url: this.getSanitizedUrl(queue._file) as string,
+      isMain: false,
     };
   }
-  getSanitizedUrl(queue: any) {
-    if (queue) {
+
+  getSanitizedUrl(file: File) {
+    if (file) {
       let previewPath = this.sanitizer.bypassSecurityTrustUrl(
-        window.URL.createObjectURL(queue._file)
+        window.URL.createObjectURL(file)
       );
       return previewPath;
     } else {
-      return '';
+      return null;
     }
   }
 }
