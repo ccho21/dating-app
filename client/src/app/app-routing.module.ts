@@ -25,6 +25,7 @@ import { MainComponent } from './main/main/main.component';
 import { ProjectEditComponent } from './profile/profile-edit/components/profile-projects/components/project-edit/project-edit.component';
 import { ProjectListComponent } from './projects/project-list/project-list.component';
 import { ProjectComponent } from './projects/project/project.component';
+import { ExperienceEditComponent } from './profile/profile-edit/components/profile-experiences/components/experience-edit/experience-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -67,6 +68,10 @@ const routes: Routes = [
             component: ProjectEditComponent,
           },
           { path: 'experiences', component: ProfileExperiencesComponent },
+          {
+            path: 'experiences/:id',
+            component: ExperienceEditComponent,
+          },
           { path: 'skills', component: ProfileSkillsComponent },
         ],
       },
