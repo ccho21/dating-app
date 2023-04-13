@@ -26,7 +26,7 @@ export class ProjectEditComponent implements OnInit {
   @ViewChild('photoUpload') photoUpload?: PhotoUploadComponent;
 
   baseUrl = environment.apiUrl;
-  projectForm!: FormGroup;
+  projectForm?: FormGroup;
   maxDate?: Date;
   photos: Photo[] = [];
   mode?: string;
@@ -36,7 +36,7 @@ export class ProjectEditComponent implements OnInit {
   @HostListener('window:beforeunload', ['$event']) unloadNotification(
     $event: any
   ) {
-    if (this.projectForm.dirty) {
+    if (this.projectForm?.dirty) {
       $event.returnValue = true;
     }
   }
@@ -98,7 +98,7 @@ export class ProjectEditComponent implements OnInit {
 
   private fillForm(): void {
     if (this.project) {
-      this.projectForm.patchValue({
+      this.projectForm?.patchValue({
         ...this.project,
       });
     }
@@ -137,10 +137,10 @@ export class ProjectEditComponent implements OnInit {
   }
 
   public saveProject(): void {
-    const { projectEnded, projectStarted, images } = this.projectForm.value;
+    const { projectEnded, projectStarted, images } = this.projectForm?.value;
 
     const form: Project = {
-      ...this.projectForm.value,
+      ...this.projectForm?.value,
       projectEnded: new Date(projectEnded).toISOString(),
       projectStarted: new Date(projectStarted).toISOString(),
       images: this.project?.images,
@@ -154,7 +154,7 @@ export class ProjectEditComponent implements OnInit {
   }
 
   private updateProject(form: Project): void {
-    console.log('### ngOnInit projectForm: ', this.projectForm.value);
+    console.log('### ngOnInit projectForm: ', this.projectForm?.value);
     console.log('### form:', form);
 
     const { id } = form;
@@ -178,7 +178,7 @@ export class ProjectEditComponent implements OnInit {
   }
 
   private createProject(form: Project): void {
-    console.log('### ngOnInit projectForm: ', this.projectForm.value);
+    console.log('### ngOnInit projectForm: ', this.projectForm?.value);
     console.log('### form:', form);
     delete form.id;
     this.projectService

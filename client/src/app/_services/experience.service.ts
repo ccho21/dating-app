@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Member } from '../_models/member';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { AccountService } from './account.service';
 import { User } from '../_models/user';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 import { ExperienceParams } from '../_models/experienceParams';
+import { Experience } from '../_models/experience';
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +46,14 @@ export class ExperienceService {
       params,
       this.http
     ).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
+  getExperience(id: number): Observable<Experience> {
+    return this.http.get<Experience>(this.baseUrl + 'experiences/' + id).pipe(
       map((response) => {
         return response;
       })
