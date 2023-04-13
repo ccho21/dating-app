@@ -128,11 +128,11 @@ export class ProjectEditComponent implements OnInit {
   }
 
   public updatePhoto(photo: Photo): void {
-    console.log(`### updatePhoto: ${photo}`);
+    console.log('### updatePhoto:', photo);
 
     // //TODO: NGRX
     if (photo) {
-      // this.project?.images.push(photo);
+      this.project?.images.push(photo);
       // if (photo.isMain) {
       //   this.user.photoUrl = photo.url;
       //   this.member.photoUrl = photo.url;
@@ -159,16 +159,27 @@ export class ProjectEditComponent implements OnInit {
   }
 
   private updateProject(form: Project): void {
-    console.log(`### ngOnInit projectForm: ${this.projectForm.value}`);
+    console.log('### ngOnInit projectForm: ', this.projectForm.value);
+    console.log('### form:', form);
 
     const { id } = form;
 
-    console.log(`### form: ${form}`);
-    console.log(`### id: ${id}`);
+    console.log('### form:', form);
+    console.log('### id:', id);
 
-    this.projectService.updateProject(form, id as number).subscribe((res) => {
-      console.log(res);
-    });
+    this.projectService
+      .updateProject(form, id as number)
+      .subscribe((res: Project) => {
+        console.log('### project update', res);
+        this.updateImages(res.id as number);
+      });
+  }
+  updateImages(id: number) {
+    if (id) {
+      const url = `${this.baseUrl}projects/${id}/add-photo`;
+      this.photoUpload?.updateUrl(url);
+      this.photoUpload?.uploadAll();
+    }
   }
 
   private createProject(form: Project): void {
@@ -184,9 +195,7 @@ export class ProjectEditComponent implements OnInit {
         })
       )
       .subscribe((res: Project) => {
-        const url = `${this.baseUrl}projects/${res.id}/add-photo`;
-        this.photoUpload?.updateUrl(url);
-        this.photoUpload?.uploadAll();
+        this.updateImages(res.id as number);
       });
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { Pagination } from 'src/app/_models/pagination';
 import { ProjectParams } from 'src/app/_models/projectParams';
 import { User } from 'src/app/_models/user';
@@ -13,7 +14,8 @@ import { ProjectService } from 'src/app/_services/project.service';
 export class ProjectTableComponent implements OnInit {
   projects?: Partial<any[]>;
   pageNumber = 0;
-  pageSize = 5;
+  pageSize = 10;
+  currentPage: number = 0;
   pagination?: Pagination;
   selectedRowIds: Set<number> = new Set<number>();
   allChecked: boolean = false;
@@ -31,18 +33,19 @@ export class ProjectTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadProjects();
+    const params: ProjectParams = this.projectService.getProjectParams();
+    console.log('### NG ON INIT', params);
+    this.loadProjects(params);
   }
 
-  loadProjects() {
-    const params: ProjectParams = this.projectService.getProjectParams();
+  loadProjects(params: ProjectParams) {
     params.currentUsername = this.user?.username || undefined;
 
     this.projectService.getProjects(params).subscribe((response) => {
       if (response && response.pagination) {
+        console.log('### RESPONSE', response);
         this.projects = response.result;
         this.pagination = response.pagination;
-        this.pagination.currentPage = response.pagination.currentPage - 1;
       }
       this.projectService.resetProjectParams();
     });
@@ -61,7 +64,6 @@ export class ProjectTableComponent implements OnInit {
   }
 
   selectAll() {
-    console.log('### SELECT ALL');
     if (this.allChecked) {
       this.projects?.forEach((project) =>
         this.selectedRowIds.delete(project.id)
@@ -99,5 +101,13 @@ export class ProjectTableComponent implements OnInit {
 
   getSelectedRows() {
     return this.projects?.filter((x) => this.selectedRowIds.has(x.id));
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    if (this.pageNumber != event.page) {
+      const params: ProjectParams = this.projectService.getProjectParams();
+      params.pageNumber = event.page;
+      this.loadProjects(params);
+    }
   }
 }

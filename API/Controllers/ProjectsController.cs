@@ -19,15 +19,16 @@ namespace API.Controllers
     [Authorize]
     public class ProjectsController : BaseApiController
     {
-        //private readonly DataContext _context;
+        private readonly DataContext _context;
         private readonly IMapper _mapper;
         private readonly IPhotoService _photoService;
         private readonly IUnitOfWork _unitOfWork;
-        public ProjectsController(IUnitOfWork unitOfWork, IMapper mapper, IPhotoService photoService)
+        public ProjectsController(DataContext context, IUnitOfWork unitOfWork, IMapper mapper, IPhotoService photoService)
         {
             _unitOfWork = unitOfWork;
             _photoService = photoService;
             _mapper = mapper;
+            _context = context;
         }
 
         [HttpGet]
@@ -96,7 +97,7 @@ namespace API.Controllers
 
             _mapper.Map(updateProjectDto, project);
 
-            if (await _unitOfWork.Complete())
+            if (await _context.SaveChangesAsync() >= 0)
                 return Ok(_mapper.Map<ProjectDto>(project));
 
             return BadRequest("Failed to update project");

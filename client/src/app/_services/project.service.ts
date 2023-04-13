@@ -86,14 +86,18 @@ export class ProjectService {
   }
 
   updateProject(project: Project, projectId: number) {
-    return this.http.put(`${this.baseUrl}projects/${projectId}`, project).pipe(
-      map(() => {
-        if (this.projects) {
-          const index = this.projects?.indexOf(project);
-          this.projects[index] = project;
-        }
-      })
-    );
+    return this.http
+      .put<Project>(`${this.baseUrl}projects/${projectId}`, project)
+      .pipe(
+        map((res: Project) => {
+          console.log('### what?', res);
+          if (this.projects) {
+            const index = this.projects?.indexOf(project);
+            this.projects[index] = project;
+          }
+          return res;
+        })
+      );
   }
 
   deleteProject(projectId: number) {

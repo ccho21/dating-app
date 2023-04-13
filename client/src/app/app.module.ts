@@ -14,6 +14,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -169,6 +170,7 @@ import { TruncatePipe } from './_pipes/truncate.pipe';
     BsDatepickerModule.forRoot(),
     TooltipModule.forRoot(),
     CarouselModule.forRoot(),
+    PaginationModule.forRoot(),
 
     GalleryModule.withConfig({
       // thumbView: 'contain',

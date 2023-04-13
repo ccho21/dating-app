@@ -125,13 +125,13 @@ export class PhotoUploadComponent implements OnInit, OnChanges {
     console.log('## Project', this.project);
 
     let url = '';
-    if (this.project && this.project.id) {
-      url = `${this.baseUrl}projects/${this.project.id}/add-photo`;
-    } else if (this.experienceId) {
-      url = `${this.baseUrl}experiences/${this.experienceId}/add-photo`;
-    } else {
-      url = `${this.baseUrl}users/add-photo`;
-    }
+    // if (this.project && this.project.id) {
+    //   url = `${this.baseUrl}projects/${this.project.id}/add-photo`;
+    // } else if (this.experienceId) {
+    //   url = `${this.baseUrl}experiences/${this.experienceId}/add-photo`;
+    // } else {
+    //   url = `${this.baseUrl}users/add-photo`;
+    // }
 
     this.uploader = new FileUploader({
       url: url,
@@ -143,56 +143,52 @@ export class PhotoUploadComponent implements OnInit, OnChanges {
       maxFileSize: 10 * 1024 * 1024,
     });
 
-    if (this.uploader) {
-      this.uploader.onAfterAddingFile = (file) => {
-        console.log('## onAfterAddingFile');
+    this.uploader.onAfterAddingFile = (file) => {
+      console.log('## onAfterAddingFile');
 
-        file.withCredentials = false;
+      file.withCredentials = false;
 
-        if (this.uploader) {
-          const previewImages: Partial<Photo>[] = this.uploader?.queue.map(
-            (q) => {
-              return this.getPreviewImages(q);
-            }
-          );
-
-          this.updatedPhotos = previewImages.slice();
-          if (this.photos) {
-            this.updatedPhotos = [...this.updatedPhotos, ...this.photos];
+      if (this.uploader) {
+        const previewImages: Partial<Photo>[] = this.uploader?.queue.map(
+          (q) => {
+            return this.getPreviewImages(q);
           }
-        }
-      };
+        );
 
-      this.uploader.onSuccessItem = (item, response, status, headers) => {
-        console.log('## onSuccessItem', response);
-
-        const photo: Photo = JSON.parse(response);
-        if (this.photos && this.photos.length) {
-          this.photos?.push(photo);
-        } else {
-          this.photo = photo;
+        this.updatedPhotos = previewImages.slice();
+        if (this.photos) {
+          this.updatedPhotos = [...this.updatedPhotos, ...this.photos];
         }
-        this.updatePhoto.emit(photo);
-      };
-    }
+      }
+    };
+
+    this.uploader.onSuccessItem = (item, response, status, headers) => {
+      console.log('## onSuccessItem', response);
+
+      const photo: Photo = JSON.parse(response);
+      if (this.photos && this.photos.length) {
+        this.photos?.push(photo);
+        this.updatedPhotos = this.photos.slice();
+      } else {
+        this.photo = photo;
+      }
+      this.updatePhoto.emit(photo);
+    };
   }
 
   updateUrl(url: string) {
     this.uploader?.queue.forEach((elem) => {
       elem.url = url;
-      console.log('### elem');
     });
   }
+
   uploadAll() {
     if (this.uploader && this.uploader.queue) {
-      console.log('### uploader', this.uploader);
-      console.log('### this.uploader.queue', this.uploader.queue);
       this.uploader.uploadAll();
     }
   }
 
   removeAll() {
-    console.log('### uploader');
     this.updatedPhotos = this.photos ? this.photos.slice() : [];
     this.uploader?.clearQueue();
   }

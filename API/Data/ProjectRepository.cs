@@ -17,6 +17,11 @@ namespace API.Data
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
+        public ProjectRepository(DataContext context, IMapper mapper)
+        {
+            _mapper = mapper;
+            _context = context;
+        }
 
         public void AddProject(Project project)
         {
@@ -32,13 +37,7 @@ namespace API.Data
         {
             _context.Projects.Remove(project);
         }
-
-
-        public ProjectRepository(DataContext context, IMapper mapper)
-        {
-            _mapper = mapper;
-            _context = context;
-        }
+       
         public async Task<PagedList<ProjectDto>> GetProjectsAsync(ProjectParams projectParams)
         {
             var query = _context.Projects.Include(x => x.AppUser).Include(x => x.Images).AsQueryable();
