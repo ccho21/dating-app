@@ -41,23 +41,21 @@ namespace API.Controllers
             return Ok(experiences);
         }
 
-        // [HttpGet("{id}")]
-        // public async Task<ActionResult<IEnumerable<MemberDto>>> getExperience(int id)
-        // {
-        //     var experience = await _unitOfWork.ExperienceRepository.GetExperienceByIdAsync(id);
-
-        //     return Ok(experience);
-        // }
-
-        [HttpGet("{username}", Name = "GetExperiencesByUsername")]
-        public async Task<ActionResult<IEnumerable<ExperienceDto>>> GetExperiencesByUsername(string username)
+        [HttpGet("{id}", Name = "getExperience")]
+        public async Task<ActionResult<ExperienceDto>> getExperience(int id)
         {
-            var experiences = await _unitOfWork.ExperienceRepository.GetExperiencesByUsernameAsync(username);
-
-            Response.AddPaginationHeader(experiences.CurrentPage, experiences.PageSize, experiences.TotalCount, experiences.TotalPages);
-
-            return Ok(experiences);
+            return await _unitOfWork.ExperienceRepository.GetExperienceAsync(id);
         }
+
+        //[HttpGet("{username}", Name = "GetExperiencesByUsername")]
+        //public async Task<ActionResult<IEnumerable<ExperienceDto>>> GetExperiencesByUsername(string username)
+        //{
+        //    var experiences = await _unitOfWork.ExperienceRepository.GetExperiencesByUsernameAsync(username);
+
+        //    Response.AddPaginationHeader(experiences.CurrentPage, experiences.PageSize, experiences.TotalCount, experiences.TotalPages);
+
+        //    return Ok(experiences);
+        //}
 
         [HttpPost]
         public async Task<ActionResult<ExperienceDto>> CreateExperience(ExperienceDto createExperienceDto)
@@ -102,7 +100,7 @@ namespace API.Controllers
             var username = User.GetUsername();
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
 
-            var experience = await _unitOfWork.ExperienceRepository.GetExperienceByIdAsync(id);
+            var experience = await _unitOfWork.ExperienceRepository.GetExperienceAsync(id);
 
             if (experience == null)
                 return BadRequest("Experience not found");

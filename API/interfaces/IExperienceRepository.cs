@@ -15,7 +15,7 @@ namespace API.interfaces
         public void DeleteExperience(Experience experience);
         public Task<PagedList<ExperienceDto>> GetExperiencesAsync(ExperienceParams experienceParams);
         public Task<PagedList<ExperienceDto>> GetExperiencesByUsernameAsync(string username);
-        public Task<Experience> GetExperienceByIdAsync(int id);
+        public Task<ExperienceDto> GetExperienceAsync(int id);
         public Task<Experience> GetExperienceWithLogoByIdAsync(int id);
         public Task<Experience> GetExperienceWithDetailsByIdAsync(int id);
     }

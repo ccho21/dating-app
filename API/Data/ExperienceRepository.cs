@@ -41,7 +41,13 @@ namespace API.Data
 
         public async Task<PagedList<ExperienceDto>> GetExperiencesAsync(ExperienceParams experienceParams)
         {
-            var query = _context.Experiences.AsQueryable();
+            var query = _context.Experiences.Include(x => x.AppUser).AsQueryable();
+
+            // Check if the keyword is for username or project name
+            if (!string.IsNullOrEmpty(experienceParams.CurrentUsername))
+            {
+                query = query.Where(x => x.AppUser.UserName.ToLower().Contains(experienceParams.CurrentUsername.ToLower()));
+            }
 
             return await PagedList<ExperienceDto>.CreateAsync(
                 query.ProjectTo<ExperienceDto>(_mapper.ConfigurationProvider).AsNoTracking(),
@@ -58,9 +64,12 @@ namespace API.Data
                1, 10);
         }
 
-        public async Task<Experience> GetExperienceByIdAsync(int id)
+        public async Task<ExperienceDto> GetExperienceAsync(int id)
         {
-            return await _context.Experiences.FindAsync(id);
+            return await _context.Experiences
+                .Where(x => x.Id == id)
+                .ProjectTo<ExperienceDto>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
         }
         public async Task<Experience> GetExperienceWithLogoByIdAsync(int id)
         {
