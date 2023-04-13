@@ -133,11 +133,6 @@ export class ProjectEditComponent implements OnInit {
     // //TODO: NGRX
     if (photo) {
       this.project?.images.push(photo);
-      // if (photo.isMain) {
-      //   this.user.photoUrl = photo.url;
-      //   this.member.photoUrl = photo.url;
-      //   this.accountService.setCurrentUser(this.user);
-      // }
     }
   }
 

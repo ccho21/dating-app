@@ -16,6 +16,7 @@ export class ExperienceService {
   baseUrl = environment.apiUrl;
   project?: any;
   user?: User;
+  experienceParams?: ExperienceParams;
 
   constructor(
     private http: HttpClient,
@@ -26,13 +27,21 @@ export class ExperienceService {
       .subscribe((user: User | null) => {
         this.user = user as User;
       });
+
+    this.experienceParams = new ExperienceParams();
   }
 
-  getExperiences(experienceParams?: ExperienceParams) {
-    let params = getPaginationHeaders(1, 10);
+  getExperiences(experienceParams: ExperienceParams) {
+    let params = new HttpParams();
+
+    console.log('###params', experienceParams);
+    Object.keys(experienceParams).forEach((key: string) => {
+      const value: string = experienceParams.getValue(key);
+      params = params.append(key, value);
+    });
 
     return getPaginatedResult<any[]>(
-      this.baseUrl + 'experiences/' + this.user?.username,
+      this.baseUrl + 'experiences/',
       params,
       this.http
     ).pipe(
@@ -40,5 +49,18 @@ export class ExperienceService {
         return response;
       })
     );
+  }
+
+  getExperienceParams(): ExperienceParams {
+    return this.experienceParams as ExperienceParams;
+  }
+
+  setExperienceParams(params: ExperienceParams) {
+    this.experienceParams = params;
+  }
+
+  resetExperienceParams() {
+    this.experienceParams = new ExperienceParams();
+    return this.experienceParams;
   }
 }

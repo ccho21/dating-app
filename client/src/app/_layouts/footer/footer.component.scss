@@ -1,7 +1,7 @@
 @import "../../../assets/scss/typography";
 
 .footer {
-  height: 20rem;
+  min-height: 20rem;
   background-color: var(--light-green);
   text-align: center;
   display: flex;

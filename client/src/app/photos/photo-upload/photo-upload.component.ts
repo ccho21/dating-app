@@ -32,7 +32,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhotoUploadComponent implements OnInit, OnChanges {
-  @Input() uploader?: FileUploader;
+  uploader?: FileUploader;
   user?: User;
   @Input() photos?: Photo[] = [];
   @Input() photo?: Photo;
@@ -125,13 +125,6 @@ export class PhotoUploadComponent implements OnInit, OnChanges {
     console.log('## Project', this.project);
 
     let url = '';
-    // if (this.project && this.project.id) {
-    //   url = `${this.baseUrl}projects/${this.project.id}/add-photo`;
-    // } else if (this.experienceId) {
-    //   url = `${this.baseUrl}experiences/${this.experienceId}/add-photo`;
-    // } else {
-    //   url = `${this.baseUrl}users/add-photo`;
-    // }
 
     this.uploader = new FileUploader({
       url: url,

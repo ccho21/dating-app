@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ExperienceParams } from 'src/app/_models/experienceParams';
 import { Pagination } from 'src/app/_models/pagination';
 import { ExperienceService } from 'src/app/_services/experience.service';
 
@@ -15,18 +16,18 @@ export class ExperienceOverviewComponent implements OnInit {
   constructor(private experienceService: ExperienceService) {}
 
   ngOnInit(): void {
-    this.loadExperiences();
+    const params: ExperienceParams =
+      this.experienceService.getExperienceParams();
+    this.loadExperiences(params);
   }
 
-  loadExperiences() {
-    this.experienceService
-      .getExperiences({ pageNumber: this.pageNumber, pageSize: this.pageSize })
-      .subscribe((response) => {
-        if (response && response.pagination) {
-          this.experiences = response.result;
-          this.pagination = response.pagination;
-          this.pagination.currentPage = response.pagination.currentPage - 1;
-        }
-      });
+  loadExperiences(params: ExperienceParams) {
+    this.experienceService.getExperiences(params).subscribe((response) => {
+      if (response && response.pagination) {
+        this.experiences = response.result;
+        this.pagination = response.pagination;
+        this.pagination.currentPage = response.pagination.currentPage - 1;
+      }
+    });
   }
 }

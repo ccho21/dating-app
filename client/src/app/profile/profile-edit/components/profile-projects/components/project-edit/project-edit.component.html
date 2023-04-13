@@ -268,7 +268,6 @@
                 [photos]="project?.images"
                 [project]="project"
                 (delete)="deletePhoto($event)"
-                (updatePhoto)="updatePhoto($event)"
               ></app-photo-upload>
             </div>
           </div>
@@ -277,7 +276,7 @@
         <div class="row align-items-start mb-3">
           <div class="col-md-9 text-end">
             <button
-              [disabled]="!projectForm.dirty && !uploader?.queue"
+              [disabled]="!projectForm.dirty"
               form="projectForm"
               type="submit"
               class="btn btn-success btn-block"

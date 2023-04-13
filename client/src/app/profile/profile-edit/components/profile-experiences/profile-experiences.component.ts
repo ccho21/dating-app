@@ -36,6 +36,7 @@ export class ProfileExperiencesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('### experience');
     this.maxDate = new Date();
     this.loadMember();
   }

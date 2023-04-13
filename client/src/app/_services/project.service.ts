@@ -16,7 +16,7 @@ export class ProjectService {
   baseUrl = environment.apiUrl;
   projects?: Project[];
   user?: User;
-  ProjectParams?: ProjectParams;
+  projectParams?: ProjectParams;
 
   constructor(
     private http: HttpClient,
@@ -28,20 +28,7 @@ export class ProjectService {
         this.user = user as User;
       });
 
-    this.ProjectParams = new ProjectParams();
-  }
-
-  getProjectParams(): ProjectParams {
-    return this.ProjectParams as ProjectParams;
-  }
-
-  setProjectParams(params: ProjectParams) {
-    this.ProjectParams = params;
-  }
-
-  resetProjectParams() {
-    this.ProjectParams = new ProjectParams();
-    return this.ProjectParams;
+    this.projectParams = new ProjectParams();
   }
 
   getProjects(projectParams: ProjectParams) {
@@ -108,6 +95,19 @@ export class ProjectService {
     return this.http.delete(
       this.baseUrl + 'projects/' + projectId + '/delete-photo/' + photoId
     );
+  }
+
+  getProjectParams(): ProjectParams {
+    return this.projectParams as ProjectParams;
+  }
+
+  setProjectParams(params: ProjectParams) {
+    this.projectParams = params;
+  }
+
+  resetProjectParams() {
+    this.projectParams = new ProjectParams();
+    return this.projectParams;
   }
 }
 
