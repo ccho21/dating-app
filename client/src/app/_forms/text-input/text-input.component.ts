@@ -33,7 +33,6 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
   @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
   @Input() customClass: string = '';
 
-
   onChange: any = () => {};
   onTouched: any = () => {};
 

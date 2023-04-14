@@ -59,7 +59,7 @@
             </div>
             <div class="offset-md-1 col-md-8">
               <app-textarea-input
-                [rows]="4"
+                [rows]="2"
                 [label]="'intro'"
                 [formControl]="experienceForm.controls['intro'] | formControl"
                 class="theme-green"
@@ -72,9 +72,62 @@
             </div>
           </div>
         </app-panel>
+
         <app-panel
-          title="Project Info"
+          title="Job Description Info"
           sub="Name this project and describe it to your visitors"
+        >
+          <div [formGroup]="experienceForm">
+            <div formArrayName="jobDescriptions">
+              <ng-container
+                *ngFor="let jdForm of jobDescriptions.controls; let j = index"
+                [formGroup]="jdForm | formGroup"
+              >
+                <app-job-description-edit [jdForm]="jdForm | formGroup">
+                </app-job-description-edit>
+              </ng-container>
+            </div>
+          </div>
+        </app-panel>
+
+        <app-panel
+          title="Skills Info"
+          sub="Add Skills that you used"
+          customClass="no-height "
+        >
+          <div class="row">
+            <div class="offset-md-1 col-md-9">
+              <div class="d-flex align-items-center mb-3">
+                <div *ngFor="let skill of skills" class="mx-2">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="deleteSkill(skill)"
+                  >
+                    {{ skill.name }} <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+              </div>
+              <input
+                formControlName="skills"
+                [typeahead]="dataSource"
+                [typeaheadAsync]="true"
+                typeaheadOptionField="name"
+                (typeaheadNoResults)="typeaheadNoResults($event)"
+                (typeaheadOnSelect)="typeaheadOnSelect($event)"
+                placeholder="Please Add skills"
+                class="form-control"
+              />
+              <div class="py-3" *ngIf="noResult">
+                <app-button (click)="addSkill()">Add Skill</app-button>
+              </div>
+            </div>
+          </div>
+        </app-panel>
+
+        <app-panel
+          title="Additional Info"
+          sub="Project that you have worked on"
         >
           <div class="row align-items-center mb-3">
             <div class="col-md-2 text-end">
@@ -120,22 +173,6 @@
             </div>
           </div>
         </app-panel>
-        <app-panel
-          title="Job Description Info"
-          sub="Name this project and describe it to your visitors"
-        >
-          <div [formGroup]="experienceForm">
-            <div formArrayName="jobDescriptions">
-              <ng-container
-                *ngFor="let jdForm of jobDescriptions.controls; let j = index"
-                [formGroup]="jdForm | formGroup"
-              >
-                <app-job-description-edit [jdForm]="jdForm | formGroup">
-                </app-job-description-edit>
-              </ng-container>
-            </div>
-          </div>
-        </app-panel>
 
         <app-panel
           title="Experience Images"
@@ -153,6 +190,18 @@
             </div>
           </div>
         </app-panel>
+        <div class="row align-items-start mb-3">
+          <div class="col-md-12 text-end">
+            <button
+              [disabled]="!experienceForm.dirty && !skills.length"
+              form="experiencesForm"
+              type="submit"
+              class="btn btn-success btn-block"
+            >
+              Save Changes
+            </button>
+          </div>
+        </div>
       </div>
       <div class="col-md-4">
         <app-panel customClass="no-height">
@@ -189,17 +238,4 @@
       </div>
     </div>
   </form>
-
-  <div class="row align-items-start mb-3">
-    <div class="col-md-12 text-end">
-      <button
-        [disabled]="!experienceForm.dirty"
-        form="experiencesForm"
-        type="submit"
-        class="btn btn-success btn-block"
-      >
-        Save Changes
-      </button>
-    </div>
-  </div>
 </div>

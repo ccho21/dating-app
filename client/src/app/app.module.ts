@@ -15,6 +15,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -171,6 +172,7 @@ import { TruncatePipe } from './_pipes/truncate.pipe';
     TooltipModule.forRoot(),
     CarouselModule.forRoot(),
     PaginationModule.forRoot(),
+    TypeaheadModule.forRoot(),
 
     GalleryModule.withConfig({
       // thumbView: 'contain',

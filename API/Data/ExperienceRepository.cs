@@ -63,7 +63,6 @@ namespace API.Data
                query.ProjectTo<ExperienceDto>(_mapper.ConfigurationProvider).AsNoTracking(),
                1, 10);
         }
-
         public async Task<ExperienceDto> GetExperienceAsync(int id)
         {
             return await _context.Experiences
@@ -71,13 +70,18 @@ namespace API.Data
                 .ProjectTo<ExperienceDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }
+
+        public async Task<Experience> GetExperienceByIdAsync(int id)
+        {
+            return await _context.Experiences.FirstOrDefaultAsync(x => x.Id == id);
+        }
         public async Task<Experience> GetExperienceWithLogoByIdAsync(int id)
         {
             return await _context.Experiences.Include(x => x.Logo).SingleOrDefaultAsync(x => x.Id == id);
         }
         public async Task<Experience> GetExperienceWithDetailsByIdAsync(int id)
         {
-            return await _context.Experiences.Include(x => x.JobDescriptions).ThenInclude(x => x.Details).SingleOrDefaultAsync(x => x.Id == id);
+            return await _context.Experiences.Include(x => x.JobDescriptions).ThenInclude(x => x.Skills).SingleOrDefaultAsync(x => x.Id == id);
         }
 
     }

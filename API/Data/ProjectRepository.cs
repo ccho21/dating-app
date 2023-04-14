@@ -91,15 +91,6 @@ namespace API.Data
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<PagedList<ProjectDto>> GetProjectsByUsernameAsync(string username)
-        {
-            var query = _context.Projects.AsQueryable();
-            query = query.Where(x => x.AppUser.UserName == username);
-
-            return await PagedList<ProjectDto>.CreateAsync(
-                query.ProjectTo<ProjectDto>(_mapper.ConfigurationProvider).AsNoTracking(),
-                1, 10);
-        }
         public async Task<Project> GetProjectByIdAsync(int id)
         {
             return await _context.Projects.FirstOrDefaultAsync(x => x.Id == id);

@@ -19,15 +19,16 @@ namespace API.Controllers
     [Authorize]
     public class ExperiencesController : BaseApiController
     {
-        // private readonly DataContext _context;
+        private readonly DataContext _context;
         private readonly IMapper _mapper;
         private readonly IPhotoService _photoService;
         private readonly IUnitOfWork _unitOfWork;
-        public ExperiencesController(IUnitOfWork unitOfWork, IMapper mapper, IPhotoService photoService)
+        public ExperiencesController(IUnitOfWork unitOfWork, IMapper mapper, IPhotoService photoService, DataContext context)
         {
             _unitOfWork = unitOfWork;
             _photoService = photoService;
             _mapper = mapper;
+            _context = context;
         }
 
         [HttpGet]
@@ -46,16 +47,6 @@ namespace API.Controllers
         {
             return await _unitOfWork.ExperienceRepository.GetExperienceAsync(id);
         }
-
-        //[HttpGet("{username}", Name = "GetExperiencesByUsername")]
-        //public async Task<ActionResult<IEnumerable<ExperienceDto>>> GetExperiencesByUsername(string username)
-        //{
-        //    var experiences = await _unitOfWork.ExperienceRepository.GetExperiencesByUsernameAsync(username);
-
-        //    Response.AddPaginationHeader(experiences.CurrentPage, experiences.PageSize, experiences.TotalCount, experiences.TotalPages);
-
-        //    return Ok(experiences);
-        //}
 
         [HttpPost]
         public async Task<ActionResult<ExperienceDto>> CreateExperience(ExperienceDto createExperienceDto)
@@ -96,12 +87,12 @@ namespace API.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ExperienceDto>> UpdateExperience(int id, ExperienceUpdateDto createExperienceDto)
+        public async Task<ActionResult<ExperienceDto>> UpdateExperience(int id, ExperienceUpdateDto updateExperienceDto)
         {
             var username = User.GetUsername();
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
 
-            var experience = await _unitOfWork.ExperienceRepository.GetExperienceAsync(id);
+            var experience = await _unitOfWork.ExperienceRepository.GetExperienceByIdAsync(id);
 
             if (experience == null)
                 return BadRequest("Experience not found");
@@ -109,7 +100,7 @@ namespace API.Controllers
             if (user.Id != experience.AppUserId)
                 return BadRequest("You don't have permission to update this experience");
 
-            _mapper.Map(createExperienceDto, experience);
+            _mapper.Map(updateExperienceDto, experience);
 
             if (await _unitOfWork.Complete())
                 return Ok(_mapper.Map<ExperienceDto>(experience));

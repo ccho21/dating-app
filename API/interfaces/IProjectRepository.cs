@@ -15,7 +15,6 @@ namespace API.interfaces
         void DeleteProject(Project project);
         public Task<PagedList<ProjectDto>> GetProjectsAsync(ProjectParams projectParams);
         public Task<ProjectDto> GetProjectAsync(int id);
-        public Task<PagedList<ProjectDto>> GetProjectsByUsernameAsync(string username);
         public Task<Project> GetProjectByIdAsync(int id);
         public Task<Project> GetProjectWithImagesByIdAsync(int id);
     }

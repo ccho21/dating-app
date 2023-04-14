@@ -16,7 +16,6 @@ export class JobDescriptionEditComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('### job Description INIT');
     console.log('### jdForm: ', this.jdForm);
   }
 }

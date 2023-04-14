@@ -16,5 +16,5 @@
   <div *ngIf="formControl.errors?.isMatching" class="invalid-feedback">
     Passwords do not match
   </div>
-  {{ formControl.value.length }} / 500
+  <div class="text-end">{{ formControl.value.length }} / 500</div>
 </div>
