@@ -6,10 +6,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Entities
 {
-    [Table("JobDetails")]
-    public class JobDetail
+    [Table("Skills")]
+
+    public class Skill
     {
         public int Id { get; set; }
-        public string Description { get; set; }
+        public string Name { get; set; }
     }
 }

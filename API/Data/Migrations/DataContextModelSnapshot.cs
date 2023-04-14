@@ -268,6 +268,9 @@ namespace API.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Details")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("Ended")
                         .HasColumnType("TEXT");
 
@@ -288,25 +291,6 @@ namespace API.Data.Migrations
                     b.HasIndex("ExperienceId");
 
                     b.ToTable("JobDescriptions");
-                });
-
-            modelBuilder.Entity("API.Entities.JobDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("JobDescriptionId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("JobDescriptionId");
-
-                    b.ToTable("JobDetails");
                 });
 
             modelBuilder.Entity("API.Entities.Message", b =>
@@ -446,6 +430,25 @@ namespace API.Data.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("API.Entities.Skill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("JobDescriptionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobDescriptionId");
+
+                    b.ToTable("Skills");
                 });
 
             modelBuilder.Entity("API.Entities.UserLike", b =>
@@ -602,13 +605,6 @@ namespace API.Data.Migrations
                         .HasForeignKey("ExperienceId");
                 });
 
-            modelBuilder.Entity("API.Entities.JobDetail", b =>
-                {
-                    b.HasOne("API.Entities.JobDescription", null)
-                        .WithMany("Details")
-                        .HasForeignKey("JobDescriptionId");
-                });
-
             modelBuilder.Entity("API.Entities.Message", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "Recipient")
@@ -658,6 +654,13 @@ namespace API.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("API.Entities.Skill", b =>
+                {
+                    b.HasOne("API.Entities.JobDescription", null)
+                        .WithMany("Skills")
+                        .HasForeignKey("JobDescriptionId");
                 });
 
             modelBuilder.Entity("API.Entities.UserLike", b =>
@@ -755,7 +758,7 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.JobDescription", b =>
                 {
-                    b.Navigation("Details");
+                    b.Navigation("Skills");
                 });
 
             modelBuilder.Entity("API.Entities.Project", b =>

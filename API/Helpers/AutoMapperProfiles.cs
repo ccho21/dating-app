@@ -45,10 +45,10 @@ namespace API.Helpers
             CreateMap<ExperienceUpdateDto, Experience>();
 
             CreateMap<JobDescription, JobDescriptionDto>();
-            CreateMap<JobDetail, JobDetailDto>();
+            CreateMap<Skill, SkillDto>();
 
             CreateMap<JobDescriptionDto, JobDescription>();
-            CreateMap<JobDetailDto, JobDetail>();
+            CreateMap<SkillDto, Skill>();
         }
     }
 }

@@ -41,7 +41,7 @@ namespace API.Data
 
         public async Task<PagedList<ExperienceDto>> GetExperiencesAsync(ExperienceParams experienceParams)
         {
-            var query = _context.Experiences.Include(x => x.AppUser).AsQueryable();
+            var query = _context.Experiences.AsQueryable();
 
             // Check if the keyword is for username or project name
             if (!string.IsNullOrEmpty(experienceParams.CurrentUsername))

@@ -11,7 +11,8 @@ namespace API.DTOs
         public string Description { get; set; }
         public string Position { get; set; }
         public DateTime Started { get; set; }
-        public ICollection<JobDetailDto> Details { get; set; }
+        public string Details { get; set; }
+        public ICollection<SkillDto> Skills { get; set; }
         public DateTime? Ended { get; set; }
     }
 }

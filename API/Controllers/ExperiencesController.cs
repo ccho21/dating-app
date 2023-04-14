@@ -78,9 +78,10 @@ namespace API.Controllers
                     Position = x.Position,
                     Started = x.Started,
                     Ended = x.Ended,
-                    Details = x.Details.Select(u => new JobDetail
+                    Details = x.Details,
+                    Skills = x.Skills.Select(u => new Skill
                     {
-                        Description = u.Description,
+                        Name = u.Name,
 
                     }).ToList()
                 }).ToList()
