@@ -40,5 +40,29 @@ namespace API.Controllers
             var skills = await query.ProjectTo<SkillDto>(_mapper.ConfigurationProvider).AsNoTracking().ToListAsync();
             return Ok(skills);
         }
+
+
+        [HttpPost]
+        public async Task<ActionResult<SkillDto>> CreateSkill(SkillDto skillDto)
+        {
+
+            var existingSkill = await _context.Skills.SingleOrDefaultAsync(x => x.Name.Replace(" ", string.Empty).ToLower() == skillDto.Name.Replace(" ", string.Empty).ToLower());
+
+            if (existingSkill != null)
+            {
+                return BadRequest("This skill is already added before");
+            }
+
+            var skill = new Skill
+            {
+                Name = skillDto.Name
+            };
+
+            _context.Skills.Add(skill);
+
+            if (await _context.SaveChangesAsync() > 0) return Ok(_mapper.Map<SkillDto>(skill));
+
+            return BadRequest("Failed to create skill");
+        }
     }
 }

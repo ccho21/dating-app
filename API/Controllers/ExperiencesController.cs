@@ -100,6 +100,30 @@ namespace API.Controllers
             if (user.Id != experience.AppUserId)
                 return BadRequest("You don't have permission to update this experience");
 
+            foreach (var jd in updateExperienceDto.JobDescriptions)
+            {
+                var matchingSkills = new List<Skill>();
+                foreach (var skill in jd.Skills)
+                {
+                    var existingSkill = await _context.Skills.SingleOrDefaultAsync(x => x.Name.Replace(" ", string.Empty).ToLower() == skill.Name.Replace(" ", string.Empty).ToLower());
+                    if (existingSkill != null)
+                    {
+                        matchingSkills.Add(existingSkill);
+                    }
+                    else
+                    {
+                        var newSkill = new Skill
+                        {
+                            Name = skill.Name
+                        };
+
+                        matchingSkills.Add(newSkill);
+                    }
+                }
+                _mapper.Map(matchingSkills, jd.Skills);
+
+            }
+
             _mapper.Map(updateExperienceDto, experience);
 
             if (await _unitOfWork.Complete())
