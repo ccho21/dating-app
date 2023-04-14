@@ -81,7 +81,7 @@ namespace API.Data
         }
         public async Task<Experience> GetExperienceWithDetailsByIdAsync(int id)
         {
-            return await _context.Experiences.Include(x => x.JobDescriptions).ThenInclude(x => x.Skills).SingleOrDefaultAsync(x => x.Id == id);
+            return await _context.Experiences.Include(x => x.JobDescriptions).Include(x => x.Skills).SingleOrDefaultAsync(x => x.Id == id);
         }
 
     }

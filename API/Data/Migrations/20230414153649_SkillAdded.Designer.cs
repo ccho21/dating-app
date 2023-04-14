@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230413235608_SkillsAdded")]
-    partial class SkillsAdded
+    [Migration("20230414153649_SkillAdded")]
+    partial class SkillAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -440,7 +440,7 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("JobDescriptionId")
+                    b.Property<int?>("ExperienceId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -448,7 +448,7 @@ namespace API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("JobDescriptionId");
+                    b.HasIndex("ExperienceId");
 
                     b.ToTable("Skills");
                 });
@@ -660,9 +660,9 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.Skill", b =>
                 {
-                    b.HasOne("API.Entities.JobDescription", null)
+                    b.HasOne("API.Entities.Experience", null)
                         .WithMany("Skills")
-                        .HasForeignKey("JobDescriptionId");
+                        .HasForeignKey("ExperienceId");
                 });
 
             modelBuilder.Entity("API.Entities.UserLike", b =>
@@ -751,16 +751,13 @@ namespace API.Data.Migrations
                     b.Navigation("JobDescriptions");
 
                     b.Navigation("Logo");
+
+                    b.Navigation("Skills");
                 });
 
             modelBuilder.Entity("API.Entities.Group", b =>
                 {
                     b.Navigation("Connections");
-                });
-
-            modelBuilder.Entity("API.Entities.JobDescription", b =>
-                {
-                    b.Navigation("Skills");
                 });
 
             modelBuilder.Entity("API.Entities.Project", b =>

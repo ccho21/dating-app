@@ -16,6 +16,6 @@ namespace API.DTOs
         public DateTime Started { get; set; }
         public DateTime? Ended { get; set; }
         public PhotoDto Logo { get; set; }
-
+        public ICollection<SkillDto> Skills { get; set; }
     }
 }

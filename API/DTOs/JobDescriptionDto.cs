@@ -12,7 +12,6 @@ namespace API.DTOs
         public string Position { get; set; }
         public DateTime Started { get; set; }
         public string Details { get; set; }
-        public ICollection<SkillDto> Skills { get; set; }
         public DateTime? Ended { get; set; }
     }
 }

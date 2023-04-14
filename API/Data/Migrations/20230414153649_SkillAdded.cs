@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Data.Migrations
 {
-    public partial class SkillsAdded : Migration
+    public partial class SkillAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,22 +49,22 @@ namespace API.Data.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
-                    JobDescriptionId = table.Column<int>(type: "INTEGER", nullable: true)
+                    ExperienceId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Skills", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Skills_JobDescriptions_JobDescriptionId",
-                        column: x => x.JobDescriptionId,
-                        principalTable: "JobDescriptions",
+                        name: "FK_Skills_Experiences_ExperienceId",
+                        column: x => x.ExperienceId,
+                        principalTable: "Experiences",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Skills_JobDescriptionId",
+                name: "IX_Skills_ExperienceId",
                 table: "Skills",
-                column: "JobDescriptionId");
+                column: "ExperienceId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
