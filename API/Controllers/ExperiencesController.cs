@@ -48,11 +48,36 @@ namespace API.Controllers
             return await _unitOfWork.ExperienceRepository.GetExperienceAsync(id);
         }
 
+        private async Task<List<Skill>> getMatchingSkills(ICollection<SkillDto> skills)
+        {
+            var matchingSkills = new List<Skill>();
+            foreach (var skill in skills)
+            {
+                var existingSkill = await _context.Skills.SingleOrDefaultAsync(x => x.Name.Replace(" ", string.Empty).ToLower() == skill.Name.Replace(" ", string.Empty).ToLower());
+                if (existingSkill != null)
+                {
+                    matchingSkills.Add(existingSkill);
+                }
+                else
+                {
+                    var newSkill = new Skill
+                    {
+                        Name = skill.Name
+                    };
+
+                    matchingSkills.Add(newSkill);
+                }
+            }
+            return matchingSkills;
+        }
+
         [HttpPost]
         public async Task<ActionResult<ExperienceDto>> CreateExperience(ExperienceDto createExperienceDto)
         {
             var username = User.GetUsername();
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+
+            var matchingSkills = await getMatchingSkills(createExperienceDto.Skills);
 
             var experience = new Experience
             {
@@ -72,11 +97,7 @@ namespace API.Controllers
                     Details = x.Details,
 
                 }).ToList(),
-                Skills = createExperienceDto.Skills.Select(u => new Skill
-                {
-                    Name = u.Name,
-
-                }).ToList()
+                Skills = matchingSkills,
             };
 
             _unitOfWork.ExperienceRepository.AddExperience(experience);
@@ -85,7 +106,6 @@ namespace API.Controllers
 
             return BadRequest("Failed to send message");
         }
-
 
         [HttpPut("{id}")]
         public async Task<ActionResult<ExperienceDto>> UpdateExperience(int id, ExperienceUpdateDto updateExperienceDto)
@@ -102,26 +122,29 @@ namespace API.Controllers
                 return BadRequest("You don't have permission to update this experience");
 
 
-            var matchingSkills = new List<Skill>();
-            foreach (var skill in updateExperienceDto.Skills)
+            if (updateExperienceDto.Skills.Count() > 0)
             {
-                var existingSkill = await _context.Skills.SingleOrDefaultAsync(x => x.Name.Replace(" ", string.Empty).ToLower() == skill.Name.Replace(" ", string.Empty).ToLower());
-                if (existingSkill != null)
+                var matchingSkills = new List<Skill>();
+                foreach (var skill in updateExperienceDto.Skills)
                 {
-                    matchingSkills.Add(existingSkill);
-                }
-                else
-                {
-                    var newSkill = new Skill
+                    var existingSkill = await _context.Skills.AsNoTracking().SingleOrDefaultAsync(x => x.Name.Replace(" ", string.Empty).ToLower() == skill.Name.Replace(" ", string.Empty).ToLower());
+                    if (existingSkill != null)
                     {
-                        Name = skill.Name
-                    };
+                        matchingSkills.Add(existingSkill);
+                    }
+                    else
+                    {
+                        var newSkill = new Skill
+                        {
+                            Name = skill.Name
+                        };
 
-                    matchingSkills.Add(newSkill);
+                        matchingSkills.Add(newSkill);
+                    }
                 }
+                _mapper.Map(matchingSkills, updateExperienceDto.Skills);
             }
 
-            _mapper.Map(matchingSkills, updateExperienceDto.Skills);
             _mapper.Map(updateExperienceDto, experience);
 
             if (await _unitOfWork.Complete())
@@ -133,7 +156,7 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteExperience(int id)
         {
-            var experience = await _unitOfWork.ExperienceRepository.GetExperienceWithDetailsByIdAsync(id);
+            var experience = await _unitOfWork.ExperienceRepository.GetExperienceByIdAsync(id);
 
             if (experience == null) return NotFound();
 
@@ -165,7 +188,7 @@ namespace API.Controllers
 
             if (await _unitOfWork.Complete())
             {
-                return CreatedAtRoute("GetExperiencesByUsername", new { username = username }, _mapper.Map<PhotoDto>(photo));
+                return CreatedAtRoute("GetExperience", new { id = experience.Id }, _mapper.Map<PhotoDto>(photo));
             }
 
             return BadRequest("Problem adding photo");
