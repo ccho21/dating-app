@@ -30,6 +30,12 @@
 </div> -->
 <div class="row">
   <div class="offset-xl-1 col-xl-10">
-    <app-experience-list></app-experience-list>
+    <app-panel
+      title="Experience"
+      sub="Create, edit and manage your projects."
+      [btns]="btns"
+    >
+      <app-experience-list></app-experience-list>
+    </app-panel>
   </div>
 </div>

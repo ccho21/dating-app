@@ -363,8 +363,7 @@ namespace API.Data.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("ExperienceId")
-                        .IsUnique();
+                    b.HasIndex("ExperienceId");
 
                     b.HasIndex("ProjectId");
 
@@ -631,8 +630,8 @@ namespace API.Data.Migrations
                         .HasForeignKey("AppUserId");
 
                     b.HasOne("API.Entities.Experience", "Experience")
-                        .WithOne("Logo")
-                        .HasForeignKey("API.Entities.Photo", "ExperienceId");
+                        .WithMany("Logos")
+                        .HasForeignKey("ExperienceId");
 
                     b.HasOne("API.Entities.Project", "Project")
                         .WithMany("Images")
@@ -748,7 +747,7 @@ namespace API.Data.Migrations
                 {
                     b.Navigation("JobDescriptions");
 
-                    b.Navigation("Logo");
+                    b.Navigation("Logos");
 
                     b.Navigation("Skills");
                 });

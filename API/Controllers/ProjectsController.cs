@@ -144,7 +144,6 @@ namespace API.Controllers
 
             if (await _unitOfWork.Complete())
             {
-                // return CreatedAtRoute("GetUser", _mapper.Map<PhotoDto>(photo));
                 return CreatedAtRoute("GetProject", new { id = project.Id }, _mapper.Map<PhotoDto>(photo));
             }
 

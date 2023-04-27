@@ -5,12 +5,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Data.Migrations
 {
-    public partial class SkillAdded : Migration
+    public partial class SkillsAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "JobDetails");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Photos_ExperienceId",
+                table: "Photos");
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "UpdatedDate",
@@ -62,6 +66,11 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Photos_ExperienceId",
+                table: "Photos",
+                column: "ExperienceId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Skills_ExperienceId",
                 table: "Skills",
                 column: "ExperienceId");
@@ -71,6 +80,10 @@ namespace API.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Skills");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Photos_ExperienceId",
+                table: "Photos");
 
             migrationBuilder.DropColumn(
                 name: "UpdatedDate",
@@ -110,6 +123,12 @@ namespace API.Data.Migrations
                         principalTable: "JobDescriptions",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photos_ExperienceId",
+                table: "Photos",
+                column: "ExperienceId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_JobDetails_JobDescriptionId",

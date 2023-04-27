@@ -22,7 +22,6 @@ import {
   ImageSize,
 } from 'ng-gallery';
 import { Lightbox } from 'ng-gallery/lightbox';
-import { Project } from 'src/app/_models/project';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
@@ -31,14 +30,11 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./photo-upload.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PhotoUploadComponent implements OnInit, OnChanges {
+export class PhotoUploadComponent implements OnInit {
   uploader?: FileUploader;
   user?: User;
-  @Input() photos?: Photo[] = [];
+  @Input() photos?: Photo[];
   @Input() photo?: Photo;
-
-  @Input() project?: Project;
-  @Input() experienceId?: number;
 
   @Input() single?: boolean;
 
@@ -69,14 +65,6 @@ export class PhotoUploadComponent implements OnInit, OnChanges {
       .pipe(take(1))
       .subscribe((user) => (this.user = user as User));
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    // console.log('### changes', changes);
-    // const { project } = changes;
-    // if (project.currentValue) {
-    //   console.log('### ONE MORE TIME CALL');
-    //   this.initUploader();
-    // }
-  }
 
   ngOnInit(): void {
     const lightboxRef = this.gallery.ref('lightbox');
@@ -93,10 +81,16 @@ export class PhotoUploadComponent implements OnInit, OnChanges {
     this.initUploader();
     console.log('### this uploader', this.uploader);
   }
+
   initUploader() {
     this.initializeUploader();
+    this.updatedPhotos = [];
     if (this.photos) {
-      this.updatedPhotos = this.photos.slice();
+      this.updatedPhotos = this.photos?.slice();
+    } else if (this.photo) {
+      this.updatedPhotos.push(JSON.parse(JSON.stringify(this.photo)));
+    } else {
+      this.updatedPhotos = [];
     }
   }
 
@@ -108,21 +102,8 @@ export class PhotoUploadComponent implements OnInit, OnChanges {
     }));
   }
 
-  fileOverBase(e: any) {
-    this.hasBaseDropzoneOver = e;
-  }
-
-  setMainPhoto(photo: Photo) {
-    this.setMain.emit(photo);
-  }
-
-  deletePhoto(photoId: number) {
-    this.delete.emit(photoId);
-  }
-
   initializeUploader() {
     console.log('## initializeUploader');
-    console.log('## Project', this.project);
 
     let url = '';
 
@@ -192,6 +173,18 @@ export class PhotoUploadComponent implements OnInit, OnChanges {
       url: this.getSanitizedUrl(queue._file) as string,
       isMain: false,
     };
+  }
+
+  fileOverBase(e: any) {
+    this.hasBaseDropzoneOver = e;
+  }
+
+  setMainPhoto(photo: Photo) {
+    this.setMain.emit(photo);
+  }
+
+  deletePhoto(photoId: number) {
+    this.delete.emit(photoId);
   }
 
   getSanitizedUrl(file: File) {

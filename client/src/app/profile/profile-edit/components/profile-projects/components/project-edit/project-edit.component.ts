@@ -33,6 +33,7 @@ export class ProjectEditComponent implements OnInit {
   user?: User;
 
   project?: Project;
+  uploaderReady: boolean = false;
   @HostListener('window:beforeunload', ['$event']) unloadNotification(
     $event: any
   ) {
@@ -40,8 +41,6 @@ export class ProjectEditComponent implements OnInit {
       $event.returnValue = true;
     }
   }
-
-  uploader?: FileUploader;
 
   constructor(
     private projectService: ProjectService,
@@ -67,10 +66,10 @@ export class ProjectEditComponent implements OnInit {
           console.log('### project', this.project);
           this.fillForm();
           this.mode = this.project ? 'EDIT' : 'ADD';
-          this.initializeUploader(id);
+          this.uploaderReady = true;
         });
       } else {
-        this.initializeUploader();
+        this.uploaderReady = true;
       }
     });
   }
@@ -154,14 +153,7 @@ export class ProjectEditComponent implements OnInit {
   }
 
   private updateProject(form: Project): void {
-    console.log('### ngOnInit projectForm: ', this.projectForm?.value);
-    console.log('### form:', form);
-
     const { id } = form;
-
-    console.log('### form:', form);
-    console.log('### id:', id);
-
     this.projectService
       .updateProject(form, id as number)
       .subscribe((res: Project) => {
@@ -195,17 +187,4 @@ export class ProjectEditComponent implements OnInit {
   }
 
   public deleteProject(): void {}
-
-  initializeUploader(id?: number) {
-    let url = `${this.baseUrl}projects/${id}/add-photo`;
-    this.uploader = new FileUploader({
-      url: url,
-      authToken: 'Bearer ' + this.user?.token,
-      isHTML5: true,
-      allowedFileType: ['image'],
-      removeAfterUpload: true,
-      autoUpload: false,
-      maxFileSize: 10 * 1024 * 1024,
-    });
-  }
 }

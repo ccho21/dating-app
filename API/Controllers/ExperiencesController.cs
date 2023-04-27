@@ -172,7 +172,6 @@ namespace API.Controllers
         public async Task<ActionResult<PhotoDto>> AddPhoto(int id, IFormFile file)
         {
             var experience = await _unitOfWork.ExperienceRepository.GetExperienceWithLogoByIdAsync(id);
-            var username = User.GetUsername();
 
             var result = await _photoService.AddPhotoAsync(file);
 
@@ -184,7 +183,12 @@ namespace API.Controllers
                 PublicId = result.PublicId
             };
 
-            experience.Logo = photo;
+            if (experience.Logos.Count == 0)
+            {
+                photo.IsMain = true;
+            }
+
+            experience.Logos.Add(photo);
 
             if (await _unitOfWork.Complete())
             {
@@ -199,21 +203,42 @@ namespace API.Controllers
         {
             var experience = await _unitOfWork.ExperienceRepository.GetExperienceWithLogoByIdAsync(id);
 
-            var logo = experience.Logo;
+            var photo = experience.Logos.FirstOrDefault(x => x.Id == photoId);
 
-            if (logo == null) return NotFound();
+            if (photo == null) return NotFound();
 
-            if (logo.PublicId != null)
+            if (photo.PublicId != null)
             {
-                var result = await _photoService.DeletePhotoAsync(logo.PublicId);
+                var result = await _photoService.DeletePhotoAsync(photo.PublicId);
                 if (result.Error != null) return BadRequest(result.Error.Message);
             }
-            experience.Logo = null;
+
+            experience.Logos.Remove(photo);
 
             if (await _unitOfWork.Complete()) return Ok();
             return BadRequest("Failed to delete the Logo");
 
         }
+
+        [HttpPut("{id}/set-main-photo/{photoId}")]
+        public async Task<ActionResult<PhotoDto>> SetMainPhoto(int id, int photoId)
+        {
+            var experience = await _unitOfWork.ExperienceRepository.GetExperienceByIdAsync(id);
+
+            var photo = experience.Logos.FirstOrDefault(x => x.Id == photoId);
+
+            if (photo.IsMain) return BadRequest("This is already your main photo");
+
+            var currentMain = experience.Logos.FirstOrDefault(x => x.IsMain);
+
+            if (currentMain != null) currentMain.IsMain = false;
+            photo.IsMain = true;
+
+            if (await _unitOfWork.Complete()) return NoContent();
+
+            return BadRequest("Failed to set main photo");
+        }
+
 
     }
 }

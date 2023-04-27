@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230414153649_SkillAdded")]
-    partial class SkillAdded
+    [Migration("20230427135038_SkillsAdded")]
+    partial class SkillsAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -365,8 +365,7 @@ namespace API.Data.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("ExperienceId")
-                        .IsUnique();
+                    b.HasIndex("ExperienceId");
 
                     b.HasIndex("ProjectId");
 
@@ -633,8 +632,8 @@ namespace API.Data.Migrations
                         .HasForeignKey("AppUserId");
 
                     b.HasOne("API.Entities.Experience", "Experience")
-                        .WithOne("Logo")
-                        .HasForeignKey("API.Entities.Photo", "ExperienceId");
+                        .WithMany("Logos")
+                        .HasForeignKey("ExperienceId");
 
                     b.HasOne("API.Entities.Project", "Project")
                         .WithMany("Images")
@@ -750,7 +749,7 @@ namespace API.Data.Migrations
                 {
                     b.Navigation("JobDescriptions");
 
-                    b.Navigation("Logo");
+                    b.Navigation("Logos");
 
                     b.Navigation("Skills");
                 });

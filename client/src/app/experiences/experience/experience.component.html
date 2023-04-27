@@ -72,14 +72,9 @@
               {{ jobDescription.started | date : "MMM y" }} ~
               {{ jobDescription.ended | date : "MMM y" }}
             </div>
-            <ul class="job-list">
-              <li
-                class="job-item"
-                *ngFor="let detail of jobDescription.details"
-              >
-                {{ detail.description }}
-              </li>
-            </ul>
+            <div>
+              {{ jobDescription.details }}
+            </div>
           </div>
         </div>
       </div>

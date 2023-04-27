@@ -109,7 +109,7 @@
                 </div>
               </div>
               <input
-                formControlName="skills"
+                formControlName="skill"
                 [typeahead]="dataSource"
                 [typeaheadAsync]="true"
                 typeaheadOptionField="name"
@@ -182,10 +182,10 @@
           <div class="row mb-5">
             <div class="col-md-12">
               <app-photo-upload
-                *ngIf="experience"
-                [photo]="experience.logo"
+                *ngIf="uploaderReady"
+                #photoUpload
+                [photos]="experience?.logos"
                 [single]="true"
-                [experienceId]="experience.id"
               ></app-photo-upload>
             </div>
           </div>
@@ -197,6 +197,7 @@
               form="experiencesForm"
               type="submit"
               class="btn btn-success btn-block"
+              (click)="saveExperience()"
             >
               Save Changes
             </button>

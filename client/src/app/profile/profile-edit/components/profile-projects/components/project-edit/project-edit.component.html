@@ -263,10 +263,9 @@
           <div class="row mb-5">
             <div class="col-md-12">
               <app-photo-upload
-                *ngIf="uploader"
+                *ngIf="uploaderReady"
                 #photoUpload
                 [photos]="project?.images"
-                [project]="project"
                 (delete)="deletePhoto($event)"
               ></app-photo-upload>
             </div>

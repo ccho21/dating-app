@@ -16,7 +16,7 @@ namespace API.DTOs
         public int PhotoId { get; set; }
         public DateTime Started { get; set; }
         public DateTime? Ended { get; set; }
-        public PhotoDto Logo { get; set; }
+        public ICollection<PhotoDto> Logos { get; set; }
         public ICollection<JobDescriptionDto> JobDescriptions { get; set; }
         public ICollection<SkillDto> Skills { get; set; }
     }

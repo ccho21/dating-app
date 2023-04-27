@@ -16,7 +16,7 @@ namespace API.Entities
         public DateTime? Ended { get; set; }
         public AppUser AppUser { get; set; }
         public int AppUserId { get; set; }
-        public Photo Logo { get; set; }
+        public ICollection<Photo> Logos { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedDate { get; set; }
         public ICollection<JobDescription> JobDescriptions { get; set; }

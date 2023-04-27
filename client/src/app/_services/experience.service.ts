@@ -60,6 +60,38 @@ export class ExperienceService {
     );
   }
 
+  createExperience(experience: Experience) {
+    return this.http
+      .post<Experience>(`${this.baseUrl}experiences`, experience)
+      .pipe(
+        map((res: Experience) => {
+          console.log('### update experience?', res);
+          // TODO: NGRX
+          // if (this.experiences) {
+          //   const index = this.experiences?.indexOf(experience);
+          //   this.experiences[index] = experience;
+          // }
+          return res;
+        })
+      );
+  }
+
+  updateExperience(experience: Experience, experienceId: number) {
+    return this.http
+      .put<Experience>(`${this.baseUrl}experiences/${experienceId}`, experience)
+      .pipe(
+        map((res: Experience) => {
+          console.log('### update experience?', res);
+          // TODO: NGRX
+          // if (this.experiences) {
+          //   const index = this.experiences?.indexOf(experience);
+          //   this.experiences[index] = experience;
+          // }
+          return res;
+        })
+      );
+  }
+
   getExperienceParams(): ExperienceParams {
     return this.experienceParams as ExperienceParams;
   }

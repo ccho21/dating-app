@@ -1,5 +1,6 @@
 import { Message } from './message';
 import { Photo } from './photo';
+import { Skill } from './skill';
 
 export interface Experience {
   id: number;
@@ -11,7 +12,8 @@ export interface Experience {
   appUserId: number;
   started: string;
   ended: string;
-  logo: Photo;
+  logos: Photo[];
+  skills: Skill[];
 }
 
 export interface JobDescription {
@@ -19,7 +21,6 @@ export interface JobDescription {
   description: string;
   position: string;
   started: string;
-  details: Detail[];
   ended: string;
 }
 

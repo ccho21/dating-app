@@ -69,6 +69,10 @@ const routes: Routes = [
           },
           { path: 'experiences', component: ProfileExperiencesComponent },
           {
+            path: 'experiences/create',
+            component: ExperienceEditComponent,
+          },
+          {
             path: 'experiences/:id',
             component: ExperienceEditComponent,
           },
