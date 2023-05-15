@@ -99,6 +99,8 @@ export class ProjectEditComponent implements OnInit {
     if (this.project) {
       this.projectForm?.patchValue({
         ...this.project,
+        projectEnded: new Date(this.project.projectEnded),
+        projectStarted: new Date(this.project.projectStarted),
       });
     }
   }
