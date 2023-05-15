@@ -1,0 +1,103 @@
+@import "../../../assets/scss/typography";
+@import "../../../assets/scss/layout";
+
+.profile {
+  position: relative;
+  .header-background {
+    width: 100%;
+    position: relative;
+    min-height: calc(40vh - 64px);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+  }
+  .profile-content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .thumbnail-box {
+    position: relative;
+    display: inline-block;
+    & .edit-icon {
+      cursor: pointer;
+      position: absolute;
+      bottom: 3rem;
+      right: 0.3rem;
+
+      border-radius: 50%;
+      padding: 0.3rem;
+
+      color: var(--white);
+      font-size: 1.3rem;
+      background-color: var(--black);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+  & .action-groups {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    & .action-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      margin: 1rem;
+      text-decoration: none;
+      border: 0.1rem solid var(--white);
+      border-radius: 50%;
+      color: var(--white);
+      transition: all 0.3s ease;
+      & .action-icon {
+        width: 3rem;
+        height: 3rem;
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+}
+
+.side-nav {
+  list-style: none;
+  padding-left: 0;
+  & .side-nav-item {
+    transition: all 0.3s ease;
+    & .side-nav-link {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      padding: 1.5rem 0;
+      color: var(--black);
+      & .nav-icon {
+        font-size: 2.2rem;
+      }
+      & .nav-title {
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        border-bottom: 1px solid var(--light-shadow);
+      }
+    }
+  }
+}
+
+.btn-box {
+  display: flex;
+  align-items: center;
+  & app-button {
+    margin-right: 0.5rem;
+  }
+}

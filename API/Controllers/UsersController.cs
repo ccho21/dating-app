@@ -19,7 +19,7 @@ namespace API.Controllers
     [Authorize]
     public class UsersController : BaseApiController
     {
-        private readonly DataContext _context;
+        //private readonly DataContext _context;
         private readonly IMapper _mapper;
         private readonly IPhotoService _photoService;
         private readonly IUnitOfWork _unitOfWork;
@@ -42,11 +42,25 @@ namespace API.Controllers
             }
 
             var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
-
+            
             Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
 
             return Ok(users);
         }
+
+         [HttpGet("with-message")]
+        public async Task<ActionResult<IEnumerable<MemberMessageDto>>> GetUsersAll([FromQuery] UserParams userParams)
+        {
+            userParams.CurrentUsername = User.GetUsername();
+            
+            var users = await _unitOfWork.UserRepository.GetMembersWithMessagesAsync(userParams);
+            
+            
+            Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+
+            return Ok(users);
+        }
+
 
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)

@@ -1,0 +1,33 @@
+@import "../../../assets/scss/typography";
+
+.footer {
+  min-height: 20rem;
+  background-color: var(--light-green);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 0;
+  .copyright {
+    @extend .footer-text-2;
+    color: white;
+    text-transform: uppercase;
+  }
+  .footer-nav {
+    @extend .footer-text-1;
+    list-style: none;
+    text-align: left;
+    color: white;
+    & li {
+      margin: 1rem;
+      & a {
+        color: white;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

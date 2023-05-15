@@ -1,67 +1,19 @@
-<div class="row home-container">
-  <!-- <swiper
-    [navigation]="false"
-    [pagination]="{
-      dynamicBullets: true,
-      clickable: true
-    }"
-    [autoplay]="{
-      delay: 2500,
-      disableOnInteraction: false
-    }"
-    class="mySwiper"
-  >
-    <ng-template swiperSlide *ngFor="let url of imageUrls">
-      <div
-        class="home-background"
-        [ngStyle]="{ 'background-image': 'url(/assets/' + url + ')' }"
-      ></div>
-    </ng-template>
-  </swiper> -->
-
-  <div class="home-background">
-    <div
-      class="home-content"
-      *ngIf="accountService.currentUser$ | async as user; else logged"
-    >
-      <div class="row">
-        <div class="col-md-12">
-          <h1 class="heading-text-1">Find your match</h1>
-          <p class="sub-heading">
-            Come on in to view your matches... all you need to do is sign up!
-          </p>
+<section class="">
+  <div class="container home">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="home-background"></div>
+      </div>
+      <div class="offset-lg-1 col-lg-4 align-self-center">
+        <div class="text-left mb-4">
+          <img
+            class="logo"
+            src="./assets/shared/together-logo-4.svg"
+            alt="Get together Logo"
+          />
         </div>
+        <app-login></app-login>
       </div>
     </div>
-
-    <ng-template #logged>
-      <div class="home-content">
-        <div class="row">
-          <div class="col-md-6 main-left">
-            <h1 class="heading-text-1">Find your match</h1>
-            <p class="sub-heading">
-              Come on in to view your matches... all you need to do is sign up!
-            </p>
-            <!-- <div class="text-center">
-              <button mat-raised-button color="primary" (click)="openRegister()">
-                Register
-              </button>
-              <button mat-raised-button color="warn" class="ms-3">
-                Learn more
-              </button>
-            </div> -->
-          </div>
-          <div class="offset-md-1 col-md-4 text-right">
-            <app-register></app-register>
-          </div>
-        </div>
-      </div>
-    </ng-template>
   </div>
-</div>
-
-<div class="container">
-  <div class="panel" (click)="checkLoggedIn()">
-    <app-member-search (searchEvent)="loadMembers($event)"></app-member-search>
-  </div>
-</div>
+</section>

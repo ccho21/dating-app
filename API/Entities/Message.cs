@@ -7,6 +7,8 @@ namespace API.Entities
 {
     public class Message
     {
+        internal string recipientUsername;
+
         public int Id { get; set; }
         public int SenderId { get; set; }
         public string SenderUsername { get; set; }

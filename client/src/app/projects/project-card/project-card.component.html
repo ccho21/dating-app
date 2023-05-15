@@ -1,0 +1,103 @@
+<div class="card" *ngIf="project">
+  <div class="card-header" *ngIf="project.user as member">
+    <div class="header-content">
+      <div class="img-container">
+        <img
+          src="{{ member.photoUrl || './assets/shared/user.png' }}"
+          [alt]="member.username"
+          class="user-thumbnail size-xs"
+        />
+      </div>
+      <div class="user">
+        <app-link
+          [label]="'@' + member.username"
+          [routerLink]="['/main/members/', member.username]"
+        ></app-link>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="btn-group" dropdown>
+        <button
+          id="project-action"
+          dropdownToggle
+          type="button"
+          class="btn"
+          aria-controls="project-action"
+        >
+          <i class="fa-solid fa-ellipsis"></i>
+        </button>
+        <ul
+          id="project-action"
+          *dropdownMenu
+          class="dropdown-menu dropdown-menu-right"
+          role="menu"
+          aria-labelledby="project-action"
+        >
+          <li role="menuitem">
+            <a
+              class="dropdown-item"
+              [routerLink]="'/main/projects/' + project.id"
+              >View project</a
+            >
+          </li>
+          <li role="menuitem">
+            <a
+              class="dropdown-item"
+              [routerLink]="'/main/projects/' + project.id"
+              >Edit project</a
+            >
+          </li>
+          <li role="menuitem">
+            <a
+              class="dropdown-item"
+              [routerLink]="'/main/projects/' + project.id"
+              >Delete project</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <swiper
+    class="gallery"
+    [config]="config"
+    *ngIf="project.images.length; else noImage"
+  >
+    <ng-template
+      swiperSlide
+      *ngFor="let image of project.images; let i = index"
+    >
+      <img [src]="image.url" alt="" class="project-img" />
+    </ng-template>
+  </swiper>
+  <ng-template #noImage>
+    <img
+      class="card-img-top"
+      src="./assets/shared/user.png"
+      alt="Card image cap"
+    />
+  </ng-template>
+  <div class="card-body">
+    <h5 class="card-title">{{ project.name }}</h5>
+    <div class="card-text">
+      {{ project.description | truncate : 30 }}
+    </div>
+    <div>
+      <small> {{ project.projectStarted | date : "MMM y" }} </small> -
+      <small> {{ project.projectEnded | date : "MMM y" }} </small>
+    </div>
+    <div class="mb-4">
+      <div>
+        <span class="badge bg-dark me-2">Angular</span>
+        <span class="badge bg-dark me-2">React</span>
+        <span class="badge bg-dark me-2">.NET</span>
+      </div>
+    </div>
+    <hr />
+    <div class="">
+      <app-button [routerLink]="'/main/projects/' + project.id">
+        View Project
+      </app-button>
+    </div>
+  </div>
+</div>

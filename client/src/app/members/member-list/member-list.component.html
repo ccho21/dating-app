@@ -1,37 +1,121 @@
-<div *ngIf="userParams">
-  <app-member-search (searchEvent)="loadMembers($event)"></app-member-search>
-
-  <div class="mt-4 mb-1">
-    <h3>Your matches - {{ pagination?.totalItems }} found</h3>
-    <mat-form-field appearance="fill">
-      <mat-label>Sort By</mat-label>
-      <mat-select
-        (selectionChange)="change($event)"
-        [(ngModel)]="userParams.orderBy"
-      >
-        <mat-option value="created">Newest Member</mat-option>
-        <mat-option value="lastActive">Last Active</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-
+<section class="my-5">
+  <!-- <app-member-search></app-member-search> -->
+</section>
+<section class="example-section mb-4 text-end">
   <div class="container">
     <div class="row">
-      <div class="col-md-3 mb-4" *ngFor="let member of members">
-        <app-member-card [member]="member"></app-member-card>
+      <div class="offset-lg-1 col-lg-10">
+        <mat-button-toggle-group
+          class="list-search"
+          name="fontStyle"
+          aria-label="Font Style"
+          [(ngModel)]="predicate"
+        >
+          <mat-button-toggle
+            class="list-search-item"
+            [routerLink]="['/main/members']"
+          >
+            People
+          </mat-button-toggle>
+          <mat-button-toggle
+            [routerLink]="['/main/members']"
+            [queryParams]="{ predicate: 'liked' }"
+            class="list-search-item"
+          >
+            Following
+          </mat-button-toggle>
+          <mat-button-toggle
+            class="list-search-item"
+            [routerLink]="['/main/members']"
+            [queryParams]="{ predicate: 'likedBy' }"
+          >
+            Followed
+          </mat-button-toggle>
+        </mat-button-toggle-group>
       </div>
     </div>
   </div>
+</section>
+<section class="my-5">
+  <div class="container">
+    <div class="row">
+      <!-- <div>
+        <h2 class="title mb-4">
+          <mat-icon class="me-3">people</mat-icon>
+          Matches
+        </h2>
+      </div> -->
+      <div class="offset-lg-1 col-lg-10">
+        <div class="row">
+          <ng-container *ngIf="members && members.length; else noData">
+            <div
+              class="col-lg-4 col-md-4 col-sm-6 col-xs-6 mb-4"
+              *ngFor="let member of members"
+            >
+              <app-member-card [member]="member"></app-member-card>
+            </div>
+          </ng-container>
+          <ng-template #noData>
+            <div class="no-data">
+              <i class="no-data-icon fa-solid fa-people-group"></i>
+              <div class="main-text-2">NO PEOPLE FOUND</div>
+              <div class="connection-btn">
+                <button class="main-btn">Please Go Find People!</button>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <mat-paginator
-    *ngIf="pagination"
-    [length]="pagination.totalItems"
-    [pageSize]="pagination.itemsPerPage"
-    [pageSizeOptions]="[5, 10, 25, 100]"
-    [pageIndex]="pagination.currentPage"
-    (page)="pageChanged($event)"
-    class="mt-5"
-    aria-label="Select page"
-  >
-  </mat-paginator>
-</div>
+<!-- <section class="my-5">
+  <div class="container">
+    <div class="panel mb-5 p-3">
+      <app-member-search
+        (searchEvent)="loadMembers($event)"
+      ></app-member-search>
+    </div>
+
+    <div *ngIf="userParams">
+      <div class="row">
+        <div class="offset-md-10 col-md-2">
+          <mat-form-field appearance="fill">
+            <mat-label>Sort By</mat-label>
+            <mat-select
+              (selectionChange)="change($event)"
+              [(ngModel)]="userParams.orderBy"
+            >
+              <mat-option value="created">Newest Member</mat-option>
+              <mat-option value="lastActive">Last Active</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="mt-4 mb-5">
+        <h3>Your matches - {{ pagination?.totalItems }} found</h3>
+        <hr />
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-4" *ngFor="let member of members">
+            <app-member-card [member]="member"></app-member-card>
+          </div>
+        </div>
+      </div>
+
+      <mat-paginator
+        *ngIf="pagination"
+        [length]="pagination.totalItems"
+        [pageSize]="pagination.itemsPerPage"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        [pageIndex]="pagination.currentPage"
+        (page)="pageChanged($event)"
+        class="mt-5"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</section> -->

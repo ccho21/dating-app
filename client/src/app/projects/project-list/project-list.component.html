@@ -1,0 +1,19 @@
+<section>
+  <div class="container">
+    <div class="row my-5">
+      <div class="col">
+        <app-search (paramsEmit)="search($event)"></app-search>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="my-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-6 mb-4" *ngFor="let project of projects">
+        <app-project-card [project]="project"></app-project-card>
+      </div>
+    </div>
+  </div>
+</section>

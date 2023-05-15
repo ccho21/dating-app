@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Member } from 'src/app/_models/member';
-import { MembersService } from 'src/app/_services/members.service';
+import { MemberService } from 'src/app/_services/member.service';
 import { Pagination } from 'src/app/_models/pagination';
 import { UserParams } from 'src/app/_models/userParams';
 import { User } from 'src/app/_models/user';
@@ -26,19 +26,20 @@ export class MemberSearchComponent implements OnInit {
 
   driver?: Driver;
 
-  constructor(private memberService: MembersService) {
+  constructor(private memberService: MemberService) {
     this.userParams = this.memberService.getUserParams();
   }
 
   ngOnInit(): void {
     this.userParams = {
       gender: 'female',
-      maxAge: 70,
+      maxAge: 99,
       minAge: 18,
       orderBy: 'lastActive',
       pageNumber: 0,
       pageSize: 10,
     };
+    this.search();
     // this.startNavigationGuide();
   }
 

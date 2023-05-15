@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { AccountService } from '../_services/account.service';
 
@@ -15,12 +16,13 @@ export class LoginComponent implements OnInit {
   hide = true;
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<LoginComponent>,
+    // private dialogRef: MatDialogRef<LoginComponent>,
     public accountService: AccountService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router: Router
   ) {
     this.form = fb.group({
-      username: [null, [Validators.required]],
+      username: ['lisa', [Validators.required]],
       password: ['Pa$$w0rd', [Validators.required]],
     });
   }
@@ -34,25 +36,27 @@ export class LoginComponent implements OnInit {
       password,
     };
 
+    console.log('###', loginForm);
     this.accountService.login(loginForm).subscribe({
       next: (res) => {
+        this.router.navigateByUrl('/main');
         console.log('### successfully logged in ', res);
-        this._snackBar.open('successfully logged in', 'Dance', {
-          panelClass: ['blue-snackbar'],
-          duration: 5000,
-          verticalPosition: 'bottom',
-          horizontalPosition: 'right',
-        });
-        this.dialogRef.close(true);
+        // this._snackBar.open('successfully logged in', 'Dance', {
+        //   panelClass: ['blue-snackbar'],
+        //   duration: 5000,
+        //   verticalPosition: 'bottom',
+        //   horizontalPosition: 'right',
+        // });
+        // this.dialogRef.close(true);
       },
       error: (err) => {
         console.log('### ERROR', err);
-        this._snackBar.open('Error occured', 'Dance', {
-          panelClass: ['red-snackbar'],
-          duration: 5000,
-          verticalPosition: 'bottom',
-          horizontalPosition: 'right',
-        });
+        // this._snackBar.open('Error occured', 'Dance', {
+        //   panelClass: ['red-snackbar'],
+        //   duration: 5000,
+        //   verticalPosition: 'bottom',
+        //   horizontalPosition: 'right',
+        // });
       },
     });
   }

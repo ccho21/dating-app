@@ -19,7 +19,7 @@ namespace API.Controllers
         public LikesController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-           
+
         }
 
         [HttpPost("{username}")]
@@ -49,8 +49,29 @@ namespace API.Controllers
             return BadRequest("Failed to like user");
         }
 
+        [HttpDelete("{username}")]
+        public async Task<ActionResult> RemoveLike(string username)
+        {
+            var sourceUserId = User.GetUserId();
+            var likedUser = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            var sourceUser = await _unitOfWork.LikesRepository.GetUserWithLikes(sourceUserId);
+            if (likedUser == null) return NotFound();
+
+            if (sourceUser.UserName == username) return BadRequest("You cannot remove like from yourself!");
+
+            var userLike = await _unitOfWork.LikesRepository.GetUserLike(sourceUserId, likedUser.Id);
+
+            if (userLike == null) return BadRequest("Could not find user to remove like");
+
+            sourceUser.LikedUsers.Remove(userLike);
+
+            if (await _unitOfWork.Complete()) return Ok();
+
+            return BadRequest("Failed to remove like from the user");
+        }
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LikeDto>>> GetUserLikes([FromQuery] LikesParams likesParams)
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUserLikes([FromQuery] LikesParams likesParams)
         {
             likesParams.UserId = User.GetUserId();
             var users = await _unitOfWork.LikesRepository.GetUserLikes(likesParams);

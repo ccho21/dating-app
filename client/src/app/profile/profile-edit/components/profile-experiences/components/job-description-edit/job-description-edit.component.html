@@ -1,0 +1,90 @@
+<div *ngIf="jdForm" class="p-3 m-3 border">
+  <div class="row align-items-start mb-3">
+    <div class="col-md-2 text-end">
+      <label for="description" class="label"> Headline </label>
+    </div>
+    <div class="offset-md-1 col-md-8">
+      <app-textarea-input
+        [rows]="1"
+        [label]="'intro'"
+        [formControl]="jdForm.controls['description'] | formControl"
+        class="theme-green"
+      >
+      </app-textarea-input>
+      <p class="main-text-1 description"></p>
+    </div>
+  </div>
+  <div class="row align-items-start mb-3">
+    <div class="col-md-2 text-end">
+      <label for="intro" class="label"> Position </label>
+    </div>
+    <div class="offset-md-1 col-md-6">
+      <app-text-input
+        [type]="'text'"
+        [label]="'position'"
+        [formControl]="jdForm.controls['position'] | formControl"
+        class="theme-green"
+      >
+      </app-text-input>
+      <p class="main-text-1 description">
+        Please give us a brief introduction about the company and your work
+      </p>
+    </div>
+  </div>
+
+  <div class="row align-items-start mb-3">
+    <div class="col-md-2 text-end">
+      <label for="started" class="label"> Started </label>
+    </div>
+    <div class="offset-md-1 col-md-6">
+      <app-date-input
+        [label]="'Job started'"
+        [maxDate]="maxDate"
+        [formControl]="jdForm.controls['started'] | formControl"
+        class="theme-green"
+      >
+      </app-date-input>
+    </div>
+  </div>
+  <div class="row align-items-start mb-3">
+    <div class="col-md-2 text-end">
+      <label for="started" class="label"> Ended </label>
+    </div>
+    <div class="offset-md-1 col-md-6">
+      <app-date-input
+        [label]="'Ended'"
+        [maxDate]="maxDate"
+        [formControl]="jdForm.controls['ended'] | formControl"
+        class="theme-green"
+      >
+      </app-date-input>
+    </div>
+  </div>
+
+  <div class="row align-items-start mb-3">
+    <div class="col-md-2 text-end">
+      <label for="description" class="label"> Details </label>
+    </div>
+    <div class="offset-md-1 col-md-8">
+      <app-textarea-input
+        [rows]="2"
+        [label]="'intro'"
+        [formControl]="jdForm.controls['details'] | formControl"
+        class="theme-green"
+      >
+      </app-textarea-input>
+      <p class="main-text-1 description"></p>
+    </div>
+  </div>
+  <!-- <div [formGroup]="jdForm">
+    <div formArrayName="details">
+      <ng-container
+        *ngFor="let detailForm of details.controls; let j = index"
+        [formGroup]="detailForm | formGroup"
+      >
+        <app-job-detail-edit [detailForm]="detailForm | formGroup">
+        </app-job-detail-edit>
+      </ng-container>
+    </div>
+  </div> -->
+</div>

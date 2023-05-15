@@ -1,0 +1,58 @@
+.search-form {
+  font-size: 1.5rem;
+  .form-select {
+    font-size: 1.5rem;
+    max-width: 15rem;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-color: #6c757d;
+    padding-left: 1rem;
+    &:active,
+    &:focus,
+    &:focus-within {
+      border-color: #6c757d;
+      box-shadow: none;
+    }
+  }
+  .dropdown-toggle {
+    font-size: 1.5rem;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+  }
+  .dropdown-menu {
+    margin-top: 2rem;
+    border: none;
+    box-shadow: 0 5px 14px 2px rgb(0, 0, 0, 0.2);
+    z-index: 999;
+    font-size: 1.5rem;
+    &::before {
+      background-color: #fff;
+      box-shadow: 3px 3px 3px 0 rgba(23, 50, 68, 0.08);
+      content: " ";
+      height: 15px;
+      width: 15px;
+      position: absolute;
+      transform: translateX(0) rotate(-135deg);
+      z-index: -1;
+      top: -0.3rem;
+      left: 50%;
+    }
+  }
+  .form-control {
+    border-color: #6c757d;
+    font-size: 1.5rem;
+    &:active,
+    &:focus,
+    &:focus-within {
+      border-color: #6c757d;
+      box-shadow: none;
+    }
+  }
+  .btn-outline-secondary {
+    font-size: 1.5rem;
+  }
+  .btn-append {
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+  }
+}

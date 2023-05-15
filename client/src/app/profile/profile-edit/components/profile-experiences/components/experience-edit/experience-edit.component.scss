@@ -1,0 +1,32 @@
+.description {
+  color: #999;
+}
+.label {
+  margin-top: 0.8rem;
+}
+
+.form-control {
+  border: 0.1rem solid #ccc;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  color: var(--black);
+  flex: 0 1 355px;
+  font-size: 1.5rem;
+  height: 32px;
+  padding: 0 10px;
+  width: 100%;
+  &:active,
+  &:focus,
+  &:focus-within {
+    border-color: #ccc;
+    box-shadow: none;
+  }
+}
+
+.no-radius {
+  border-radius: 0;
+}
+.size-lg {
+  height: 52px;
+  font-size: 17px;
+}

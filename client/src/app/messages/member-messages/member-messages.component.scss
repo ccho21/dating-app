@@ -1,0 +1,116 @@
+.rounded-circle {
+  max-height: 35px;
+}
+.messages {
+  padding: 0;
+  width: 100%;
+
+  .message-header {
+    margin-bottom: 15px;
+    padding: 0.5rem;
+  }
+  .message-body {
+    padding: 0.5rem;
+    min-height: 550px;
+  }
+  .message-sticky {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    // background-color: #424242;
+  }
+}
+
+.message-container {
+  background-color: var(--white);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  overflow: hidden;
+  z-index: 0;
+  border: 1px solid lightgray;
+  border-left-width: 0;
+}
+
+.message-contents {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  & .heading {
+    border-bottom: 0.8px solid lightgray;
+    padding: 1rem;
+  }
+
+  & .body {
+    overflow-y: scroll;
+    position: relative;
+    bottom: 0;
+    flex-grow: 1;
+    padding: 1rem;
+    transition: 0.3s all ease;
+    .message-item {
+      padding: 1rem;
+      .message-content {
+        display: inline-block;
+        background-color: var(--dark-green);
+        color: var(--white);
+        padding: 0.75rem;
+        border-radius: 1rem;
+        max-width: 350px;
+        font-size: 1.2rem;
+      }
+      .message-line {
+        display: flex;
+        align-items: center;
+        .icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.4rem;
+        }
+      }
+      .message-date {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .footer {
+    border-top: 0.8px solid lightgray;
+    .input-group {
+      background-color: var(--white);
+    }
+    .form-control {
+      border: none;
+      font-size: 1.4rem;
+      background-color: transparent;
+    }
+    .form-control:focus {
+      box-shadow: none;
+    }
+
+    .form-control-underlined {
+      border-width: 0;
+      border-bottom-width: 1px;
+      border-radius: 0;
+      padding-left: 0;
+    }
+
+    .form-control::placeholder {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+.mat-mini-fab.mat-green {
+  background-color: var(--dark-green);
+  color: var(--white);
+}

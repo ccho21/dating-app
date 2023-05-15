@@ -1,56 +1,49 @@
-<div class="container-wrapper">
-  <div class="row align-items-center text-center" *ngIf="userParams">
-    <div class="col-md-3">
-      <div class="d-flex align-items-center justify-content-center p-3">
-        <mat-radio-group
-          aria-label="Select a gender"
-          [(ngModel)]="userParams.gender"
+<div class="row align-items-center text-center pt-3" *ngIf="userParams">
+  <div class="col-md-3">
+    <div class="d-flex align-items-center justify-content-center pb-3">
+      <mat-radio-group
+        aria-label="Select a gender"
+        [(ngModel)]="userParams.gender"
+      >
+        <mat-radio-button
+          class="ms-3"
+          *ngFor="let gender of genderList"
+          [value]="gender.value"
         >
-          <mat-radio-button
-            class="ms-3"
-            *ngFor="let gender of genderList"
-            [value]="gender.value"
-          >
-            {{ gender.display }}
-          </mat-radio-button>
-        </mat-radio-group>
-      </div>
+          {{ gender.display }}
+        </mat-radio-button>
+      </mat-radio-group>
     </div>
-    <div class="col-md-3">
-      <div class="px-3 px-0">
-        <mat-form-field class="" appearance="fill">
-          <mat-label>Age From</mat-label>
-          <input matInput type="number" [(ngModel)]="userParams.minAge" />
-        </mat-form-field>
-      </div>
+  </div>
+  <div class="col-md-3">
+    <div class="px-3 px-0">
+      <mat-form-field class="" appearance="fill">
+        <mat-label>Age From</mat-label>
+        <input matInput type="number" [(ngModel)]="userParams.minAge" />
+      </mat-form-field>
     </div>
-    <div class="col-md-3">
-      <div class="px-3 px-0">
-        <mat-form-field class="ms-md-3" appearance="fill">
-          <mat-label>Age To</mat-label>
-          <input matInput type="number" [(ngModel)]="userParams.maxAge" />
-        </mat-form-field>
-      </div>
+  </div>
+  <div class="col-md-3">
+    <div class="px-3 px-0">
+      <mat-form-field class="ms-md-3" appearance="fill">
+        <mat-label>Age To</mat-label>
+        <input matInput type="number" [(ngModel)]="userParams.maxAge" />
+      </mat-form-field>
     </div>
-    <div class="col-md-3">
-      <div class="d-flex align-items-center justify-content-center p-3">
-        <button
-          mat-stroked-button
-          color="warn"
-          class="mx-2"
-          (click)="resetFilters()"
-        >
-          Reset
-        </button>
-        <button
-          mat-raised-button
-          color="primary"
-          class="mx-2"
-          (click)="search()"
-        >
-          Search
-        </button>
-      </div>
+  </div>
+  <div class="col-md-3">
+    <div class="d-flex align-items-center justify-content-center pb-3">
+      <button
+        mat-stroked-button
+        color="warn"
+        class="mx-2"
+        (click)="resetFilters()"
+      >
+        Reset
+      </button>
+      <button mat-raised-button color="primary" class="mx-2" (click)="search()">
+        Search
+      </button>
     </div>
   </div>
 </div>

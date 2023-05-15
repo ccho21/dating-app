@@ -1,0 +1,66 @@
+.experience {
+  text-align: left;
+  position: relative;
+  .body {
+    position: relative;
+    margin-left: 3rem;
+  }
+  .img-box {
+    position: relative;
+    padding-right: 3rem;
+    &::before {
+      content: " ";
+      position: absolute;
+      height: 100%;
+      width: .1rem;
+      right: 0;
+      background-color: #ccc;
+    }
+  }
+  & img {
+    background-color: #ccc;
+    padding: 1rem;
+  }
+  .company-name {
+    padding-bottom: 0.5rem;
+    font-weight: 900;
+    font-size: 2rem;
+  }
+  .working-date {
+    padding-bottom: 1rem;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: #6c757d;
+  }
+
+  .company-description {
+    padding-bottom: 1rem;
+  }
+
+  .work-detail {
+    .job-description {
+      margin: 2rem 0 1rem -1rem;
+      font-size: 1rem;
+      color: #222;
+    }
+    .job-date {
+      margin: 0 0 1rem -1rem;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #6c757d;
+    }
+    .job-list {
+      padding-left: 1rem;
+      list-style: none;
+      margin: 1rem 0;
+      .job-item {
+      }
+    }
+  }
+  .work-date {
+    margin: 0 0 1rem -1rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #6c757d;
+  }
+}

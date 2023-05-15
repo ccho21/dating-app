@@ -1,0 +1,14 @@
+<a
+  (click)="handleClick()"
+  class="main-link"
+  [tooltip]="tooltip"
+  containerClass="tooltip-link"
+  [delay]="500"
+  [class]="customClass"
+>
+  <!-- <ng-container *ngIf="icon">
+    <i [class]="icon" class="icon d-block d-md-none"></i>
+  </ng-container> -->
+  <div class="">{{ label }}</div>
+  <!-- <ng-content></ng-content> -->
+</a>

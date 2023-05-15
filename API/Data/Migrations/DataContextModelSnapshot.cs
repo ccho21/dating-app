@@ -16,11 +16,7 @@ namespace API.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0-rc.1.22426.7")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
-
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.0-preview.7.22376.2");
 
             modelBuilder.Entity("API.Entities.AppRole", b =>
                 {
@@ -181,6 +177,80 @@ namespace API.Data.Migrations
                     b.ToTable("Connections");
                 });
 
+            modelBuilder.Entity("API.Entities.Education", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Degree")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Program")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SchoolName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Educations");
+                });
+
+            modelBuilder.Entity("API.Entities.Experience", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("Ended")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Intro")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Position")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Started")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Experiences");
+                });
+
             modelBuilder.Entity("API.Entities.Group", b =>
                 {
                     b.Property<string>("Name")
@@ -189,6 +259,43 @@ namespace API.Data.Migrations
                     b.HasKey("Name");
 
                     b.ToTable("Groups");
+                });
+
+            modelBuilder.Entity("API.Entities.JobDescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Details")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("Ended")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ExperienceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Position")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Started")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExperienceId");
+
+                    b.ToTable("JobDescriptions");
                 });
 
             modelBuilder.Entity("API.Entities.Message", b =>
@@ -244,10 +351,13 @@ namespace API.Data.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AppUserId")
-                        .HasColumnType("integer");
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsMain")
                         .HasColumnType("boolean");
+
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("PublicId")
                         .HasColumnType("text");
@@ -259,7 +369,91 @@ namespace API.Data.Migrations
 
                     b.HasIndex("AppUserId");
 
+                    b.HasIndex("ExperienceId");
+
+                    b.HasIndex("ProjectId");
+
                     b.ToTable("Photos");
+                });
+
+            modelBuilder.Entity("API.Entities.Project", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("BackEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Database")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Deployement")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FrontEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GithubUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Intro")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MainFeature")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ProjectEnded")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ProjectStarted")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProjectWith")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("API.Entities.Skill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ExperienceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExperienceId");
+
+                    b.ToTable("Skills");
                 });
 
             modelBuilder.Entity("API.Entities.UserLike", b =>
@@ -391,6 +585,35 @@ namespace API.Data.Migrations
                         .HasForeignKey("GroupName");
                 });
 
+            modelBuilder.Entity("API.Entities.Education", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "AppUser")
+                        .WithMany("educations")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("API.Entities.Experience", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "AppUser")
+                        .WithMany("Experiences")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("API.Entities.JobDescription", b =>
+                {
+                    b.HasOne("API.Entities.Experience", null)
+                        .WithMany("JobDescriptions")
+                        .HasForeignKey("ExperienceId");
+                });
+
             modelBuilder.Entity("API.Entities.Message", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "Recipient")
@@ -414,11 +637,39 @@ namespace API.Data.Migrations
                 {
                     b.HasOne("API.Entities.AppUser", "AppUser")
                         .WithMany("Photos")
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("API.Entities.Experience", "Experience")
+                        .WithMany("Logos")
+                        .HasForeignKey("ExperienceId");
+
+                    b.HasOne("API.Entities.Project", "Project")
+                        .WithMany("Images")
+                        .HasForeignKey("ProjectId");
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Experience");
+
+                    b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("API.Entities.Project", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "AppUser")
+                        .WithMany("Projects")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("API.Entities.Skill", b =>
+                {
+                    b.HasOne("API.Entities.Experience", null)
+                        .WithMany("Skills")
+                        .HasForeignKey("ExperienceId");
                 });
 
             modelBuilder.Entity("API.Entities.UserLike", b =>
@@ -483,6 +734,8 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
+                    b.Navigation("Experiences");
+
                     b.Navigation("LikedByUsers");
 
                     b.Navigation("LikedUsers");
@@ -493,12 +746,30 @@ namespace API.Data.Migrations
 
                     b.Navigation("Photos");
 
+                    b.Navigation("Projects");
+
                     b.Navigation("UserRoles");
+
+                    b.Navigation("educations");
+                });
+
+            modelBuilder.Entity("API.Entities.Experience", b =>
+                {
+                    b.Navigation("JobDescriptions");
+
+                    b.Navigation("Logos");
+
+                    b.Navigation("Skills");
                 });
 
             modelBuilder.Entity("API.Entities.Group", b =>
                 {
                     b.Navigation("Connections");
+                });
+
+            modelBuilder.Entity("API.Entities.Project", b =>
+                {
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

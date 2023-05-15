@@ -1,0 +1,17 @@
+<div *ngIf="detailForm" class="p-3 m-3 border">
+  <div class="row align-items-start mb-3">
+    <div class="col-md-2 text-end">
+      <label for="description" class="label"> Detail </label>
+    </div>
+    <div class="offset-md-1 col-md-8">
+      <app-textarea-input
+        [rows]="1"
+        [label]="'intro'"
+        [formControl]="detailForm.controls['description'] | formControl"
+        class="theme-green"
+      >
+      </app-textarea-input>
+      <p class="main-text-1 description"></p>
+    </div>
+  </div>
+</div>

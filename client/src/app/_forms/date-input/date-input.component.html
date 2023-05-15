@@ -1,7 +1,8 @@
-<mat-form-field
+<!-- <mat-form-field
   appearance="fill"
-  class="example-half-width"
+  class="date-input"
   *ngIf="ngControl.control"
+  color="black"
 >
   <mat-label>Choose a date</mat-label>
   <input
@@ -11,11 +12,14 @@
     placeholder="{{ label }}"
   />
   <mat-hint>MM/DD/YYYY</mat-hint>
-  <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+  <mat-datepicker-toggle
+    matSuffix
+    [for]="datepicker"
+    color="black"
+  ></mat-datepicker-toggle>
   <mat-datepicker #datepicker>
     <mat-datepicker-actions>
-      <button mat-button matDatepickerCancel>Cancel</button>
-      <button mat-raised-button color="primary" matDatepickerApply>
+      <button mat-raised-button color="default" matDatepickerApply>
         Apply
       </button>
     </mat-datepicker-actions>
@@ -24,20 +28,44 @@
   <mat-error *ngIf="ngControl.control.errors?.required">
     {{ label }} is required
   </mat-error>
-</mat-form-field>
+</mat-form-field> -->
 
-<!-- <div class="mb-3">
-  <input
-    type="text"
-    [class.is-invalid]="ngControl.touched && ngControl.invalid"
-    class="form-control"
-    [formControl]="ngControl.control"
-    placeholder="{{ label }}"
-    bsDatepicker
-    [bsConfig]="bsConfig"
-    [maxDate]="maxDate"
-  />
-  <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">
-    {{ label }} is required
+<!-- <div class="row">
+  <div class="col-xs-12 col-12 col-md-4 form-group mb-3">
+    <input
+      type="text"
+      placeholder="Datepicker"
+      class="form-control"
+      bsDatepicker
+    />
+  </div>
+  <div class="col-xs-12 col-12 col-md-4 form-group mb-3">
+    <input
+      type="text"
+      placeholder="Daterangepicker"
+      class="form-control"
+      bsDaterangepicker
+    />
   </div>
 </div> -->
+
+<div class="" *ngIf="formControl">
+  <div class="input-group">
+    <input
+      type="text"
+      [class.is-invalid]="formControl.touched && formControl.invalid"
+      class="form-control"
+      [formControl]="formControl | formControl"
+      placeholder="{{ label }}"
+      bsDatepicker
+      [bsConfig]="bsConfig"
+      [maxDate]="maxDate"
+      [class]="customClass"
+      (bsValueChange)="onValueChange($event)"
+    />
+    <span class="input-group-text"><i class="fa-regular fa-calendar"></i></span>
+  </div>
+  <div *ngIf="formControl.errors?.['required']" class="invalid-feedback">
+    {{ label }} is required
+  </div>
+</div>

@@ -1,0 +1,20 @@
+.form-control {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+  color: var(--black);
+  font-size: 1.4rem;
+  height: 32px;
+  &:active,
+  &:focus,
+  &:focus-within {
+    box-shadow: none;
+  }
+
+  &.border-dark {
+    border-color: #6c757d;
+    & + .input-group-text {
+      border-color: #6c757d;
+    }
+  }
+}

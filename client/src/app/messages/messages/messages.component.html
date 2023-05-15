@@ -1,0 +1,113 @@
+<section class="my-5">
+  <div class="container bg-white">
+    <div class="row">
+      <div class="col-md-5 px-0">
+        <div class="member-box">
+          <app-message-overview></app-message-overview>
+        </div>
+      </div>
+      <div class="col-md-7 px-0">
+      <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="mb-5">
+    <div class="container">
+      <mat-button-toggle-group
+        name="fontStyle"
+        aria-label="Font Style"
+        [(ngModel)]="container"
+      >
+        <mat-button-toggle
+          color="primary"
+          value="Unread"
+          (click)="loadMessages()"
+        >
+          <mat-icon class="mx-2">markunread</mat-icon>Unread
+        </mat-button-toggle>
+        <mat-button-toggle
+          color="primary"
+          value="Inbox"
+          (click)="loadMessages()"
+        >
+          <mat-icon class="mx-2">inbox</mat-icon>Inbox
+        </mat-button-toggle>
+        <mat-button-toggle
+          color="primary"
+          value="Outbox"
+          (click)="loadMessages()"
+        >
+          <mat-icon class="mx-2">send</mat-icon>Sent
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <div *ngIf="messages?.length === 0">
+        <h3>No messages</h3>
+      </div>
+
+      <div class="mat-elevation-z8" *ngIf="messages && messages.length > 0">
+        <table mat-table [dataSource]="messages">
+          <ng-container matColumnDef="senderUsername">
+            <th mat-header-cell *matHeaderCellDef>From</th>
+            <td mat-cell *matCellDef="let element">
+              <img
+                class="img-circle p-2"
+                [src]="element.senderPhotoUrl || './assets/shared/user.png'"
+                [alt]="element.senderUsername"
+              />
+              {{ element.senderUsername | titlecase }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="content">
+            <th mat-header-cell *matHeaderCellDef>Message</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.content }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="recipientUsername">
+            <th mat-header-cell *matHeaderCellDef>To</th>
+            <td mat-cell *matCellDef="let element">
+              <img
+                class="img-circle p-2"
+                [src]="element.recipientPhotoUrl || './assets/shared/user.png'"
+                [alt]="element.recipientUsername"
+              />
+              {{ element.recipientUsername | titlecase }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="messageSent">
+            <th mat-header-cell *matHeaderCellDef>Sent</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.messageSent | timeago }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            [routerLink]="
+              container === 'Outbox'
+                ? '/members/' + row.recipientUsername
+                : '/members/' + row.senderUsername
+            "
+          ></tr>
+        </table>
+      </div>
+
+      <mat-paginator
+        *ngIf="pagination"
+        [length]="pagination.totalItems"
+        [pageSize]="pagination.itemsPerPage"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        [pageIndex]="pagination.currentPage"
+        (page)="pageChanged($event)"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+    </div>
+  </section> -->

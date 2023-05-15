@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using API.Helpers;
 using API.interfaces;
 using AutoMapper;
@@ -35,13 +36,15 @@ namespace API.Data
             var query = _context.Users.AsQueryable();
 
             query = query.Where(u => u.UserName != userParams.CurrentUsername);
-            query = query.Where(u => u.Gender == userParams.Gender);
+            if (!string.IsNullOrEmpty(userParams.Gender))
+            {
+                // query = query.Where(u => u.Gender == userParams.Gender);
+            }
 
             var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
             var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
 
-            query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
-
+            query = query.Include(x => x.LikedUsers);
             query = userParams.OrderBy switch
             {
                 "created" => query.OrderByDescending(u => u.Created),
@@ -52,6 +55,40 @@ namespace API.Data
                 query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(),
                 userParams.PageNumber, userParams.PageSize);
         }
+
+        public async Task<PagedList<MemberMessageDto>> GetMembersWithMessagesAsync(UserParams userParams)
+        {
+            var query = _context.Users.AsQueryable();
+            query = query.Where(u => u.UserName != userParams.CurrentUsername);
+
+            query = query.Include(u => u.MessagesSent).Select(u => new AppUser
+            {
+                Id = u.Id,
+                DateOfBirth = u.DateOfBirth,
+                KnownAs = u.KnownAs,
+                Created = u.Created,
+                LastActive = u.LastActive,
+                Gender = u.Gender,
+                Introduction = u.Introduction,
+                LookingFor = u.LookingFor,
+                Interests = u.Interests,
+                City = u.City,
+                Country = u.Country,
+                Photos = u.Photos,
+                MessagesSent = u.MessagesSent.Where(m => m.RecipientUsername == userParams.CurrentUsername).OrderBy(m => m.MessageSent).ToList()
+            }).Where(u => u.MessagesSent.Count > 0);
+
+            query = userParams.OrderBy switch
+            {
+                "created" => query.OrderByDescending(u => u.Created),
+                _ => query.OrderByDescending(u => u.LastActive)
+            };
+
+            return await PagedList<MemberMessageDto>.CreateAsync(
+                query.ProjectTo<MemberMessageDto>(_mapper.ConfigurationProvider).AsNoTracking(),
+                userParams.PageNumber, userParams.PageSize);
+        }
+
 
         public async Task<AppUser> GetUserByIdAsync(int id)
         {

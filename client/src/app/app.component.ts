@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
 import { PresenceService } from './_services/presence.service';
+import { setTheme } from 'ngx-bootstrap/utils';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { PresenceService } from './_services/presence.service';
 })
 export class AppComponent implements OnInit {
   title = 'The Dating app';
-  users: any;
+  user?: User;
 
   constructor(
     private accountService: AccountService,
@@ -19,14 +20,15 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    setTheme('bs5');
     this.setCurrentUser();
   }
 
   setCurrentUser() {
-    const user: User = JSON.parse(localStorage.getItem('user') as string);
-    if (user) {
-      this.accountService.setCurrentUser(user);
-      this.presence.createHubConnection(user);
+    this.user = JSON.parse(localStorage.getItem('user') as string);
+    if (this.user) {
+      this.accountService.setCurrentUser(this.user);
+      this.presence.createHubConnection(this.user);
     }
   }
 }

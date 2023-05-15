@@ -1,0 +1,87 @@
+.photo-upload {
+  .upload-files-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    border-radius: 1rem;
+  }
+  .dynamic-message {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  .dropzone {
+    border: 1.3px dashed hsl(184deg, 91%, 28%);
+    color: hsl(184deg, 91%, 28%);
+    border-radius: 1rem;
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    cursor: pointer;
+    text-decoration: none !important;
+    display: block;
+  }
+  .dropzone-icon {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 1rem;
+    color: hsl(184deg, 91%, 28%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      font-size: 5rem;
+    }
+  }
+  .browse-files {
+    position: relative;
+    .default-file-input {
+      opacity: 0;
+      z-index: 100;
+      position: relative;
+    }
+    .file-text-btn {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .browse-files-text {
+      color: hsla(184, 91%, 28%, 1);
+
+      font-weight: bolder;
+      cursor: pointer;
+    }
+  }
+
+  .photo-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 !important;
+  }
+  .photo-delete {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+  }
+}
+
+// img.img-thumbnail {
+//   height: 100px;
+//   min-width: 100px !important;
+//   margin-bottom: 2px;
+// }
+
+// .nv-file-over {
+//   border: dotted 3px red;
+// }
+
+// input[type="file"] {
+//   color: transparent;
+// }

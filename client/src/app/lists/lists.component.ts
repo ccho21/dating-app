@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Member } from '../_models/member';
 import { Pagination } from '../_models/pagination';
-import { MembersService } from '../_services/members.service';
+import { MemberService } from '../_services/member.service';
 import Driver from 'driver.js';
 import { MatGridList } from '@angular/material/grid-list';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -12,14 +12,6 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
   styleUrls: ['./lists.component.scss'],
 })
 export class ListsComponent implements OnInit {
-  @ViewChild('grid') grid?: MatGridList;
-  gridByBreakpoint = {
-    xl: 5,
-    lg: 3,
-    md: 3,
-    sm: 2,
-    xs: 1,
-  };
 
   members?: Partial<Member[]>;
   predicate = 'liked';
@@ -28,7 +20,7 @@ export class ListsComponent implements OnInit {
   pagination?: Pagination;
   driver?: Driver;
 
-  constructor(private memberService: MembersService) {}
+  constructor(private memberService: MemberService) {}
 
   ngOnInit(): void {
     this.loadLikes();

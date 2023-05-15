@@ -1,77 +1,195 @@
-@import "../node_modules/driver.js/dist/driver.min.css";
-@import "~swiper/swiper-bundle.css";
+@import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+@import "../node_modules/swiper/swiper-bundle.css";
+@import "../node_modules/@angular/cdk/overlay-prebuilt.css";
+@import "./assets/scss/typography";
+@import "./assets/scss/tabs";
+
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --peach: #ffbf90;
+  --red: #f36870;
+  --celadon: #ced6ca;
+  --champagne: #f0eae7;
+  --white: rgba(255, 255, 255, 0.9);
+  --wash: #f0f2f5;
+
+  --black: #555;
+  --dark-blue: #2b4560;
+  --tiffany-blue: #6aa4b0;
+  --ivory: #e1e7e0;
+  --midnight-blue: #2f6d80;
+  --light-green: #06828c;
+  --dark-green: #1a5f78;
+  --amber: #fcb900;
+  --purple: #617dc6;
+
+  --COLOR_decoration_100-h: 195;
+  --COLOR_decoration_100-s: 64%;
+  --COLOR_decoration_100-l: 28%;
+  --COLOR_decoration_100-a: 1;
+
+  --COLOR_mainBrand_100: hsla(184, 91%, 28%, 1);
+  --COLOR_mainBrand_100-h: 184;
+  --COLOR_mainBrand_100-s: 91%;
+  --COLOR_mainBrand_100-l: 28%;
+  --COLOR_mainBrand_100-a: 1;
+}
+
+html {
+  font-size: 62.5% !important;
+}
 body {
-  font-size: 62.5%;
+  font-size: 1.4rem;
   position: relative;
   height: 100%;
-  // background-color:rgba(201, 167, 167, 0.923);
+  background-color: var(--ivory);
+  color: var(--black);
+
   margin: 0;
+  font-family: "Rubik", sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+
+  --peach: #ffbf90;
+  --red: #f36870;
+  --celadon: #ced6ca;
+  --champagne: #f0eae7;
+  --white: rgba(255, 255, 255, 0.9);
+  --wash: #f0f2f5;
+
+  --black: #555;
+  --dark-blue: #2b4560;
+  --tiffany-blue: #6aa4b0;
+  --ivory: #e1e7e0;
+  --midnight-blue: #2f6d80;
+  --light-green: #06828c;
+  --dark-green: #1a5f78;
+  --amber: #fcb900;
+  --purple: #617dc6;
+  --main-bg-white: hsla(0, 0%, 0%, 0.05);
+  --dark-shadow: hsla(240, 2%, 60%, 1);
+  --light-shadow: hsla(0, 0%, 0%, 0.15);
+  --t-black: hsla(0, 0%, 0%, 0.6);
 }
 
-.container {
-  @media screen and (max-width: 567px) {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-.container-wrapper {
-  margin: 24px 0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-}
-.img-circle {
-  border-radius: 50% !important;
-  max-width: 100%;
-  padding: 0.1rem;
-}
-
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-}
-
-.example-full-width {
-  width: 100%;
-}
-
-.example-half-width {
-  width: 60%;
-  margin-bottom: 0.25rem;
-}
-
-.demo-table {
-  width: 100%;
-}
-
-/* width */
 ::-webkit-scrollbar {
   width: 5px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background-color: #ebebeb;
+  -webkit-border-radius: 10px;
   border-radius: 10px;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  -webkit-border-radius: 10px;
   border-radius: 10px;
+  background: #6d6d6d;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+.user-thumbnail {
+  width: 15rem;
+  border-radius: 50%;
+  max-width: 100%;
+  aspect-ratio: 1;
+  &.square {
+    border-radius: 1rem;
+    width: 100%;
+    height: auto;
+  }
+  &.rectangle {
+    border-radius: 1rem;
+    width: 100%;
+    height: 80%;
+  }
+
+  &.border {
+    border: 0.3rem solid var(--white);
+  }
 }
 
-.mat-form-field {
-  width: 100%;
+.member-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--t-black);
+  padding: 0.25rem 1rem;
+  border-radius: 10rem;
+  color: var(--white);
+  &.circle {
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    padding: 0.5rem;
+  }
+  &.is-liked {
+    color: var(--red) !important;
+  }
 }
 
-.mat-form-field-wrapper {
-  padding-bottom: 1.34375em;
-  padding-top: 1.34375em;
+.no-data {
+  color: var(--dark-shadow);
+  text-align: center;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  & .no-data-icon {
+    color: var(--light-shadow);
+    width: 20rem;
+    height: 20rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.icon-btn {
+  background-color: var(--red);
+  border: none;
+  box-shadow: 0 5px 14px 2px rgba(0, 0, 0, 0.2);
+  color: var(--white);
+  padding: 0.5rem;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  transform: translateY(-0.2rem);
+  transition: all 0.15s ease-in-out;
+}
+
+.mySwiper {
+  overflow: unset;
+  .swiper-pagination-bullet-active {
+    background-color: var(--light-green) !important;
+  }
+  .swiper-pagination {
+    bottom: -2rem;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: var(--light-green) !important;
+  }
+}
+
+//  TEMP SOLUTION
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0 #{"/* rtl:ignore */"};
+}
+
+.popover-arrow {
+  position: absolute;
+}
+
+.tooltip {
+  position: absolute;
+  font-size: 1.4rem;
+}
+
+.tooltip-arrow {
+  position: absolute;
 }

@@ -1,25 +1,60 @@
-import { Component, Input, OnInit, Self } from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnInit,
+  Output,
+  Self,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NgControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-date-input',
   templateUrl: './date-input.component.html',
   styleUrls: ['./date-input.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DateInputComponent),
+      multi: true,
+    },
+  ],
 })
-export class DateInputComponent implements ControlValueAccessor {
+export class DateInputComponent implements OnInit, ControlValueAccessor {
   @Input() label?: string;
   @Input() maxDate?: Date;
+  bsConfig: Partial<BsDatepickerConfig> | undefined;
+  @Input() formControl?: FormControl;
+  @Input() customClass: string = '';
+  @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(@Self() public ngControl: NgControl) {
-    this.ngControl.valueAccessor = this;
+  onChange: any = () => {};
+  onTouched: any = () => {};
+
+  constructor() {}
+  ngOnInit() {}
+
+  writeValue(value: any): void {
+    console.log('### value', value);
+    // this.formControl?.setValue(value);
   }
-  filter(d: Date | null) {
-    console.log(d);
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
   }
 
-  writeValue(obj: any): void {}
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
 
-  registerOnChange(fn: any): void {}
-
-  registerOnTouched(fn: any): void {}
+  onValueChange(value: Date): void {
+    this.valueChange.emit(value);
+  }
 }

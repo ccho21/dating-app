@@ -1,0 +1,20 @@
+<div *ngIf="formControl">
+  <textarea
+    [class.is-invalid]="formControl.touched && formControl.invalid"
+    [rows]="rows"
+    class="form-control"
+    [formControl]="formControl | formControl"
+    placeholder="{{ label }}"
+  ></textarea>
+  <div *ngIf="formControl.errors?.required" class="invalid-feedback">
+    Please enter a {{ label }}
+  </div>
+  <div *ngIf="formControl.errors?.maxlength" class="invalid-feedback">
+    {{ label }} must be at most
+    {{ formControl.errors?.maxlength["requiredLength"] }}
+  </div>
+  <div *ngIf="formControl.errors?.isMatching" class="invalid-feedback">
+    Passwords do not match
+  </div>
+  <div class="text-end">{{ formControl.value.length }} / 500</div>
+</div>

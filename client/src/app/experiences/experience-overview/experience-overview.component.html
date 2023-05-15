@@ -1,0 +1,29 @@
+<div class="timeline">
+  <div class="entry" *ngFor="let experience of experiences">
+    <div class="title">
+      <h3>
+        {{ experience.started | date : "MMM y" }} -
+        {{ experience.ended | date : "MMM y" }}
+      </h3>
+      <div>{{ experience.position }}, {{ experience.companyName }}</div>
+    </div>
+    <div class="body">
+      <div>
+        <img
+          class="logo"
+          src="./assets/shared/acentury-logo.svg"
+          alt="Get together Logo"
+        />
+      </div>
+      <div>
+        {{ experience.intro }}
+      </div>
+      <ul *ngFor="let description of experience.jobDescriptions">
+        <li>** {{ description.description }}</li>
+        <li *ngFor="let detail of description.details">
+          {{ detail.description }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

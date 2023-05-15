@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/_models/member';
-import { MembersService } from 'src/app/_services/members.service';
+import { MemberService } from 'src/app/_services/member.service';
 import { Observable } from 'rxjs';
-import { Pagination } from 'src/app/_models/pagination';
+import { PaginatedResult, Pagination } from 'src/app/_models/pagination';
 import { UserParams } from 'src/app/_models/userParams';
 import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs/operators';
@@ -11,50 +11,65 @@ import Driver from 'driver.js';
 import { MatGridList } from '@angular/material/grid-list';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import {
+  Router,
+  Event,
+  NavigationStart,
+  NavigationEnd,
+  NavigationError,
+  ActivatedRoute,
+} from '@angular/router';
 
 @Component({
   selector: 'app-member-list',
   templateUrl: './member-list.component.html',
   styleUrls: ['./member-list.component.scss'],
 })
-export class MemberListComponent implements OnInit {
+export class MemberListComponent implements OnInit, OnDestroy {
   members?: Member[];
-  pagination?: Pagination;
   userParams?: UserParams;
   user?: User;
-  genderList = [
-    { value: 'male', display: 'Males' },
-    { value: 'female', display: 'Females' },
-  ];
 
-  driver?: Driver;
+  predicate?: string | null;
+  pageNumber = 1;
+  pageSize = 12;
+  pagination?: Pagination;
+  activeTab: any;
 
-  constructor(private memberService: MembersService) {
+  constructor(
+    private memberService: MemberService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.userParams = this.memberService.getUserParams();
+  }
+  ngOnDestroy(): void {
+    console.log('### DESTROYED');
   }
 
   ngOnInit(): void {
-    this.loadMembers();
-    // this.startNavigationGuide();
+    this.route.queryParams.subscribe((params) => {
+      if (params) {
+        console.log(' ### PARAMS ', params);
+        this.predicate = params.predicate ? params.predicate : null;
+
+        this.loadMembers();
+      }
+    });
   }
 
-  loadMembers(userParams?: UserParams) {
-    if (userParams) {
-      this.userParams = userParams;
-    }
-    if (this.userParams) {
-      this.memberService.setUserParams(this.userParams);
-      this.memberService.getMembers(this.userParams).subscribe((response) => {
-        console.log('### RESPONSE', response);
-        this.members = response.result;
-        this.pagination = response.pagination;
-
-        if (this.pagination) {
+  loadMembers() {
+    this.memberService
+      .getLikes(this.predicate as string, this.pageNumber, this.pageSize)
+      .subscribe((response) => {
+        if (response && response.pagination) {
+          this.members = response.result as Member[];
+          this.pagination = response.pagination;
           this.pagination.currentPage = response.pagination.currentPage - 1;
         }
       });
-    }
   }
+
   change(e: MatSelectChange) {
     this.loadMembers();
   }
@@ -67,38 +82,6 @@ export class MemberListComponent implements OnInit {
 
       this.memberService.setUserParams(this.userParams);
       this.loadMembers();
-    }
-  }
-
-  startNavigationGuide() {
-    if (!this.driver) {
-      this.driver = new Driver({
-        animate: true,
-        keyboardControl: true,
-      });
-
-      const steps = [
-        {
-          element: '#login-step1',
-          popover: {
-            className: 'first-step-popover-class',
-            title: 'Matches',
-            description:
-              'Menu that shows a list of members who might interest you. Please use filter to find someone you love!',
-            position: 'bottom-center',
-          },
-        },
-      ];
-      console.log('### this driver', steps);
-      this.driver.defineSteps(steps);
-      this.driver.start();
-    }
-  }
-
-  resetNavigationGuide() {
-    if (this.driver) {
-      this.driver.reset();
-      this.driver = undefined;
     }
   }
 }
