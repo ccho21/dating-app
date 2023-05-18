@@ -4,13 +4,12 @@
       <label for="description" class="label"> Headline </label>
     </div>
     <div class="offset-md-1 col-md-8">
-      <app-textarea-input
-        [rows]="1"
-        [label]="'intro'"
+      <app-text-input
+        [label]="'Headline'"
         [formControl]="jdForm.controls['description'] | formControl"
         class="theme-green"
       >
-      </app-textarea-input>
+      </app-text-input>
       <p class="main-text-1 description"></p>
     </div>
   </div>
