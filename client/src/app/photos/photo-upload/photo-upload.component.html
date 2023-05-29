@@ -6,7 +6,7 @@
         *ngIf="updatedPhotos && updatedPhotos.length; else noImage"
       >
         <div
-          class="col-md-2 d-flex flex-column mb-4"
+          class="col-md-3 d-flex flex-column mb-4"
           *ngFor="let photo of updatedPhotos; let i = index"
         >
           <div class="photo-box">
@@ -15,18 +15,26 @@
               [alt]="photo.url"
               class="user-thumbnail square"
             />
-            <div class="photo-delete">
+            <div class="photo-actions">
+              <button
+                *ngIf="photo.id && photo.isMain"
+                (click)="setMainPhoto(photo)"
+                class="icon-btn icon-blue"
+              >
+                <i class="fa-solid fa-check"></i>
+              </button>
+
               <button
                 *ngIf="photo.id"
                 (click)="deletePhoto(photo.id)"
-                class="icon-btn"
+                class="icon-btn icon-red ms-2"
               >
                 <i class="fa fa-trash"></i>
               </button>
             </div>
           </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <div class="upload-files-container">
             <a
               ng2FileDrop

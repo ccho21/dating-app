@@ -182,11 +182,11 @@ export class ExperienceEditComponent implements OnInit {
       });
 
       const { jobDescriptions } = this.experience;
-      this.addJobDescriptions(jobDescriptions);
+      this.updateJobDescriptions(jobDescriptions);
     }
   }
 
-  addJobDescriptions(jobDescriptions: JobDescription[]) {
+  updateJobDescriptions(jobDescriptions: JobDescription[]) {
     jobDescriptions.forEach((jd: JobDescription, i: number) => {
       let newItem = this.fb.group({
         ...jd,
@@ -196,6 +196,18 @@ export class ExperienceEditComponent implements OnInit {
 
       this.jobDescriptions.push(newItem);
     });
+  }
+
+  addJobDescription() {
+    console.log('### hi');
+    const newItem = this.fb.group({
+      description: [''],
+      position: [''],
+      started: [new Date()],
+      ended: [new Date()],
+      details: [''],
+    });
+    this.jobDescriptions.insert(0, newItem);
   }
 
   getStatesAsObservable(token: string): Observable<any[]> {
@@ -224,6 +236,25 @@ export class ExperienceEditComponent implements OnInit {
       }
       this.resetSkill();
     }
+  }
+
+  public deletePhoto(photoId: number): void {
+    console.log(`### deletePhoto: ${photoId}`);
+
+    if (!this.experience || !photoId) {
+      return;
+    }
+
+    this.experienceService
+      .deletePhoto(this.experience.id as number, photoId)
+      .subscribe(() => {
+        //TODO: NGRX
+        if (this.experience) {
+          this.experience.logos = this.experience.logos.filter(
+            (x) => x.id !== photoId
+          );
+        }
+      });
   }
 
   typeaheadNoResults(event: boolean): void {

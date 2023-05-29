@@ -179,8 +179,8 @@ export class PhotoUploadComponent implements OnInit {
     this.hasBaseDropzoneOver = e;
   }
 
-  setMainPhoto(photo: Photo) {
-    this.setMain.emit(photo);
+  setMainPhoto(photo: Photo | Partial<Photo>) {
+    this.setMain.emit(photo as Photo);
   }
 
   deletePhoto(photoId: number) {

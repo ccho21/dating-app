@@ -77,6 +77,15 @@
           title="Job Description Info"
           sub="Name this project and describe it to your visitors"
         >
+          <div class="my-2 text-end">
+            <app-button
+              tooltip="Add job description"
+              placement="right"
+              (click)="addJobDescription()"
+            >
+              <i class="fa-solid fa-plus"></i>
+            </app-button>
+          </div>
           <div [formGroup]="experienceForm">
             <div formArrayName="jobDescriptions">
               <ng-container
@@ -186,6 +195,7 @@
                 #photoUpload
                 [photos]="experience?.logos"
                 [single]="true"
+                (delete)="deletePhoto($event)"
               ></app-photo-upload>
             </div>
           </div>

@@ -9,11 +9,11 @@ export class ButtonComponent implements OnInit {
   @Input() icon?: string;
   @Input() label?: string;
   @Input() customClass?: string;
+  @Input() tooltip?: string;
+  @Input() placement: string = 'top';
   @Output() onClick = new EventEmitter();
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   handleClick() {
     this.onClick.emit();

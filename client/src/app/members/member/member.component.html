@@ -53,7 +53,12 @@
                 <button mat-menu-item (click)="addOrRemoveLike(member)">
                   {{ isLiked ? "Remove Favourite" : "Add Favourite" }}
                 </button>
-                <button mat-menu-item routerLink="/main/messages/{{member.username}}">Send message</button>
+                <button
+                  mat-menu-item
+                  routerLink="/main/messages/{{ member.username }}"
+                >
+                  Send message
+                </button>
               </mat-menu>
             </div>
             <div class="member-content">
@@ -108,12 +113,14 @@
     </div>
   </div>
   <div class="container move-over">
-    <div class="panel white bg-white d-block">
+    <app-panel
+      [title]="'About ' + member.knownAs"
+      [sub]="'Please explore ' + member.knownAs + 'for your next project'"
+    >
       <div class="row">
         <div class="col-xl-9">
           <div>
             <article class="member-card">
-              <h2 class="text-start">ABOUT ME</h2>
               <p>
                 {{ member.introduction }}
               </p>
@@ -125,65 +132,70 @@
               </p>
             </article>
           </div>
-          <div>
-            <article class="member-card">
-              <h2 class="text-start">PROJECT</h2>
-              <app-project-list> </app-project-list>
-            </article>
-          </div>
-          <div>
-            <article class="member-card">
-              <h2 class="text-start">CAREER</h2>
-              <app-experience-list></app-experience-list>
-            </article>
-          </div>
-        </div>
-
-        <div class="col-xl-3">
-          <div>
-            <article class="member-card">
-              <h2 class="text-start">SKILLS</h2>
-              <div>
-                <h3 class="mb-0">FRONT END</h3>
-                <div class="tech-item">HTML5</div>
-                <div class="tech-item">CSS</div>
-                <div class="tech-item">JavaScript</div>
-                <div class="tech-item">HTML5</div>
-              </div>
-
-              <hr />
-              <div>
-                <h3 class="mb-0">BACK END</h3>
-                <div class="tech-item">Node Js</div>
-                <div class="tech-item">.NET</div>
-                <div class="tech-item">Java</div>
-                <div class="tech-item">Firebase</div>
-                <div class="tech-item">PostgreSQL</div>
-              </div>
-              <hr />
-              <div>
-                <h3 class="mb-0">DEPLOYEMENT</h3>
-                <div class="tech-item">Heroku</div>
-                <div class="tech-item">Firebase</div>
-                <div class="tech-item">Docker</div>
-              </div>
-              <hr />
-              <div>
-                <h3 class="mb-0">VERSION CONTROL</h3>
-                <div class="tech-item">Git</div>
-                <div class="tech-item">Github</div>
-                <div class="tech-item">BitBucket</div>
-              </div>
-              <hr />
-              <div>
-                <h3 class="mb-0">COMMUNICATION</h3>
-                <div class="tech-item">Jira</div>
-                <div class="tech-item">Confluence</div>
-              </div>
-            </article>
-          </div>
         </div>
       </div>
-    </div>
+    </app-panel>
+    <app-panel>
+      <div>
+        <article class="member-card">
+          <h2 class="text-start">PROJECT</h2>
+          <app-projects [projects]="member.projects"></app-projects>
+        </article>
+      </div>
+    </app-panel>
+    <app-panel>
+      <div>
+        <article class="member-card">
+          <h2 class="text-start">CAREER</h2>
+          <app-experience-list></app-experience-list>
+        </article>
+      </div>
+    </app-panel>
+    <app-panel>
+      <div class="col-xl-3">
+        <div>
+          <article class="member-card">
+            <h2 class="text-start">SKILLS</h2>
+            <div>
+              <h3 class="mb-0">FRONT END</h3>
+              <div class="tech-item">HTML5</div>
+              <div class="tech-item">CSS</div>
+              <div class="tech-item">JavaScript</div>
+              <div class="tech-item">HTML5</div>
+            </div>
+
+            <hr />
+            <div>
+              <h3 class="mb-0">BACK END</h3>
+              <div class="tech-item">Node Js</div>
+              <div class="tech-item">.NET</div>
+              <div class="tech-item">Java</div>
+              <div class="tech-item">Firebase</div>
+              <div class="tech-item">PostgreSQL</div>
+            </div>
+            <hr />
+            <div>
+              <h3 class="mb-0">DEPLOYEMENT</h3>
+              <div class="tech-item">Heroku</div>
+              <div class="tech-item">Firebase</div>
+              <div class="tech-item">Docker</div>
+            </div>
+            <hr />
+            <div>
+              <h3 class="mb-0">VERSION CONTROL</h3>
+              <div class="tech-item">Git</div>
+              <div class="tech-item">Github</div>
+              <div class="tech-item">BitBucket</div>
+            </div>
+            <hr />
+            <div>
+              <h3 class="mb-0">COMMUNICATION</h3>
+              <div class="tech-item">Jira</div>
+              <div class="tech-item">Confluence</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </app-panel>
   </div>
 </section>

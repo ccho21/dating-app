@@ -79,7 +79,7 @@ import { FooterComponent } from './_layouts/footer/footer.component';
 import { MainComponent } from './main/main/main.component';
 import { HeaderComponent } from './_layouts/header/header.component';
 import { LinkComponent } from './_forms/link/link.component';
-import { ProfileOverviewComponent } from './profile/components/profile-overview/profile-overview.component';
+import { ProfileOverviewComponent } from './profile/containers/profile-overview/profile-overview.component';
 import { DynamicComponentComponent } from './_layouts/dynamic-component/dynamic-component.component';
 import { ExperienceOverviewComponent } from './experiences/experience-overview/experience-overview.component';
 import { DropdownLinkComponent } from './_forms/dropdown-link/dropdown-link.component';
@@ -88,6 +88,9 @@ import { ProjectTableComponent } from './projects/project-table/project-table.co
 import { SearchComponent } from './_layouts/search/search.component';
 import { ProjectCardComponent } from './projects/project-card/project-card.component';
 import { TruncatePipe } from './_pipes/truncate.pipe';
+import { ProjectsComponent } from './projects/projects/projects.component';
+import { ProjectsTabComponent } from './profile/containers/projects-tab/projects-tab.component';
+import { AboutTabComponent } from './profile/containers/about-tab/about-tab.component';
 
 @NgModule({
   declarations: [
@@ -153,6 +156,9 @@ import { TruncatePipe } from './_pipes/truncate.pipe';
     ProjectCardComponent,
     SearchComponent,
     TruncatePipe,
+    ProjectsComponent,
+    ProjectsTabComponent,
+    AboutTabComponent,
   ],
   imports: [
     BrowserModule,

@@ -54,18 +54,14 @@
             (selectTab)="activateTab($event)"
             #projectTab="tab"
           >
-            TAB2 app-
+            <app-about-tab *ngIf="member" [member]="member"> </app-about-tab>
           </tab>
           <tab
             heading="Projects"
             (selectTab)="activateTab($event)"
             #projectTab="tab"
           >
-            <!-- <app-project-list
-              *ngIf="member?.projects"
-              [projects]="member?.projects"
-            >
-            </app-project-list> -->
+            <app-projects-tab *ngIf="member?.projects"> </app-projects-tab>
           </tab>
           <tab
             heading="Experiences"

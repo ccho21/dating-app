@@ -92,6 +92,12 @@ export class ExperienceService {
       );
   }
 
+  deletePhoto(experienceId: number, photoId: number) {
+    return this.http.delete(
+      this.baseUrl + 'experiences/' + experienceId + '/delete-photo/' + photoId
+    );
+  }
+
   getExperienceParams(): ExperienceParams {
     return this.experienceParams as ExperienceParams;
   }

@@ -1,0 +1,34 @@
+<div class="about">
+  <div class="container mt-5" *ngIf="member">
+    <app-panel title="About me" sub="About myself!">
+      <div class="row">
+        <div class="col-md-12">
+          <article class="member-card p-3">
+            <p>Headline</p>
+            <p>Profession</p>
+            <p>Gender</p>
+            <p>City, Country</p>
+            <p>School</p>
+            <p>Contact Info</p>
+            <p>Github, Linkedin</p>
+          </article>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <article class="member-card p-3">
+            <p>
+              {{ member.introduction }}
+            </p>
+            <p>
+              {{ member.interests }}
+            </p>
+            <p>
+              {{ member.lookingFor }}
+            </p>
+          </article>
+        </div>
+      </div>
+    </app-panel>
+  </div>
+</div>
