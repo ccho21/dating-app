@@ -16,6 +16,6 @@ export class ProjectsComponent implements OnInit {
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
-    console.log('### project list destroyed');
+    console.log('### project list destroyed!');
   }
 }
