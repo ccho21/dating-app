@@ -1,0 +1,43 @@
+<div class="" *ngIf="member">
+  <div class="row mb-4 align-items-start">
+    <div class="col-2">
+      <img
+        src="{{ member.photoUrl || './assets/shared/user.png' }}"
+        [alt]="member.username"
+        class="user-thumbnail size-xs"
+      />
+      <div></div>
+    </div>
+    <div class="col-10 text-start">
+      <div class="d-flex">
+        <div>
+          <app-link
+            [label]="member.knownAs"
+            routerLink="/main/members/{{ member.username }}"
+            customClass="link-md"
+          ></app-link>
+          <div>
+            <small>Software developer, Accentury Inc.</small>
+          </div>
+          <div>
+            <small class="text-muted"
+              >Last visited {{ member.lastActive | timeago }}
+            </small>
+            <div>
+              <span class="badge bg-dark me-2">Angular</span>
+              <span class="badge bg-dark me-2">React</span>
+              <span class="badge bg-dark me-2">.NET</span>
+            </div>
+          </div>
+        </div>
+        <div class="ms-auto">
+          <div>
+            <i class="fa-solid fa-heart"></i>
+            {{ member.likedByUsers?.length }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
