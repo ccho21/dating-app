@@ -20,8 +20,8 @@
       </div>
       <ul *ngFor="let description of experience.jobDescriptions">
         <li>** {{ description.description }}</li>
-        <li *ngFor="let detail of description.details">
-          {{ detail.description }}
+        <li>
+          {{ description.details }}
         </li>
       </ul>
     </div>

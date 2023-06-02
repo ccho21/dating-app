@@ -18,15 +18,18 @@ export class ExperienceOverviewComponent implements OnInit {
   ngOnInit(): void {
     const params: ExperienceParams =
       this.experienceService.getExperienceParams();
+
     this.loadExperiences(params);
   }
 
   loadExperiences(params: ExperienceParams) {
     this.experienceService.getExperiences(params).subscribe((response) => {
       if (response && response.pagination) {
-        this.experiences = response.result;
         this.pagination = response.pagination;
         this.pagination.currentPage = response.pagination.currentPage - 1;
+        this.experiences = response.result;
+
+        console.log('### this experiences', response.result);
       }
     });
   }
