@@ -11,11 +11,32 @@
     <div class="col-10 text-start">
       <div class="d-flex">
         <div>
-          <app-link
-            [label]="member.knownAs"
-            routerLink="/main/members/{{ member.username }}"
-            customClass="link-md"
-          ></app-link>
+          <div class="d-flex align-items-center">
+            <app-link
+              [label]="member.knownAs"
+              routerLink="/main/members/{{ member.username }}"
+              customClass="link-md"
+            ></app-link>
+            <div class="status">
+              <div
+                *ngIf="
+                  (presence.onlineUsers$ | async)!.includes(member.username!);
+                  else offline
+                "
+              >
+                <div>
+                  <i class="fa-solid fa-circle is-online"></i>
+                  <span class="ps-2">ONLINE</span>
+                </div>
+              </div>
+              <ng-template #offline>
+                <div>
+                  <i class="fa-regular fa-circle"></i>
+                  <small class="ps-2">OFFLINE</small>
+                </div>
+              </ng-template>
+            </div>
+          </div>
           <div>
             <small>Software developer, Accentury Inc.</small>
           </div>
