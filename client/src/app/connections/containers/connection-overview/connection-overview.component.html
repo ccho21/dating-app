@@ -1,0 +1,29 @@
+<section>
+  <tabset class="tabset" type="pills" #profileTabs>
+    <tab
+      heading="Follwing"
+      (selectTab)="activateTab($event)"
+      #connectTabA="tab"
+    >
+      <div class="my-5" *ngIf="connectTabA">
+        <div *ngFor="let member of members; let i = index">
+          <app-connection-sm
+            [member]="member"
+            (updateMembers)="loadMembersWithLikes()"
+          ></app-connection-sm>
+        </div>
+      </div>
+    </tab>
+
+    <tab heading="Follwed" (selectTab)="activateTab($event)" #connectTabB="tab">
+      <div class="my-5" *ngIf="connectTabB">
+        <div *ngFor="let member of members; let i = index">
+          <app-connection-sm
+            [member]="member"
+            (updateMembers)="loadMembersWithLikes()"
+          ></app-connection-sm>
+        </div>
+      </div>
+    </tab>
+  </tabset>
+</section>

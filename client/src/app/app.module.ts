@@ -50,9 +50,9 @@ import { FormGroupPipe } from './_pipes/form-group.pipe';
 import { MemberSearchComponent } from './members/member-search/member-search.component';
 import { MessagesComponent } from './messages/messages/messages.component';
 import { MessageOverviewComponent } from './messages/message-overview/message-overview.component';
-import { ConnectionOverviewComponent } from './connections/connection-overview/connection-overview.component';
+import { ConnectionOverviewComponent } from './connections/containers/connection-overview/connection-overview.component';
 import { MemberComponent } from './members/member/member.component';
-import { ConnectionCardComponent } from './connections/connection-card/connection-card.component';
+import { ConnectionCardComponent } from './connections/components/connection-card/connection-card.component';
 import { NoDataComponent } from './no-data/no-data/no-data.component';
 import { ProjectListComponent } from './projects/project-list/project-list.component';
 import { ProjectComponent } from './projects/project/project.component';
@@ -91,6 +91,7 @@ import { TruncatePipe } from './_pipes/truncate.pipe';
 import { ProjectsComponent } from './projects/projects/projects.component';
 import { ProjectsTabComponent } from './profile/containers/projects-tab/projects-tab.component';
 import { AboutTabComponent } from './profile/containers/about-tab/about-tab.component';
+import { ConnectionSmComponent } from './connections/components/connection-sm/connection-sm.component';
 
 @NgModule({
   declarations: [
@@ -159,6 +160,7 @@ import { AboutTabComponent } from './profile/containers/about-tab/about-tab.comp
     ProjectsComponent,
     ProjectsTabComponent,
     AboutTabComponent,
+    ConnectionSmComponent,
   ],
   imports: [
     BrowserModule,
