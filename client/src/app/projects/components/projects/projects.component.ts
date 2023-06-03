@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Project } from '../../_models/project';
-import { ProjectParams } from '../../_models/projectParams';
-import { ProjectService } from '../../_services/project.service';
+import { Project } from '../../../_models/project';
+import { ProjectParams } from '../../../_models/projectParams';
+import { ProjectService } from '../../../_services/project.service';
 
 @Component({
   selector: 'app-projects',

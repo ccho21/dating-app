@@ -43,9 +43,7 @@
             #overviewTab="tab"
           >
             <div class="py-5">
-              <app-profile-overview
-                *ngIf="overviewTab.active"
-              ></app-profile-overview>
+              <app-overview-tab *ngIf="overviewTab.active"></app-overview-tab>
             </div>
           </tab>
 
@@ -68,30 +66,29 @@
             (selectTab)="activateTab($event)"
             #experienceTab="tab"
           >
-            <app-experience-list
-              *ngIf="experienceTab.active"
-            ></app-experience-list>
+            <app-experience-tab *ngIf="experienceTab.active">
+            </app-experience-tab>
           </tab>
-          <tab heading="Education" (selectTab)="activateTab($event)">
+          <!-- <tab heading="Education" (selectTab)="activateTab($event)">
             TAB3
 
-            <!-- <sub-component
+            <sub-component
                 name="C"
                 *ngIf="tabC.active"
                 (onInit)="message('Sub-Component C activated')"
                 (onDestroy)="message('Sub-Component C destroyed')"
-              ></sub-component> -->
-          </tab>
-          <tab heading="Skills" (selectTab)="activateTab($event)">
+              ></sub-component>
+          </tab> -->
+          <!-- <tab heading="Skills" (selectTab)="activateTab($event)">
             TAB3
 
-            <!-- <sub-component
+            <sub-component
                 name="C"
                 *ngIf="tabC.active"
                 (onInit)="message('Sub-Component C activated')"
                 (onDestroy)="message('Sub-Component C destroyed')"
-              ></sub-component> -->
-          </tab>
+              ></sub-component>
+          </tab> -->
         </tabset>
       </section>
     </div>

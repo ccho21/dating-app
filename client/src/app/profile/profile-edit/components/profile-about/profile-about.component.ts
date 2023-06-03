@@ -7,6 +7,8 @@ import { take } from 'rxjs/operators';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Photo } from 'src/app/_models/photo';
+import { PhotoUploadComponent } from 'src/app/photos/photo-upload/photo-upload.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile-about',
@@ -15,10 +17,15 @@ import { Photo } from 'src/app/_models/photo';
 })
 export class ProfileAboutComponent implements OnInit {
   // @ViewChild('editForm') editForm?: NgForm;
+  @ViewChild('photoUpload') photoUpload?: PhotoUploadComponent;
+  baseUrl = environment.apiUrl;
 
   member?: Member;
   user?: User;
   activeTab?: number;
+
+  uploaderReady: boolean = false;
+  photos: Photo[] = [];
 
   editForm: FormGroup = this.fb.group({
     gender: ['male'],
@@ -92,14 +99,19 @@ export class ProfileAboutComponent implements OnInit {
 
   updateMember() {
     this.memberService.updateMember(this.member as Member).subscribe(() => {
-      this._snackBar.open(`Profile updated successfully`, 'okay', {
-        duration: 5000,
-        verticalPosition: 'bottom',
-      });
+      this.updateImages(this.member?.id as number);
       this.editForm?.reset(this.member);
     });
   }
 
+  updateImages(id: number) {
+    if (id) {
+      const url = `${this.baseUrl}projects/${id}/add-photo`;
+      this.photoUpload?.updateUrl(url);
+      this.photoUpload?.uploadAll();
+    }
+  }
+  
   setMainPhoto(photo: Photo) {
     this.memberService.setMainPhoto(photo.id).subscribe(() => {
       if (this.user && this.member) {

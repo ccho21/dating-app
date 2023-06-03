@@ -84,4 +84,5 @@ export class MemberListComponent implements OnInit, OnDestroy {
       this.loadMembers();
     }
   }
+  search(e: any) {}
 }

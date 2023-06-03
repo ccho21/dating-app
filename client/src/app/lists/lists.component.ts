@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Member } from '../_models/member';
 import { Pagination } from '../_models/pagination';
 import { MemberService } from '../_services/member.service';
-import Driver from 'driver.js';
 import { MatGridList } from '@angular/material/grid-list';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
@@ -12,13 +11,11 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
   styleUrls: ['./lists.component.scss'],
 })
 export class ListsComponent implements OnInit {
-
   members?: Partial<Member[]>;
   predicate = 'liked';
   pageNumber = 1;
   pageSize = 5;
   pagination?: Pagination;
-  driver?: Driver;
 
   constructor(private memberService: MemberService) {}
 
@@ -44,36 +41,5 @@ export class ListsComponent implements OnInit {
     this.pageNumber = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.loadLikes();
-  }
-
-  startNavigationGuide() {
-    if (!this.driver) {
-      this.driver = new Driver({
-        animate: true,
-        keyboardControl: true,
-      });
-
-      const steps = [
-        {
-          element: '#login-step2',
-          popover: {
-            title: 'Lists',
-            description:
-              'Menu that shows members you already liked and who liked you.',
-            position: 'bottom-center',
-          },
-        },
-      ];
-      console.log('### this driver', steps);
-      this.driver.defineSteps(steps);
-      this.driver.start();
-    }
-  }
-
-  resetNavigationGuide() {
-    if (this.driver) {
-      this.driver.reset();
-      this.driver = undefined;
-    }
   }
 }

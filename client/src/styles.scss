@@ -180,3 +180,30 @@ body {
 .tooltip-arrow {
   position: absolute;
 }
+
+.vertical-tab {
+  display: flex;
+  flex-wrap: wrap;
+
+  & .nav-tabs {
+    flex-direction: column;
+    flex-basis: 25%;
+    border: 0;
+    border-right: 1px solid;
+    border-color: rgba(#858585, 0.25);
+
+    .nav-link {
+      &:hover {
+        border-color: transparent !important;
+      }
+      &.active {
+        background-color: rgba(56, 88, 153, 0.5);
+        border-color: transparent !important;
+        color: #555;
+      }
+    }
+  }
+  & .tab-content {
+    flex-grow: 1;
+  }
+}

@@ -20,7 +20,6 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
@@ -53,9 +52,8 @@ import { MessageOverviewComponent } from './messages/message-overview/message-ov
 import { ConnectionOverviewComponent } from './connections/containers/connection-overview/connection-overview.component';
 import { MemberComponent } from './members/member/member.component';
 import { ConnectionCardComponent } from './connections/components/connection-card/connection-card.component';
-import { NoDataComponent } from './no-data/no-data/no-data.component';
-import { ProjectListComponent } from './projects/project-list/project-list.component';
-import { ProjectComponent } from './projects/project/project.component';
+import { ProjectListComponent } from './projects/containers/project-list/project-list.component';
+import { ProjectComponent } from './projects/components/project/project.component';
 import { VisitorOverviewComponent } from './visitors/visitor-overview/visitor-overview.component';
 
 import { SlicePipe } from '@angular/common';
@@ -79,24 +77,24 @@ import { FooterComponent } from './_layouts/footer/footer.component';
 import { MainComponent } from './main/main/main.component';
 import { HeaderComponent } from './_layouts/header/header.component';
 import { LinkComponent } from './_forms/link/link.component';
-import { ProfileOverviewComponent } from './profile/containers/profile-overview/profile-overview.component';
+import { OverviewTabComponent } from './profile/containers/overview-tab/overview-tab.component';
 import { DynamicComponentComponent } from './_layouts/dynamic-component/dynamic-component.component';
 import { ExperienceOverviewComponent } from './experiences/experience-overview/experience-overview.component';
 import { DropdownLinkComponent } from './_forms/dropdown-link/dropdown-link.component';
 import { SideNavComponent } from './_layouts/side-nav/side-nav.component';
-import { ProjectTableComponent } from './projects/project-table/project-table.component';
+import { ProjectTableComponent } from './projects/components/project-table/project-table.component';
 import { SearchComponent } from './_layouts/search/search.component';
-import { ProjectCardComponent } from './projects/project-card/project-card.component';
+import { ProjectCardComponent } from './projects/components/project-card/project-card.component';
 import { TruncatePipe } from './_pipes/truncate.pipe';
-import { ProjectsComponent } from './projects/projects/projects.component';
+import { ProjectsComponent } from './projects/components/projects/projects.component';
 import { ProjectsTabComponent } from './profile/containers/projects-tab/projects-tab.component';
 import { AboutTabComponent } from './profile/containers/about-tab/about-tab.component';
 import { ConnectionSmComponent } from './connections/components/connection-sm/connection-sm.component';
+import { ExperienceTabComponent } from './profile/containers/experience-tab/experience-tab.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent,
     HomeComponent,
     RegisterComponent,
     MemberListComponent,
@@ -125,7 +123,6 @@ import { ConnectionSmComponent } from './connections/components/connection-sm/co
     ConnectionOverviewComponent,
     MemberComponent,
     ConnectionCardComponent,
-    NoDataComponent,
     ProjectListComponent,
     ProjectComponent,
     VisitorOverviewComponent,
@@ -148,7 +145,7 @@ import { ConnectionSmComponent } from './connections/components/connection-sm/co
     MainComponent,
     HeaderComponent,
     LinkComponent,
-    ProfileOverviewComponent,
+    OverviewTabComponent,
     DynamicComponentComponent,
     ExperienceOverviewComponent,
     DropdownLinkComponent,
@@ -161,6 +158,7 @@ import { ConnectionSmComponent } from './connections/components/connection-sm/co
     ProjectsTabComponent,
     AboutTabComponent,
     ConnectionSmComponent,
+    ExperienceTabComponent,
   ],
   imports: [
     BrowserModule,

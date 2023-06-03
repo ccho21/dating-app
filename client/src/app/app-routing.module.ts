@@ -23,8 +23,8 @@ import { ProfileExperiencesComponent } from './profile/profile-edit/components/p
 import { ProfileSkillsComponent } from './profile/profile-edit/components/profile-skills/profile-skills.component';
 import { MainComponent } from './main/main/main.component';
 import { ProjectEditComponent } from './profile/profile-edit/components/profile-projects/components/project-edit/project-edit.component';
-import { ProjectListComponent } from './projects/project-list/project-list.component';
-import { ProjectComponent } from './projects/project/project.component';
+import { ProjectListComponent } from './projects/containers/project-list/project-list.component';
+import { ProjectComponent } from './projects/components/project/project.component';
 import { ExperienceEditComponent } from './profile/profile-edit/components/profile-experiences/components/experience-edit/experience-edit.component';
 
 const routes: Routes = [

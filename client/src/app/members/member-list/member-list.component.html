@@ -1,37 +1,8 @@
-<section class="my-5">
-  <!-- <app-member-search></app-member-search> -->
-</section>
-<section class="example-section mb-4 text-end">
+<section>
   <div class="container">
-    <div class="row">
-      <div class="offset-lg-1 col-lg-10">
-        <mat-button-toggle-group
-          class="list-search"
-          name="fontStyle"
-          aria-label="Font Style"
-          [(ngModel)]="predicate"
-        >
-          <mat-button-toggle
-            class="list-search-item"
-            [routerLink]="['/main/members']"
-          >
-            People
-          </mat-button-toggle>
-          <mat-button-toggle
-            [routerLink]="['/main/members']"
-            [queryParams]="{ predicate: 'liked' }"
-            class="list-search-item"
-          >
-            Following
-          </mat-button-toggle>
-          <mat-button-toggle
-            class="list-search-item"
-            [routerLink]="['/main/members']"
-            [queryParams]="{ predicate: 'likedBy' }"
-          >
-            Followed
-          </mat-button-toggle>
-        </mat-button-toggle-group>
+    <div class="row my-5">
+      <div class="col">
+        <app-search (paramsEmit)="search($event)"></app-search>
       </div>
     </div>
   </div>
@@ -39,17 +10,11 @@
 <section class="my-5">
   <div class="container">
     <div class="row">
-      <!-- <div>
-        <h2 class="title mb-4">
-          <mat-icon class="me-3">people</mat-icon>
-          Matches
-        </h2>
-      </div> -->
       <div class="offset-lg-1 col-lg-10">
         <div class="row">
           <ng-container *ngIf="members && members.length; else noData">
             <div
-              class="col-lg-4 col-md-4 col-sm-6 col-xs-6 mb-4"
+              class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mb-4"
               *ngFor="let member of members"
             >
               <app-member-card [member]="member"></app-member-card>

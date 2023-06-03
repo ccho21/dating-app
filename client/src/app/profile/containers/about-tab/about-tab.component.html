@@ -1,6 +1,6 @@
 <div class="about">
   <div class="container mt-5" *ngIf="member">
-    <app-panel title="About me" sub="About myself!">
+    <!-- <app-panel title="About me" sub="About myself!">
       <div class="row">
         <div class="col-md-12">
           <article class="member-card p-3">
@@ -29,6 +29,112 @@
           </article>
         </div>
       </div>
+    </app-panel> -->
+
+    <app-panel customClass="no-padding no-height">
+      <div class="row">
+        <div class="col-md-12">
+          <div>
+            <tabset #staticTabs class="vertical-tab" [vertical]="true">
+              <tab heading="Overview">
+                <div>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <i class="fa-solid fa-heading"></i>
+                      I am changsoo Cho, Front-end developer.
+                    </li>
+                    <li class="list-group-item">
+                      <i class="fa-solid fa-briefcase"></i>
+                      Toronto District School Board
+                    </li>
+                    <li class="list-group-item">
+                      <i class="fa-solid fa-graduation-cap"></i>
+                      Studied Music at University of Toronto
+                    </li>
+                  </ul>
+                </div>
+              </tab>
+              <tab heading="Work and Education">
+                <div>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <div class="fs-3">Work</div>
+                      <div>
+                        <i class="fa-solid fa-person-digging"></i>
+                        Toronto District School Board
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="fs-3">College</div>
+                      <div>
+                        <i class="fa-solid fa-building-columns"></i>
+                        Computer programming, Seneca College
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </tab>
+              <tab heading="Places Lived">
+                <div>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <i class="fa-solid fa-flag"></i>
+                      Toronto, Canada
+                    </li>
+                  </ul>
+                </div>
+              </tab>
+              <tab heading="Contact Basic info">
+                <div>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <div class="fs-3">Contact info</div>
+                      <div>
+                        <i class="fa-solid fa-person-digging"></i>
+                        Toronto District School Board
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="fs-3">Websites and social links</div>
+                      <div>
+                        <i class="fa-solid fa-building-columns"></i>
+                        Computer programming, Seneca College
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="fs-3">Basic info</div>
+                      <div>
+                        <i class="fa-solid fa-building-columns"></i>
+                        Computer programming, Seneca College
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </tab>
+            </tabset>
+          </div>
+        </div>
+      </div>
+    </app-panel>
+
+    <app-panel title="Photos">
+      <div class="row" gallerize *ngIf="member.photos.length; else noGallery">
+        <div
+          class="col-md-2 mb-3"
+          *ngFor="let photo of member.photos"
+          gallerize
+        >
+          <img [src]="photo.url" alt="" class="w-100" />
+        </div>
+      </div>
+      <ng-template #noGallery>
+        <div class="text-center my-4">
+          No images to show. Please upload some photos.
+        </div>
+        <div class="my-4 text-center">
+          <app-button>Upload picture</app-button>
+        </div>
+      </ng-template>
     </app-panel>
   </div>
 </div>

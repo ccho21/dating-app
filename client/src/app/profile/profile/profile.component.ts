@@ -63,7 +63,7 @@ export class ProfileComponent implements OnInit {
   }
 
   activateTab(tab: TabDirective) {
-    console.log('### activate tab', tab.heading);
+    console.log('### activate tab', tab);
     this.router.navigate(['/main'], { queryParams: { tab: tab.heading } });
   }
 }

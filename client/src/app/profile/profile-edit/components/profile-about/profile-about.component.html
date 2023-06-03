@@ -184,10 +184,10 @@
                 <div class="col-md-12">
                   <app-photo-upload
                     *ngIf="member"
+                    #photoUpload
                     [photos]="member.photos"
                     (setMain)="setMainPhoto($event)"
                     (delete)="deletePhoto($event)"
-                    (updatePhoto)="updatePhoto($event)"
                   ></app-photo-upload>
                 </div>
               </div>
