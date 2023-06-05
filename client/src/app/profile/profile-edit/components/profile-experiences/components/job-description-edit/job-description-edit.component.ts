@@ -10,9 +10,6 @@ export class JobDescriptionEditComponent implements OnInit {
   maxDate?: Date;
   @Input() jdForm?: FormGroup;
 
-  get details(): FormArray {
-    return this.jdForm?.get('details') as FormArray;
-  }
   constructor() {}
 
   ngOnInit(): void {

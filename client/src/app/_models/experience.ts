@@ -7,6 +7,7 @@ export interface Experience {
   intro: string;
   position: string;
   companyName: string;
+  isCurrent: boolean;
   jobDescriptions: JobDescription[];
   url: string;
   appUserId: number;
@@ -18,6 +19,7 @@ export interface Experience {
 
 export interface JobDescription {
   id: number;
+  isCurrent: boolean;
   description: string;
   position: string;
   started: string;

@@ -51,6 +51,11 @@ namespace API.Controllers
         private async Task<List<Skill>> getMatchingSkills(ICollection<SkillDto> skills)
         {
             var matchingSkills = new List<Skill>();
+            if (skills == null)
+            {
+                return matchingSkills;
+            }
+
             foreach (var skill in skills)
             {
                 var existingSkill = await _context.Skills.SingleOrDefaultAsync(x => x.Name.Replace(" ", string.Empty).ToLower() == skill.Name.Replace(" ", string.Empty).ToLower());
@@ -85,6 +90,7 @@ namespace API.Controllers
                 Position = createExperienceDto.Position,
                 CompanyName = createExperienceDto.CompanyName,
                 Url = createExperienceDto.Url,
+                IsCurrent = createExperienceDto.IsCurrent,
                 Started = createExperienceDto.Started,
                 Ended = createExperienceDto.Ended,
                 AppUser = user,
@@ -92,6 +98,7 @@ namespace API.Controllers
                 {
                     Description = x.Description,
                     Position = x.Position,
+                    IsCurrent = x.IsCurrent,
                     Started = x.Started,
                     Ended = x.Ended,
                     Details = x.Details,
@@ -122,9 +129,9 @@ namespace API.Controllers
                 return BadRequest("You don't have permission to update this experience");
 
 
-            if (updateExperienceDto.Skills.Count() > 0)
+            var matchingSkills = new List<Skill>();
+            if (updateExperienceDto.Skills != null && updateExperienceDto.Skills.Count() > 0)
             {
-                var matchingSkills = new List<Skill>();
                 foreach (var skill in updateExperienceDto.Skills)
                 {
                     var existingSkill = await _context.Skills.AsNoTracking().SingleOrDefaultAsync(x => x.Name.Replace(" ", string.Empty).ToLower() == skill.Name.Replace(" ", string.Empty).ToLower());
@@ -142,9 +149,9 @@ namespace API.Controllers
                         matchingSkills.Add(newSkill);
                     }
                 }
-                _mapper.Map(matchingSkills, updateExperienceDto.Skills);
             }
 
+            _mapper.Map(matchingSkills, updateExperienceDto.Skills);
             _mapper.Map(updateExperienceDto, experience);
 
             if (await _unitOfWork.Complete())
@@ -156,7 +163,7 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteExperience(int id)
         {
-            var experience = await _unitOfWork.ExperienceRepository.GetExperienceByIdAsync(id);
+            var experience = await _unitOfWork.ExperienceRepository.GetExperienceWithDetailsByIdAsync(id);
 
             if (experience == null) return NotFound();
 

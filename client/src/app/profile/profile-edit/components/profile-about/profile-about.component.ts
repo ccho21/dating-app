@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { Member } from 'src/app/_models/member';
+import { Member, MemberForm } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { MemberService } from 'src/app/_services/member.service';
@@ -98,7 +98,18 @@ export class ProfileAboutComponent implements OnInit {
   }
 
   updateMember() {
-    this.memberService.updateMember(this.member as Member).subscribe(() => {
+    const { name, interests, lookingFor, city, country, gender, introduction } =
+      this.editForm.value;
+    const form: MemberForm = {
+      knownAs: name,
+      interests,
+      lookingFor,
+      city,
+      country,
+      gender,
+      introduction,
+    };
+    this.memberService.updateMember(form).subscribe(() => {
       this.updateImages(this.member?.id as number);
       this.editForm?.reset(this.member);
     });
@@ -106,12 +117,12 @@ export class ProfileAboutComponent implements OnInit {
 
   updateImages(id: number) {
     if (id) {
-      const url = `${this.baseUrl}projects/${id}/add-photo`;
+      const url = `${this.baseUrl}users/add-photo`;
       this.photoUpload?.updateUrl(url);
       this.photoUpload?.uploadAll();
     }
   }
-  
+
   setMainPhoto(photo: Photo) {
     this.memberService.setMainPhoto(photo.id).subscribe(() => {
       if (this.user && this.member) {

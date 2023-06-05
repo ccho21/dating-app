@@ -33,6 +33,21 @@
 
   <div class="row align-items-start mb-3">
     <div class="col-md-2 text-end">
+      <label for="started" class="label"> Current </label>
+    </div>
+    <div class="offset-md-1 col-md-6">
+      <input
+        [formControl]="jdForm.controls['isCurrent'] | formControl"
+        class="form-check-input"
+        type="checkbox"
+        value=""
+        id="flexCheckDefault"
+      />
+    </div>
+  </div>
+
+  <div class="row align-items-start mb-3">
+    <div class="col-md-2 text-end">
       <label for="started" class="label"> Started </label>
     </div>
     <div class="offset-md-1 col-md-6">
@@ -75,15 +90,4 @@
       <p class="main-text-1 description"></p>
     </div>
   </div>
-  <!-- <div [formGroup]="jdForm">
-    <div formArrayName="details">
-      <ng-container
-        *ngFor="let detailForm of details.controls; let j = index"
-        [formGroup]="detailForm | formGroup"
-      >
-        <app-job-detail-edit [detailForm]="detailForm | formGroup">
-        </app-job-detail-edit>
-      </ng-container>
-    </div>
-  </div> -->
 </div>

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Member } from '../_models/member';
-import { of } from 'rxjs';
+import { Member, MemberForm } from '../_models/member';
+import { Observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
@@ -111,11 +111,11 @@ export class MemberService {
     return this.http.get<Member>(this.baseUrl + 'users/' + username);
   }
 
-  updateMember(member: Member) {
-    return this.http.put(this.baseUrl + 'users', member).pipe(
+  updateMember(member: MemberForm): Observable<void> {
+    return this.http.put<void>(this.baseUrl + 'users', member).pipe(
       map(() => {
-        const index = this.members.indexOf(member);
-        this.members[index] = member;
+        // const index = this.members.indexOf(member);
+        // this.members[index] = member;
       })
     );
   }

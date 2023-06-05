@@ -14,7 +14,7 @@ namespace API.Entities
         public string Url { get; set; }
         public DateTime Started { get; set; }
         public bool IsCurrent { get; set; }
-        public DateTime Ended { get; set; }
+        public DateTime? Ended { get; set; }
         public AppUser AppUser { get; set; }
         public int AppUserId { get; set; }
         public ICollection<Photo> Logos { get; set; }

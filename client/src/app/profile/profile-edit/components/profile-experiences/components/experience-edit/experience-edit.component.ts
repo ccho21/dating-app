@@ -7,11 +7,9 @@ import {
 } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FileUploader } from 'ng2-file-upload';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
 import { Observable, Subscriber, mergeMap, of, take } from 'rxjs';
-import { Detail, Experience, JobDescription } from 'src/app/_models/experience';
-import { Photo } from 'src/app/_models/photo';
+import { Experience, JobDescription } from 'src/app/_models/experience';
 import { Skill } from 'src/app/_models/skill';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -44,6 +42,7 @@ export class ExperienceEditComponent implements OnInit {
   statesComplex: any[] = [];
   uploaderReady: boolean = false;
   id?: number;
+  isCurrent: boolean = false;
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification(
     $event: any
@@ -56,7 +55,6 @@ export class ExperienceEditComponent implements OnInit {
     private experienceService: ExperienceService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router,
     private accountService: AccountService,
     private skillService: SkillService
   ) {
@@ -79,6 +77,7 @@ export class ExperienceEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+
     this.route.params.subscribe(({ id }) => {
       console.log('### ID', id);
       if (id) {
@@ -91,6 +90,7 @@ export class ExperienceEditComponent implements OnInit {
           this.fillForm();
           this.mode = 'EDIT';
           this.uploaderReady = true;
+          this.isCurrent = this.experience.isCurrent;
         });
       } else {
         this.uploaderReady = true;
@@ -98,7 +98,6 @@ export class ExperienceEditComponent implements OnInit {
     });
 
     this.skillService.getSkills().subscribe((res) => {
-      console.log('### :) ', res);
       this.statesComplex = res.slice();
     });
   }
@@ -154,6 +153,7 @@ export class ExperienceEditComponent implements OnInit {
       intro: ['Hello everyone I am charles.'],
       position: ['Front-end Developer'],
       companyName: ['Guidelines advertising'],
+      isCurrent: [false],
       jobDescriptions: this.fb.array([]),
       url: ['google.ca'],
       started: [new Date()],
@@ -170,13 +170,13 @@ export class ExperienceEditComponent implements OnInit {
         'I was working as a web developer for 2 years and I was working on developing a variety of websites that promotes the pre-construction condos and houses',
       ],
     });
-    this.jobDescriptions.push(jdForm);
   }
 
   private fillForm(): void {
     if (this.experience) {
       this.experienceForm?.patchValue({
         ...this.experience,
+        isCurrent: false,
         started: new Date(this.experience.started),
         ended: new Date(this.experience.ended),
       });
@@ -199,15 +199,19 @@ export class ExperienceEditComponent implements OnInit {
   }
 
   addJobDescription() {
-    console.log('### hi');
     const newItem = this.fb.group({
       description: [''],
       position: [''],
+      isCurrent: [false],
       started: [new Date()],
       ended: [new Date()],
       details: [''],
     });
     this.jobDescriptions.insert(0, newItem);
+  }
+
+  removeJobDescription(i: number) {
+    this.jobDescriptions.removeAt(i);
   }
 
   getStatesAsObservable(token: string): Observable<any[]> {
@@ -286,5 +290,14 @@ export class ExperienceEditComponent implements OnInit {
   resetSkill() {
     this.skillForm.reset();
     this.noResult = false;
+  }
+
+  onCheckboxChange(event: Event): void {
+    console.log('### event', event);
+    // Get the checkbox element from the event target
+    const checkbox = <HTMLInputElement>event.target;
+
+    // Get the checked value from the checkbox element
+    this.isCurrent = checkbox.checked;
   }
 }

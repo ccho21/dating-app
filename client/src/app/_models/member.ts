@@ -24,3 +24,13 @@ export interface Member {
   projects: Project[];
   experiences: Experience[];
 }
+
+export interface MemberForm {
+  knownAs: string;
+  gender: string;
+  introduction: string;
+  lookingFor: string;
+  interests: string;
+  city: string;
+  country: string;
+}
