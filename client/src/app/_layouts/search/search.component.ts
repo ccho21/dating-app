@@ -34,6 +34,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     { value: 'title', display: 'Title' },
     { value: 'username', display: 'Username' },
   ];
+
   constructor(
     private projectService: ProjectService,
     private fb: FormBuilder
@@ -56,6 +57,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   onDateChange(date: Date) {
     if (date && this.projectParams) {
       date.setHours(0, 0, 0);
@@ -88,15 +90,9 @@ export class SearchComponent implements OnInit, OnDestroy {
         }
       }
 
+      this.projectService.setProjectParams(this.projectParams);
       this.paramsEmit.emit(this.projectParams);
-
-      this.resetForm();
     }
-  }
-
-  resetForm() {
-    // Reset form controls
-    // this.searchForm.get('keyword')?.reset();
   }
 
   ngOnDestroy(): void {

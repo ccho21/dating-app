@@ -4,7 +4,7 @@ import { MemberService } from 'src/app/_services/member.service';
 import { Pagination } from 'src/app/_models/pagination';
 import { UserParams } from 'src/app/_models/userParams';
 import { User } from 'src/app/_models/user';
-import Driver from 'driver.js';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-member-search',
@@ -12,46 +12,75 @@ import Driver from 'driver.js';
   styleUrls: ['./member-search.component.scss'],
 })
 export class MemberSearchComponent implements OnInit {
-  @Output() searchEvent = new EventEmitter<UserParams>();
+  @Output() paramsEmit = new EventEmitter<UserParams>();
+  searchForm: FormGroup = new FormGroup({});
   members?: Member[];
   pagination?: Pagination;
-
-  userParams?: UserParams;
+  userParams: UserParams = new UserParams();
 
   user?: User;
-  genderList = [
-    { value: 'male', display: 'Males' },
-    { value: 'female', display: 'Females' },
+
+  searchList = [
+    { value: 'username', display: 'Username' },
+    { value: 'name', display: 'Name' },
+    { value: 'education', display: 'Education' },
+    { value: 'position', display: 'Position' },
   ];
 
-  driver?: Driver;
+  orderList = [
+    { value: '', display: 'Sort by' },
+    { value: 'lastActive', display: 'Last Active' },
+    { value: 'username', display: 'Username' },
+  ];
 
-  constructor(private memberService: MemberService) {
-    this.userParams = this.memberService.getUserParams();
-  }
+  constructor(private memberService: MemberService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.userParams = {
-      gender: 'female',
-      maxAge: 99,
-      minAge: 18,
-      orderBy: 'lastActive',
-      pageNumber: 0,
-      pageSize: 10,
-    };
-    this.search();
-    // this.startNavigationGuide();
+    // members should be filtered by name, job, education skills,
+    this.searchForm = this.fb.group({
+      keyword: [''],
+      search: ['username', [Validators.required]],
+      orderBy: [''],
+    });
+
+    this.searchForm.get('orderBy')?.valueChanges.subscribe((change) => {
+      if (change) {
+        this.userParams.orderBy = change;
+        this.paramsEmit.emit(this.userParams);
+      }
+    });
   }
 
   resetFilters() {
     this.userParams = this.memberService.resetUserParams();
   }
 
-  search() {
-    console.log('### check this user params', this.userParams);
-    if (this.userParams) {
-      this.memberService.setUserParams(this.userParams);
-      this.searchEvent.emit(this.userParams);
+  submit() {
+    if (this.searchForm) {
+      console.log('### this.search form', this.searchForm);
+      const selectedSearch: string = this.searchForm.get('search')?.value;
+      const keyword: string = this.searchForm.get('keyword')?.value;
+
+      if (!selectedSearch || !keyword) {
+        alert('search and keyword should be entered');
+        return;
+      }
+
+      if (this.userParams) {
+        switch (selectedSearch) {
+          case 'username':
+            this.userParams.username = keyword;
+            break;
+        }
+      }
+
+      console.log('### user params,', this.userParams);
+      this.paramsEmit.emit(this.userParams);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.searchForm.reset();
+    this.memberService.resetUserParams();
   }
 }

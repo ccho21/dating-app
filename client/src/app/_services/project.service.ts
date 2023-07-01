@@ -110,18 +110,3 @@ export class ProjectService {
     return this.projectParams;
   }
 }
-
-// interface ProjectParams {
-//   pageNumber: number;
-//   pageSize: number;
-//   minDate?: Date;
-//   maxDate?: Date;
-//   currentUsername?: string;
-//   projectStatus?: string;
-//   projectId?: number;
-//   projectName?: string;
-//   projectDescription?: string;
-//   sort?: string;
-//   isSortAscending?: boolean;
-//   [key: string]: any;
-// }

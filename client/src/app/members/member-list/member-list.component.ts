@@ -59,6 +59,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
   }
 
   loadMembers() {
+    console.log('### hello');
     this.memberService
       .getLikes(this.predicate as string, this.pageNumber, this.pageSize)
       .subscribe((response) => {
@@ -84,5 +85,10 @@ export class MemberListComponent implements OnInit, OnDestroy {
       this.loadMembers();
     }
   }
-  search(e: any) {}
+  search(params: UserParams) {
+    console.log('### e', params);
+    this.memberService.getMembers(params).subscribe((res) => {
+      console.log('### res', res);
+    });
+  }
 }
