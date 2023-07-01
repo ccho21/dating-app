@@ -53,11 +53,11 @@
   margin-top: 2rem;
   padding: 0.5rem;
   border: none;
-  box-shadow: 0 5px 14px 2px rgb(0, 0, 0, 0.2);
+  box-shadow: 0 5px 14px 2px var(--shadow);
   font-size: 1.3rem;
   &::before {
-    background-color: #fff;
-    box-shadow: 3px 3px 3px 0 rgba(23, 50, 68, 0.08);
+    background-color: var(--white);
+    box-shadow: 3px 3px 3px 0 var(--shadow);
     content: " ";
     height: 15px;
     width: 15px;

@@ -12,29 +12,13 @@
     z-index: 1;
     padding-top: 5rem;
     padding-bottom: 10rem;
-    background-image: linear-gradient(
-      69deg,
-      hsla(
-        var(--COLOR_decoration_100-h),
-        var(--COLOR_decoration_100-s),
-        var(--COLOR_decoration_100-l),
-        0.6
-      ),
-      hsla(
-          var(--COLOR_mainBrand_100-h),
-          var(--COLOR_mainBrand_100-s),
-          var(--COLOR_mainBrand_100-l),
-          0.6
-        )
-        100%
-    );
 
     &::before {
       content: "";
       position: absolute;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: var(--shadow);
       top: 0;
       left: 0;
       z-index: -1;
@@ -86,7 +70,7 @@
       & .distance {
         padding: 0.1rem 0.75rem;
         border-radius: 1rem;
-        background-image: linear-gradient(90deg, hsla(4, 82%, 63%, 1), #f89637);
+        background-image: var(--gradient);
       }
     }
   }
@@ -116,7 +100,7 @@
       }
 
       &:hover {
-        background-color: rgba(255, 255, 255, 0.2);
+        background-color: var(--shadow);
       }
     }
   }

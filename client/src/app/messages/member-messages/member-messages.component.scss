@@ -18,7 +18,6 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    // background-color: #424242;
   }
 }
 
@@ -30,7 +29,7 @@
   min-height: 350px;
   overflow: hidden;
   z-index: 0;
-  border: 1px solid lightgray;
+  border: 1px solid var(--border-main);
   border-left-width: 0;
 }
 
@@ -45,7 +44,7 @@
   flex-direction: column;
 
   & .heading {
-    border-bottom: 0.8px solid lightgray;
+    border-bottom: 0.8px solid var(--border-main);
     padding: 1rem;
   }
 
@@ -60,7 +59,7 @@
       padding: 1rem;
       .message-content {
         display: inline-block;
-        background-color: var(--dark-green);
+        background-color: var(--primary);
         color: var(--white);
         padding: 0.75rem;
         border-radius: 1rem;
@@ -84,7 +83,7 @@
   }
 
   .footer {
-    border-top: 0.8px solid lightgray;
+    border-top: 0.8px solid var(--primary);
     .input-group {
       background-color: var(--white);
     }
@@ -111,6 +110,6 @@
 }
 
 .mat-mini-fab.mat-green {
-  background-color: var(--dark-green);
+  background-color: var(--black);
   color: var(--white);
 }

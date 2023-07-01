@@ -59,7 +59,6 @@ export class MemberListComponent implements OnInit, OnDestroy {
   }
 
   loadMembers() {
-    console.log('### hello');
     this.memberService
       .getLikes(this.predicate as string, this.pageNumber, this.pageSize)
       .subscribe((response) => {
@@ -87,8 +86,13 @@ export class MemberListComponent implements OnInit, OnDestroy {
   }
   search(params: UserParams) {
     console.log('### e', params);
-    this.memberService.getMembers(params).subscribe((res) => {
-      console.log('### res', res);
+    this.memberService.getMembers(params).subscribe((response) => {
+      console.log('### res', response);
+      if (response && response.pagination) {
+        this.members = response.result as Member[];
+        this.pagination = response.pagination;
+        this.pagination.currentPage = response.pagination.currentPage - 1;
+      }
     });
   }
 }

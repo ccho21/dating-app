@@ -36,18 +36,28 @@ namespace API.Data
             var query = _context.Users.AsQueryable();
 
             query = query.Where(u => u.UserName != userParams.CurrentUsername);
-            if (!string.IsNullOrEmpty(userParams.Gender))
+            // If the query contains username, filter the output based on the query.
+            if (!string.IsNullOrEmpty(userParams.Username))
             {
-                // query = query.Where(u => u.Gender == userParams.Gender);
+                query = query.Where(x => x.UserName.ToLower().Contains(userParams.Username.ToLower()));
             }
 
-            var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
-            var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
+
+            //if (!string.IsNullOrEmpty(userParams.Position))
+            //{
+            //    query = query.Where(x => x.UserName == userParams.Position);
+            //}
+
+            //if (!string.IsNullOrEmpty(userParams.School))
+            //{
+            //    query = query.Where(x => x.UserName == userParams.Username);
+            //}
 
             query = query.Include(x => x.LikedUsers);
             query = userParams.OrderBy switch
             {
                 "created" => query.OrderByDescending(u => u.Created),
+                "username" => query.OrderBy(u => u.UserName),
                 _ => query.OrderByDescending(u => u.LastActive)
             };
 

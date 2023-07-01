@@ -4,11 +4,11 @@
 .message {
   width: 100%;
   .empty {
-    color: var(--dark-shadow);
+    color: var(--text-light);
     text-align: center;
     margin-bottom: 2rem;
     & .empty-icon {
-      color: var(--light-shadow);
+      color: var(--text-light);
       width: 20rem;
       height: 20rem;
       margin-bottom: 2rem;
@@ -20,7 +20,7 @@
 }
 
 .member-list {
-  background-color: white;
+  background-color: var(--white);
   border-radius: 0;
   font-size: 1.2rem;
   .list-group-item {
@@ -66,7 +66,7 @@
           font-weight: 600;
         }
         & .date {
-          color: var(--dark-shadow);
+          color: var(--text-main);
         }
       }
       .message {

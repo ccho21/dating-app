@@ -1,12 +1,12 @@
 .description {
-  color: #999;
+  color: var(--text-light);
 }
 .label {
   margin-top: 0.8rem;
 }
 
 .form-control {
-  border: 0.1rem solid #ccc;
+  border: 0.1rem solid var(--border-main);
   border-radius: 0.5rem;
   box-sizing: border-box;
   color: var(--black);
@@ -18,7 +18,7 @@
   &:active,
   &:focus,
   &:focus-within {
-    border-color: #ccc;
+    border-color: var(--border-main);
     box-shadow: none;
   }
 }

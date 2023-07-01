@@ -31,7 +31,7 @@
     & .head {
       display: flex;
       align-items: center;
-      background-color: var(--peach);
+      background-color: var(--black);
       width: 100%;
 
       & .status {
@@ -71,7 +71,7 @@
     & .member-content {
       display: flex;
       align-items: center;
-      background-color: var(--champagne);
+      background-color: var(--black);
       flex-direction: column;
       position: absolute;
       height: 100%;

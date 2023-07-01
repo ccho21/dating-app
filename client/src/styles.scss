@@ -7,71 +7,45 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-  --peach: #ffbf90;
-  --red: #f36870;
-  --celadon: #ced6ca;
-  --champagne: #f0eae7;
-  --white: rgba(255, 255, 255, 0.9);
-  --wash: #f0f2f5;
+  --base: #fafafa;
+  --white: #fff;
+  --black: #000;
 
-  --black: #555;
-  --dark-blue: #2b4560;
-  --tiffany-blue: #6aa4b0;
-  --ivory: #e1e7e0;
-  --midnight-blue: #2f6d80;
-  --light-green: #06828c;
-  --dark-green: #1a5f78;
-  --amber: #fcb900;
-  --purple: #617dc6;
+  --primary: #1976d2;
+  --danger: #ff0000;
+  --info: #08c;
 
-  --COLOR_decoration_100-h: 195;
-  --COLOR_decoration_100-s: 64%;
-  --COLOR_decoration_100-l: 28%;
-  --COLOR_decoration_100-a: 1;
+  --text-main: #333;
+  --text-light: #444;
 
-  --COLOR_mainBrand_100: hsla(184, 91%, 28%, 1);
-  --COLOR_mainBrand_100-h: 184;
-  --COLOR_mainBrand_100-s: 91%;
-  --COLOR_mainBrand_100-l: 28%;
-  --COLOR_mainBrand_100-a: 1;
+  --scroll-main: #ebebeb;
+  --scroll-dark: #6d6d6d;
+
+  --border-main: #dbdbdb;
+
+  --online: #00bf63;
+  --offline: #00bf63;
+  --gradient: linear-gradient(90deg, hsla(4, 82%, 63%, 1), #f89637);
+  --shadow: rgba(0, 0, 0, 0.2);
 }
 
 html {
   font-size: 62.5% !important;
 }
 body {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   position: relative;
   height: 100%;
-  background-color: var(--ivory);
-  color: var(--black);
+  background-color: var(--base);
+  color: var(--text-priamry);
 
   margin: 0;
-  font-family: "Rubik", sans-serif;
-  font-weight: 300;
+  font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial,
+    Lucida Grande, sans-serif;
+  letter-spacing: 0.05rem;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
-
-  --peach: #ffbf90;
-  --red: #f36870;
-  --celadon: #ced6ca;
-  --champagne: #f0eae7;
-  --white: rgba(255, 255, 255, 0.9);
-  --wash: #f0f2f5;
-
-  --black: #555;
-  --dark-blue: #2b4560;
-  --tiffany-blue: #6aa4b0;
-  --ivory: #e1e7e0;
-  --midnight-blue: #2f6d80;
-  --light-green: #06828c;
-  --dark-green: #1a5f78;
-  --amber: #fcb900;
-  --purple: #617dc6;
-  --main-bg-white: hsla(0, 0%, 0%, 0.05);
-  --dark-shadow: hsla(240, 2%, 60%, 1);
-  --light-shadow: hsla(0, 0%, 0%, 0.15);
-  --t-black: hsla(0, 0%, 0%, 0.6);
 }
 
 ::-webkit-scrollbar {
@@ -79,7 +53,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #ebebeb;
+  background-color: var(--scroll-main);
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
@@ -87,7 +61,7 @@ body {
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
   border-radius: 10px;
-  background: #6d6d6d;
+  background: var(--scroll-dark);
 }
 
 .user-thumbnail {
@@ -115,7 +89,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--t-black);
+  background-color: var(--text-priamry);
   padding: 0.25rem 1rem;
   border-radius: 10rem;
   color: var(--white);
@@ -126,12 +100,12 @@ body {
     padding: 0.5rem;
   }
   &.is-liked {
-    color: var(--red) !important;
+    color: var(--danger) !important;
   }
 }
 
 .no-data {
-  color: var(--dark-shadow);
+  color: var(--text-main);
   text-align: center;
   margin-bottom: 2rem;
   display: flex;
@@ -140,7 +114,7 @@ body {
   flex-direction: column;
   height: 100%;
   & .no-data-icon {
-    color: var(--light-shadow);
+    color: var(--text-main);
     width: 20rem;
     height: 20rem;
     margin-bottom: 2rem;
@@ -150,14 +124,14 @@ body {
 .mySwiper {
   overflow: unset;
   .swiper-pagination-bullet-active {
-    background-color: var(--light-green) !important;
+    background-color: var(--text-main) !important;
   }
   .swiper-pagination {
     bottom: -2rem;
   }
   .swiper-button-prev,
   .swiper-button-next {
-    color: var(--light-green) !important;
+    color: var(--text-main) !important;
   }
 }
 
@@ -165,7 +139,7 @@ body {
 .popover {
   position: absolute;
   top: 0;
-  left: 0 #{"/* rtl:ignore */"};
+  left: 0;
 }
 
 .popover-arrow {
@@ -190,16 +164,16 @@ body {
     flex-basis: 25%;
     border: 0;
     border-right: 1px solid;
-    border-color: rgba(#858585, 0.25);
+    border-color: var(--text-main);
 
     .nav-link {
       &:hover {
         border-color: transparent !important;
       }
       &.active {
-        background-color: rgba(56, 88, 153, 0.5);
+        background-color: var(--primary);
         border-color: transparent !important;
-        color: #555;
+        color: var(text-primary);
       }
     }
   }

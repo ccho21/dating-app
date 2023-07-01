@@ -26,7 +26,7 @@
   font-size: 15px;
   font-size: 1.5rem;
   line-height: 1.2;
-  color: #777;
+  color: var(--text-light);
 }
 
 .main-text-1 {
@@ -48,7 +48,7 @@
 }
 
 mark {
-  color: var(--amber);
+  color: var(--primary);
   background-color: inherit;
   padding: 0;
 }

@@ -8,13 +8,13 @@
     .nav-item {
     }
     .nav-link {
-      color: #777;
+      color: var(--text-priamry);
       border-radius: 0;
       font-size: 1.2rem;
       &.active {
         background-color: transparent;
-        border-bottom: 0.3rem solid var(--black);
-        color: #555;
+        border-bottom: 0.3rem solid var(--text-priamry);
+        color: var(--text-priamry);
       }
       &:active,
       &:hover,
@@ -22,7 +22,7 @@
       &:focus-visible {
         text-decoration: none;
         // border-bottom: 0.3rem solid transparent;
-        color: var(--black);
+        color: var(--text-priamry);
       }
     }
   }

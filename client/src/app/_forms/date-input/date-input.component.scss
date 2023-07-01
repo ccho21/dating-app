@@ -1,5 +1,5 @@
 .form-control {
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-main);
   border-radius: 3px;
   box-sizing: border-box;
   color: var(--black);
@@ -12,9 +12,9 @@
   }
 
   &.border-dark {
-    border-color: #6c757d;
+    border-color: var(--border-main);
     & + .input-group-text {
-      border-color: #6c757d;
+      border-color: var(--border-main);
     }
   }
 }

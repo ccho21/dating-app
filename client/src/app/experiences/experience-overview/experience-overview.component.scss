@@ -1,11 +1,11 @@
-$container-shadow: 0.5rem 0.5rem 2rem 0 rgba(black, 0.2);
+$container-shadow: 0.5rem 0.5rem 2rem 0 var(--shadow);
 $gutter: 30px;
 $border-width: 4px;
 $dot-diameter: 8px;
 
 .timeline {
   width: 100%;
-  background: #fff;
+  background: var(--white);
   position: relative;
   &:before {
     content: "";
@@ -14,7 +14,7 @@ $dot-diameter: 8px;
     left: calc(10rem);
     bottom: 0px;
     width: 0.3rem;
-    background: #ddd;
+    background: var(--border-main);
   }
   &:after {
     content: "";
@@ -40,8 +40,8 @@ $dot-diameter: 8px;
       position: absolute;
       width: 0.8rem;
       height: 0.8rem;
-      border: 0.3rem solid salmon;
-      background-color: #fff;
+      border: 0.3rem solid var(--border-main);
+      background-color: var(--white);
       border-radius: 100%;
       top: 15%;
       right: -0.8rem;
@@ -65,7 +65,7 @@ $dot-diameter: 8px;
     }
 
     ul {
-      color: #aaa;
+      color: var(--text-light);
       padding-left: 0;
       list-style-type: none;
       font-size: 1.3rem;

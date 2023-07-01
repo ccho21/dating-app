@@ -10,7 +10,7 @@ namespace API.Helpers
         public string CurrentUsername { get; set; }
         public string Username { get; set; }
         public string Title { get; set; }
-        public string OrderBy { get; set; } = "lastActive";
+        public string OrderBy { get; set; }
     }
 
 }

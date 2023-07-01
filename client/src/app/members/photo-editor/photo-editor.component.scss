@@ -5,7 +5,7 @@ img.img-thumbnail {
 }
 
 .nv-file-over {
-    border: dotted 3px red;
+    border: dotted 3px var(--danger);
 }
 
 input[type=file] {
