@@ -10,6 +10,8 @@
   --base: #fafafa;
   --white: #fff;
   --black: #000;
+  --black-transparent: rgba(0, 0, 0, 0.2);
+
 
   --primary: #1976d2;
   --danger: #ff0000;
@@ -26,7 +28,6 @@
   --online: #00bf63;
   --offline: #00bf63;
   --gradient: linear-gradient(90deg, hsla(4, 82%, 63%, 1), #f89637);
-  --shadow: rgba(0, 0, 0, 0.2);
 }
 
 html {
