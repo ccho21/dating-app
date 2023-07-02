@@ -38,4 +38,14 @@
   <ng-template #noData>
     <app-no-data [key]="'message'"></app-no-data>
   </ng-template>
+  <div class="text-end m-3">
+    <app-link
+      customClass="primary"
+      icon="fa-solid fa-arrow-right"
+      label="View all messages"
+      routerLink="/main"
+      routerLinkActive="active"
+    >
+    </app-link>
+  </div>
 </div>

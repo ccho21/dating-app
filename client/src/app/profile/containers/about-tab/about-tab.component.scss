@@ -1,6 +1,10 @@
 .about {
   position: relative;
-  color: var(--white);
+  color: var(--text-main);
+
+  .about-content {
+    margin-bottom: 2rem;
+  }
 
   .header-background {
     z-index: 1;
@@ -113,5 +117,11 @@
     content: "✔";
     display: inline;
     padding-right: 0.5rem;
+  }
+}
+
+.list-group {
+  .list-group-item {
+    border: 0;
   }
 }

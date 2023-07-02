@@ -10,6 +10,7 @@
       </div>
       <div class="user">
         <app-link
+          customClass="text"
           [label]="'@' + member.username"
           [routerLink]="['/main/members/', member.username]"
         ></app-link>
@@ -51,53 +52,50 @@
             <a
               class="dropdown-item"
               [routerLink]="'/main/projects/' + project.id"
-              >Delete project</a
             >
+              Delete project
+            </a>
           </li>
         </ul>
       </div>
     </div>
   </div>
-  <swiper
-    class="gallery"
-    [config]="config"
-    *ngIf="project.images.length; else noImage"
-  >
-    <ng-template
-      swiperSlide
-      *ngFor="let image of project.images; let i = index"
+  <a [routerLink]="'/main/projects/' + project.id" class="">
+    <swiper
+      class="gallery"
+      [config]="config"
+      *ngIf="project.images.length; else noImage"
     >
-      <img [src]="image.url" alt="" class="project-img" />
+      <ng-template
+        swiperSlide
+        *ngFor="let image of project.images; let i = index"
+      >
+        <img [src]="image.url" alt="" class="project-img" />
+      </ng-template>
+    </swiper>
+    <ng-template #noImage>
+      <img
+        class="card-img-top"
+        src="./assets/shared/user.png"
+        alt="Card image cap"
+      />
     </ng-template>
-  </swiper>
-  <ng-template #noImage>
-    <img
-      class="card-img-top"
-      src="./assets/shared/user.png"
-      alt="Card image cap"
-    />
-  </ng-template>
-  <div class="card-body">
-    <h5 class="card-title">{{ project.name }}</h5>
-    <div class="card-text">
-      {{ project.description | truncate : 30 }}
-    </div>
-    <div>
-      <small> {{ project.projectStarted | date : "MMM y" }} </small> -
-      <small> {{ project.projectEnded | date : "MMM y" }} </small>
-    </div>
-    <div class="mb-4">
-      <div>
-        <span class="badge bg-dark me-2">Angular</span>
-        <span class="badge bg-dark me-2">React</span>
-        <span class="badge bg-dark me-2">.NET</span>
+    <div class="card-body">
+      <h5 class="card-title">{{ project.name }}</h5>
+      <div class="card-text">
+        {{ project.description | truncate : 30 }}
+      </div>
+      <div class="card-date mb-3">
+        <small> {{ project.projectStarted | date : "MMM y" }} </small> -
+        <small> {{ project.projectEnded | date : "MMM y" }} </small>
+      </div>
+      <div class="mb-4">
+        <div>
+          <span class="badge bg-dark me-2">Angular</span>
+          <span class="badge bg-dark me-2">React</span>
+          <span class="badge bg-dark me-2">.NET</span>
+        </div>
       </div>
     </div>
-    <hr />
-    <div class="">
-      <app-button [routerLink]="'/main/projects/' + project.id">
-        View Project
-      </app-button>
-    </div>
-  </div>
+  </a>
 </div>

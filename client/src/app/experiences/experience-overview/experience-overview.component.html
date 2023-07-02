@@ -18,12 +18,22 @@
       <div>
         {{ experience.intro }}
       </div>
-      <ul *ngFor="let description of experience.jobDescriptions">
+      <!-- <ul *ngFor="let description of experience.jobDescriptions">
         <li>** {{ description.description }}</li>
         <li>
           {{ description.details }}
         </li>
-      </ul>
+      </ul> -->
     </div>
+  </div>
+  <div class="text-end m-3">
+    <app-link
+      customClass="primary"
+      icon="fa-solid fa-arrow-right"
+      label="View all experiences"
+      routerLink="/main"
+      routerLinkActive="active"
+    >
+    </app-link>
   </div>
 </div>

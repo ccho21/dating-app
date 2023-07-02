@@ -27,3 +27,33 @@
     }
   }
 }
+
+.vertical-tab {
+  display: flex;
+  // flex-wrap: wrap;
+  min-height: 20rem;
+  & .nav-tabs {
+    flex-direction: column;
+    flex-basis: 25%;
+    border: 0;
+    border-right: 1px solid;
+    border-color: var(--border-main);
+    @extend .heading-5;
+
+    .nav-link {
+      &:hover {
+        border-color: transparent !important;
+      }
+      &.active {
+        background-color: var(--primary);
+        border-color: transparent !important;
+        color: var(--white);
+      }
+    }
+  }
+  & .tab-content {
+    flex-grow: 1;
+    flex-basis: 75%;
+    padding: 1rem;
+  }
+}

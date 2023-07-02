@@ -1,7 +1,9 @@
 @import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 @import "../node_modules/swiper/swiper-bundle.css";
 @import "../node_modules/@angular/cdk/overlay-prebuilt.css";
+@import "_swiper";
 @import "_typography";
+@import "_base";
 @import "_tabs";
 @import "_layout";
 
@@ -54,6 +56,19 @@ body {
 a {
   text-decoration: none;
 }
+
+p {
+  @extend .text-2;
+  padding-left: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin-bottom: 0.75rem;
+}
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -68,27 +83,6 @@ a {
   -webkit-border-radius: 10px;
   border-radius: 10px;
   background: var(--scroll-dark);
-}
-
-.user-thumbnail {
-  width: 15rem;
-  border-radius: 50%;
-  max-width: 100%;
-  aspect-ratio: 1;
-  &.square {
-    border-radius: 1rem;
-    width: 100%;
-    height: auto;
-  }
-  &.rectangle {
-    border-radius: 1rem;
-    width: 100%;
-    height: 80%;
-  }
-
-  &.border {
-    border: 0.3rem solid var(--white);
-  }
 }
 
 .member-badge {
@@ -110,65 +104,7 @@ a {
   }
 }
 
-
-.mySwiper {
-  overflow: unset;
-  .swiper-pagination-bullet-active {
-    background-color: var(--text-main) !important;
-  }
-  .swiper-pagination {
-    bottom: -2rem;
-  }
-  .swiper-button-prev,
-  .swiper-button-next {
-    color: var(--text-main) !important;
-  }
-}
-
-//  TEMP SOLUTION
-.popover {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.popover-arrow {
-  position: absolute;
-}
-
-.tooltip {
-  position: absolute;
-  font-size: 1.4rem;
-}
-
-.tooltip-arrow {
-  position: absolute;
-}
-
-.vertical-tab {
-  display: flex;
-  flex-wrap: wrap;
-  min-height: 200px;
-
-  & .nav-tabs {
-    flex-direction: column;
-    flex-basis: 25%;
-    border: 0;
-    border-right: 1px solid;
-    border-color: var(--border-main);
-
-    .nav-link {
-      &:hover {
-        border-color: transparent !important;
-      }
-      &.active {
-        background-color: var(--primary);
-        border-color: transparent !important;
-        color: var(--white);
-      }
-    }
-  }
-  & .tab-content {
-    flex-grow: 1;
-  }
+.pagination {
+  font-size: 1.75rem;
+  --bs-pagination-font-size: 1.75rem;
 }

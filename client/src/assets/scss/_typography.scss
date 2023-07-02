@@ -45,6 +45,11 @@
   font-weight: 600;
 }
 
+.heading-5 {
+  @extend .font-sm;
+  font-weight: 500;
+}
+
 .sub-heading-1 {
   @extend .font-sm;
   color: var(--text-light);
@@ -52,8 +57,6 @@
 
 .text-1 {
   @extend .font-sm;
-  line-height: 1;
-  margin: 0 0 0.825em;
 }
 
 .text-2 {
@@ -68,6 +71,7 @@
   @extend .font-xs;
   font-weight: 600;
 }
+
 .btn-text {
   @extend .font-xs;
 }
@@ -75,6 +79,7 @@
 .footer-text-1 {
   @extend .font-xs;
 }
+
 .footer-text-2 {
   @extend .font-xxs;
   opacity: 0.7;

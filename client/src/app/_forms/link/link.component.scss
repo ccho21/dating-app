@@ -11,14 +11,6 @@
   cursor: pointer;
   padding: 0.5rem;
 
-  &:hover {
-    background-color: var(--primary);
-    color: var(--white) !important;
-    & .icon {
-      color: var(--white) !important;
-    }
-  }
-
   &:active {
   }
 
@@ -26,6 +18,27 @@
     color: var(--primary);
     .icon {
       color: var(--primary);
+    }
+    &:hover {
+      background-color: var(--primary);
+      color: var(--white) !important;
+      & .icon {
+        color: var(--white) !important;
+      }
+    }
+  }
+
+  &.text {
+    color: var(--text-main);
+    .icon {
+      color: var(--text-main);
+    }
+    &:hover {
+      background-color: transparent;
+      color: var(--primary) !important;
+      & .icon {
+        color: var(--primary) !important;
+      }
     }
   }
 

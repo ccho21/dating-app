@@ -1,0 +1,23 @@
+@import "_typography";
+.table {
+  @extend .text-2;
+  .table-row {
+    vertical-align: middle;
+  }
+  .table-image {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 1rem;
+    width: 8rem;
+    aspect-ratio: 1.5/1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    margin: 0.5rem;
+  }
+}
+.pagination {
+  font-size: 1.5rem !important;
+}

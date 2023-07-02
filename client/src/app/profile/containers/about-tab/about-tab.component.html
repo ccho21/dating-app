@@ -31,84 +31,106 @@
       </div>
     </app-panel> -->
 
-    <app-panel customClass="no-padding no-height">
+    <app-panel title="About" customClass="no-padding no-height">
       <div class="row">
         <div class="col-md-12">
           <div>
             <tabset #staticTabs class="vertical-tab" [vertical]="true">
               <tab heading="Overview">
-                <div>
-                  <ul class="list-group">
-                    <li class="list-group-item">
-                      <i class="fa-solid fa-heading"></i>
-                      I am changsoo Cho, Front-end developer.
-                    </li>
-                    <li class="list-group-item">
-                      <i class="fa-solid fa-briefcase"></i>
-                      Toronto District School Board
-                    </li>
-                    <li class="list-group-item">
-                      <i class="fa-solid fa-graduation-cap"></i>
-                      Studied Music at University of Toronto
-                    </li>
-                  </ul>
+                <div class="about-content">
+                  <h3 class="">
+                    <i class="fa-solid fa-heading"></i>
+                    Introduction
+                  </h3>
+                  <p>
+                    {{ member.introduction }}
+                  </p>
+                </div>
+                <div class="about-content">
+                  <h3 class="">
+                    <i class="fa-solid fa-mug-hot"></i>
+                    Interests
+                  </h3>
+                  <p>
+                    {{ member.interests }}
+                  </p>
+                </div>
+                <div class="about-content">
+                  <h3 class="">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    Looking for
+                  </h3>
+                  <p>
+                    {{ member.lookingFor }}
+                  </p>
                 </div>
               </tab>
               <tab heading="Work and Education">
                 <div>
-                  <ul class="list-group">
-                    <li class="list-group-item">
-                      <div class="fs-3">Work</div>
-                      <div>
-                        <i class="fa-solid fa-person-digging"></i>
-                        Toronto District School Board
-                      </div>
-                    </li>
-                    <li class="list-group-item">
-                      <div class="fs-3">College</div>
-                      <div>
-                        <i class="fa-solid fa-building-columns"></i>
-                        Computer programming, Seneca College
-                      </div>
-                    </li>
-                  </ul>
+                  <div class="about-content">
+                    <h3 class="">
+                      <i class="fa-solid fa-person-digging"></i>
+                      Work
+                    </h3>
+                    <p>
+                      {{ member.introduction }}
+                    </p>
+                  </div>
+                  <div class="about-content">
+                    <h3 class="">
+                      <i class="fa-solid fa-graduation-cap"></i>
+                      Education
+                    </h3>
+                    <p>
+                      {{ member.interests }}
+                    </p>
+                  </div>
                 </div>
               </tab>
               <tab heading="Places Lived">
                 <div>
-                  <ul class="list-group">
-                    <li class="list-group-item">
-                      <i class="fa-solid fa-flag"></i>
-                      Toronto, Canada
-                    </li>
-                  </ul>
+                  <div class="about-content">
+                    <h3 class="">
+                      <i class="fa-solid fa-location-crosshairs"></i>
+                      Location
+                    </h3>
+                    <p>Toronto, Canada</p>
+                  </div>
                 </div>
               </tab>
               <tab heading="Contact Basic info">
                 <div>
-                  <ul class="list-group">
-                    <li class="list-group-item">
-                      <div class="fs-3">Contact info</div>
-                      <div>
-                        <i class="fa-solid fa-person-digging"></i>
-                        Toronto District School Board
-                      </div>
-                    </li>
-                    <li class="list-group-item">
-                      <div class="fs-3">Websites and social links</div>
-                      <div>
-                        <i class="fa-solid fa-building-columns"></i>
-                        Computer programming, Seneca College
-                      </div>
-                    </li>
-                    <li class="list-group-item">
-                      <div class="fs-3">Basic info</div>
-                      <div>
-                        <i class="fa-solid fa-building-columns"></i>
-                        Computer programming, Seneca College
-                      </div>
-                    </li>
-                  </ul>
+                  <div class="about-content">
+                    <h3 class="">
+                      <i class="icon fa-solid fa-address-card"></i>
+                      Contact info
+                    </h3>
+                    <p>abc@abc.com</p>
+                    <p>Phone: 1234567899</p>
+                  </div>
+
+                  <div class="about-content">
+                    <h3 class="">
+                      <i class="fa-solid fa-thumbs-up"></i>
+                      Websites and social links
+                    </h3>
+                    <p>
+                      <span><i class="fa-brands fa-linkedin"></i></span>
+                      google.ca
+                    </p>
+                    <p>
+                      <span><i class="fa-brands fa-github"></i></span>
+                      google.ca
+                    </p>
+                  </div>
+
+                  <div class="about-content">
+                    <h3 class="">
+                      <i class="fa-solid fa-building-columns"></i>
+                      Basic info
+                    </h3>
+                    <p>Computer programming, Seneca College</p>
+                  </div>
                 </div>
               </tab>
             </tabset>
