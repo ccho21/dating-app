@@ -14,7 +14,6 @@ import { MemberMessagesComponent } from './messages/member-messages/member-messa
 import { MessagesComponent } from './messages/messages/messages.component';
 import { MemberResolver } from './_resolvers/member.resolver';
 import { MemberComponent } from './members/member/member.component';
-import { NoDataComponent } from './no-data/no-data/no-data.component';
 import { ProfileComponent } from './profile/profile/profile.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { ProfileAboutComponent } from './profile/profile-edit/components/profile-about/profile-about.component';
@@ -26,6 +25,7 @@ import { ProjectEditComponent } from './profile/profile-edit/components/profile-
 import { ProjectListComponent } from './projects/containers/project-list/project-list.component';
 import { ProjectComponent } from './projects/components/project/project.component';
 import { ExperienceEditComponent } from './profile/profile-edit/components/profile-experiences/components/experience-edit/experience-edit.component';
+import { NoDataComponent } from './_layouts/no-data/no-data.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

@@ -1,3 +1,5 @@
+@import "_typography";
+
 .panel {
   border-radius: 1rem;
   overflow: hidden;
@@ -7,31 +9,33 @@
   // padding: 2rem;
   margin-bottom: 2rem;
   text-align: left;
-  min-height: 30rem;
   box-shadow: 0 1px 2px var(--black-transparent);
+  background-color: var(--white);
 
   & .body {
     padding: 1rem;
+  }
+
+  &.min-height {
+    min-height: 40rem;
   }
 
   &.no-padding {
     & .body {
       padding: 0 !important;
     }
+    & hr {
+      margin-bottom: 0;
+    }
   }
 
   &.no-height {
     min-height: 1rem;
   }
+
   &.center {
     align-items: center;
     justify-content: center;
-  }
-
-  &.white {
-    color: var(--black);
-    background-color: var(--white);
-    // border: 2px solid var(--white);
   }
 
   & .header {
@@ -40,13 +44,10 @@
     // display: flex;
     // align-items: center;
     & .title {
-      font-size: 130%;
-      font-weight: 500;
-
-      line-height: 1.2;
+      @extend .heading-4;
     }
+
     & .sub {
-      font-size: 90%;
       color: var(--text-light);
     }
   }

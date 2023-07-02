@@ -17,7 +17,7 @@ export class ConnectionOverviewComponent implements OnInit {
   members?: Partial<Member[]>;
   predicate = 'liked';
   pageNumber = 0;
-  pageSize = 5;
+  pageSize = 2;
   pagination?: Pagination;
 
   activeTab: any;

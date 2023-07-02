@@ -36,12 +36,6 @@
     </ul>
   </div>
   <ng-template #noData>
-    <div class="no-data">
-      <i class="no-data-icon fa-solid fa-comment-dots"></i>
-      <div class="main-text-2">Your new messages will appear here.</div>
-      <div class="no-data-btn">
-        <button class="main-btn">Let's Go Talk</button>
-      </div>
-    </div>
+    <app-no-data [key]="'message'"></app-no-data>
   </ng-template>
 </div>

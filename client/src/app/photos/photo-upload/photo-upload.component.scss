@@ -11,7 +11,7 @@
     border-radius: 1rem;
   }
   .dynamic-message {
-    font-size: 1.5rem;
+    // font-size: 1.5rem;
     font-weight: 500;
   }
   .dropzone {
@@ -30,12 +30,12 @@
     height: 100%;
     text-align: center;
     padding: 1rem;
-    color: hsl(184deg, 91%, 28%);
+    color: var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
     span {
-      font-size: 5rem;
+      // font-size: 5rem;
     }
   }
   .browse-files {

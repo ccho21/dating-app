@@ -91,6 +91,7 @@ import { ProjectsTabComponent } from './profile/containers/projects-tab/projects
 import { AboutTabComponent } from './profile/containers/about-tab/about-tab.component';
 import { ConnectionSmComponent } from './connections/components/connection-sm/connection-sm.component';
 import { ExperienceTabComponent } from './profile/containers/experience-tab/experience-tab.component';
+import { NoDataComponent } from './_layouts/no-data/no-data.component';
 
 @NgModule({
   declarations: [
@@ -159,6 +160,7 @@ import { ExperienceTabComponent } from './profile/containers/experience-tab/expe
     AboutTabComponent,
     ConnectionSmComponent,
     ExperienceTabComponent,
+    NoDataComponent,
   ],
   imports: [
     BrowserModule,

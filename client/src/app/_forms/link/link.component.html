@@ -6,9 +6,11 @@
   [delay]="500"
   [class]="customClass"
 >
-  <!-- <ng-container *ngIf="icon">
-    <i [class]="icon" class="icon d-block d-md-none"></i>
-  </ng-container> -->
-  <div class="">{{ label }}</div>
+  <div class="">
+    {{ label }}
+    <span *ngIf="icon">
+      <i [class]="icon" class="icon d-inline-block"></i>
+    </span>
+  </div>
   <!-- <ng-content></ng-content> -->
 </a>

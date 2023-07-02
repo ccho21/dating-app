@@ -1,20 +1,22 @@
 @import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 @import "../node_modules/swiper/swiper-bundle.css";
 @import "../node_modules/@angular/cdk/overlay-prebuilt.css";
-@import "./assets/scss/typography";
-@import "./assets/scss/tabs";
+@import "_typography";
+@import "_tabs";
+@import "_layout";
 
 /* You can add global styles to this file, and also import other style files */
 
 :root {
   --base: #fafafa;
   --white: #fff;
-  --black: #000;
+  --black: #333;
   --black-transparent: rgba(0, 0, 0, 0.2);
 
-
+  --red: #dc3545;
   --primary: #1976d2;
-  --danger: #ff0000;
+  --primary-transparent: rgba(25, 118, 210, 0.1);
+  --danger: #dc3545;
   --info: #08c;
 
   --text-main: #333;
@@ -38,8 +40,8 @@ body {
   position: relative;
   height: 100%;
   background-color: var(--base);
-  color: var(--text-priamry);
-
+  color: var(--text-main);
+  line-height: 1;
   margin: 0;
   font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial,
     Lucida Grande, sans-serif;
@@ -49,6 +51,9 @@ body {
   min-height: 100vh;
 }
 
+a {
+  text-decoration: none;
+}
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -90,7 +95,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--text-priamry);
+  background-color: var(--text-main);
   padding: 0.25rem 1rem;
   border-radius: 10rem;
   color: var(--white);
@@ -105,22 +110,6 @@ body {
   }
 }
 
-.no-data {
-  color: var(--text-main);
-  text-align: center;
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 100%;
-  & .no-data-icon {
-    color: var(--text-main);
-    width: 20rem;
-    height: 20rem;
-    margin-bottom: 2rem;
-  }
-}
 
 .mySwiper {
   overflow: unset;
@@ -159,13 +148,14 @@ body {
 .vertical-tab {
   display: flex;
   flex-wrap: wrap;
+  min-height: 200px;
 
   & .nav-tabs {
     flex-direction: column;
     flex-basis: 25%;
     border: 0;
     border-right: 1px solid;
-    border-color: var(--text-main);
+    border-color: var(--border-main);
 
     .nav-link {
       &:hover {
@@ -174,7 +164,7 @@ body {
       &.active {
         background-color: var(--primary);
         border-color: transparent !important;
-        color: var(text-primary);
+        color: var(--white);
       }
     }
   }

@@ -1,64 +1,66 @@
 <div class="" *ngIf="member">
-  <div class="row mb-4 align-items-start">
-    <div class="col-2">
-      <img
-        src="{{ member.photoUrl || './assets/shared/user.png' }}"
-        [alt]="member.username"
-        class="user-thumbnail size-xs"
-      />
-      <div></div>
-    </div>
-    <div class="col-10 text-start">
-      <div class="d-flex">
-        <div>
-          <div class="d-flex align-items-center">
-            <app-link
-              [label]="member.knownAs"
-              routerLink="/main/members/{{ member.username }}"
-              customClass="link-md"
-            ></app-link>
-            <div class="status">
-              <div
-                *ngIf="
-                  (presence.onlineUsers$ | async)!.includes(member.username!);
-                  else offline
-                "
-              >
-                <div>
-                  <i class="fa-solid fa-circle is-online"></i>
-                  <span class="ps-2">ONLINE</span>
-                </div>
+  <a
+    class="connection"
+    routerLink="/main/members/{{ member.username }}"
+    routerLinkActive="router-link-active"
+  >
+    <div class="row mb-4 align-items-start">
+      <div class="col-2">
+        <img
+          src="{{ member.photoUrl || './assets/shared/user.png' }}"
+          [alt]="member.username"
+          class="user-thumbnail size-xs"
+        />
+        <div></div>
+      </div>
+      <div class="col-10 text-start">
+        <div class="d-flex">
+          <div>
+            <div class="d-flex align-items-center mb-2">
+              <div class="name">
+                {{ member.knownAs }}
               </div>
-              <ng-template #offline>
-                <div>
-                  <i class="fa-regular fa-circle"></i>
-                  <small class="ps-2">OFFLINE</small>
+              <div class="status">
+                <div
+                  *ngIf="
+                    (presence.onlineUsers$ | async)!.includes(member.username!);
+                    else offline
+                  "
+                >
+                  <div>
+                    <i class="fa-solid fa-circle is-online"></i>
+                    <small class="ps-2">ONLINE</small>
+                  </div>
                 </div>
-              </ng-template>
+                <ng-template #offline>
+                  <div>
+                    <i class="fa-regular fa-circle"></i>
+                    <small class="ps-2">OFFLINE</small>
+                  </div>
+                </ng-template>
+              </div>
             </div>
-          </div>
-          <div>
-            <small>Software developer, Accentury Inc.</small>
-          </div>
-          <div>
-            <small class="text-muted"
-              >Last visited {{ member.lastActive | timeago }}
-            </small>
+            <div class="mb-2">
+              <span>Software developer, Accentury Inc.</span>
+            </div>
+            <div class="mb-2">
+              <small class="text-muted"
+                >Last visited {{ member.lastActive | timeago }}
+              </small>
+            </div>
             <div>
               <span class="badge bg-dark me-2">Angular</span>
               <span class="badge bg-dark me-2">React</span>
               <span class="badge bg-dark me-2">.NET</span>
             </div>
           </div>
-        </div>
-        <div class="ms-auto">
-          <div>
+          <div class="ms-auto like">
             <i class="fa-solid fa-heart"></i>
             {{ member.likedByUsers?.length }}
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <hr />
+    <hr />
+  </a>
 </div>

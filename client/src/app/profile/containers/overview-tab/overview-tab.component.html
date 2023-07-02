@@ -1,31 +1,30 @@
 <div class="row">
   <div class="col-md-6">
-    <app-panel>
-      <div class="title mb-4">Recent Messages</div>
+    <app-panel title="Recent Messages" customClass="no-padding min-height">
       <app-message-overview class="w-100"></app-message-overview>
     </app-panel>
   </div>
   <div class="col-md-6">
-    <app-panel>
-      <div class="title mb-4">Saved Connections</div>
+    <app-panel title="Saved Connections" customClass="min-height no-padding">
+      <div class="title mb-4"></div>
       <app-connection-overview class="w-100"></app-connection-overview>
     </app-panel>
   </div>
 
   <div class="col-md-12">
-    <app-panel>
+    <app-panel title="Projects">
       <app-project-table class="w-100"></app-project-table>
     </app-panel>
   </div>
 
   <div class="col-md-8">
-    <app-panel>
+    <app-panel title="Career">
       <div class="title mb-4">My Career</div>
       <app-experience-overview class="w-100"></app-experience-overview>
     </app-panel>
   </div>
   <div class="col-md-4">
-    <app-panel>
+    <app-panel title="Recent visitors">
       <div class="title">Recent Visitors</div>
       <app-visitor-overview class="w-100"></app-visitor-overview>
     </app-panel>

@@ -49,11 +49,11 @@ $dot-diameter: 8px;
     }
     h3 {
       margin: 0;
-      font-size: 80%;
+      // font-size: 80%;
     }
     div {
       margin: 0;
-      font-size: 60%;
+      // font-size: 60%;
     }
   }
   .body {
@@ -68,12 +68,12 @@ $dot-diameter: 8px;
       color: var(--text-light);
       padding-left: 0;
       list-style-type: none;
-      font-size: 1.3rem;
+      // font-size: 1.3rem;
       div {
-        font-size: 1.3rem;
+        // font-size: 1.3rem;
       }
       li {
-        font-size: 1.2rem;
+        // font-size: 1.2rem;
       }
       li:before {
         content: "–";

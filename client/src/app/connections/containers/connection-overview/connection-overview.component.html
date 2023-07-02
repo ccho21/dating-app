@@ -1,4 +1,4 @@
-<section>
+<section class="px-3">
   <tabset class="tabset" type="pills" #profileTabs>
     <tab
       heading="Follwing"
@@ -6,24 +6,44 @@
       #connectTabA="tab"
     >
       <div class="my-5" *ngIf="connectTabA">
-        <div *ngFor="let member of members; let i = index">
-          <app-connection-sm
-            [member]="member"
-            (updateMembers)="loadMembersWithLikes()"
-          ></app-connection-sm>
+        <div *ngIf="members && members.length; else noData">
+          <div *ngFor="let member of members; let i = index">
+            <app-connection-sm
+              [member]="member"
+              (updateMembers)="loadMembersWithLikes()"
+            ></app-connection-sm>
+          </div>
         </div>
+        <ng-template #noData>
+          <app-no-data [key]="'connection'"></app-no-data>
+        </ng-template>
       </div>
     </tab>
 
     <tab heading="Follwed" (selectTab)="activateTab($event)" #connectTabB="tab">
       <div class="my-5" *ngIf="connectTabB">
-        <div *ngFor="let member of members; let i = index">
-          <app-connection-sm
-            [member]="member"
-            (updateMembers)="loadMembersWithLikes()"
-          ></app-connection-sm>
+        <div *ngIf="members && members.length; else noData">
+          <div *ngFor="let member of members; let i = index">
+            <app-connection-sm
+              [member]="member"
+              (updateMembers)="loadMembersWithLikes()"
+            ></app-connection-sm>
+          </div>
         </div>
+        <ng-template #noData>
+          <app-no-data [key]="'connection'"></app-no-data>
+        </ng-template>
       </div>
     </tab>
   </tabset>
+  <div class="text-end m-3">
+    <app-link
+      customClass="primary"
+      icon="fa-solid fa-arrow-right"
+      label="View all"
+      routerLink="/main"
+      routerLinkActive="active"
+    >
+    </app-link>
+  </div>
 </section>
