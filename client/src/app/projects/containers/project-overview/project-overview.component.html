@@ -55,45 +55,32 @@
         <td>{{ project.projectStarted | date : "dd MMM yyyy" }}</td>
         <td>{{ project.projectEnded | date : "dd MMM yyyy" }}</td>
         <td>
-          <div class="btn-group" dropdown>
-            <button
-              id="project-action"
-              dropdownToggle
-              type="button"
-              class="btn"
-              aria-controls="project-action"
-            >
-              <i class="fa-solid fa-ellipsis"></i>
-            </button>
-            <ul
-              id="project-action"
-              *dropdownMenu
-              class="dropdown-menu dropdown-menu-right"
-              role="menu"
-              aria-labelledby="project-action"
-            >
-              <li role="menuitem">
-                <a
-                  class="dropdown-item"
-                  [routerLink]="'/main/projects/' + project.id"
-                  >View project</a
-                >
-              </li>
-              <li role="menuitem">
-                <a class="dropdown-item" href="#">Set as private</a>
-              </li>
-              <li role="menuitem">
-                <a
-                  class="dropdown-item"
-                  routerLink="/main/dashboard/projects/{{ project.id }}"
-                  >Edit project</a
-                >
-              </li>
-              <li role="menuitem">
-                <a class="dropdown-item" href="#">Delete project</a>
-              </li>
-            </ul>
-          </div>
+          <app-dropdown-link
+            icon="fa-solid fa-ellipsis-vertical"
+            ariaControls="option-dropdown"
+            id="option-dropdown"
+          >
+            <li role="menuitem">
+              <a
+                class="dropdown-item"
+                [routerLink]="'/main/projects/' + project.id"
+                >View project</a
+              >
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" href="#">Set as private</a>
+            </li>
+            <li role="menuitem">
+              <a
+                class="dropdown-item"
+                routerLink="/main/dashboard/projects/{{ project.id }}"
+                >Edit project</a
+              >
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" href="#">Delete project</a>
+            </li>
+          </app-dropdown-link>
         </td>
       </tr>
     </tbody>

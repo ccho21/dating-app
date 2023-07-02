@@ -1,9 +1,18 @@
+@import "_typography";
+
 .experience {
+  @extend .text-1;
   text-align: left;
   position: relative;
-  .body {
+  .content {
     position: relative;
     margin-left: 3rem;
+    .content-header {
+      @extend .heading-4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
   .img-box {
     position: relative;
@@ -14,11 +23,11 @@
       height: 100%;
       width: 0.1rem;
       right: 0;
-      background-color: var(--text-light);
+      background-color: var(--black-transparent);
     }
   }
   & img {
-    background-color: var(--text-light);
+    background-color: var(--black-transparent);
     padding: 1rem;
   }
   .company-name {
@@ -37,30 +46,27 @@
     padding-bottom: 1rem;
   }
 
-  .work-detail {
-    .job-description {
-      margin: 2rem 0 1rem -1rem;
-      // font-size: 1rem;
+  .description {
+    margin-bottom: 1.5rem;
+    .description-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: .5rem;
+    }
+    .description-title {
+      @extend .text-1;
       color: var(--text-main);
+      margin-bottom: 0.5rem;
     }
     .job-date {
-      margin: 0 0 1rem -1rem;
-      // font-size: 0.9rem;
-      font-weight: 400;
+      @extend .text-3;
       color: var(--text-light);
     }
-    .job-list {
-      padding-left: 1rem;
-      list-style: none;
-      margin: 1rem 0;
-      .job-item {
-      }
+    .job-detail {
+      @extend .text-2;
+      color: var(--text-main);
+      margin-left: 2rem;
     }
-  }
-  .work-date {
-    margin: 0 0 1rem -1rem;
-    // font-size: 0.9rem;
-    font-weight: 400;
-    color: var(--text-light);
   }
 }

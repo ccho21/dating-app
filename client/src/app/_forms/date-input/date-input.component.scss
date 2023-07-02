@@ -1,8 +1,11 @@
+@import "_typography";
+
 .form-control {
+  @extend .text-1;
   border: 1px solid var(--border-main);
   border-radius: 3px;
   box-sizing: border-box;
-  color: var(--black);
+  color: var(--text-main);
   height: 32px;
   &:active,
   &:focus,
@@ -11,9 +14,9 @@
   }
 
   &.border-dark {
-    border-color: var(--border-main);
+    border-color: var(--border-main) !important;
     & + .input-group-text {
-      border-color: var(--border-main);
+      border-color: var(--border-main) !important;
     }
   }
 }

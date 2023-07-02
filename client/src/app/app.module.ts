@@ -22,17 +22,15 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
-import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberListComponent } from './members/containers/member-list/member-list.component';
 import { ListsComponent } from './lists/lists.component';
 import { SharedModule } from './_modules/shared.module';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
-import { MemberCardComponent } from './members/member-card/member-card.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
-import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { MemberMessagesComponent } from './messages/member-messages/member-messages.component';
@@ -46,11 +44,10 @@ import { LoginComponent } from './login/login.component';
 import { SwiperModule } from 'swiper/angular';
 import { FormControlPipe } from './_pipes/form-control.pipe';
 import { FormGroupPipe } from './_pipes/form-group.pipe';
-import { MemberSearchComponent } from './members/member-search/member-search.component';
 import { MessagesComponent } from './messages/messages/messages.component';
 import { MessageOverviewComponent } from './messages/message-overview/message-overview.component';
 import { ConnectionOverviewComponent } from './connections/containers/connection-overview/connection-overview.component';
-import { MemberComponent } from './members/member/member.component';
+import { MemberComponent } from './members/components/member/member.component';
 import { ConnectionCardComponent } from './connections/components/connection-card/connection-card.component';
 import { ProjectListComponent } from './projects/containers/project-list/project-list.component';
 import { ProjectComponent } from './projects/components/project/project.component';
@@ -93,6 +90,8 @@ import { ConnectionSmComponent } from './connections/components/connection-sm/co
 import { ExperienceTabComponent } from './profile/containers/experience-tab/experience-tab.component';
 import { NoDataComponent } from './_layouts/no-data/no-data.component';
 import { ProjectOverviewComponent } from './projects/containers/project-overview/project-overview.component';
+import { MemberCardComponent } from './members/components/member-card/member-card.component';
+import { MemberSearchComponent } from './members/components/member-search/member-search.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +104,6 @@ import { ProjectOverviewComponent } from './projects/containers/project-overview
     NotFoundComponent,
     ServerErrorComponent,
     MemberCardComponent,
-    PhotoEditorComponent,
     TextInputComponent,
     DateInputComponent,
     MemberMessagesComponent,
@@ -162,7 +160,7 @@ import { ProjectOverviewComponent } from './projects/containers/project-overview
     ConnectionSmComponent,
     ExperienceTabComponent,
     NoDataComponent,
-    ProjectOverviewComponent
+    ProjectOverviewComponent,
   ],
   imports: [
     BrowserModule,

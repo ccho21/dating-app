@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberListComponent } from './members/containers/member-list/member-list.component';
 import { ListsComponent } from './lists/lists.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
@@ -13,7 +13,7 @@ import { AdminGuard } from './_guards/admin.guard';
 import { MemberMessagesComponent } from './messages/member-messages/member-messages.component';
 import { MessagesComponent } from './messages/messages/messages.component';
 import { MemberResolver } from './_resolvers/member.resolver';
-import { MemberComponent } from './members/member/member.component';
+import { MemberComponent } from './members/components/member/member.component';
 import { ProfileComponent } from './profile/profile/profile.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { ProfileAboutComponent } from './profile/profile-edit/components/profile-about/profile-about.component';

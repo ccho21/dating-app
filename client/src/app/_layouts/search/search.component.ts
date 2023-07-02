@@ -30,8 +30,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   orderList = [
     { value: '', display: 'Sort by' },
-    { value: 'projectDate', display: 'Newest Projects' },
-    { value: 'title', display: 'Title' },
+    { value: 'recentProject', display: 'Recent project' },
     { value: 'username', display: 'Username' },
   ];
 

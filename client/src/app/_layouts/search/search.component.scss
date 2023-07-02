@@ -1,5 +1,7 @@
+@import "_typography";
 .search-form {
   .form-select {
+    @extend .text-1;
     max-width: 15rem;
     border-top-left-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
@@ -13,10 +15,12 @@
     }
   }
   .dropdown-toggle {
+    @extend .text-1;
     border-top-left-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
   }
   .dropdown-menu {
+    @extend .text-1;
     margin-top: 2rem;
     border: none;
     box-shadow: 0 5px 14px 2px var(--black-transparent);
@@ -35,6 +39,7 @@
     }
   }
   .form-control {
+    @extend .text-1;
     border-color: var(--border-main);
     &:active,
     &:focus,
@@ -44,9 +49,11 @@
     }
   }
   .btn-outline-secondary {
+    @extend .text-1;
   }
   .btn-append {
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
+    border-color: var(--border-main);
   }
 }

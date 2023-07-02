@@ -1,4 +1,4 @@
-@import "../../../assets/scss/typography";
+@import "_typography";
 
 .member-card {
   position: relative;
@@ -33,7 +33,7 @@
       height: 100%;
       // filter: blur(1px);
       border-radius: 1rem;
-      background-color: var(--black);
+      background-color: var(--black-transparent);
       z-index: -1;
     }
 
