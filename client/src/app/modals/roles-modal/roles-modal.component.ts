@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { User } from 'src/app/_models/user';
 
 @Component({
@@ -8,24 +8,18 @@ import { User } from 'src/app/_models/user';
   styleUrls: ['./roles-modal.component.scss'],
 })
 export class RolesModalComponent implements OnInit {
-  user?: User;
-  roles?: any[];
+  username = '';
+  availableRoles: any[] = [];
+  selectedRoles: any[] = [];
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { user: User; roles: any[] },
-    private dialogRef: MatDialogRef<RolesModalComponent>
-  ) {}
+  constructor(public bsModalRef: BsModalRef) {}
 
-  ngOnInit(): void {
-    console.log('### data', this.data);
-    if (this.data) {
-      this.user = { ...this.data.user };
-      this.roles = [...this.data.roles];
-    }
-  }
+  ngOnInit(): void {}
 
-  updateRoles() {
-    console.log('### this.roles', this.roles);
-    this.dialogRef.close(this.roles);
+  updateChecked(checkedValue: string) {
+    const index = this.selectedRoles.indexOf(checkedValue);
+    index !== -1
+      ? this.selectedRoles.splice(index, 1)
+      : this.selectedRoles.push(checkedValue);
   }
 }

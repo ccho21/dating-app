@@ -1,19 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { ConfirmDialogComponent } from '../modals/confirm-dialog/confirm-dialog.component';
-import {
-  MatDialog,
-  MatDialogConfig,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConfirmService {
-  dialogRef?: MatDialogRef<ConfirmDialogComponent, any>;
+  bsModalRef?: BsModalRef<ConfirmDialogComponent>;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(private modalService: BsModalService) {}
 
   confirm(
     title = 'Confirmation',
@@ -21,27 +17,19 @@ export class ConfirmService {
     btnOkText = 'Ok',
     btnCancelText = 'Cancel'
   ): Observable<boolean> {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.minWidth = '350px';
-    dialogConfig.data = { title, message, btnOkText, btnCancelText };
-
-    this.dialogRef = this.dialog.open(ConfirmDialogComponent, dialogConfig);
-
-    return new Observable<boolean>(this.getResult());
-  }
-
-  private getResult() {
-    return (observer: any) => {
-      const subscription = this.dialogRef?.afterClosed().subscribe((res) => {
-        observer.next(res);
-        observer.complete();
-      });
-
-      return {
-        unsubscribe() {
-          subscription?.unsubscribe();
-        },
-      };
+    const config = {
+      initialState: {
+        title,
+        message,
+        btnOkText,
+        btnCancelText,
+      },
     };
+    this.bsModalRef = this.modalService.show(ConfirmDialogComponent, config);
+    return this.bsModalRef.onHidden!.pipe(
+      map(() => {
+        return this.bsModalRef!.content!.result;
+      })
+    );
   }
 }

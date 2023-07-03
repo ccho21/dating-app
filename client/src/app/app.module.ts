@@ -94,6 +94,7 @@ import { ProjectOverviewComponent } from './projects/containers/project-overview
 import { MemberCardComponent } from './members/components/member-card/member-card.component';
 import { MemberSearchComponent } from './members/components/member-search/member-search.component';
 import { AboutComponent } from './about/about/about.component';
+
 @NgModule({
   declarations: [
     AppComponent,

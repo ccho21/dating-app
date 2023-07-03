@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
@@ -16,7 +15,6 @@ import { AccountService } from '../_services/account.service';
 export class AdminGuard implements CanActivate {
   constructor(
     private accountService: AccountService,
-    private _snackBar: MatSnackBar
   ) {}
 
   canActivate(): Observable<boolean> {

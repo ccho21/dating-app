@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Member } from '../_models/member';
 import { Pagination } from '../_models/pagination';
 import { MemberService } from '../_services/member.service';
-import { MatGridList } from '@angular/material/grid-list';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-lists',
@@ -36,10 +34,10 @@ export class ListsComponent implements OnInit {
       });
   }
 
-  pageChanged(event: PageEvent) {
-    console.log('event', event);
-    this.pageNumber = event.pageIndex + 1;
-    this.pageSize = event.pageSize;
-    this.loadLikes();
+  pageChanged(event: any) {
+    if (this.pageNumber !== event.page) {
+      this.pageNumber = event.page;
+      this.loadLikes();
+    }
   }
 }

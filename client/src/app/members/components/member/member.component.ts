@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { concatMap, Observable, tap } from 'rxjs';
 import { Member } from 'src/app/_models/member';
@@ -35,7 +34,6 @@ export class MemberComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private memberService: MemberService,
     public presence: PresenceService,
-    private _snackBar: MatSnackBar,
     private accountService: AccountService
   ) {}
 
@@ -79,11 +77,11 @@ export class MemberComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((member) => {
-        this._snackBar.open(message, 'okay', {
-          duration: 5000,
-          verticalPosition: 'bottom',
-          horizontalPosition: 'right',
-        });
+        // this._snackBar.open(message, 'okay', {
+        //   duration: 5000,
+        //   verticalPosition: 'bottom',
+        //   horizontalPosition: 'right',
+        // });
       });
   }
 

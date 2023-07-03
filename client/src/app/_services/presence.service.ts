@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { BehaviorSubject } from 'rxjs';
@@ -19,7 +18,7 @@ export class PresenceService {
   onlineUsers$ = this.onlineUsersSource.asObservable();
   newMessage$ = this.newMessageSource.asObservable();
 
-  constructor(private router: Router, private _snackBar: MatSnackBar) {}
+  constructor(private router: Router) {}
 
   createHubConnection(user: User) {
     this.hubConnection = new HubConnectionBuilder()
@@ -52,23 +51,23 @@ export class PresenceService {
     this.hubConnection.on('NewMessageReceived', (message) => {
       console.log('### messageSent', message);
       const { senderUsername, content, recipientPhotoUrl } = message;
-      let snackBarRef = this._snackBar.open(
-        `${senderUsername} has sent you a new message!`,
-        'Check',
-        {
-          duration: 5000,
-          verticalPosition: 'bottom',
-          horizontalPosition: 'right',
-        }
-      );
+      // let snackBarRef = this._snackBar.open(
+      //   `${senderUsername} has sent you a new message!`,
+      //   'Check',
+      //   {
+      //     duration: 5000,
+      //     verticalPosition: 'bottom',
+      //     horizontalPosition: 'right',
+      //   }
+      // );
 
       this.newMessageSource.next(message);
 
-      snackBarRef
-        .onAction()
-        .subscribe(() =>
-          this.router.navigateByUrl('/messages/' + senderUsername)
-        );
+      // snackBarRef
+      //   .onAction()
+      //   .subscribe(() =>
+      //     this.router.navigateByUrl('/messages/' + senderUsername)
+      //   );
     });
   }
 

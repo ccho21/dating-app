@@ -7,16 +7,8 @@ import { UserParams } from 'src/app/_models/userParams';
 import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs/operators';
 import { User } from 'src/app/_models/user';
-import Driver from 'driver.js';
-import { MatGridList } from '@angular/material/grid-list';
-import { MatSelect, MatSelectChange } from '@angular/material/select';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import {
   Router,
-  Event,
-  NavigationStart,
-  NavigationEnd,
-  NavigationError,
   ActivatedRoute,
 } from '@angular/router';
 
@@ -70,20 +62,6 @@ export class MemberListComponent implements OnInit, OnDestroy {
       });
   }
 
-  change(e: MatSelectChange) {
-    this.loadMembers();
-  }
-
-  pageChanged(event: PageEvent) {
-    if (this.userParams) {
-      this.userParams.pageSize = event.pageSize;
-      this.userParams.pageNumber = event.pageIndex + 1;
-      console.log('### event', this.userParams);
-
-      this.memberService.setUserParams(this.userParams);
-      this.loadMembers();
-    }
-  }
   search(params: UserParams) {
     console.log('### e', params);
     this.memberService.getMembers(params).subscribe((response) => {

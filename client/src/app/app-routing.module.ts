@@ -27,6 +27,7 @@ import { ProjectComponent } from './projects/components/project/project.componen
 import { ExperienceEditComponent } from './profile/profile-edit/components/profile-experiences/components/experience-edit/experience-edit.component';
 import { NoDataComponent } from './_layouts/no-data/no-data.component';
 
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   {

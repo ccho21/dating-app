@@ -5,7 +5,6 @@ import { AccountService } from 'src/app/_services/account.service';
 import { MemberService } from 'src/app/_services/member.service';
 import { take } from 'rxjs/operators';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-profile-edit',
@@ -25,10 +24,6 @@ export class ProfileEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUser();
-  }
-
-  selectTab(tab: MatTabChangeEvent): void {
-    this.activeTab = tab.index;
   }
 
   loadUser(): void {

@@ -8,11 +8,10 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { Router, NavigationExtras } from '@angular/router';
 import { catchError } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private router: Router, private _snackBar: MatSnackBar) {}
+  constructor(private router: Router) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -32,28 +31,28 @@ export class ErrorInterceptor implements HttpInterceptor {
                 }
                 throw modalStateErrors.flat();
               } else if (typeof error.error === 'object') {
-                this._snackBar.open(error.statusText, 'Dismiss', {
-                  panelClass: ['red-snackbar'],
-                  duration: 5000,
-                  verticalPosition: 'bottom',
-                  horizontalPosition: 'right',
-                });
+                // this._snackBar.open(error.statusText, 'Dismiss', {
+                //   panelClass: ['red-snackbar'],
+                //   duration: 5000,
+                //   verticalPosition: 'bottom',
+                //   horizontalPosition: 'right',
+                // });
               } else {
-                this._snackBar.open(error.error, 'Dismiss', {
-                  panelClass: ['red-snackbar'],
-                  duration: 5000,
-                  verticalPosition: 'bottom',
-                  horizontalPosition: 'right',
-                });
+                // this._snackBar.open(error.error, 'Dismiss', {
+                //   panelClass: ['red-snackbar'],
+                //   duration: 5000,
+                //   verticalPosition: 'bottom',
+                //   horizontalPosition: 'right',
+                // });
               }
               break;
             case 401:
-              this._snackBar.open(error.statusText, 'Dismiss', {
-                panelClass: ['red-snackbar'],
-                duration: 5000,
-                verticalPosition: 'bottom',
-                horizontalPosition: 'right',
-              });
+              // this._snackBar.open(error.statusText, 'Dismiss', {
+              //   panelClass: ['red-snackbar'],
+              //   duration: 5000,
+              //   verticalPosition: 'bottom',
+              //   horizontalPosition: 'right',
+              // });
               break;
             case 404:
               this.router.navigateByUrl('/not-found');
@@ -65,16 +64,16 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.router.navigateByUrl('/server-error', navigationExtras);
               break;
             default:
-              this._snackBar.open(
-                'Something unexpected went wrong',
-                'Dismiss',
-                {
-                  panelClass: ['red-snackbar'],
-                  duration: 5000,
-                  verticalPosition: 'bottom',
-                  horizontalPosition: 'right',
-                }
-              );
+              // this._snackBar.open(
+              //   'Something unexpected went wrong',
+              //   'Dismiss',
+              //   {
+              //     panelClass: ['red-snackbar'],
+              //     duration: 5000,
+              //     verticalPosition: 'bottom',
+              //     horizontalPosition: 'right',
+              //   }
+              // );
               console.log(error);
               break;
           }

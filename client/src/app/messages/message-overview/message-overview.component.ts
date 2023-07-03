@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Subscription } from 'rxjs';
 import { Member } from 'src/app/_models/member';
@@ -38,7 +37,6 @@ export class MessageOverviewComponent implements OnInit, OnDestroy {
     private memberService: MemberService,
     private confirmService: ConfirmService,
     private presenceService: PresenceService,
-    private _snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router
   ) {}

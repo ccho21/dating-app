@@ -1,7 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import Driver from 'driver.js';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { map, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Message } from 'src/app/_models/message';
@@ -39,7 +36,6 @@ export class MessagesComponent implements OnInit, OnDestroy {
   newMessageThread$?: Subscription;
   messageThread$?: Subscription;
   //
-  driver?: Driver;
 
   columns: string[] = [
     'senderUsername',
@@ -57,7 +53,6 @@ export class MessagesComponent implements OnInit, OnDestroy {
     private memberService: MemberService,
     private confirmService: ConfirmService,
     private presenceService: PresenceService,
-    private _snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -189,13 +184,6 @@ export class MessagesComponent implements OnInit, OnDestroy {
       this.pageNumber = event.pageIndex + 1;
       this.pageSize = event.pageSize;
       this.loadMessages();
-    }
-  }
-
-  resetNavigationGuide() {
-    if (this.driver) {
-      this.driver.reset();
-      this.driver = undefined;
     }
   }
 

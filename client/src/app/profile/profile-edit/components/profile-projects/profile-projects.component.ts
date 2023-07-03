@@ -5,7 +5,6 @@ import { AccountService } from 'src/app/_services/account.service';
 import { MemberService } from 'src/app/_services/member.service';
 import { take } from 'rxjs/operators';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Project } from 'src/app/_models/project';
 import { ProjectService } from 'src/app/_services/project.service';
 

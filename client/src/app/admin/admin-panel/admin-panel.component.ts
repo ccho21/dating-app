@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-admin-panel',
@@ -12,5 +11,4 @@ export class AdminPanelComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-  selectTab(tab: MatTabChangeEvent) {}
 }

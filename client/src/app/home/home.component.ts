@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AccountService } from '../_services/account.service';
 import { Router } from '@angular/router';
 import { MemberService } from '../_services/member.service';
@@ -61,7 +60,6 @@ export class HomeComponent implements OnInit {
   messageOpen: boolean = false;
 
   constructor(
-    public dialog: MatDialog,
     public accountService: AccountService,
     private router: Router,
     private memberService: MemberService,

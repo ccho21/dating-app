@@ -5,7 +5,6 @@ import { AccountService } from 'src/app/_services/account.service';
 import { MemberService } from 'src/app/_services/member.service';
 import { take } from 'rxjs/operators';
 import { Form, FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Detail, Experience, JobDescription } from 'src/app/_models/experience';
 @Component({
   selector: 'app-profile-experiences',
@@ -28,7 +27,6 @@ export class ProfileExperiencesComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private memberService: MemberService,
-    private _snackBar: MatSnackBar,
     private fb: FormBuilder
   ) {
     this.accountService.currentUser$

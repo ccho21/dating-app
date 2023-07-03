@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
     private accountService: AccountService,
     private fb: FormBuilder,
     public bsModalRef: BsModalRef
-  ) // private dialogRef: MatDialogRef<RegisterComponent>,
+  )
   {}
 
   ngOnInit(): void {

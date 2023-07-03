@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -21,7 +20,6 @@ export class ConnectionSmComponent implements OnInit {
     private memberService: MemberService,
     private accountService: AccountService,
     public presence: PresenceService,
-    private _snackBar: MatSnackBar
   ) {
     console.log('### working');
   }
@@ -38,15 +36,15 @@ export class ConnectionSmComponent implements OnInit {
       // update using ngrx later
       this.updateMembers.emit();
 
-      this._snackBar.open(
-        `You have removed like from ${member.knownAs}`,
-        'okay',
-        {
-          duration: 5000,
-          verticalPosition: 'bottom',
-          horizontalPosition: 'right',
-        }
-      );
+      // this._snackBar.open(
+      //   `You have removed like from ${member.knownAs}`,
+      //   'okay',
+      //   {
+      //     duration: 5000,
+      //     verticalPosition: 'bottom',
+      //     horizontalPosition: 'right',
+      //   }
+      // );
     });
   }
 

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { concatMap, Observable } from 'rxjs';
 import { Member } from 'src/app/_models/member';
@@ -20,7 +19,6 @@ export class MemberCardComponent implements OnInit {
   constructor(
     private memberService: MemberService,
     public presence: PresenceService,
-    private _snackBar: MatSnackBar,
     private accountService: AccountService,
     private router: Router
   ) {}
@@ -51,11 +49,11 @@ export class MemberCardComponent implements OnInit {
         })
       )
       .subscribe(() => {
-        this._snackBar.open(message, 'okay', {
-          duration: 5000,
-          verticalPosition: 'bottom',
-          horizontalPosition: 'right',
-        });
+        // this._snackBar.open(message, 'okay', {
+        //   duration: 5000,
+        //   verticalPosition: 'bottom',
+        //   horizontalPosition: 'right',
+        // });
       });
   }
 
