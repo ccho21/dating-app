@@ -41,6 +41,9 @@
     @extend .heading-5;
 
     .nav-link {
+      color: var(--text-main);
+      border-radius: 0;
+      border-bottom: 0.3rem solid transparent;
       &:hover {
         border-color: transparent !important;
       }

@@ -42,7 +42,7 @@
   </div>
   <a [routerLink]="'/main/projects/' + project.id" class="">
     <swiper
-      class="gallery"
+      class="project-swiper"
       [config]="config"
       *ngIf="project.images.length; else noImage"
     >

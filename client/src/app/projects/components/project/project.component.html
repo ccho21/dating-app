@@ -1,6 +1,6 @@
 <div class="container my-5" *ngIf="project">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-lg-8">
       <app-panel>
         <div class="project-container pt-xl-5">
           <div class="row">
@@ -13,10 +13,10 @@
                 </div>
               </div>
             </div>
-            <div class="offset-lg-3 col-lg-6">
-              <div class="">
+            <div class="offset-md-2 col-md-8 mb-5">
+              <div class="px-4">
                 <swiper
-                  class="mySwiperOne"
+                  class="project-swiper"
                   [config]="config"
                   *ngIf="project.images.length; else noImage"
                 >
@@ -96,20 +96,24 @@
         </div>
       </app-panel>
 
-      <app-panel [title]="project.user.username + '\'s Other Projects'">
+      <app-panel
+        [title]="project.user.username + '\'s Other Projects'"
+        customClass="no-height"
+      >
         <div class="row p-xl-4">
           <swiper
             [pagination]="{
-              clickable: true
+              clickable: false,
+              dynamicBullets: false
             }"
             [navigation]="true"
             [slidesPerView]="2"
-            [spaceBetween]="30"
+            [spaceBetween]="10"
             [centeredSlides]="false"
             [centeredSlidesBounds]="false"
             [preventClicks]="false"
             [preventClicksPropagation]="false"
-            class="mySwiperOne"
+            class="other-project-swiper"
           >
             <ng-template swiperSlide *ngFor="let p of otherProjects">
               <div>
@@ -119,19 +123,9 @@
           </swiper>
         </div>
       </app-panel>
-
-      <div class="text-end m-3">
-        <app-link
-          customClass="primary"
-          icon="fa-solid fa-arrow-right"
-          label="Go back to projects"
-          (click)="goBack()"
-        >
-        </app-link>
-      </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-lg-4">
       <app-panel customClass="no-padding no-height">
         <app-connection-card
           [member]="project.user"
@@ -162,6 +156,15 @@
           </div>
         </ng-template>
       </app-panel>
+    </div>
+    <div class="text-end m-3">
+      <app-link
+        customClass="primary"
+        icon="fa-solid fa-arrow-right"
+        label="Go back to projects"
+        (click)="goBack()"
+      >
+      </app-link>
     </div>
   </div>
 </div>

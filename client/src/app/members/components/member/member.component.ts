@@ -23,6 +23,14 @@ export class MemberComponent implements OnInit, OnDestroy {
   currentUser?: User | null;
   isLiked: boolean = false;
 
+  config: SwiperOptions = {
+    slidesPerView: 1,
+    spaceBetween: 50,
+    navigation: false,
+    pagination: { clickable: true, dynamicBullets: true },
+    scrollbar: { draggable: true },
+  };
+  
   constructor(
     private route: ActivatedRoute,
     private memberService: MemberService,

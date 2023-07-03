@@ -1,8 +1,11 @@
+@import "_typography";
 .form-control {
+  @extend .text-1;
+  color: var(--text-main);
+  
   border: 0.1rem solid var(--border-main);
   border-radius: 0.5rem;
   box-sizing: border-box;
-  color: var(--black);
   flex: 0 1 355px;
   height: 32px;
   padding: 0 10px;

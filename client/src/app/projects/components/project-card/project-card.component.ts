@@ -11,7 +11,7 @@ export class ProjectCardComponent implements OnInit {
   @Input() project?: Project;
   config: SwiperOptions = {
     slidesPerView: 1,
-    spaceBetween: 10,
+    spaceBetween: 0,
     navigation: false,
     pagination: { clickable: true, dynamicBullets: true },
     scrollbar: { draggable: true },

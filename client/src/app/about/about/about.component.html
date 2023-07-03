@@ -1,0 +1,109 @@
+<div class="about">
+  <app-panel title="About" customClass="no-padding no-height" *ngIf="member">
+    <div class="row">
+      <div class="col-md-12">
+        <div>
+          <tabset #staticTabs class="vertical-tab" [vertical]="true">
+            <tab heading="Overview">
+              <div class="about-content">
+                <h3 class="">
+                  <i class="fa-solid fa-heading"></i>
+                  Introduction
+                </h3>
+                <p>
+                  {{ member.introduction }}
+                </p>
+              </div>
+              <div class="about-content">
+                <h3 class="">
+                  <i class="fa-solid fa-mug-hot"></i>
+                  Interests
+                </h3>
+                <p>
+                  {{ member.interests }}
+                </p>
+              </div>
+              <div class="about-content">
+                <h3 class="">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  Looking for
+                </h3>
+                <p>
+                  {{ member.lookingFor }}
+                </p>
+              </div>
+            </tab>
+            <tab heading="Work and Education">
+              <div>
+                <div class="about-content">
+                  <h3 class="">
+                    <i class="fa-solid fa-person-digging"></i>
+                    Work
+                  </h3>
+                  <p>
+                    {{ member.introduction }}
+                  </p>
+                </div>
+                <div class="about-content">
+                  <h3 class="">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    Education
+                  </h3>
+                  <p>
+                    {{ member.interests }}
+                  </p>
+                </div>
+              </div>
+            </tab>
+            <tab heading="Places Lived">
+              <div>
+                <div class="about-content">
+                  <h3 class="">
+                    <i class="fa-solid fa-location-crosshairs"></i>
+                    Location
+                  </h3>
+                  <p>Toronto, Canada</p>
+                </div>
+              </div>
+            </tab>
+            <tab heading="Contact Basic info">
+              <div>
+                <div class="about-content">
+                  <h3 class="">
+                    <i class="icon fa-solid fa-address-card"></i>
+                    Contact info
+                  </h3>
+                  <p>abc@abc.com</p>
+                  <p>Phone: 1234567899</p>
+                </div>
+
+                <div class="about-content">
+                  <h3 class="">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                    Websites and social links
+                  </h3>
+                  <p>
+                    <span><i class="fa-brands fa-linkedin"></i></span>
+                    google.ca
+                  </p>
+                  <p>
+                    <span><i class="fa-brands fa-github"></i></span>
+                    google.ca
+                  </p>
+                </div>
+
+                <div class="about-content">
+                  <h3 class="">
+                    <i class="fa-solid fa-building-columns"></i>
+                    Basic info
+                  </h3>
+                  <p>Computer programming, Seneca College</p>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </app-panel>
+</div>

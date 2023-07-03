@@ -1,7 +1,10 @@
+@import "_typography";
+
 .form-control {
+  @extend .text-1;
+  color: var(--text-main);
   border: 1px solid var(--border-main);
   border-radius: 3px;
   box-sizing: border-box;
-  color: var(--black);
   padding: 6px 10px;
 }

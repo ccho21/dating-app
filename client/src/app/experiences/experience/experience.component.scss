@@ -31,9 +31,9 @@
     padding: 1rem;
   }
   .company-name {
+    @extend .heading-2;
     padding-bottom: 0.5rem;
     font-weight: 900;
-    // font-size: 2rem;
   }
   .working-date {
     padding-bottom: 1rem;
@@ -52,7 +52,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
     }
     .description-title {
       @extend .text-1;

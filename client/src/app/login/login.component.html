@@ -7,7 +7,6 @@
             [formControl]="form.controls['username'] | formControl"
             [label]="'Username'"
             [size]="'lg'"
-            class="theme-green"
           >
           </app-text-input>
         </div>
@@ -24,63 +23,33 @@
           </app-text-input>
         </div>
       </div>
-      <div class="col-md-12">
-        <app-button
-          icon="fa fa-plus"
-          customClass="full btn-lg"
-          (onClick)="login()"
-        >
+      <div class="col-md-12 mb-3">
+        <app-button customClass="full btn-lg" (onClick)="login()">
           Login
         </app-button>
       </div>
     </form>
-    <div class="col-md-12 mb-4">
-      <div><a href=""> Need to Login? </a></div>
-      <hr />
-    </div>
 
     <div class="col-md-12">
       <app-button
         icon="fa fa-plus"
         customClass="full btn-lg"
-        routerLink="/register"
+        (click)="openModalWithComponent()"
       >
         Register
       </app-button>
     </div>
+    <hr />
+    <div class="col-md-12">
+      <div>
+        <app-link
+          customClass="primary"
+          label="Need to Login?"
+          routerLink="/"
+          routerLinkActive="active"
+        >
+        </app-link>
+      </div>
+    </div>
   </app-panel>
 </div>
-<!-- <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Username</mat-label>
-    <input
-      matInput
-      type="text"
-      placeholder="Username"
-      formControlName="username"
-    />
-  </mat-form-field> -->
-
-<!-- <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Enter your password</mat-label>
-    <input
-      matInput
-      [type]="hide ? 'password' : 'text'"
-      formControlName="password"
-    />
-    <button
-      mat-icon-button
-      matSuffix
-      (click)="hide = !hide"
-      [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hide"
-    >
-      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-    </button>
-  </mat-form-field> -->
-
-<!-- <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button cdkFocusInitial color="primary" (click)="login()">
-    Login
-  </button>
-</mat-dialog-actions> -->

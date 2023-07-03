@@ -1,5 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { TabsetComponent } from 'ngx-bootstrap/tabs';
+import { Component, Input, OnInit } from '@angular/core';
 import { Member } from 'src/app/_models/member';
 import SwiperCore, { Pagination, Navigation, SwiperOptions } from 'swiper';
 SwiperCore.use([Navigation, Pagination]);
@@ -17,7 +16,6 @@ import {
   styleUrls: ['./about-tab.component.scss'],
 })
 export class AboutTabComponent implements OnInit {
-  @ViewChild('staticTabs', { static: false }) staticTabs?: TabsetComponent;
   @Input() member?: Member;
 
   config: SwiperOptions = {
@@ -46,12 +44,5 @@ export class AboutTabComponent implements OnInit {
 
     // Load items into the lightbox gallery ref
     lightboxRef.load(this.items);
-  }
-
-  selectTab(tabId: number) {
-    console.log('### ', tabId);
-    if (this.staticTabs?.tabs[tabId]) {
-      this.staticTabs.tabs[tabId].active = true;
-    }
   }
 }

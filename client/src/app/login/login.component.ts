@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { AccountService } from '../_services/account.service';
+import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-login',
@@ -13,15 +13,16 @@ import { AccountService } from '../_services/account.service';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  bsModalRef?: BsModalRef;
+
   hide = true;
   constructor(
     private fb: FormBuilder,
-    // private dialogRef: MatDialogRef<LoginComponent>,
+    private modalService: BsModalService,
     public accountService: AccountService,
-    private _snackBar: MatSnackBar,
     private router: Router
   ) {
-    this.form = fb.group({
+    this.form = this.fb.group({
       username: ['lisa', [Validators.required]],
       password: ['Pa$$w0rd', [Validators.required]],
     });
@@ -59,6 +60,25 @@ export class LoginComponent implements OnInit {
         // });
       },
     });
+  }
+
+  openModalWithComponent() {
+    const initialState: ModalOptions = {
+      initialState: {
+        list: [
+          'Open a modal with component',
+          'Pass your data',
+          'Do something else',
+          '...',
+        ],
+        title: 'Modal with component',
+      },
+    };
+    this.bsModalRef = this.modalService.show(
+      RegisterComponent,
+      initialState
+    );
+    this.bsModalRef.content.closeBtnName = 'Close';
   }
 
   ok() {}

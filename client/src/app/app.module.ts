@@ -16,6 +16,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -92,7 +93,7 @@ import { NoDataComponent } from './_layouts/no-data/no-data.component';
 import { ProjectOverviewComponent } from './projects/containers/project-overview/project-overview.component';
 import { MemberCardComponent } from './members/components/member-card/member-card.component';
 import { MemberSearchComponent } from './members/components/member-search/member-search.component';
-
+import { AboutComponent } from './about/about/about.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -161,6 +162,7 @@ import { MemberSearchComponent } from './members/components/member-search/member
     ExperienceTabComponent,
     NoDataComponent,
     ProjectOverviewComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
@@ -181,6 +183,7 @@ import { MemberSearchComponent } from './members/components/member-search/member
     CarouselModule.forRoot(),
     PaginationModule.forRoot(),
     TypeaheadModule.forRoot(),
+    ModalModule.forRoot(),
 
     GalleryModule.withConfig({
       // thumbView: 'contain',

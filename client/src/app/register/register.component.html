@@ -1,10 +1,23 @@
-<div class="register">
-  <form
-    [formGroup]="registerForm"
-    (ngSubmit)="registerForm.valid && register()"
-    autocomplete="off"
+<div class="modal-header modal-lg">
+  <h4 class="modal-title pull-left">Register</h4>
+  <button
+    type="button"
+    class="btn-close close pull-right"
+    aria-label="Close"
+    (click)="bsModalRef.hide()"
   >
-    <!-- <div class="text-left">
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <div class="register">
+      <form
+        [formGroup]="registerForm"
+        (ngSubmit)="registerForm.valid && register()"
+        autocomplete="off"
+      >
+        <!-- <div class="text-left">
       <label id="example-radio-group-label"> I AM LOOKING FOR </label>
       <mat-radio-group aria-label="Select an option" formControlName="gender">
         <mat-radio-button value="male" style="margin: 0.25rem">
@@ -16,70 +29,127 @@
       </mat-radio-group>
     </div> -->
 
-    <div class="row">
-      <div class="col-md-12">
-        <app-text-input
-          [formControl]="registerForm.controls['username'] | formControl"
-          [label]="'Username'"
-          class="theme-green"
-        >
-        </app-text-input>
-        <app-text-input
-          [formControl]="registerForm.controls['password'] | formControl"
-          [label]="'Password'"
-          [type]="'password'"
-        >
-        </app-text-input>
-        <!-- <app-date-input
-          [formControl]="registerForm.controls['dateOfBirth'] | formControl"
-          [label]="'Date Of Birth'"
-          [maxDate]="maxDate"
-        ></app-date-input> -->
-      </div>
-      <div class="col-md-12">
-        <app-text-input
-          [formControl]="registerForm.controls['country'] | formControl"
-          [label]="'Country'"
-        ></app-text-input>
-      </div>
-      <div class="col-md-12">
-        <button class="main-btn" (click)="register()">Register</button>
-      </div>
+        <div class="row mb-3 align-items-center">
+          <div class="col-md-4">Username:</div>
+          <div class="col-md-8">
+            <app-text-input
+              [formControl]="registerForm.controls['username'] | formControl"
+              [label]="'Username'"
+              [size]="'lg'"
+              [type]="'text'"
+            >
+            </app-text-input>
+          </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+          <div class="col-md-4">Password:</div>
+          <div class="col-md-8">
+            <app-text-input
+              [formControl]="registerForm.controls['password'] | formControl"
+              [size]="'lg'"
+              [label]="'Password'"
+              [type]="'password'"
+            >
+            </app-text-input>
+          </div>
+        </div>
+
+        <div class="row mb-3 align-items-center">
+          <div class="col-md-4">Confirm Password:</div>
+          <div class="col-md-8">
+            <app-text-input
+              [formControl]="
+                registerForm.controls['confirmPassword'] | formControl
+              "
+              [size]="'lg'"
+              [label]="'Confirm Password'"
+              [type]="'password'"
+            ></app-text-input>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="row mb-3 align-items-center">
+          <div class="col-md-4">First name:</div>
+          <div class="col-md-8">
+            <app-text-input
+              [formControl]="registerForm.controls['username'] | formControl"
+              [label]="'First name'"
+              [size]="'lg'"
+              [type]="'text'"
+            >
+            </app-text-input>
+          </div>
+        </div>
+
+        <div class="row mb-3 align-items-center">
+          <div class="col-md-4">Last name:</div>
+          <div class="col-md-8">
+            <app-text-input
+              [formControl]="registerForm.controls['username'] | formControl"
+              [label]="'Last name'"
+              [size]="'lg'"
+              [type]="'text'"
+            >
+            </app-text-input>
+          </div>
+        </div>
+
+        <div class="row mb-3 align-items-center">
+          <div class="col-md-4">Date of birth:</div>
+          <div class="col-md-8">
+            <app-date-input
+              [formControl]="registerForm.controls['dateOfBirth'] | formControl"
+              [label]="'Date Of Birth'"
+              [maxDate]="maxDate"
+            ></app-date-input>
+          </div>
+        </div>
+
+        <div class="row mb-3 align-items-center">
+          <div class="col-md-4">City:</div>
+          <div class="col-md-8">
+            <app-text-input
+              [formControl]="registerForm.controls['city'] | formControl"
+              [size]="'lg'"
+              [label]="'City'"
+              [type]="'text'"
+            >
+            </app-text-input>
+          </div>
+        </div>
+
+        <div class="row mb-3 align-items-center">
+          <div class="col-md-4">Country:</div>
+          <div class="col-md-8">
+            <app-text-input
+              [formControl]="registerForm.controls['country'] | formControl"
+              [size]="'lg'"
+              [label]="'Coutnry'"
+              [type]="'text'"
+            >
+            </app-text-input>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="validationErrors.length > 0">
+          <ul class="text-danger">
+            <li *ngFor="let error of validationErrors">
+              {{ error }}
+            </li>
+          </ul>
+        </div>
+      </form>
     </div>
-
-    <!-- <app-text-input
-      [formControl]="registerForm.controls['confirmPassword'] | formControl"
-      [label]="'Confirm Password'"
-      [type]="'password'"
-    ></app-text-input> -->
-
-    <!-- <app-text-input
-      [formControl]="registerForm.controls['knownAs'] | formControl"
-      [label]="'Known As'"
-    ></app-text-input> -->
-
-    <!-- <app-date-input
-      [formControl]="registerForm.controls['dateOfBirth'] | formControl"
-      [label]="'Date Of Birth'"
-      [maxDate]="maxDate"
-    ></app-date-input> -->
-
-    <!-- <app-text-input
-      [formControl]="registerForm.controls['city'] | formControl"
-      [label]="'City'"
-    ></app-text-input> -->
-
-    <!-- <app-text-input
-      [formControl]="registerForm.controls['country'] | formControl"
-      [label]="'Country'"
-    ></app-text-input> -->
-
-    <div class="row" *ngIf="validationErrors.length > 0">
-      <ul class="text-danger">
-        <li *ngFor="let error of validationErrors">
-          {{ error }}
-        </li>
-      </ul>
-    </div>
-  </form>
+  </div>
+</div>
+<div class="modal-footer">
+  <app-button
+    customClass="btn-lg danger"
+    (click)="bsModalRef.hide()"
+  >
+    close
+  </app-button>
+  <app-button customClass="btn-lg" (click)="register()"> Register </app-button>
 </div>

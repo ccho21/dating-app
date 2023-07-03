@@ -104,6 +104,6 @@ export class ProjectComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['main', 'projects']);
   }
 }

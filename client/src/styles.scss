@@ -1,11 +1,11 @@
 @import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 @import "../node_modules/swiper/swiper-bundle.css";
 @import "../node_modules/@angular/cdk/overlay-prebuilt.css";
-@import "_swiper";
 @import "_typography";
 @import "_base";
-@import "_tabs";
 @import "_layout";
+@import "_tabs";
+@import "_swiper";
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -107,4 +107,8 @@ h5 {
 .pagination {
   font-size: 1.75rem;
   --bs-pagination-font-size: 1.75rem;
+}
+
+.show {
+  transition: all 0.3s ease;
 }

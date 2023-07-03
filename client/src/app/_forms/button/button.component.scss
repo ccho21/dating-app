@@ -26,11 +26,18 @@
     box-shadow: none;
   }
 
-  &.filled {
-  }
-
   &.full {
     width: 100%;
+  }
+
+  &.danger {
+    color: var(--red);
+    &:hover {
+      color: var(--white);
+      background-color: var(--red);
+      border-color: var(--red);
+      box-shadow: none;
+    }
   }
 
   &.icon {

@@ -1,10 +1,11 @@
-.mySwiper {
-  overflow: unset;
+.swiper {
+  // overflow: unset;
+  // aspect-ratio: 1;
   .swiper-pagination-bullet-active {
-    background-color: var(--text-main) !important;
+    background-color: var(--primary) !important;
   }
   .swiper-pagination {
-    bottom: -2rem;
+    bottom: 1rem;
   }
   .swiper-button-prev,
   .swiper-button-next {
