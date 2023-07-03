@@ -1,7 +1,7 @@
 import { User } from './user';
 
 export class ExperienceParams {
-  pageNumber = 0;
+  pageNumber = 1;
   pageSize = 10;
   currentUsername?: string;
 

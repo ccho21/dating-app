@@ -13,7 +13,7 @@ import { ProjectService } from 'src/app/_services/project.service';
 })
 export class ProjectOverviewComponent implements OnInit {
   projects?: Partial<any[]>;
-  pageNumber = 0;
+  pageNumber = 1;
   pageSize = 10;
   currentPage: number = 0;
   pagination?: Pagination;
