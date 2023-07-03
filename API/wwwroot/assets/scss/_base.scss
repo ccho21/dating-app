@@ -1,0 +1,44 @@
+.user-thumbnail {
+  width: 15rem;
+  border-radius: 50%;
+  max-width: 100%;
+  aspect-ratio: 1;
+  &.square {
+    border-radius: 1rem;
+    width: 100%;
+    height: auto;
+  }
+  &.rectangle {
+    border-radius: 1rem;
+    width: 100%;
+    height: 80%;
+  }
+
+  &.border {
+    border: 0.3rem solid var(--white);
+  }
+}
+
+.like-icon {
+  color: var(--red);
+}
+
+//  TEMP SOLUTION
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.popover-arrow {
+  position: absolute;
+}
+
+.tooltip {
+  position: absolute;
+  font-size: 1.4rem;
+}
+
+.tooltip-arrow {
+  position: absolute;
+}

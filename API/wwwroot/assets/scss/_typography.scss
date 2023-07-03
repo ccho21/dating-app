@@ -1,0 +1,92 @@
+.font-xl {
+  font-size: 30px;
+  font-size: 3rem;
+}
+.font-lg {
+  font-size: 25px;
+  font-size: 2.5rem;
+}
+.font-md {
+  font-size: 20px;
+  font-size: 2rem;
+}
+.font-sm {
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+.font-xs {
+  font-size: 14px;
+  font-size: 1.4rem;
+}
+.font-xxs {
+  font-size: 12px;
+  font-size: 1.2rem;
+}
+
+.heading-1 {
+  @extend .font-xl;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.heading-2 {
+  @extend .font-lg;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.heading-3 {
+  @extend .font-md;
+  font-weight: 600;
+}
+
+.heading-4 {
+  @extend .font-sm;
+  font-weight: 600;
+}
+
+.heading-5 {
+  @extend .font-sm;
+  font-weight: 500;
+}
+
+.sub-heading-1 {
+  @extend .font-sm;
+  color: var(--text-light);
+}
+
+.text-1 {
+  @extend .font-sm;
+}
+
+.text-2 {
+  @extend .font-xs;
+}
+
+.text-3 {
+  @extend .font-xxs;
+}
+
+.link-text {
+  @extend .font-xs;
+  font-weight: 600;
+}
+
+.btn-text {
+  @extend .font-xs;
+}
+
+.footer-text-1 {
+  @extend .font-xs;
+}
+
+.footer-text-2 {
+  @extend .font-xxs;
+  opacity: 0.7;
+}
+
+mark {
+  color: var(--primary);
+  background-color: inherit;
+  padding: 0;
+}
