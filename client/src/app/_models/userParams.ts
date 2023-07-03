@@ -1,7 +1,7 @@
 import { User } from './user';
 
 export class UserParams {
-  pageNumber: number = 1;
+  pageNumber: number = 0;
   pageSize: number = 10;
   username?: string;
   orderBy?: string;

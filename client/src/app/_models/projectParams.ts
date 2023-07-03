@@ -1,5 +1,5 @@
 export class ProjectParams {
-  pageNumber: number = 1;
+  pageNumber: number = 0;
   pageSize: number = 10;
   currentUsername?: string;
   orderBy?: string;

@@ -10,7 +10,7 @@ import { ExperienceService } from 'src/app/_services/experience.service';
 })
 export class ExperienceListComponent implements OnInit {
   experiences?: Partial<any[]>;
-  pageNumber = 1;
+  pageNumber = 0;
   pageSize = 5;
   pagination?: Pagination;
   constructor(private experienceService: ExperienceService) {}
