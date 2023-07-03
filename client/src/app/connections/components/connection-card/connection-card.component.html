@@ -10,6 +10,7 @@
       </div>
       <div class="user">
         <app-link
+          customClass="text"
           [label]="'@' + member.username"
           [routerLink]="['/main/members/', member.username]"
         ></app-link>
@@ -47,20 +48,17 @@
   </div>
   <div class="card-body">
     <div class="d-flex align-items-center">
-      <div>
-        <app-link
-          [label]="member.knownAs"
-          routerLink="/main/members/{{ member.username }}"
-          customClass="link-lg"
-        ></app-link>
-      </div>
+      <h3 class="name">
+        {{ member.username }}
+      </h3>
       <div class="ms-auto">
         <div>
-          <i class="fa-solid fa-heart"></i> {{ member.likedByUsers?.length }}
+          <i class="like-icon fa-solid fa-heart"></i>
+          {{ member.likedByUsers?.length }}
         </div>
       </div>
     </div>
-    <div>Software developer, Accentury Inc.</div>
+    <div class="position">Software developer, Accentury Inc.</div>
 
     <!-- <div class="card-text" [tooltip]="member.introduction">
       {{ member.introduction | truncate : 50 }},
@@ -71,15 +69,15 @@
       <span class="badge bg-dark me-2">React</span>
       <span class="badge bg-dark me-2">.NET</span>
     </div>
-    <small class="text-muted"
+    <small class="visited"
       >Last visited {{ member.lastActive | timeago }}
     </small>
-    <div class="text-end">
+    <!-- <div class="text-end">
       <app-button
         >{{ getLikedUserIndex(member) === -1 ? "Add to" : "Remove from" }} my
         connection</app-button
       >
-    </div>
+    </div> -->
   </div>
 </div>
 <!-- 

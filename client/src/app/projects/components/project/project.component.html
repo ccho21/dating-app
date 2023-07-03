@@ -1,143 +1,103 @@
 <div class="container my-5" *ngIf="project">
   <div class="row">
     <div class="col-md-8">
-      <div class="project container">
-        <app-panel
-          [title]="'Project\'s Info'"
-          [sub]="'Please check details about the project'"
-        >
-          <div class="project-container">
-            <div class="row">
-              <div class="col-12 text-center">
-                <div>
-                  <h3 class="title">{{ project.name }}</h3>
-                  <div class="date">
-                    {{ project.projectStarted | date : "MMM y" }} -
-                    {{ project.projectEnded | date : "MMM y" }}
-                    {{ project.projectWith }}
-                  </div>
+      <app-panel>
+        <div class="project-container pt-xl-5">
+          <div class="row">
+            <div class="col-12 text-center">
+              <div>
+                <h2 class="title">{{ project.name }}</h2>
+                <div class="date">
+                  {{ project.projectStarted | date : "MMM y" }} -
+                  {{ project.projectEnded | date : "MMM y" }}
                 </div>
               </div>
-              <div class="col-xl-6 mb-5">
-                <div class="p-xl-5">
-                  <swiper
-                    class="mySwiperOne"
-                    [config]="config"
-                    *ngIf="project.images.length; else noImage"
+            </div>
+            <div class="offset-lg-3 col-lg-6">
+              <div class="">
+                <swiper
+                  class="mySwiperOne"
+                  [config]="config"
+                  *ngIf="project.images.length; else noImage"
+                >
+                  <ng-template
+                    swiperSlide
+                    *ngFor="let image of project.images; let i = index"
                   >
-                    <ng-template
-                      swiperSlide
-                      *ngFor="let image of project.images; let i = index"
-                    >
-                      <img
-                        [src]="image.url"
-                        alt=""
-                        class="user-thumbnail square"
-                      />
-                    </ng-template>
-                  </swiper>
-                  <ng-template #noImage>
                     <img
-                      src="./assets/shared/user.png"
-                      class="user-thumbnail square"
+                      [src]="image.url"
                       alt=""
+                      class="user-thumbnail square"
                     />
                   </ng-template>
-                </div>
+                </swiper>
+                <ng-template #noImage>
+                  <img
+                    src="./assets/shared/user.png"
+                    class="user-thumbnail square"
+                    alt=""
+                  />
+                </ng-template>
               </div>
-              <div class="col-xl-6 mb-5">
-                <div class="p-xl-5">
-                  <div class="intro mb-4">
-                    {{ project.intro }}
+            </div>
+            <div class="col-xl-12">
+              <div class="p-xl-5">
+                <h3 class="sub-title">Intro</h3>
+                <p class="intro">
+                  {{ project.intro }}
+                </p>
+                <h3 class="sub-title">Description</h3>
+                <p class="description">{{ project.description }}</p>
+                <h3 class="sub-title">Contributors</h3>
+                <p class="intro">
+                  {{ project.projectWith }}
+                </p>
+                <hr />
+                <div class="tech-item">
+                  <div class="label">Main Feature</div>
+                  <div class="content">
+                    내가 생각하는 나의 성격 검사하기, 친구에게 나의 성격 평가
+                    부탁하기, 나의 성격에 대한 나와 친구의 검사 결과 비교하기
                   </div>
-                  <div class="description mb-4">{{ project.description }}</div>
+                </div>
+                <div class="tech-item">
+                  <div class="label">Github</div>
+                  <div class="content">
+                    <a href="">{{ project.githubUrl }}</a>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <div class="label">Website</div>
+                  <div class="content">
+                    <a [href]="project.url">{{ project.url }}</a>
+                  </div>
+                </div>
+                <hr />
+                <div class="tech-item">
+                  <div class="label">Frontend</div>
+                  <div class="content">{{ project.frontEnd }}</div>
+                </div>
+                <div class="tech-item">
+                  <div class="label">Backend</div>
+                  <div class="content">{{ project.backEnd }}</div>
+                </div>
+                <div class="tech-item">
+                  <div class="label">Database</div>
+                  <div class="content">{{ project.database }}</div>
+                </div>
 
-                  <hr />
-
-                  <div class="tech-item">
-                    <div class="label">Main Feature</div>
-                    <div class="text-field">
-                      내가 생각하는 나의 성격 검사하기, 친구에게 나의 성격 평가
-                      부탁하기, 나의 성격에 대한 나와 친구의 검사 결과 비교하기
-                    </div>
-                  </div>
-                  <div class="tech-item">
-                    <div class="label">Github</div>
-                    <div class="">
-                      <a href="">{{ project.githubUrl }}</a>
-                    </div>
-                  </div>
-                  <div class="tech-item">
-                    <div class="label">URL</div>
-                    <div>
-                      <a [href]="project.url">{{ project.url }}</a>
-                    </div>
-                  </div>
-                  <div class="tech-item">
-                    <div class="label">Frontend</div>
-                    <div>{{ project.frontEnd }}</div>
-                  </div>
-                  <div class="tech-item">
-                    <div class="label">Backend</div>
-                    <div>{{ project.backEnd }}</div>
-                  </div>
-                  <div class="tech-item">
-                    <div class="label">Database</div>
-                    <div>{{ project.database }}</div>
-                  </div>
-
-                  <div class="tech-item">
-                    <div class="label">Deployment</div>
-                    <div>{{ project.deployement }}</div>
-                  </div>
+                <div class="tech-item">
+                  <div class="label">Deployment</div>
+                  <div class="content">{{ project.deployement }}</div>
                 </div>
               </div>
             </div>
           </div>
-        </app-panel>
-        <app-panel
-          title="Project's Gallery"
-          sub="This is to give you an idea about how the project has developed and the final product"
-          customClass="no-height"
-        >
-          <div
-            class="row"
-            gallerize
-            *ngIf="project.images.length; else noGallery"
-          >
-            <div
-              class="col-md-3 mb-3"
-              *ngFor="let image of project.images"
-              gallerize
-            >
-              <img [src]="image.url" alt="" class="w-100" />
-            </div>
-          </div>
-          <ng-template #noGallery>
-            <div class="text-center my-4">
-              No images to show. Please upload some photos.
-            </div>
-            <div class="my-4 text-center">
-              <app-button>Upload picture</app-button>
-            </div>
-          </ng-template>
-        </app-panel>
-      </div>
-      <div class="text-end">
-        <app-button (click)="goBack()">Go back to projects</app-button>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <app-panel customClass="no-padding no-height">
-        <app-connection-card
-          [member]="project.user"
-          [noImage]="true"
-        ></app-connection-card>
+        </div>
       </app-panel>
 
       <app-panel [title]="project.user.username + '\'s Other Projects'">
-        <div class="row pb-5 px-4">
+        <div class="row p-xl-4">
           <swiper
             [pagination]="{
               clickable: true
@@ -158,6 +118,49 @@
             </ng-template>
           </swiper>
         </div>
+      </app-panel>
+
+      <div class="text-end m-3">
+        <app-link
+          customClass="primary"
+          icon="fa-solid fa-arrow-right"
+          label="Go back to projects"
+          (click)="goBack()"
+        >
+        </app-link>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <app-panel customClass="no-padding no-height">
+        <app-connection-card
+          [member]="project.user"
+          [noImage]="true"
+        ></app-connection-card>
+      </app-panel>
+
+      <app-panel title="Project's Gallery" customClass="no-height">
+        <div
+          class="row"
+          gallerize
+          *ngIf="project.images.length; else noGallery"
+        >
+          <div
+            class="col-md-3 mb-3"
+            *ngFor="let image of project.images"
+            gallerize
+          >
+            <img [src]="image.url" alt="" class="w-100" />
+          </div>
+        </div>
+        <ng-template #noGallery>
+          <div class="text-center my-4">
+            No images to show. Please upload some photos.
+          </div>
+          <div class="my-4 text-center">
+            <app-button>Upload picture</app-button>
+          </div>
+        </ng-template>
       </app-panel>
     </div>
   </div>
