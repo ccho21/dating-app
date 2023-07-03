@@ -45,17 +45,7 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
             });
-            
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAllOrigins",
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin()
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
-                    });
-            });
+            services.AddCors();
 
             // Extension method
             services.AddIdentityServices(_config);
@@ -73,6 +63,7 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
             }
+            
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
@@ -82,7 +73,7 @@ namespace API
             app.UseCors(x => x.AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()
-                    .AllowAnyOrigin());
+                    .WithOrigins("https://localhost:4200"));
 
             app.UseAuthentication();
 
