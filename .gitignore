@@ -433,7 +433,3 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 
 appsettings.json
-
-## DATABASE 
-datingapp.db-wal
-datingapp.db-shm

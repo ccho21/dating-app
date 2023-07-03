@@ -23,12 +23,12 @@ export class AuthGuard implements CanActivate {
     return this.accountService.currentUser$.pipe(
       map((user) => {
         if (user) return true;
-        this._snackBar.open('You shall not pass!', 'Dismiss', {
-          panelClass: ['red-snackbar'],
-          duration: 5000,
-          verticalPosition: 'bottom',
-          horizontalPosition: 'right',
-        });
+        // this._snackBar.open('You shall not pass!', 'Dismiss', {
+        //   panelClass: ['red-snackbar'],
+        //   duration: 5000,
+        //   verticalPosition: 'bottom',
+        //   horizontalPosition: 'right',
+        // });
         return false;
       })
     );
