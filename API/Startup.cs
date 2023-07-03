@@ -45,13 +45,17 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
             });
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            
+            services.AddCors(options =>
             {
-                builder
-                .AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-            }));
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
 
             // Extension method
             services.AddIdentityServices(_config);
@@ -78,7 +82,7 @@ namespace API
             app.UseCors(x => x.AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()
-                    .WithOrigins("https://localhost:4200"));
+                    .AllowAnyOrigin());
 
             app.UseAuthentication();
 
