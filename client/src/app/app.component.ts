@@ -4,6 +4,7 @@ import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
 import { PresenceService } from './_services/presence.service';
 import { setTheme } from 'ngx-bootstrap/utils';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
@@ -16,12 +17,16 @@ export class AppComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private presence: PresenceService
+    private presence: PresenceService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
     setTheme('bs5');
     this.setCurrentUser();
+
+    this.spinner.show();
+    this.spinner.hide();
   }
 
   setCurrentUser() {

@@ -26,12 +26,6 @@ export class AdminGuard implements CanActivate {
         ) {
           return true;
         }
-        // this._snackBar.open('You cannot enter this area', 'Dismiss', {
-        //   panelClass: ['red-snackbar'],
-        //   duration: 5000,
-        //   verticalPosition: 'bottom',
-        //   horizontalPosition: 'right',
-        // });
         return false;
       })
     );

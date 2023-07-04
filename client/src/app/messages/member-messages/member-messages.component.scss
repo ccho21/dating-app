@@ -1,10 +1,13 @@
+@import "_typography";
+
 .rounded-circle {
   max-height: 35px;
 }
+
 .messages {
+  @extend .text-1;
   padding: 0;
   width: 100%;
-
   .message-header {
     margin-bottom: 15px;
     padding: 0.5rem;
@@ -83,7 +86,7 @@
   }
 
   .footer {
-    border-top: 0.8px solid var(--primary);
+    border-top: 0.8px solid var(--border-main);
     .input-group {
       background-color: var(--white);
     }
@@ -104,12 +107,7 @@
     }
 
     .form-control::placeholder {
-      // font-size: 1.4rem;
+      @extend .text-1;
     }
   }
-}
-
-.mat-mini-fab.mat-green {
-  background-color: var(--black);
-  color: var(--white);
 }

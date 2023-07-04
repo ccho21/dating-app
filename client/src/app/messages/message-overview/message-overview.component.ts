@@ -44,8 +44,9 @@ export class MessageOverviewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.user$ = this.accountService.currentUser$.subscribe((res) => {
       this.user = res!;
-      console.log('##### this. user', this.user);
-      this.loadUsers();
+      if (this.user) {
+        this.loadUsers();
+      }
     });
   }
 
@@ -55,8 +56,8 @@ export class MessageOverviewComponent implements OnInit, OnDestroy {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
     };
+    console.log('## users? IN OVERVIEW!!!!!!!!!!!!!!!!!', userParams);
 
-    console.log('### this. params', userParams);
     this.memberService
       .getUsersWithMessage(userParams)
       .pipe(
@@ -76,16 +77,20 @@ export class MessageOverviewComponent implements OnInit, OnDestroy {
           return res;
         })
       )
-      .subscribe((response) => {
-        console.log('### THIS LOAD USERS RESPONSE', response);
-        if (response && response.pagination) {
-          this.members = response.result;
-          this.pagination = response.pagination;
-          if (this.pagination) {
-            this.pagination.currentPage = response.pagination.currentPage - 1;
+      .subscribe({
+        next: (response) => {
+          console.log('### THIS LOAD USERS RESPONSE', response);
+          if (response && response.pagination) {
+            this.members = response.result;
+            this.pagination = response.pagination;
+            if (this.pagination) {
+              this.pagination.currentPage = response.pagination.currentPage - 1;
+            }
           }
+        },
+        complete: () => {
           this.loading = false;
-        }
+        },
       });
   }
 

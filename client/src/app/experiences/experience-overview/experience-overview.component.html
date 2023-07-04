@@ -5,16 +5,16 @@
         {{ experience.started | date : "MMM y" }} -
         {{ experience.ended | date : "MMM y" }}
       </h3>
-      <div>{{ experience.position }}, {{ experience.companyName }}</div>
     </div>
     <div class="body">
-      <div>
+      <div class="mb-3">
         <img
           class="logo"
           src="./assets/shared/acentury-logo.svg"
           alt="Get together Logo"
         />
       </div>
+      <div>{{ experience.position }}, {{ experience.companyName }}</div>
       <div>
         {{ experience.intro }}
       </div>

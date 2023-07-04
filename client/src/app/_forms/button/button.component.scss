@@ -39,16 +39,26 @@
       box-shadow: none;
     }
   }
+  &.primary {
+    &:hover {
+      color: var(--white);
+      background-color: var(--primary);
+      border-color: var(--primary);
+      box-shadow: none;
+    }
+  }
 
   &.icon {
     padding: 0.5rem;
     border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3rem;
+    height: 3rem;
     margin: 0.5rem;
-    color: var(--red);
   }
 
-  &.btn-lg {
+  &.icon-lg {
+    @extend .heading-3;
+    width: 4rem;
+    height: 4rem;
   }
 }

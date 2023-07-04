@@ -18,7 +18,9 @@ export class ExperienceListComponent implements OnInit {
   ngOnInit(): void {
     const params: ExperienceParams =
       this.experienceService.getExperienceParams();
+
     console.log('### params', params);
+
     this.loadExperiences(params);
   }
 

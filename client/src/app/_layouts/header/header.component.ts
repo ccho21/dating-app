@@ -13,12 +13,27 @@ export class HeaderComponent implements OnInit {
   navbarFixed = false;
   user?: User | null;
 
+  screenHeight?: number;
+  screenWidth?: number;
+  isDropdownOpen: boolean = false;
+  isMobileDropdownOpen: boolean = false;
+
   constructor(public accountService: AccountService, private router: Router) {}
 
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe((user: User | null) => {
       if (user) this.user = user;
     });
+  }
+
+  handleChange(data: boolean): void {
+    console.log('### data', data);
+    this.isDropdownOpen = data;
+  }
+
+  handleMobileChange(data: boolean): void {
+    console.log('### data', data);
+    this.isMobileDropdownOpen = data;
   }
 
   @HostListener('window:scroll', [])

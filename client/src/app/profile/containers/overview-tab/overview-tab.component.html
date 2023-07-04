@@ -2,6 +2,16 @@
   <div class="col-md-6">
     <app-panel title="Recent Messages" customClass="no-padding min-height">
       <app-message-overview class="w-100"></app-message-overview>
+      <div class="text-end m-3">
+        <app-link
+          customClass="primary"
+          icon="fa-solid fa-arrow-right"
+          label="View all messages"
+          routerLink="/main"
+          routerLinkActive="active"
+        >
+        </app-link>
+      </div>
     </app-panel>
   </div>
   <div class="col-md-6">
@@ -13,13 +23,19 @@
 
   <div class="col-md-12">
     <app-panel title="Projects">
-      <app-project-overview class="w-100"></app-project-overview>
+      <app-project-overview
+        [projects]="member?.projects"
+        class="w-100"
+      ></app-project-overview>
     </app-panel>
   </div>
 
   <div class="col-md-8">
     <app-panel title="Career">
-      <app-experience-overview class="w-100"></app-experience-overview>
+      <app-experience-overview
+        [experiences]="member?.experiences"
+        class="w-100"
+      ></app-experience-overview>
     </app-panel>
   </div>
   <div class="col-md-4">

@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
   container?: ViewContainerRef;
   user?: User;
   member?: Member;
+  loading: boolean = false;
   constructor(
     private accountService: AccountService,
     private memberService: MemberService,
@@ -44,11 +45,16 @@ export class ProfileComponent implements OnInit {
 
     this.accountService.currentUser$.subscribe((user: User | null) => {
       if (user) {
+        this.loading = true;
         this.user = user;
-        console.log('### this.user', this.user);
 
-        this.memberService.getMember(this.user.username).subscribe((member) => {
-          this.member = member;
+        this.memberService.getMember(this.user.username).subscribe({
+          next: (member) => {
+            this.member = member;
+          },
+          complete: () => {
+            this.loading = false;
+          },
         });
       }
     });

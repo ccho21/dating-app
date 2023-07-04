@@ -27,23 +27,25 @@ import { ProjectComponent } from './projects/components/project/project.componen
 import { ExperienceEditComponent } from './profile/profile-edit/components/profile-experiences/components/experience-edit/experience-edit.component';
 import { NoDataComponent } from './_layouts/no-data/no-data.component';
 
-
 const routes: Routes = [
   { path: '', component: HomeComponent },
   {
     path: 'main',
-    component: MainComponent,
     canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always',
+    component: MainComponent,
+
     children: [
       { path: '', component: ProfileComponent },
       {
         path: 'members',
         component: MemberListComponent,
-        runGuardsAndResolvers: 'always',
       },
       {
         path: 'members/:username',
         component: MemberComponent,
+        canActivate: [AuthGuard],
+        runGuardsAndResolvers: 'always',
         resolve: { member: MemberResolver },
       },
       { path: 'dashboard', redirectTo: 'dashboard/about' },

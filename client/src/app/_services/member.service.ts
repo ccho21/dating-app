@@ -84,6 +84,7 @@ export class MemberService {
       userParams.pageSize as number
     );
 
+    console.log('##3 PARAMS!', params);
     return getPaginatedResult<Member[]>(
       `${this.baseUrl}users/with-message`,
       params,

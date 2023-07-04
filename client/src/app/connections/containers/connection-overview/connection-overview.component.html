@@ -6,6 +6,11 @@
       #connectTabA="tab"
     >
       <div class="my-5" *ngIf="connectTabA">
+        <div class="spinner" *ngIf="loading">
+          <div class="spinner-border md" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
         <div *ngIf="members && members.length; else noData">
           <div *ngFor="let member of members; let i = index">
             <app-connection-sm
@@ -15,13 +20,18 @@
           </div>
         </div>
         <ng-template #noData>
-          <app-no-data [key]="'connection'"></app-no-data>
+          <app-no-data *ngIf="!loading" [key]="'connection'"></app-no-data>
         </ng-template>
       </div>
     </tab>
 
     <tab heading="Follwed" (selectTab)="activateTab($event)" #connectTabB="tab">
       <div class="my-5" *ngIf="connectTabB">
+        <div class="spinner" *ngIf="loading">
+          <div class="spinner-border md" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
         <div *ngIf="members && members.length; else noData">
           <div *ngFor="let member of members; let i = index">
             <app-connection-sm
@@ -31,7 +41,7 @@
           </div>
         </div>
         <ng-template #noData>
-          <app-no-data [key]="'connection'"></app-no-data>
+          <app-no-data *ngIf="!loading" [key]="'connection'"></app-no-data>
         </ng-template>
       </div>
     </tab>

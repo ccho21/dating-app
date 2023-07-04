@@ -16,3 +16,15 @@
     If you have had no visitors to your profile, consider updating your profile
   </div>
 </div>
+
+<div class="no-data" *ngIf="key === 'data'">
+  <i class="no-data-icon fa-regular fa-folder-open"></i>
+  <div class="main-text-2">No Data Available</div>
+  <div class="no-data-btn"></div>
+</div>
+
+<div class="no-data" *ngIf="key === 'messages'">
+  <i class="no-data-icon fa-regular fa-folder-open"></i>
+  <div class="main-text-2">No chat room is loaded.</div>
+  <div class="no-data-btn"></div>
+</div>

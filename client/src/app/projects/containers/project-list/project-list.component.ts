@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Project } from '../../../_models/project';
 import { ProjectParams } from '../../../_models/projectParams';
 import { ProjectService } from '../../../_services/project.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-project-list',
@@ -10,17 +11,27 @@ import { ProjectService } from '../../../_services/project.service';
 })
 export class ProjectListComponent implements OnInit, OnDestroy {
   projects: Project[] = [];
+  loading: boolean = false;
 
-  constructor(private projectService: ProjectService) {}
+  constructor(
+    private projectService: ProjectService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {
     this.getProjects();
   }
 
   private getProjects(): void {
+    this.loading = true;
     const params: ProjectParams = this.projectService.getProjectParams();
-    this.projectService.getProjects(params).subscribe((res) => {
-      this.projects = res.result as Project[];
+    this.projectService.getProjects(params).subscribe({
+      next: (res) => {
+        this.projects = res.result as Project[];
+      },
+      complete: () => {
+        this.loading = false;
+      },
     });
   }
 

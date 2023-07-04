@@ -17,14 +17,23 @@
       <div class="pr-2"></div>
 
       <div>
-        <button mat-icon-button (click)="close()">
+        <app-button customClass="icon danger" (click)="close()">
           <i class="fa-solid fa-xmark"></i>
-        </button>
+        </app-button>
       </div>
     </div>
 
     <div class="body" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-      <div *ngIf="(messageService.messageThread$ | async)?.length === 0">
+      <div class="spinner" *ngIf="loading">
+        <div class="spinner-border md" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div
+        *ngIf="
+          (messageService.messageThread$ | async)?.length === 0 && !loading
+        "
+      >
         <div>No messages yet... Please say HI!</div>
       </div>
 
@@ -82,15 +91,9 @@
               class="form-control"
             />
             <div class="input-group-append">
-              <button
-                matSuffix
-                mat-mini-fab
-                color="green"
-                class="mb-2"
-                aria-label=""
-              >
+              <app-button customClass="icon icon-lg primary">
                 <i class="fa-regular fa-paper-plane"></i>
-              </button>
+              </app-button>
             </div>
           </div>
         </div>

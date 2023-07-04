@@ -7,10 +7,8 @@ import { UserParams } from 'src/app/_models/userParams';
 import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs/operators';
 import { User } from 'src/app/_models/user';
-import {
-  Router,
-  ActivatedRoute,
-} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-member-list',
@@ -27,19 +25,20 @@ export class MemberListComponent implements OnInit, OnDestroy {
   pageSize = 12;
   pagination?: Pagination;
   activeTab: any;
+  loading: boolean = false;
 
   constructor(
     private memberService: MemberService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService
   ) {
     this.userParams = this.memberService.getUserParams();
   }
-  ngOnDestroy(): void {
-    console.log('### DESTROYED');
-  }
 
   ngOnInit(): void {
+    this.spinner.show();
+
     this.route.queryParams.subscribe((params) => {
       if (params) {
         console.log(' ### PARAMS ', params);
@@ -51,14 +50,21 @@ export class MemberListComponent implements OnInit, OnDestroy {
   }
 
   loadMembers() {
+    this.loading = true;
     this.memberService
       .getLikes(this.predicate as string, this.pageNumber, this.pageSize)
-      .subscribe((response) => {
-        if (response && response.pagination) {
-          this.members = response.result as Member[];
-          this.pagination = response.pagination;
-          this.pagination.currentPage = response.pagination.currentPage - 1;
-        }
+      .subscribe({
+        next: (response) => {
+          if (response && response.pagination) {
+            this.members = response.result as Member[];
+            this.pagination = response.pagination;
+            this.pagination.currentPage = response.pagination.currentPage - 1;
+          }
+        },
+        error: () => {},
+        complete: () => {
+          this.loading = false;
+        },
       });
   }
 
@@ -72,5 +78,9 @@ export class MemberListComponent implements OnInit, OnDestroy {
         this.pagination.currentPage = response.pagination.currentPage - 1;
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    console.log('### DESTROYED');
   }
 }

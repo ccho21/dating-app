@@ -19,10 +19,23 @@
           customClass="dropdown-menu-right messsage-dropdown"
           ariaControls="message-dropdown"
           id="message-dropdown"
+          (onChange)="handleMobileChange($event)"
         >
           <li class="dw-item" role="menuitem">Chats</li>
           <li class="dw-item" role="menuitem">
-            <app-message-overview></app-message-overview>
+            <app-message-overview
+              *ngIf="isMobileDropdownOpen"
+            ></app-message-overview>
+            <div class="text-end m-3">
+              <app-link
+                customClass="primary"
+                icon="fa-solid fa-arrow-right"
+                label="View all messages"
+                routerLink="/main"
+                routerLinkActive="active"
+              >
+              </app-link>
+            </div>
           </li>
         </app-dropdown-link>
       </div>
@@ -88,12 +101,15 @@
           </li>
 
           <li class="dw-item" *appHasRole="['Admin', 'Moderator']">
-            <app-link routerLink="/main/admin" customClass="circle icon">
-              Admin
+            <app-link
+              customClass="text"
+              [label]="'Admin'"
+              routerLink="/main/admin"
+            >
             </app-link>
           </li>
           <li class="dw-item" *appHasRole="['Admin', 'Moderator']">
-            <app-link routerLink="/errors" customClass="" tooltip="Errors">
+            <app-link customClass="" [label]="'Errors'" routerLink="/errors">
               Errors
             </app-link>
           </li>
@@ -148,7 +164,7 @@
           >
           </app-link>
         </li>
-       
+
         <li class="nav-item">
           <app-link
             customClass=""
@@ -173,27 +189,45 @@
             customClass="dropdown-menu-right messsage-dropdown"
             ariaControls="message-dropdown"
             id="message-dropdown"
+            (onChange)="handleChange($event)"
           >
             <li class="dw-item" role="menuitem">Chats</li>
             <li class="dw-item" role="menuitem">
-              <app-message-overview></app-message-overview>
+              <app-message-overview *ngIf="isDropdownOpen">
+              </app-message-overview>
+              <div class="text-end m-3">
+                <app-link
+                  customClass="primary"
+                  icon="fa-solid fa-arrow-right"
+                  label="View all messages"
+                  routerLink="/main"
+                  routerLinkActive="active"
+                >
+                </app-link>
+              </div>
             </li>
           </app-dropdown-link>
         </li>
 
         <li class="nav-item" *appHasRole="['Admin', 'Moderator']">
-          <app-link routerLink="/main/admin" customClass="circle icon">
-            Admin
+          <app-link
+            customClass=""
+            [label]="'Admin'"
+            routerLink="/main/admin"
+            routerLinkActive="active"
+          >
           </app-link>
         </li>
         <li class="nav-item" *appHasRole="['Admin', 'Moderator']">
-          <app-link routerLink="/errors" customClass="" tooltip="Errors">
+          <app-link customClass="" [label]="'Errors'" routerLink="/errors">
             Errors
           </app-link>
         </li>
         <li class="nav-item d-none d-lg-block">
           <app-dropdown-link
-            [thumbnail]="user.photoUrl"
+            [thumbnail]="
+              user.photoUrl ? user.photoUrl : './assets/shared/user.png'
+            "
             customClass="dropdown-menu-right"
             ariaControls="account-dropdown"
             id="account-dropdown"
@@ -206,7 +240,7 @@
                 heigh="37"
                 class="rounded-circle me-2"
               />
-              Changsoo Cho
+              {{ user.knownAs || user.username }}
             </li>
             <li class="dw-item" class="divider dropdown-divider"></li>
             <li class="dw-item" role="menuitem">
@@ -232,128 +266,3 @@
     </div>
   </div>
 </nav>
-
-<!-- <header>
-  <nav
-    class="navbar navbar-expand shadow-lg"
-    [ngClass]="{ 'fixed-top': navbarFixed }"
-    *ngIf="user"
-  >
-    <div class="container">
-      <a class="navbar-brand" routerLink="/">
-        <img
-          width="180"
-          class="img-fluid"
-          src="./assets/shared/together-logo-7.svg"
-          alt="Get together Logo"
-        />
-      </a>
-      <div class="" [collapse]="isCollapsed">
-        <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item" *ngIf="user">
-            <app-link
-              customClass=""
-              [label]="user.knownAs"
-              tooltip="Profile"
-              routerLink="/main"
-              routerLinkActive="active"
-            >
-            </app-link>
-          </li>
-          <li class="nav-item">
-            <app-link
-              customClass=""
-              [label]="'Menu'"
-              tooltip="Menu"
-              routerLink="/main"
-              routerLinkActive="active"
-            >
-            </app-link>
-          </li>
-          <li class="nav-item">
-            <app-link
-              customClass=""
-              [label]="'Members'"
-              tooltip="Members"
-              routerLink="/main/members"
-              routerLinkActive="active"
-            >
-            </app-link>
-          </li>
-          <li class="nav-item">
-            <app-link
-              customClass=""
-              [label]="'Projects'"
-              tooltip="Projects"
-              routerLink="/main/projects"
-              routerLinkActive="active"
-            >
-            </app-link>
-          </li>
-          <li class="nav-item">
-            <app-dropdown-link
-              label="Message"
-              customClass="dropdown-menu-right messsage-dropdown"
-              tooltip="Message"
-              ariaControls="message-dropdown"
-              id="message-dropdown"
-            >
-              <li class="dw-item" role="menuitem">Chats</li>
-              <li class="dw-item" role="menuitem">
-                <app-message-overview></app-message-overview>
-              </li>
-            </app-dropdown-link>
-          </li>
-
-          <li class="nav-item" *appHasRole="['Admin', 'Moderator']">
-            <app-link
-              routerLink="/main/admin"
-              customClass="circle icon"
-              tooltip="Admin"
-            >
-              Admin
-            </app-link>
-          </li>
-          <li class="nav-item" *appHasRole="['Admin', 'Moderator']">
-            <app-link routerLink="/errors" customClass="" tooltip="Errors">
-              Errors
-            </app-link>
-          </li>
-          <li class="nav-item">
-            <app-dropdown-link
-              [thumbnail]="user.photoUrl"
-              customClass="dropdown-menu-right"
-              ariaControls="account-dropdown"
-              id="account-dropdown"
-            >
-              <li class="dw-item" role="menuitem">
-                <img
-                  [src]="user.photoUrl"
-                  alt=""
-                  width="37"
-                  heigh="37"
-                  class="rounded-circle me-2"
-                />
-                Changsoo Cho
-              </li>
-              <li class="dw-item" class="divider dropdown-divider"></li>
-              <li class="dw-item" role="menuitem">
-                <app-link label="Edit Profile" routerLink="/main/dashboard" customClass="black">
-                </app-link>
-              </li>
-              <li class="dw-item" class="divider dropdown-divider"></li>
-              <li class="dw-item" role="menuitem logout">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div><i class="fa-solid fa-globe me-2"></i> English</div>
-                  <app-button customClass="ms-auto" (click)="logout()">
-                    Logout
-                  </app-button>
-                </div>
-              </li>
-            </app-dropdown-link>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header> -->

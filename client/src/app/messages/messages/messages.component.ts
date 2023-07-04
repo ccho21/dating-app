@@ -28,7 +28,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   pagination?: Pagination;
   container = 'Inbox';
   pageNumber = 1;
-  pageSize = 20;
+  pageSize = 10;
   loading = false;
 
   user?: User;
@@ -62,10 +62,11 @@ export class MessagesComponent implements OnInit, OnDestroy {
       if (user) this.user = user;
     });
 
-    this.loadUsers();
+    // this.loadUsers();
 
     this.newMessageThread$ = this.presenceService.newMessage$.subscribe(
       (res: Message) => {
+        console.log('#### hohoho');
         const index = this.members?.findIndex(
           (member) => member.username === res.senderUsername
         ) as number;
@@ -74,14 +75,15 @@ export class MessagesComponent implements OnInit, OnDestroy {
           const messages = this.members[index!].messagesSent;
           this.members[index!].messagesSent = [...messages, res];
         } else {
-          this.loadUsers();
+          // this.loadUsers();
         }
       }
     );
 
     this.messageThread$ = this.messageService.messageThread$.subscribe(
-      (res) => {
+      (res: Message[]) => {
         console.log('### Check Message Thread$', res);
+        this.messages = res;
         // console.log('### this.member!!', this.member);
         // if (this.member) {
         //   this.member.messagesSent = res;
@@ -101,6 +103,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
     };
+    console.log('## users? IN MESSAGE!!!!!!!!!!!!!!!!!', userParams);
 
     this.memberService
       .getUsersWithMessage(userParams)

@@ -22,23 +22,17 @@
         <th></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="!projects || !projects.length">
+      <td [colSpan]="6">
+        <app-no-data [key]="'data'"></app-no-data>
+      </td>
+    </tbody>
+    <tbody *ngIf="projects">
       <tr
         *ngFor="let project of projects"
         [class.selectedRow]="rowIsSelected(project.id)"
         class="table-row"
       >
-        <!-- <td>
-          <span class="custom-checkbox">
-            <input
-              type="checkbox"
-              [(ngModel)]="project.isChecked"
-              value="1"
-              (click)="onRowClick(project.id)"
-            />
-            <label for="checkbox1"></label>
-          </span>
-        </td> -->
         <td>
           <div
             class="table-image"

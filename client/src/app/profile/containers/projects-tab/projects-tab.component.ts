@@ -13,6 +13,7 @@ import { ProjectService } from 'src/app/_services/project.service';
 export class ProjectsTabComponent implements OnInit {
   projects: Project[] = [];
   user?: User;
+  loading: boolean = false;
 
   constructor(
     private projectService: ProjectService,
@@ -33,8 +34,14 @@ export class ProjectsTabComponent implements OnInit {
     const params: ProjectParams = this.projectService.getProjectParams();
     params.currentUsername = this.user?.username || undefined;
 
-    this.projectService.getProjects(params).subscribe((res) => {
-      this.projects = res.result as Project[];
+    this.loading = true;
+    this.projectService.getProjects(params).subscribe({
+      next: (res) => {
+        this.projects = res.result as Project[];
+      },
+      complete: () => {
+        this.loading = false;
+      },
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ExperienceParams } from 'src/app/_models/experienceParams';
 import { Pagination } from 'src/app/_models/pagination';
 import { ExperienceService } from 'src/app/_services/experience.service';
@@ -9,7 +9,7 @@ import { ExperienceService } from 'src/app/_services/experience.service';
   styleUrls: ['./experience-overview.component.scss'],
 })
 export class ExperienceOverviewComponent implements OnInit {
-  experiences?: Partial<any[]>;
+  @Input() experiences?: Partial<any[]>;
   pageNumber = 1;
   pageSize = 5;
   pagination?: Pagination;
@@ -19,7 +19,7 @@ export class ExperienceOverviewComponent implements OnInit {
     const params: ExperienceParams =
       this.experienceService.getExperienceParams();
 
-    this.loadExperiences(params);
+    // this.loadExperiences(params);
   }
 
   loadExperiences(params: ExperienceParams) {

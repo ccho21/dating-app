@@ -20,6 +20,7 @@ export class ConnectionOverviewComponent implements OnInit {
   pagination?: Pagination;
 
   activeTab: any;
+  loading: boolean = false;
 
   constructor(private memberService: MemberService, private router: Router) {}
 
@@ -28,15 +29,21 @@ export class ConnectionOverviewComponent implements OnInit {
   }
 
   loadMembersWithLikes(predicate: string = 'liked') {
+    this.loading = true;
     this.memberService
       .getLikes(predicate, this.pageNumber, this.pageSize)
-      .subscribe((response) => {
-        if (response && response.pagination) {
-          console.log('### response', response);
-          this.members = response.result;
-          this.pagination = response.pagination;
-          this.pagination.currentPage = response.pagination.currentPage - 1;
-        }
+      .subscribe({
+        next: (response) => {
+          if (response && response.pagination) {
+            console.log('### response', response);
+            this.members = response.result;
+            this.pagination = response.pagination;
+            this.pagination.currentPage = response.pagination.currentPage - 1;
+          }
+        },
+        complete: () => {
+          this.loading = false;
+        },
       });
   }
 

@@ -8,7 +8,12 @@
   </div>
 </section>
 <section class="my-5">
-  <div class="container">
+  <div class="container position-relative">
+    <div class="spinner" *ngIf="loading">
+      <div class="spinner-border lg" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
     <div class="row">
       <div class="offset-lg-1 col-lg-10">
         <div class="row">
@@ -21,7 +26,7 @@
             </div>
           </ng-container>
           <ng-template #noData>
-            <div class="no-data">
+            <div class="no-data" *ngIf="!loading">
               <i class="no-data-icon fa-solid fa-people-group"></i>
               <div class="main-text-2">NO PEOPLE FOUND</div>
               <div class="connection-btn">

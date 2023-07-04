@@ -76,30 +76,41 @@ export class MemberMessagesComponent implements OnInit, OnChanges, OnDestroy {
   // }
 
   ngOnInit(): void {
-    this.accountService.currentUser$
-      .pipe(take(1))
-      .subscribe((user: User | null) => {
+    this.loading = true;
+
+    this.accountService.currentUser$.pipe(take(1)).subscribe({
+      next: (user: User | null) => {
         if (user) {
           this.user = user;
           console.log('### ACCOUNT SERVICE', this.user);
         }
-      });
+      },
+      complete: () => {
+        // this.loading = false;
+      },
+    });
 
     console.log('### MEMBER MESSAGE STARTED');
-    this.messageThread$ = this.messageService.messageThread$.subscribe(
-      (res) => {
+    this.messageThread$ = this.messageService.messageThread$.subscribe({
+      next: (res) => {
         console.log('### Check Message Thread$', res);
-      }
-    );
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
 
     this.route.params.subscribe(({ membername }) => {
       this.membername = membername;
 
-      this.memberService.getMember(membername).subscribe((member) => {
-        console.log('### MEMBEr', member);
-        console.log('### User', this.user);
-        this.member = member;
-        if (this.user && this.member) this.selectTab();
+      this.memberService.getMember(membername).subscribe({
+        next: (member) => {
+          this.member = member;
+          if (this.user && this.member) this.selectTab();
+        },
+        complete: () => {
+          this.loading = false;
+        },
       });
     });
   }

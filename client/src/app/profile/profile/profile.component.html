@@ -41,7 +41,7 @@
         </section>
       </app-panel>
 
-      <section>
+      <section class="position-relative">
         <tabset class="tabset" type="pills" #profileTabs>
           <tab
             heading="Overview"
@@ -49,7 +49,10 @@
             #overviewTab="tab"
           >
             <div class="py-5">
-              <app-overview-tab *ngIf="overviewTab.active"></app-overview-tab>
+              <app-overview-tab
+                [member]="member"
+                *ngIf="overviewTab.active"
+              ></app-overview-tab>
             </div>
           </tab>
 
@@ -60,13 +63,21 @@
           >
             <app-about-tab *ngIf="member" [member]="member"> </app-about-tab>
           </tab>
+
           <tab
             heading="Projects"
             (selectTab)="activateTab($event)"
             #projectTab="tab"
           >
             <app-projects-tab *ngIf="member?.projects"> </app-projects-tab>
+            <app-no-data
+              *ngIf="
+                (!member?.projects || !member?.projects?.length) && !loading
+              "
+              [key]="'data'"
+            ></app-no-data>
           </tab>
+
           <tab
             heading="Experiences"
             (selectTab)="activateTab($event)"
@@ -96,6 +107,11 @@
               ></sub-component>
           </tab> -->
         </tabset>
+        <div class="spinner" *ngIf="loading">
+          <div class="spinner-border md" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
       </section>
     </div>
   </div>

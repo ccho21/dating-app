@@ -14,11 +14,16 @@ export class DropdownLinkComponent implements OnInit {
   @Input() thumbnail?: string;
   @Input() id?: string;
   @Output() onClick = new EventEmitter();
+  @Output() onChange = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}
 
   handleClick() {
     this.onClick.emit();
+  }
+
+  onOpenChange(data: boolean): void {
+    this.onChange.emit(data);
   }
 }

@@ -40,6 +40,10 @@ export class AccountService {
     );
   }
 
+  getCurrentUser() {
+    return localStorage.getItem('user');
+  }
+
   setCurrentUser(user: User) {
     user.roles = [];
     const roles = this.getDecodedToken(user.token).role;

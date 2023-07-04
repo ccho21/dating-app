@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { Member } from 'src/app/_models/member';
 import { Pagination } from 'src/app/_models/pagination';
 import { ProjectParams } from 'src/app/_models/projectParams';
 import { User } from 'src/app/_models/user';
@@ -12,7 +13,7 @@ import { ProjectService } from 'src/app/_services/project.service';
   styleUrls: ['./project-overview.component.scss'],
 })
 export class ProjectOverviewComponent implements OnInit {
-  projects?: Partial<any[]>;
+  @Input() projects?: Partial<any[]>;
   pageNumber = 1;
   pageSize = 10;
   currentPage: number = 0;
@@ -21,6 +22,10 @@ export class ProjectOverviewComponent implements OnInit {
   allChecked: boolean = false;
 
   user?: User;
+
+  @Input() member?: Member;
+  loading: boolean = false;
+
   constructor(
     private projectService: ProjectService,
     private accountService: AccountService
@@ -33,21 +38,32 @@ export class ProjectOverviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     const params: ProjectParams = this.projectService.getProjectParams();
     console.log('### NG ON INIT', params);
-    this.loadProjects(params);
+
+    if (this.projects) {
+      this.loading = false;
+    }
+    // this.loadProjects(params);
   }
 
   loadProjects(params: ProjectParams) {
+    this.loading = true;
     params.currentUsername = this.user?.username || undefined;
 
-    this.projectService.getProjects(params).subscribe((response) => {
-      if (response && response.pagination) {
-        console.log('### RESPONSE', response);
-        this.projects = response.result;
-        this.pagination = response.pagination;
-      }
-      this.projectService.resetProjectParams();
+    this.projectService.getProjects(params).subscribe({
+      next: (response) => {
+        if (response && response.pagination) {
+          console.log('### RESPONSE', response);
+          this.projects = response.result;
+          this.pagination = response.pagination;
+        }
+        this.projectService.resetProjectParams();
+      },
+      complete: () => {
+        this.loading = false;
+      },
     });
   }
 

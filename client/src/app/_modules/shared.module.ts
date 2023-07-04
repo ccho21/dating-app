@@ -17,8 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
       closeButton: true,
       progressBar: true,
     }),
-    NgxSpinnerModule,
   ],
-  exports: [FileUploadModule, TimeagoModule, NgxSpinnerModule, ToastrModule],
+  exports: [FileUploadModule, TimeagoModule, ToastrModule],
 })
 export class SharedModule {}
