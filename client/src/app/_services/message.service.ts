@@ -9,6 +9,7 @@ import { Message } from '../_models/message';
 import { User } from '../_models/user';
 import { BusyService } from './busy.service';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
+import { Member } from '../_models/member';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,9 @@ export class MessageService {
   private hubConnection?: HubConnection;
   private messageThreadSource = new BehaviorSubject<Message[]>([]);
   messageThread$ = this.messageThreadSource.asObservable();
+
+  private sendMemberSource = new BehaviorSubject<Member | null>(null);
+  sendMember$ = this.sendMemberSource.asObservable();
 
   constructor(private http: HttpClient, private busyService: BusyService) {}
 
@@ -58,6 +62,10 @@ export class MessageService {
         });
       }
     });
+  }
+
+  setSendMemberSource (member: Member) {
+    this.sendMemberSource.next(member);
   }
 
   stopHubConnection() {

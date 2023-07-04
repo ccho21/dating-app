@@ -95,6 +95,8 @@ import { ProjectOverviewComponent } from './projects/containers/project-overview
 import { MemberCardComponent } from './members/components/member-card/member-card.component';
 import { MemberSearchComponent } from './members/components/member-search/member-search.component';
 import { AboutComponent } from './about/about/about.component';
+import { MessageMembersComponent } from './messages/message-members/message-members.component';
+import { MessageEmptyComponent } from './messages/message-empty/message-empty.component';
 
 @NgModule({
   declarations: [
@@ -165,6 +167,8 @@ import { AboutComponent } from './about/about/about.component';
     NoDataComponent,
     ProjectOverviewComponent,
     AboutComponent,
+    MessageMembersComponent,
+    MessageEmptyComponent,
   ],
   imports: [
     BrowserModule,

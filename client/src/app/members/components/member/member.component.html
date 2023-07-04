@@ -67,8 +67,8 @@
                           class="dropdown-item"
                           routerLink="/main/messages/{{ member.username }}"
                         >
-                          Send message</a
-                        >
+                          Send message
+                        </a>
                       </li>
                     </app-dropdown-link>
                   </div>
@@ -111,7 +111,9 @@
                       </div>
 
                       <div>
-                        <app-button (click)="addOrRemoveLike(member)">
+                        <app-button
+                          routerLink="/main/messages/{{ member.username }}"
+                        >
                           Send Message
                         </app-button>
                       </div>

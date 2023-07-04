@@ -1,13 +1,13 @@
 <section class="my-5">
-  <div class="container bg-white">
-    <div class="row">
+  <div class="container">
+    <div class="row message-box">
       <div class="col-md-5">
-        <div class="member-box">
-          <app-message-overview></app-message-overview>
-        </div>
+        <app-panel customClass="no-padding" title="Users">
+          <app-message-members></app-message-members>
+        </app-panel>
       </div>
       <div class="col-md-7">
-        <app-panel>
+        <app-panel customClass="no-padding full">
           <router-outlet></router-outlet>
           <app-no-data *ngIf="!messages" [key]="'messages'"></app-no-data>
         </app-panel>

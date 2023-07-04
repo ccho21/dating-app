@@ -32,7 +32,7 @@
   min-height: 350px;
   overflow: hidden;
   z-index: 0;
-  border: 1px solid var(--border-main);
+  border-bottom: 1px solid var(--border-main);
   border-left-width: 0;
 }
 
@@ -57,6 +57,7 @@
     bottom: 0;
     flex-grow: 1;
     padding: 1rem;
+    height: 100%;
     transition: 0.3s all ease;
     .message-item {
       padding: 1rem;

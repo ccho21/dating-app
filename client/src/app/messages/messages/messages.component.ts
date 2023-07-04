@@ -66,7 +66,6 @@ export class MessagesComponent implements OnInit, OnDestroy {
 
     this.newMessageThread$ = this.presenceService.newMessage$.subscribe(
       (res: Message) => {
-        console.log('#### hohoho');
         const index = this.members?.findIndex(
           (member) => member.username === res.senderUsername
         ) as number;
@@ -84,7 +83,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
       (res: Message[]) => {
         console.log('### Check Message Thread$', res);
         this.messages = res;
-        // console.log('### this.member!!', this.member);
+        console.log('### this.member!!', this.member);
         // if (this.member) {
         //   this.member.messagesSent = res;
         // }

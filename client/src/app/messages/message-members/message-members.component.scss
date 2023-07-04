@@ -20,9 +20,7 @@
 
 .member-list {
   background-color: var(--white);
-  border-radius: 0;
   .list-group-item {
-    border: 1px solid var(--border-main);
     transition: 0.2s all ease;
     border-left-width: 0;
     border-right-width: 0;

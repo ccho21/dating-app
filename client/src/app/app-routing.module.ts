@@ -26,6 +26,7 @@ import { ProjectListComponent } from './projects/containers/project-list/project
 import { ProjectComponent } from './projects/components/project/project.component';
 import { ExperienceEditComponent } from './profile/profile-edit/components/profile-experiences/components/experience-edit/experience-edit.component';
 import { NoDataComponent } from './_layouts/no-data/no-data.component';
+import { MessageEmptyComponent } from './messages/message-empty/message-empty.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -96,7 +97,7 @@ const routes: Routes = [
         path: 'messages',
         component: MessagesComponent,
         children: [
-          { path: '', component: NoDataComponent },
+          { path: '', component: MessageEmptyComponent },
           { path: ':membername', component: MemberMessagesComponent },
         ],
       },

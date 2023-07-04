@@ -74,6 +74,7 @@ namespace API.Data
             query = query.Include(u => u.MessagesSent).Select(u => new AppUser
             {
                 Id = u.Id,
+                UserName = u.UserName,
                 DateOfBirth = u.DateOfBirth,
                 KnownAs = u.KnownAs,
                 Created = u.Created,

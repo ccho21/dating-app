@@ -86,7 +86,7 @@ export class MemberMessagesComponent implements OnInit, OnChanges, OnDestroy {
         }
       },
       complete: () => {
-        // this.loading = false;
+        this.loading = false;
       },
     });
 
@@ -106,6 +106,8 @@ export class MemberMessagesComponent implements OnInit, OnChanges, OnDestroy {
       this.memberService.getMember(membername).subscribe({
         next: (member) => {
           this.member = member;
+          console.log('####################', this.member);
+          this.messageService.setSendMemberSource(this.member);
           if (this.user && this.member) this.selectTab();
         },
         complete: () => {
