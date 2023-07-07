@@ -1,32 +1,35 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
-  <ul class="nav nav-pills flex-column mb-auto mt-5">
+<div class="d-flex flex-column flex-shrink-0 bg-white">
+  <ul class="nav flex-column mb-auto mt-5">
     <li class="nav-item">
-      <a
+      <app-link
         routerLink="/main/dashboard/about"
-        class="nav-link text-white"
+        class="nav-link"
         [ngClass]="{ active: url === 'about' }"
         aria-current="page"
       >
-        About
-      </a>
+        <i class="fa-regular fa-address-card"></i>
+        <span class="ms-3"> About </span>
+      </app-link>
     </li>
     <li class="nav-item">
-      <a
+      <app-link
         routerLink="/main/dashboard/projects"
-        class="nav-link text-white"
+        class="nav-link"
         [ngClass]="{ active: url === 'projects' }"
       >
-        My Projects
-      </a>
+        <i class="fa-solid fa-list-check"></i>
+        <span class="ms-3"> My Projects </span>
+      </app-link>
     </li>
     <li class="nav-item">
-      <a
+      <app-link
         routerLink="/main/dashboard/experiences"
-        class="nav-link text-white"
+        class="nav-link"
         [ngClass]="{ active: url === 'experiences' }"
       >
-        Experiences
-      </a>
+        <i class="fa-solid fa-medal"></i>
+        <span class="ms-3"> Experiences </span>
+      </app-link>
     </li>
     <!-- <li class="nav-item">
       <a

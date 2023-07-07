@@ -1,6 +1,7 @@
 <div class="container">
   <div class="pt-5">
     <div class="profile">
+      <app-loader [loading]="loading"></app-loader>
       <app-panel>
         <section class="header-background" *ngIf="user">
           <div class="row">
@@ -107,11 +108,11 @@
               ></sub-component>
           </tab> -->
         </tabset>
-        <div class="spinner" *ngIf="loading">
+        <!-- <div class="spinner" *ngIf="loading">
           <div class="spinner-border md" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
-        </div>
+        </div> -->
       </section>
     </div>
   </div>

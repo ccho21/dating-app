@@ -29,11 +29,11 @@
             <div class="text-end m-3">
               <app-link
                 customClass="primary"
-                icon="fa-solid fa-arrow-right"
-                label="View all messages"
                 routerLink="/main/messages"
                 routerLinkActive="active"
               >
+                <i class="fa-solid fa-arrow-right"></i>
+                <span class="ms-3"> View all messages </span>
               </app-link>
             </div>
           </li>
@@ -55,7 +55,7 @@
               heigh="37"
               class="rounded-circle me-2"
             />
-            Changsoo Cho
+            {{ user.knownAs }}
           </li>
 
           <li class="dw-item" class="divider dropdown-divider"></li>
@@ -63,19 +63,16 @@
           <li class="dw-item" *ngIf="user">
             <app-link
               customClass="text"
-              [label]="user.knownAs"
               routerLink="/main"
               routerLinkActive="active"
             >
+              <span> {{ user.knownAs }} </span>
             </app-link>
           </li>
 
           <li class="dw-item" role="menuitem">
-            <app-link
-              label="Edit Profile"
-              routerLink="/main/dashboard"
-              customClass="text"
-            >
+            <app-link routerLink="/main/dashboard" customClass="text">
+              <span> Edit Profile </span>
             </app-link>
           </li>
 
@@ -84,33 +81,30 @@
           <li class="dw-item">
             <app-link
               customClass="text"
-              [label]="'Members'"
               routerLink="/main/members"
               routerLinkActive="active"
             >
+              <span> Members </span>
             </app-link>
           </li>
           <li class="dw-item">
             <app-link
               customClass="text"
-              [label]="'Projects'"
               routerLink="/main/projects"
               routerLinkActive="active"
             >
+              <span> Projects </span>
             </app-link>
           </li>
 
           <li class="dw-item" *appHasRole="['Admin', 'Moderator']">
-            <app-link
-              customClass="text"
-              [label]="'Admin'"
-              routerLink="/main/admin"
-            >
+            <app-link customClass="text" [label]="''" routerLink="/main/admin">
+              <span> Admin </span>
             </app-link>
           </li>
           <li class="dw-item" *appHasRole="['Admin', 'Moderator']">
-            <app-link customClass="" [label]="'Errors'" routerLink="/errors">
-              Errors
+            <app-link customClass="" routerLink="/errors">
+              <span> Errors </span>
             </app-link>
           </li>
           <!--  -->
@@ -244,11 +238,8 @@
             </li>
             <li class="dw-item" class="divider dropdown-divider"></li>
             <li class="dw-item" role="menuitem">
-              <app-link
-                label="Edit Profile"
-                routerLink="/main/dashboard"
-                customClass="black"
-              >
+              <app-link routerLink="/main/dashboard" customClass="black">
+                <span> Edit Profile </span>
               </app-link>
             </li>
             <li class="dw-item" class="divider dropdown-divider"></li>

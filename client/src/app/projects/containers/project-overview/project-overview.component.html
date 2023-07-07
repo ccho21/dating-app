@@ -12,9 +12,11 @@
       </tr>
     </thead>
     <tbody *ngIf="(!projects || !projects.length) && !loading">
-      <td [colSpan]="6">
-        <app-no-data [key]="'data'"></app-no-data>
-      </td>
+      <tr>
+        <td [colSpan]="6">
+          <app-no-data [key]="'data'"></app-no-data>
+        </td>
+      </tr>
     </tbody>
     <tbody>
       <tr

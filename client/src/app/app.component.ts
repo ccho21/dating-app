@@ -5,6 +5,7 @@ import { AccountService } from './_services/account.service';
 import { PresenceService } from './_services/presence.service';
 import { setTheme } from 'ngx-bootstrap/utils';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +15,23 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class AppComponent implements OnInit {
   title = 'The Dating app';
   user?: User;
+  loading?: boolean;
 
   constructor(
     private accountService: AccountService,
     private presence: PresenceService,
-    private spinner: NgxSpinnerService
-  ) {}
+    private spinner: NgxSpinnerService,
+    private router: Router
+  ) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.loading = true;
+      }
+      if (event instanceof NavigationEnd) {
+        this.loading = false;
+      }
+    });
+  }
 
   ngOnInit() {
     setTheme('bs5');

@@ -2,30 +2,16 @@
 
 .main-link {
   @extend .link-text;
-  border: none;
-  color: var(--white);
+  border: 1px solid transparent;
+  color: var(--text-main);
   background-color: transparent;
   border-radius: 0.5rem;
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
   padding: 0.5rem;
-
+  transition: all 0.3s ease;
   &:active {
-  }
-
-  &.primary {
-    color: var(--primary);
-    .icon {
-      color: var(--primary);
-    }
-    &:hover {
-      background-color: var(--primary);
-      color: var(--white) !important;
-      & .icon {
-        color: var(--white) !important;
-      }
-    }
   }
 
   &.text {
@@ -58,11 +44,23 @@
   }
 
   &.link-lg {
-    // font-weight: 500;
-    // line-height: 1.2;
   }
 
   .icon {
     color: var(--black);
+  }
+
+  &.primary {
+    color: var(--primary);
+    .icon {
+      color: var(--primary);
+    }
+    &:hover {
+      border: 1px solid var(--primary);
+      color: var(--primary) !important;
+      & .icon {
+        color: var(--primary) !important;
+      }
+    }
   }
 }

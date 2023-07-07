@@ -5,6 +5,7 @@ import { map } from 'rxjs';
 import { AccountService } from '../_services/account.service';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { RegisterComponent } from '../register/register.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -16,14 +17,16 @@ export class LoginComponent implements OnInit {
   bsModalRef?: BsModalRef;
 
   hide = true;
+  loading: boolean = false;
   constructor(
     private fb: FormBuilder,
     private modalService: BsModalService,
     public accountService: AccountService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.form = this.fb.group({
-      username: ['lisa', [Validators.required]],
+      username: ['pm_olive22', [Validators.required]],
       password: ['Pa$$w0rd', [Validators.required]],
     });
   }
@@ -31,6 +34,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login() {
+    this.loading = true;
     const { username, password } = this.form.value;
     const loginForm = {
       username,
@@ -41,23 +45,20 @@ export class LoginComponent implements OnInit {
     this.accountService.login(loginForm).subscribe({
       next: (res) => {
         this.router.navigateByUrl('/main');
+        this.toastr.success('successfully logged in!');
         console.log('### successfully logged in ', res);
-        // this._snackBar.open('successfully logged in', 'Dance', {
-        //   panelClass: ['blue-snackbar'],
-        //   duration: 5000,
-        //   verticalPosition: 'bottom',
-        //   horizontalPosition: 'right',
-        // });
-        // this.dialogRef.close(true);
       },
       error: (err) => {
-        console.log('### ERROR', err);
-        // this._snackBar.open('Error occured', 'Dance', {
-        //   panelClass: ['red-snackbar'],
-        //   duration: 5000,
-        //   verticalPosition: 'bottom',
-        //   horizontalPosition: 'right',
-        // });
+        if (err.status === 401) {
+          this.toastr.error(
+            'Invalid credentials. Please enter correct ID or Password'
+          );
+        } else {
+          this.toastr.error('Error occured! Please try again');
+        }
+      },
+      complete: () => {
+        this.loading = false;
       },
     });
   }
@@ -74,10 +75,7 @@ export class LoginComponent implements OnInit {
         title: 'Modal with component',
       },
     };
-    this.bsModalRef = this.modalService.show(
-      RegisterComponent,
-      initialState
-    );
+    this.bsModalRef = this.modalService.show(RegisterComponent, initialState);
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 

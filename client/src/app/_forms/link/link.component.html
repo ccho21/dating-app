@@ -6,11 +6,10 @@
   [delay]="500"
   [class]="customClass"
 >
-  <div class="">
-    {{ label }}
+  <!-- <div class="">
     <span *ngIf="icon">
       <i [class]="icon" class="icon d-inline-block"></i>
     </span>
-  </div>
-  <!-- <ng-content></ng-content> -->
+  </div> -->
+  <ng-content></ng-content>
 </a>

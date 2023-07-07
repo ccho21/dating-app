@@ -1,13 +1,23 @@
 <div class="modal-header modal-lg">
-  <h4 class="modal-title pull-left">Register</h4>
-  <button
+  <img
+    class="logo text-center"
+    src="./assets/shared/together-logo-4.svg"
+    alt="Get together Logo"
+    width="100"
+  />
+  <!-- <button
     type="button"
-    class="btn-close close pull-right"
+    class="btn-close close me-3"
     aria-label="Close"
     (click)="bsModalRef.hide()"
   >
-    <span aria-hidden="true" class="visually-hidden">&times;</span>
-  </button>
+  </button> -->
+  <app-button
+    icon="fa-solid fa-xmark"
+    customClass="danger icon"
+    (click)="bsModalRef.hide()"
+  >
+  </app-button>
 </div>
 <div class="modal-body">
   <div class="container">
@@ -17,21 +27,8 @@
         (ngSubmit)="registerForm.valid && register()"
         autocomplete="off"
       >
-        <!-- <div class="text-left">
-      <label id="example-radio-group-label"> I AM LOOKING FOR </label>
-      <mat-radio-group aria-label="Select an option" formControlName="gender">
-        <mat-radio-button value="male" style="margin: 0.25rem">
-          Male
-        </mat-radio-button>
-        <mat-radio-button value="female" style="margin: 0.25rem">
-          Female
-        </mat-radio-button>
-      </mat-radio-group>
-    </div> -->
-
         <div class="row mb-3 align-items-center">
-          <div class="col-md-4">Username:</div>
-          <div class="col-md-8">
+          <div class="col-md-12">
             <app-text-input
               [formControl]="registerForm.controls['username'] | formControl"
               [label]="'Username'"
@@ -42,8 +39,7 @@
           </div>
         </div>
         <div class="row mb-3 align-items-center">
-          <div class="col-md-4">Password:</div>
-          <div class="col-md-8">
+          <div class="col-md-12">
             <app-text-input
               [formControl]="registerForm.controls['password'] | formControl"
               [size]="'lg'"
@@ -55,8 +51,7 @@
         </div>
 
         <div class="row mb-3 align-items-center">
-          <div class="col-md-4">Confirm Password:</div>
-          <div class="col-md-8">
+          <div class="col-md-12">
             <app-text-input
               [formControl]="
                 registerForm.controls['confirmPassword'] | formControl
@@ -71,8 +66,7 @@
         <hr />
 
         <div class="row mb-3 align-items-center">
-          <div class="col-md-4">First name:</div>
-          <div class="col-md-8">
+          <div class="col-md-12">
             <app-text-input
               [formControl]="registerForm.controls['username'] | formControl"
               [label]="'First name'"
@@ -84,8 +78,7 @@
         </div>
 
         <div class="row mb-3 align-items-center">
-          <div class="col-md-4">Last name:</div>
-          <div class="col-md-8">
+          <div class="col-md-12">
             <app-text-input
               [formControl]="registerForm.controls['username'] | formControl"
               [label]="'Last name'"
@@ -97,8 +90,7 @@
         </div>
 
         <div class="row mb-3 align-items-center">
-          <div class="col-md-4">Date of birth:</div>
-          <div class="col-md-8">
+          <div class="col-md-12">
             <app-date-input
               [formControl]="registerForm.controls['dateOfBirth'] | formControl"
               [label]="'Date Of Birth'"
@@ -108,8 +100,7 @@
         </div>
 
         <div class="row mb-3 align-items-center">
-          <div class="col-md-4">City:</div>
-          <div class="col-md-8">
+          <div class="col-md-12">
             <app-text-input
               [formControl]="registerForm.controls['city'] | formControl"
               [size]="'lg'"
@@ -121,8 +112,7 @@
         </div>
 
         <div class="row mb-3 align-items-center">
-          <div class="col-md-4">Country:</div>
-          <div class="col-md-8">
+          <div class="col-md-12">
             <app-text-input
               [formControl]="registerForm.controls['country'] | formControl"
               [size]="'lg'"
@@ -145,10 +135,7 @@
   </div>
 </div>
 <div class="modal-footer">
-  <app-button
-    customClass="btn-lg danger"
-    (click)="bsModalRef.hide()"
-  >
+  <app-button customClass="btn-lg danger" (click)="bsModalRef.hide()">
     close
   </app-button>
   <app-button customClass="btn-lg" (click)="register()"> Register </app-button>

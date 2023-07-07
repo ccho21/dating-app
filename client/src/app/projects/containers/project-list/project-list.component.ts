@@ -2,7 +2,6 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Project } from '../../../_models/project';
 import { ProjectParams } from '../../../_models/projectParams';
 import { ProjectService } from '../../../_services/project.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-project-list',
@@ -15,7 +14,6 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
   constructor(
     private projectService: ProjectService,
-    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {

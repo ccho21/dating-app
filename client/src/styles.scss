@@ -10,25 +10,29 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-  --base: #fafafa;
+  --base: #f0f2f5;
   --white: #fff;
-  --black: #333;
-  --black-transparent: rgba(0, 0, 0, 0.2);
+  --white-transparent: rgba(255, 255, 255, 0.4);
+  --black: #656565;
+  --black-transparent: rgba(0, 0, 0, 0.25);
 
   --red: #dc3545;
-  --primary: #1976d2;
+  --primary: #004b89;
+
   --primary-transparent: rgba(25, 118, 210, 0.1);
-  --primary-light: rgba(25, 118, 210, 0.7);
+  --primary-light: #e0e8f0;
   --danger: #dc3545;
   --info: #08c;
 
-  --text-main: #333;
+  --text-main: #656565;
+  --text-lighter: rgba(0, 0, 0, 0.25);
   --text-light: #444;
 
   --scroll-main: #ebebeb;
   --scroll-dark: #6d6d6d;
 
-  --border-main: #dbdbdb;
+  --border-main: #d9d9d9;
+  --placeholder: #d9d9d9;
 
   --online: #00bf63;
   --offline: #00bf63;
@@ -49,13 +53,14 @@ body {
   font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial,
     Lucida Grande, sans-serif;
   letter-spacing: 0.05rem;
-  font-weight: 400;
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 }
 
 a {
   text-decoration: none;
+  color: var(--text-main);
 }
 
 p {

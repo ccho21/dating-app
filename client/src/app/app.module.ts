@@ -97,6 +97,7 @@ import { MemberSearchComponent } from './members/components/member-search/member
 import { AboutComponent } from './about/about/about.component';
 import { MessageMembersComponent } from './messages/message-members/message-members.component';
 import { MessageEmptyComponent } from './messages/message-empty/message-empty.component';
+import { LoaderComponent } from './_layouts/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -169,6 +170,7 @@ import { MessageEmptyComponent } from './messages/message-empty/message-empty.co
     AboutComponent,
     MessageMembersComponent,
     MessageEmptyComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

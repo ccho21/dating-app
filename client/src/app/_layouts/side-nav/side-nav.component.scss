@@ -1,0 +1,7 @@
+.nav-link.active,
+.show > .nav-link {
+  color: var(--text-main);
+  border-right: 3px solid var(--primary);
+  background-color: var(--primary-light);
+  border-radius: 0;
+}
