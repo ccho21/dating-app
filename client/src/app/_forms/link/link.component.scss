@@ -14,20 +14,6 @@
   &:active {
   }
 
-  &.text {
-    color: var(--text-main);
-    .icon {
-      color: var(--text-main);
-    }
-    &:hover {
-      background-color: transparent;
-      color: var(--primary) !important;
-      & .icon {
-        color: var(--primary) !important;
-      }
-    }
-  }
-
   &.circle {
     padding: 0.5rem;
     width: 4rem;
@@ -48,6 +34,20 @@
 
   .icon {
     color: var(--black);
+  }
+
+  &.white {
+    color: var(--white);
+    .icon {
+      color: var(--white);
+    }
+    // &:hover {
+    //   background-color: transparent;
+    //   color: var(--primary) !important;
+    //   & .icon {
+    //     color: var(--primary) !important;
+    //   }
+    // }
   }
 
   &.primary {

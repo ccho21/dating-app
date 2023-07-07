@@ -155,7 +155,9 @@
                 *ngFor="let jdForm of jobDescriptions.controls; let j = index"
                 [formGroup]="jdForm | formGroup"
               >
-              <button (click)="removeJobDescription(j)"> remove job description</button>
+                <button (click)="removeJobDescription(j)">
+                  remove job description
+                </button>
                 <app-job-description-edit [jdForm]="jdForm | formGroup">
                 </app-job-description-edit>
               </ng-container>
@@ -215,7 +217,7 @@
             </div>
           </div>
         </app-panel>
-        
+
         <div class="row align-items-start mb-3">
           <div class="col-md-12 text-end">
             <button
@@ -256,7 +258,9 @@
                   team.
                 </p>
                 <div>
-                  <app-link label="Contact Support"></app-link>
+                  <app-link>
+                    <span> Contact Support </span>
+                  </app-link>
                 </div>
               </div>
             </div>

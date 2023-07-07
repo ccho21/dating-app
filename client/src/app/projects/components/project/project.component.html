@@ -158,12 +158,9 @@
       </app-panel>
     </div>
     <div class="text-end m-3">
-      <app-link
-        customClass="primary"
-        icon="fa-solid fa-arrow-right"
-        label="Go back to projects"
-        (click)="goBack()"
-      >
+      <app-link customClass="primary" (click)="goBack()">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span class="ms-3">Go back to projects</span>
       </app-link>
     </div>
   </div>

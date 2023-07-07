@@ -11,9 +11,10 @@
       <div class="user">
         <app-link
           customClass="text"
-          [label]="'@' + member.username"
           [routerLink]="['/main/members/', member.username]"
-        ></app-link>
+        >
+          <span class="ms-3"> {{ "@" + member.username }} </span>
+        </app-link>
       </div>
     </div>
     <div class="header-actions">

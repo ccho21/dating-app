@@ -98,12 +98,12 @@
           </li>
 
           <li class="dw-item" *appHasRole="['Admin', 'Moderator']">
-            <app-link customClass="text" [label]="''" routerLink="/main/admin">
+            <app-link customClass="text" routerLink="/main/admin">
               <span> Admin </span>
             </app-link>
           </li>
           <li class="dw-item" *appHasRole="['Admin', 'Moderator']">
-            <app-link customClass="" routerLink="/errors">
+            <app-link customClass="text" routerLink="/errors">
               <span> Errors </span>
             </app-link>
           </li>
@@ -120,25 +120,6 @@
           </li>
         </app-dropdown-link>
       </div>
-
-      <!-- <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-        (click)="isCollapsed = !isCollapsed"
-      >
-        <img
-          [src]="user.photoUrl"
-          alt=""
-          class="img-thumbnail img-circle"
-          width="40"
-        />
-        <span class="navbar-toggler-icon"></span>
-      </button> -->
     </div>
 
     <div
@@ -151,30 +132,30 @@
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
         <li class="nav-item" *ngIf="user">
           <app-link
-            customClass=""
-            [label]="user.knownAs"
+            customClass="white"
             routerLink="/main"
             routerLinkActive="active"
           >
+            <span>{{ user.knownAs }}</span>
           </app-link>
         </li>
 
         <li class="nav-item">
           <app-link
-            customClass=""
-            [label]="'Members'"
+            customClass="white"
             routerLink="/main/members"
             routerLinkActive="active"
           >
+            <span>Members</span>
           </app-link>
         </li>
         <li class="nav-item">
           <app-link
-            customClass=""
-            [label]="'Projects'"
+            customClass="white"
             routerLink="/main/projects"
             routerLinkActive="active"
           >
+            <span>Projects</span>
           </app-link>
         </li>
         <li class="nav-item d-none d-lg-block">
@@ -193,10 +174,10 @@
                 <app-link
                   customClass="primary"
                   icon="fa-solid fa-arrow-right"
-                  label="View all messages"
                   routerLink="/main/messages"
                   routerLinkActive="active"
                 >
+                  <span> View all messages </span>
                 </app-link>
               </div>
             </li>
@@ -205,16 +186,16 @@
 
         <li class="nav-item" *appHasRole="['Admin', 'Moderator']">
           <app-link
-            customClass=""
-            [label]="'Admin'"
+            customClass="white"
             routerLink="/main/admin"
             routerLinkActive="active"
           >
+            <span> Admin </span>
           </app-link>
         </li>
         <li class="nav-item" *appHasRole="['Admin', 'Moderator']">
-          <app-link customClass="" [label]="'Errors'" routerLink="/errors">
-            Errors
+          <app-link customClass="" routerLink="/errors">
+            <span> Errors </span>
           </app-link>
         </li>
         <li class="nav-item d-none d-lg-block">
