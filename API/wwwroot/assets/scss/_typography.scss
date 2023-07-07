@@ -32,17 +32,17 @@
 
 .heading-2 {
   @extend .font-lg;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 1rem;
 }
 .heading-3 {
   @extend .font-md;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .heading-4 {
   @extend .font-sm;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .heading-5 {
@@ -69,7 +69,7 @@
 
 .link-text {
   @extend .font-xs;
-  font-weight: 600;
+  font-weight: 300;
 }
 
 .btn-text {
