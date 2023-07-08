@@ -1,6 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { map, Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  Router,
+} from '@angular/router';
 import { Message } from 'src/app/_models/message';
 import { Pagination } from 'src/app/_models/pagination';
 import { Member } from 'src/app/_models/member';
@@ -61,34 +66,6 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this.accountService.currentUser$.subscribe((user) => {
       if (user) this.user = user;
     });
-
-    // this.loadUsers();
-
-    // this.newMessageThread$ = this.presenceService.newMessage$.subscribe(
-    //   (res: Message) => {
-    //     const index = this.members?.findIndex(
-    //       (member) => member.username === res.senderUsername
-    //     ) as number;
-
-    //     if (index > -1 && this.members && this.members.length) {
-    //       const messages = this.members[index!].messagesSent;
-    //       this.members[index!].messagesSent = [...messages, res];
-    //     } else {
-    //       // this.loadUsers();
-    //     }
-    //   }
-    // );
-
-    // this.messageThread$ = this.messageService.messageThread$.subscribe(
-    //   (res: Message[]) => {
-    //     console.log('### Check Message Thread$', res);
-    //     this.messages = res;
-    //     console.log('### this.member!!', this.member);
-    //     if (this.member) {
-    //       this.member.messagesSent = res;
-    //     }
-    //   }
-    // );
   }
 
   openMemberDetail(member: Member) {

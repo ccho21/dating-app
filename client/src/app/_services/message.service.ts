@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Group } from '../_models/group';
@@ -41,19 +41,16 @@ export class MessageService {
       .finally(() => this.busyService.idle());
 
     this.hubConnection.on('ReceiveMessageThread', (messages) => {
-      console.log('### ReceiveMessageThread');
       this.messageThreadSource.next(messages);
     });
 
     this.hubConnection.on('NewMessage', (message) => {
       this.messageThread$.pipe(take(1)).subscribe((messages) => {
-        console.log('### ReceiveMessageThread');
         this.messageThreadSource.next([...messages, message]);
       });
     });
 
     this.hubConnection.on('UpdatedGroup', (group: Group) => {
-      console.log('### UpdatedGroup');
 
       if (group.connections.some((x) => x.username === otherUsername)) {
         this.messageThread$.pipe(take(1)).subscribe((messages) => {

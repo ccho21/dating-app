@@ -40,6 +40,7 @@ export class MemberMessagesComponent implements OnInit, OnDestroy {
 
   messages?: Message[];
   messageThread$?: Subscription;
+  destroyMessage$?: Subscription;
 
   constructor(
     public messageService: MessageService,
@@ -51,38 +52,9 @@ export class MemberMessagesComponent implements OnInit, OnDestroy {
     private ref: ChangeDetectorRef
   ) {}
 
-  // ngAfterViewInit() {
-  //   const maxScroll = this.messageBody?.nativeElement.scrollHeight;
-  //   console.log('### maxScroll', maxScroll);
-  //   this.messageBody?.nativeElement.scrollTo({
-  //     top: maxScroll,
-  //     behavior: 'smooth',
-  //   });
-  // }
-
   ngOnInit(): void {
+    console.log('### hello');
     this.loading = true;
-    this.accountService.currentUser$.pipe(take(1)).subscribe({
-      next: (user: User | null) => {
-        if (user) {
-          this.user = user;
-        }
-      },
-      complete: () => {},
-    });
-
-    this.messageThread$ = this.messageService.messageThread$.subscribe({
-      next: (res) => {
-        console.log('## what is happening?');
-
-        this.messages = res;
-        this.ref.detectChanges();
-        this.loading = false;
-      },
-      complete: () => {
-        console.log('## working?');
-      },
-    });
 
     this.route.params.subscribe(({ membername }) => {
       this.memberService.getMember(membername).subscribe({
@@ -96,6 +68,35 @@ export class MemberMessagesComponent implements OnInit, OnDestroy {
         },
       });
     });
+
+    this.getCurrentUser();
+    this.getMessageThread();
+  }
+
+  getMessageThread() {
+    this.messageThread$ = this.messageService.messageThread$.subscribe({
+      next: (res) => {
+        console.log('## messageThread?', res);
+
+        this.messages = res;
+        this.ref.detectChanges();
+        this.loading = false;
+      },
+      complete: () => {
+        console.log('## working?');
+      },
+    });
+  }
+
+  getCurrentUser() {
+    this.accountService.currentUser$.pipe(take(1)).subscribe({
+      next: (user: User | null) => {
+        if (user) {
+          this.user = user;
+        }
+      },
+      complete: () => {},
+    });
   }
 
   checkConnection() {
@@ -105,7 +106,6 @@ export class MemberMessagesComponent implements OnInit, OnDestroy {
         this.member?.username as string
       );
     } else {
-      console.log('### stop', this.messages);
       this.messageService.stopHubConnection();
     }
   }
@@ -127,19 +127,18 @@ export class MemberMessagesComponent implements OnInit, OnDestroy {
   }
 
   resetMessageService() {
+    console.log('### resetMessageService COMPONENT DESTROY!');
     this.member = undefined;
     this.messageThread$!.unsubscribe();
     this.messageService.stopHubConnection();
   }
 
   close() {
-    console.log('### emit the close ');
     this.resetMessageService();
     this.router.navigate(['/main/messages']);
   }
 
   ngOnDestroy(): void {
-    console.log('### Member message is destroyed');
     this.resetMessageService();
   }
 }

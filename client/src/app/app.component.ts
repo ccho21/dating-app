@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
         this.loading = true;
       }
       if (event instanceof NavigationEnd) {
+
         this.loading = false;
       }
     });

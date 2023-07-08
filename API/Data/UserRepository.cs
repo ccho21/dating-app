@@ -69,25 +69,18 @@ namespace API.Data
         public async Task<PagedList<MemberMessageDto>> GetMembersWithMessagesAsync(UserParams userParams)
         {
             var query = _context.Users.AsQueryable();
-            query = query.Where(u => u.UserName != userParams.CurrentUsername);
+            query = query.Where(u => u.UserName != userParams.CurrentUsername).Include(u => u.MessagesSent).Include(u => u.MessagesReceived);
 
-            query = query.Include(u => u.MessagesSent).Select(u => new AppUser
+            query = query.Select(u => new AppUser
             {
                 Id = u.Id,
                 UserName = u.UserName,
-                DateOfBirth = u.DateOfBirth,
                 KnownAs = u.KnownAs,
-                Created = u.Created,
                 LastActive = u.LastActive,
-                Gender = u.Gender,
-                Introduction = u.Introduction,
-                LookingFor = u.LookingFor,
-                Interests = u.Interests,
-                City = u.City,
-                Country = u.Country,
                 Photos = u.Photos,
-                MessagesSent = u.MessagesSent.Where(m => m.RecipientUsername == userParams.CurrentUsername).OrderBy(m => m.MessageSent).ToList()
-            }).Where(u => u.MessagesSent.Count > 0);
+                MessagesSent = u.MessagesSent.Where(m => m.RecipientUsername == userParams.CurrentUsername).OrderBy(m => m.MessageSent).ToList(),
+                MessagesReceived = u.MessagesReceived.Where(m => m.SenderUsername == userParams.CurrentUsername).OrderBy(m => m.MessageSent).ToList()
+            }).Where(u => u.MessagesReceived.Count > 0 || u.MessagesSent.Count > 0);
 
             query = userParams.OrderBy switch
             {
