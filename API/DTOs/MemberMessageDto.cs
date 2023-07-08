@@ -12,8 +12,6 @@ namespace API.DTOs
         public string PhotoUrl { get; set; }
         public string KnownAs { get; set; }
         public DateTime LastActive { get; set; }
-        public ICollection<PhotoDto> Photos { get; set; }
-        public ICollection<MessageDto> MessagesSent { get; set; }
-        public ICollection<MessageDto> MessagesReceived { get; set; }
+        public ICollection<MessageDto> RecentMessages { get; set; }
     }
 }
