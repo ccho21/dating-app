@@ -33,8 +33,8 @@ export class MessagesComponent implements OnInit, OnDestroy {
 
   user?: User;
   member?: Member;
-  newMessageThread$?: Subscription;
-  messageThread$?: Subscription;
+  // newMessageThread$?: Subscription;
+  // messageThread$?: Subscription;
   //
 
   columns: string[] = [
@@ -64,31 +64,31 @@ export class MessagesComponent implements OnInit, OnDestroy {
 
     // this.loadUsers();
 
-    this.newMessageThread$ = this.presenceService.newMessage$.subscribe(
-      (res: Message) => {
-        const index = this.members?.findIndex(
-          (member) => member.username === res.senderUsername
-        ) as number;
+    // this.newMessageThread$ = this.presenceService.newMessage$.subscribe(
+    //   (res: Message) => {
+    //     const index = this.members?.findIndex(
+    //       (member) => member.username === res.senderUsername
+    //     ) as number;
 
-        if (index > -1 && this.members && this.members.length) {
-          const messages = this.members[index!].messagesSent;
-          this.members[index!].messagesSent = [...messages, res];
-        } else {
-          // this.loadUsers();
-        }
-      }
-    );
+    //     if (index > -1 && this.members && this.members.length) {
+    //       const messages = this.members[index!].messagesSent;
+    //       this.members[index!].messagesSent = [...messages, res];
+    //     } else {
+    //       // this.loadUsers();
+    //     }
+    //   }
+    // );
 
-    this.messageThread$ = this.messageService.messageThread$.subscribe(
-      (res: Message[]) => {
-        console.log('### Check Message Thread$', res);
-        this.messages = res;
-        console.log('### this.member!!', this.member);
-        // if (this.member) {
-        //   this.member.messagesSent = res;
-        // }
-      }
-    );
+    // this.messageThread$ = this.messageService.messageThread$.subscribe(
+    //   (res: Message[]) => {
+    //     console.log('### Check Message Thread$', res);
+    //     this.messages = res;
+    //     console.log('### this.member!!', this.member);
+    //     if (this.member) {
+    //       this.member.messagesSent = res;
+    //     }
+    //   }
+    // );
   }
 
   openMemberDetail(member: Member) {
@@ -200,13 +200,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this.member = null!;
   }
 
-  resetMessageService() {
-    this.members = [];
-    this.newMessageThread$!.unsubscribe();
-  }
-
   ngOnDestroy(): void {
     console.log('### Member message is destroyed');
-    this.resetMessageService();
   }
 }

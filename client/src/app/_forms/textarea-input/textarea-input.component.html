@@ -1,5 +1,6 @@
 <div *ngIf="formControl">
   <textarea
+    id="{{ label }}"
     [class.is-invalid]="formControl.touched && formControl.invalid"
     [rows]="rows"
     class="form-control"
@@ -16,5 +17,12 @@
   <div *ngIf="formControl.errors?.isMatching" class="invalid-feedback">
     Passwords do not match
   </div>
-  <div class="text-end">{{ formControl.value.length }} / 500</div>
+  <div class="text-end">
+    {{
+      formControl.value && formControl.value.length
+        ? formControl.value.length
+        : 0
+    }}
+    / 500
+  </div>
 </div>

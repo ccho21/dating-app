@@ -9,6 +9,7 @@ export class DropdownLinkComponent implements OnInit {
   @Input() icon?: string;
   @Input() label?: string;
   @Input() customClass?: string;
+  @Input() menuClass?: string;
   @Input() tooltip?: string;
   @Input() ariaControls?: string;
   @Input() thumbnail?: string;

@@ -1,3 +1,33 @@
+.header {
+  .active {
+    .main-link {
+      border-radius: 0.5rem;
+      border: 1px solid var(--white);
+    }
+  }
+
+  .show {
+    .main-link {
+      border-radius: 0.5rem;
+      border: 1px solid var(--white);
+    }
+  }
+  
+  .no-active {
+    .main-link {
+      border-radius: 0;
+      border: 1px solid transparent;
+    }
+  }
+
+  .nav-dropdown {
+    .main-link {
+      &:hover {
+        border-bottom: 1px solid var(--white);
+      }
+    }
+  }
+}
 .tabset {
   width: 100%;
   text-align: center;

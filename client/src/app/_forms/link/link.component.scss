@@ -5,14 +5,11 @@
   border: 1px solid transparent;
   color: var(--text-main);
   background-color: transparent;
-  border-radius: 0.5rem;
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
-  padding: 0.5rem;
   transition: all 0.3s ease;
-  &:active {
-  }
+  padding: 0.5rem;
 
   &.circle {
     padding: 0.5rem;
@@ -29,37 +26,39 @@
     width: 100%;
   }
 
-  &.link-lg {
+  &.no-radius {
+    border-radius: 0 !important;
   }
 
-  .icon {
-    color: var(--black);
+  &.bold {
+    font-weight: 500;
   }
 
-  &.white {
-    color: var(--white);
-    .icon {
-      color: var(--white);
-    }
-    // &:hover {
-    //   background-color: transparent;
-    //   color: var(--primary) !important;
-    //   & .icon {
-    //     color: var(--primary) !important;
-    //   }
-    // }
-  }
-
+  // COLOR
   &.primary {
-    color: var(--primary);
+    color: var(--primary) !important;
     .icon {
-      color: var(--primary);
+      color: var(--primary) !important;
     }
     &:hover {
-      border: 1px solid var(--primary);
+      border-bottom: 1px solid var(--primary) !important;
       color: var(--primary) !important;
       & .icon {
         color: var(--primary) !important;
+      }
+    }
+  }
+
+  &.white {
+    color: var(--white) !important;
+    .icon {
+      color: var(--white) !important;
+    }
+    &:hover {
+      border-bottom: 1px solid var(--white) !important;
+
+      & .icon {
+        color: var(--white) !important;
       }
     }
   }

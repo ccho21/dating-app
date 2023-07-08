@@ -76,7 +76,7 @@ export class ProjectService {
     return this.http
       .put<Project>(`${this.baseUrl}projects/${projectId}`, project)
       .pipe(
-        map((res: Project) => {
+        map((res: Project): Project => {
           console.log('### what?', res);
           if (this.projects) {
             const index = this.projects?.indexOf(project);

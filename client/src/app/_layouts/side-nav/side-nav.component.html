@@ -1,5 +1,5 @@
-<div class="d-flex flex-column flex-shrink-0 bg-white">
-  <ul class="nav flex-column mb-auto mt-5">
+<div class="side-nav">
+  <ul class="nav flex-column mb-auto my-4">
     <li class="nav-item">
       <app-link
         routerLink="/main/dashboard/about"
@@ -7,8 +7,8 @@
         [ngClass]="{ active: url === 'about' }"
         aria-current="page"
       >
-        <i class="fa-regular fa-address-card"></i>
-        <span class="ms-3"> About </span>
+        <i class="fa-regular fa-address-card d-lg-none"></i>
+        <span class="ms-3 d-none d-lg-inline"> About </span>
       </app-link>
     </li>
     <li class="nav-item">
@@ -17,8 +17,8 @@
         class="nav-link"
         [ngClass]="{ active: url === 'projects' }"
       >
-        <i class="fa-solid fa-list-check"></i>
-        <span class="ms-3"> My Projects </span>
+        <i class="fa-solid fa-list-check d-lg-none"></i>
+        <span class="ms-3 d-none d-lg-inline"> My Projects </span>
       </app-link>
     </li>
     <li class="nav-item">
@@ -27,8 +27,8 @@
         class="nav-link"
         [ngClass]="{ active: url === 'experiences' }"
       >
-        <i class="fa-solid fa-medal"></i>
-        <span class="ms-3"> Experiences </span>
+        <i class="fa-solid fa-medal d-lg-none"></i>
+        <span class="ms-3 d-none d-lg-inline"> Experiences </span>
       </app-link>
     </li>
     <!-- <li class="nav-item">
@@ -41,5 +41,4 @@
       </a>
     </li> -->
   </ul>
-  <hr />
 </div>

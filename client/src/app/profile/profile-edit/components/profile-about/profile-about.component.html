@@ -1,5 +1,5 @@
 <div class="row py-5">
-  <div class="offset-xl-1 col-xl-10">
+  <div class="offset-lg-1 col-lg-10">
     <div class="profile-edit" *ngIf="member">
       <div class="row">
         <div class="col-md-8">
@@ -11,14 +11,14 @@
       </div>
       <form [formGroup]="editForm" id="editForm" (ngSubmit)="updateMember()">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-9">
             <app-panel
               title="User Info"
               sub="Give members a quick introduction about yourself"
             >
               <div class="row align-items-start mb-3">
                 <div class="col-md-2 text-end">
-                  <label for="website" class="label"> Name </label>
+                  <label for="name" class="label"> Name </label>
                 </div>
                 <div class="offset-md-1 col-md-6">
                   <app-text-input
@@ -40,7 +40,7 @@
 
               <div class="row align-items-start mb-3">
                 <div class="col-md-2 text-end">
-                  <label for="website" class="label"> Email </label>
+                  <label for="email" class="label"> Email </label>
                 </div>
                 <div class="offset-md-1 col-md-6">
                   <app-text-input
@@ -59,7 +59,7 @@
               </div>
               <div class="row align-items-center mb-3">
                 <div class="col-md-2 text-end">
-                  <label for="website" class="label"> Gender </label>
+                  <label for="gender" class="label"> Gender </label>
                 </div>
                 <div class="offset-md-1 col-md-6">
                   <app-text-input
@@ -74,7 +74,7 @@
 
               <div class="row align-items-center mb-3">
                 <div class="col-md-2 text-end">
-                  <label for="website" class="label"> City </label>
+                  <label for="city" class="label"> City </label>
                 </div>
                 <div class="offset-md-1 col-md-6">
                   <app-text-input
@@ -89,7 +89,7 @@
 
               <div class="row align-items-center mb-3">
                 <div class="col-md-2 text-end">
-                  <label for="website" class="label"> Country </label>
+                  <label for="country" class="label"> Country </label>
                 </div>
                 <div class="offset-md-1 col-md-6">
                   <app-text-input
@@ -132,7 +132,7 @@
                 </div>
                 <div class="offset-md-1 col-md-8">
                   <app-textarea-input
-                    [rows]="6"
+                    [rows]="1"
                     [label]="'Tell me about your self'"
                     [formControl]="
                       editForm.controls['introduction'] | formControl
@@ -194,19 +194,19 @@
             </app-panel>
 
             <div class="row align-items-start mb-3">
-              <div class="col-md-8 text-end">
-                <button
+              <div class="col-md-12 text-end">
+                <app-button
                   [disabled]="!editForm.dirty"
-                  form="editForm"
-                  type="submit"
-                  class="btn btn-success btn-block"
+                  [form]="editForm"
+                  [type]="'submit'"
+                  [customClass]="'btn btn-success btn-block'"
                 >
                   Save Changes
-                </button>
+                </app-button>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <app-panel customClass="no-height">
               <div class="row">
                 <div class="col-md-8">

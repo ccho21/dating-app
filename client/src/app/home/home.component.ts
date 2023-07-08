@@ -77,18 +77,7 @@ export class HomeComponent implements OnInit {
 
     
   }
-
-  // selectTab() {
-  //   if (this.user && this.member) {
-  //     this.messageService.createHubConnection(
-  //       this.user as User,
-  //       this.member?.username as string
-  //     );
-  //   } else {
-  //     this.messageService.stopHubConnection();
-  //   }
-  // }
-
+  
   registerToggle() {
     this.registerMode = !this.registerMode;
   }

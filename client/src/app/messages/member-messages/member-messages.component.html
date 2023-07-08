@@ -24,20 +24,18 @@
     </div>
 
     <div class="body" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-      <div class="spinner" *ngIf="loading">
-        <div class="spinner-border md" role="status">
-          <span class="visually-hidden">Loading...</span>
+      <div class="spinner-box" *ngIf="loading">
+        <div class="spinner">
+          <div class="spinner-border md" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
         </div>
       </div>
-      <div
-        *ngIf="
-          (messageService.messageThread$ | async)?.length === 0 && !loading
-        "
-      >
+      <div *ngIf="!messages || messages.length === 0">
         <div>No messages yet... Please say HI!</div>
       </div>
 
-      <div *ngFor="let message of messageService.messageThread$ | async">
+      <div *ngFor="let message of messages">
         <div
           class="message-item"
           [ngClass]="{

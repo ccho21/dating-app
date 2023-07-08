@@ -8,7 +8,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
-import { take, tap } from 'rxjs';
+import { Observable, map, mergeMap, take, tap } from 'rxjs';
 import { Photo } from 'src/app/_models/photo';
 import { Project } from 'src/app/_models/project';
 import { User } from 'src/app/_models/user';
@@ -147,45 +147,44 @@ export class ProjectEditComponent implements OnInit {
       images: this.project?.images,
     };
 
+    let projectObservable = new Observable<Project>();
+
     if (this.mode === 'EDIT') {
-      this.updateProject(form);
+      projectObservable = this.updateProject(form);
     } else {
-      this.createProject(form);
+      projectObservable = this.createProject(form);
     }
+
+    projectObservable.subscribe((res) => {
+      console.log('### project update', res);
+      this.project = res;
+      this.updateImages(res.id as number);
+
+      this.router.navigate(['main', 'dashboard', 'projects']);
+    });
   }
 
-  private updateProject(form: Project): void {
+  private updateProject(form: Project): Observable<Project> {
     const { id } = form;
-    this.projectService
-      .updateProject(form, id as number)
-      .subscribe((res: Project) => {
-        console.log('### project update', res);
-        this.updateImages(res.id as number);
-      });
+    return this.projectService.updateProject(form, id as number);
   }
+
+  private createProject(form: Project): Observable<Project> {
+    console.log('### form:', form);
+
+    if (form.hasOwnProperty('id')) {
+      delete form.id;
+    }
+
+    return this.projectService.createProject(form);
+  }
+
   updateImages(id: number) {
     if (id) {
       const url = `${this.baseUrl}projects/${id}/add-photo`;
       this.photoUpload?.updateUrl(url);
       this.photoUpload?.uploadAll();
     }
-  }
-
-  private createProject(form: Project): void {
-    console.log('### ngOnInit projectForm: ', this.projectForm?.value);
-    console.log('### form:', form);
-    delete form.id;
-    this.projectService
-      .createProject(form)
-      .pipe(
-        tap((res: Project) => {
-          this.project = res;
-          console.log('##3 project updated');
-        })
-      )
-      .subscribe((res: Project) => {
-        this.updateImages(res.id as number);
-      });
   }
 
   public deleteProject(): void {}

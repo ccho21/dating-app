@@ -16,7 +16,7 @@
         >
           <div class="row align-items-start mb-3">
             <div class="col-md-2 text-end">
-              <label for="website" class="label"> Name </label>
+              <label for="name" class="label"> Name </label>
             </div>
             <div class="offset-md-1 col-md-6">
               <app-text-input
@@ -37,14 +37,12 @@
 
           <div class="row align-items-start mb-3">
             <div class="col-md-2 text-end">
-              <label for="website" class="label"> Description </label>
+              <label for="description" class="label"> Description </label>
             </div>
             <div class="offset-md-1 col-md-8">
               <app-textarea-input
                 [rows]="4"
-                [label]="
-                  ' Description about purpose, technologies of the project.'
-                "
+                [label]="'description'"
                 [formControl]="
                   projectForm.controls['description'] | formControl
                 "
@@ -64,7 +62,7 @@
         >
           <div class="row align-items-start mb-3">
             <div class="col-md-2 text-end">
-              <label for="website" class="label"> Project With </label>
+              <label for="projectWith" class="label"> Project With </label>
             </div>
             <div class="offset-md-1 col-md-6">
               <app-text-input
@@ -89,7 +87,7 @@
             </div>
             <div class="offset-md-1 col-md-6">
               <app-date-input
-                [label]="'Project started'"
+                [label]="'projectStarted'"
                 [maxDate]="maxDate"
                 [formControl]="
                   projectForm.controls['projectStarted'] | formControl
@@ -106,7 +104,7 @@
             </div>
             <div class="offset-md-1 col-md-6">
               <app-date-input
-                [label]="'Project Ended'"
+                [label]="'projectEnded'"
                 [maxDate]="maxDate"
                 [formControl]="
                   projectForm.controls['projectEnded'] | formControl
@@ -223,7 +221,7 @@
             </div>
             <div class="offset-md-1 col-md-6">
               <app-text-input
-                [label]="'Vercel, AWS (EC2, RDS, Route 53), etc..'"
+                [label]="'deployement'"
                 [formControl]="
                   projectForm.controls['deployement'] | formControl
                 "
@@ -246,7 +244,7 @@
             <div class="offset-md-1 col-md-6">
               <app-text-input
                 [type]="'text'"
-                [label]="'Url'"
+                [label]="'url'"
                 [formControl]="projectForm.controls['url'] | formControl"
                 class="theme-green"
               >
@@ -274,15 +272,14 @@
         <!-- <hr class="my-5" /> -->
         <div class="row align-items-start mb-3">
           <div class="col-md-9 text-end">
-            <button
+            <app-button
+              [form]="projectForm"
               [disabled]="!projectForm.dirty"
-              form="projectForm"
-              type="submit"
-              class="btn btn-success btn-block"
+              [type]="'submit'"
               (click)="saveProject()"
             >
               {{ mode === "EDIT" ? "Save Changes" : "Save Project" }}
-            </button>
+            </app-button>
           </div>
         </div>
       </div>

@@ -26,6 +26,7 @@ import {
   ],
 })
 export class TextInputComponent implements OnInit, ControlValueAccessor {
+  @Input() id?: string;
   @Input() label?: string;
   @Input() type = 'text';
   @Input() formControl?: FormControl;

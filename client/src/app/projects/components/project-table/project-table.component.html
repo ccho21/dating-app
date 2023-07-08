@@ -2,17 +2,6 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <!-- <th>
-          <span class="custom-checkbox">
-            <input
-              type="checkbox"
-              id="selectAll"
-              [(ngModel)]="allChecked"
-              (click)="selectAll()"
-            />
-            <label for="selectAll"></label>
-          </span>
-        </th> -->
         <th></th>
         <th>Name</th>
         <th>Description</th>
@@ -28,11 +17,7 @@
       </td>
     </tbody>
     <tbody *ngIf="projects">
-      <tr
-        *ngFor="let project of projects"
-        [class.selectedRow]="rowIsSelected(project.id)"
-        class="table-row"
-      >
+      <tr *ngFor="let project of projects" class="table-row">
         <td>
           <div
             class="table-image"
@@ -49,7 +34,30 @@
         <td>{{ project.projectStarted | date : "dd MMM yyyy" }}</td>
         <td>{{ project.projectEnded | date : "dd MMM yyyy" }}</td>
         <td>
-          <div class="btn-group" dropdown>
+          <app-dropdown-link label="" [customClass]="" [icon]="'fa-solid fa-ellipsis'">
+            <li role="menuitem">
+              <a
+                class="dropdown-item"
+                [routerLink]="'/main/projects/' + project.id"
+                >View project</a
+              >
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" href="#">Set as private</a>
+            </li>
+            <li role="menuitem">
+              <a
+                class="dropdown-item"
+                routerLink="/main/dashboard/projects/{{ project.id }}"
+                >Edit project</a
+              >
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" href="#">Delete project</a>
+            </li>
+          </app-dropdown-link>
+
+          <!-- <div class="btn-group" dropdown>
             <button
               id="project-action"
               dropdownToggle
@@ -59,35 +67,7 @@
             >
               <i class="fa-solid fa-ellipsis"></i>
             </button>
-            <ul
-              id="project-action"
-              *dropdownMenu
-              class="dropdown-menu dropdown-menu-right"
-              role="menu"
-              aria-labelledby="project-action"
-            >
-              <li role="menuitem">
-                <a
-                  class="dropdown-item"
-                  [routerLink]="'/main/projects/' + project.id"
-                  >View project</a
-                >
-              </li>
-              <li role="menuitem">
-                <a class="dropdown-item" href="#">Set as private</a>
-              </li>
-              <li role="menuitem">
-                <a
-                  class="dropdown-item"
-                  routerLink="/main/dashboard/projects/{{ project.id }}"
-                  >Edit project</a
-                >
-              </li>
-              <li role="menuitem">
-                <a class="dropdown-item" href="#">Delete project</a>
-              </li>
-            </ul>
-          </div>
+          </div> -->
         </td>
       </tr>
     </tbody>
@@ -108,28 +88,3 @@
     </pagination>
   </div>
 </div>
-
-<!-- <div class="project">
-    <div *ngIf="projects && projects.length; else noData">
-      <div class="container">
-        <div class="row mx-0 my-5">
-          <div class="cols-12 mb-4" *ngFor="let project of projects">
-            <app-project [project]="project"></app-project>
-            <hr />
-          </div>
-        </div>
-      </div>
-      <div class="connection-btn">
-        <button class="main-btn">Get Connected</button>
-      </div>
-    </div>
-  </div>
-  <ng-template #noData>
-    <div class="no-data">
-      <i class="no-data-icon fa-solid fa-people-group"></i>
-      <div class="main-text-2">Your new connections will appear here.</div>
-      <div class="connection-btn">
-        <button class="main-btn">Get Connected</button>
-      </div>
-    </div>
-  </ng-template> -->

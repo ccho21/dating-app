@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Member } from 'src/app/_models/member';
+import { Pagination } from 'src/app/_models/pagination';
+import { Project } from 'src/app/_models/project';
+import { ProjectParams } from 'src/app/_models/projectParams';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
-import { MemberService } from 'src/app/_services/member.service';
-import { take } from 'rxjs/operators';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Project } from 'src/app/_models/project';
 import { ProjectService } from 'src/app/_services/project.service';
 
 @Component({
@@ -14,28 +13,66 @@ import { ProjectService } from 'src/app/_services/project.service';
   styleUrls: ['./profile-projects.component.scss'],
 })
 export class ProfileProjectsComponent implements OnInit {
-  member?: Member;
-  user?: User;
-  maxDate?: Date;
+  projects?: Project[];
+  pagination?: Pagination;
 
+  user?: User;
   btns?: Array<any>;
 
-  constructor() {}
+  @Input() member?: Member;
+  loading: boolean = false;
+
+  constructor(
+    private projectService: ProjectService,
+    private accountService: AccountService
+  ) {
+    this.accountService.currentUser$.subscribe((user: User | null) => {
+      if (user) {
+        this.user = user;
+      }
+    });
+  }
 
   ngOnInit(): void {
-    this.maxDate = new Date();
-
     this.btns = [
       {
         btnLabel: 'Add Project',
         btnLink: '/main/dashboard/projects/create',
         customClass: '',
       },
-      {
-        btnLabel: 'View All Projects',
-        btnLink: '/main/projects',
-        customClass: '',
-      },
     ];
+
+    this.loading = true;
+    const params: ProjectParams = this.projectService.getProjectParams();
+    console.log('### NG ON INIT', params);
+
+    if (this.projects) {
+      this.loading = false;
+    }
+
+    this.loadProjects(params);
+  }
+
+  loadProjects(params: ProjectParams) {
+    this.loading = true;
+    params.currentUsername = this.user?.username || undefined;
+
+    this.projectService.getProjects(params).subscribe({
+      next: (response) => {
+        if (response && response.pagination) {
+          console.log('### RESPONSE', response);
+          this.projects = response.result;
+          this.pagination = response.pagination;
+        }
+        this.projectService.resetProjectParams();
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
+  }
+
+  pageChanged(params: ProjectParams): void {
+    this.loadProjects(params);
   }
 }

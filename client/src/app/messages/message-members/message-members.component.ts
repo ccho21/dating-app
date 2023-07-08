@@ -27,8 +27,6 @@ export class MessageMembersComponent implements OnInit {
   loading = false;
 
   user?: User;
-  newMessageThread$?: Subscription;
-  messageThread$?: Subscription;
   user$?: Subscription;
   member?: Member;
   constructor(
@@ -50,10 +48,13 @@ export class MessageMembersComponent implements OnInit {
 
     this.messageService.sendMember$.subscribe((member: Member | null) => {
       if (member) {
-        console.log('######### MEMBER!!!', member);
         const i = this.members?.findIndex((x) => x.id === member.id) || 0;
         if (i < 0) {
-          this.members?.unshift(member);
+          if (this.members && this.members.length) {
+            this.members = [member, ...this.members];
+          } else {
+            this.members = [member];
+          }
         }
       }
     });
@@ -65,7 +66,6 @@ export class MessageMembersComponent implements OnInit {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
     };
-    console.log('## users? IN OVERVIEW!!!!!!!!!!!!!!!!!', userParams);
 
     this.memberService
       .getUsersWithMessage(userParams)
@@ -112,6 +112,11 @@ export class MessageMembersComponent implements OnInit {
     if (this.user$) {
       this.user$.unsubscribe();
     }
+  }
+
+  goToMessage(username: string) {
+    console.log('### USErNAMe', username);
+    this.router.navigateByUrl(`/main/messages/${username}`);
   }
 
   ngOnDestroy(): void {

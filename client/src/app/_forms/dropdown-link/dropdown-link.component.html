@@ -2,10 +2,11 @@
   <a
     dropdownToggle
     (click)="(false)"
-    [tooltip]="tooltip"
+    [class]="customClass"
     containerClass="tooltip-link"
     class="main-link"
   >
+    <i *ngIf="icon" [class]="icon"></i>
     <img
       [src]="thumbnail"
       alt=""
@@ -14,18 +15,14 @@
       class="rounded-circle me-2"
       *ngIf="thumbnail"
     />
-
     {{ label }}
-    <span *ngIf="icon">
-      <i [class]="icon" class="icon d-inline-block"></i>
-    </span>
   </a>
   <ul
     [id]="id"
+    [class]="menuClass"
     *dropdownMenu
     class="dropdown-menu dropdown-menu-right"
     role="menu"
-    [class]="customClass"
     [attr.aria-labelledby]="ariaControls"
   >
     <ng-content></ng-content>

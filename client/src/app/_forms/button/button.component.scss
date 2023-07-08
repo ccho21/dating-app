@@ -32,6 +32,8 @@
 
   &.danger {
     color: var(--red);
+    border-color: var(--red);
+
     &:hover {
       color: var(--white);
       background-color: var(--red);

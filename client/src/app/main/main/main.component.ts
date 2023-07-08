@@ -12,6 +12,5 @@ export class MainComponent implements OnInit {
   constructor(public accountService: AccountService, private router: Router) {}
 
   ngOnInit(): void {
-    console.log('### main');
   }
 }

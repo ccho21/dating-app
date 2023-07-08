@@ -2,17 +2,14 @@
 
 .main-link {
   @extend .link-text;
-  border: none;
-  color: var(--white);
+  border: 1px solid transparent;
+  color: var(--text-main);
   background-color: transparent;
-  border-radius: 0.5rem;
-  transition: all 0.15s ease-in-out;
   text-decoration: none;
+  display: inline-block;
   cursor: pointer;
-
-  &:active {
-    transform: translateY(0);
-  }
+  transition: all 0.3s ease;
+  padding: 0.5rem;
 
   &.circle {
     padding: 0.5rem;
@@ -21,28 +18,50 @@
     border-radius: 50%;
   }
 
-  &.white {
-    background-color: var(--white);
+  &.black {
     color: var(--black);
   }
 
   &.full {
     width: 100%;
   }
-  &.btn-lg {
-  }
 
   .icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    padding: 0.5rem;
-    color: var(--text-main);
+    color: var(--black);
+  }
+
+  // COLOR
+  &.primary {
+    color: var(--primary) !important;
+    .icon {
+      color: var(--primary) !important;
+    }
+    &:hover {
+      border-bottom: 1px solid var(--primary) !important;
+      color: var(--primary) !important;
+      & .icon {
+        color: var(--primary) !important;
+      }
+    }
+  }
+
+  &.white {
+    color: var(--white) !important;
+    .icon {
+      color: var(--white) !important;
+    }
+    &:hover {
+      border-bottom: 1px solid var(--white) !important;
+
+      & .icon {
+        color: var(--white) !important;
+      }
+    }
   }
 }
 
 .dropdown-menu {
   @extend .text-2;
-  // position: relative;
   min-width: 20rem;
   margin-top: 2rem;
   padding: 0.5rem;

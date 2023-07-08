@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-button',
@@ -11,8 +12,12 @@ export class ButtonComponent implements OnInit {
   @Input() customClass?: string;
   @Input() tooltip?: string;
   @Input() placement: string = 'top';
-  @Output() onClick = new EventEmitter();
+  @Input() disabled?: boolean;
 
+  @Input() type?: string;
+  @Input() form?: FormGroup;
+
+  @Output() onClick = new EventEmitter();
   ngOnInit(): void {}
 
   handleClick() {

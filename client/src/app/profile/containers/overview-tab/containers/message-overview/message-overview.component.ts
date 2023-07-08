@@ -28,8 +28,6 @@ export class MessageOverviewComponent implements OnInit, OnDestroy {
 
   user?: User;
   member?: Member;
-  newMessageThread$?: Subscription;
-  messageThread$?: Subscription;
   user$?: Subscription;
   constructor(
     private messageService: MessageService,

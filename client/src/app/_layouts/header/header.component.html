@@ -1,5 +1,5 @@
 <nav
-  class="navbar navbar-expand-lg bg-body-tertiary"
+  class="navbar navbar-expand-lg header"
   [ngClass]="{ 'fixed-top': navbarFixed }"
   *ngIf="user"
 >
@@ -16,7 +16,8 @@
       <div class="nav-item d-block d-lg-none">
         <app-dropdown-link
           label="Message"
-          customClass="dropdown-menu-right messsage-dropdown"
+          [customClass]="'white'"
+          menuClass="dropdown-menu-right messsage-dropdown"
           ariaControls="message-dropdown"
           id="message-dropdown"
           (onChange)="handleMobileChange($event)"
@@ -28,12 +29,12 @@
             ></app-message-overview>
             <div class="text-end m-3">
               <app-link
-                customClass="primary"
+                customClass="primary no-radius"
                 routerLink="/main/messages"
                 routerLinkActive="active"
               >
-                <i class="fa-solid fa-arrow-right"></i>
                 <span class="ms-3"> View all messages </span>
+                <i class="fa-solid fa-arrow-right"></i>
               </app-link>
             </div>
           </li>
@@ -62,16 +63,17 @@
 
           <li class="dw-item" *ngIf="user">
             <app-link
-              customClass="text"
+              customClass="bold"
               routerLink="/main"
               routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
             >
               <span> {{ user.knownAs }} </span>
             </app-link>
           </li>
 
           <li class="dw-item" role="menuitem">
-            <app-link routerLink="/main/dashboard" customClass="text">
+            <app-link routerLink="/main/dashboard">
               <span> Edit Profile </span>
             </app-link>
           </li>
@@ -79,31 +81,23 @@
           <!--  -->
 
           <li class="dw-item">
-            <app-link
-              customClass="text"
-              routerLink="/main/members"
-              routerLinkActive="active"
-            >
+            <app-link routerLink="/main/members" routerLinkActive="active">
               <span> Members </span>
             </app-link>
           </li>
           <li class="dw-item">
-            <app-link
-              customClass="text"
-              routerLink="/main/projects"
-              routerLinkActive="active"
-            >
+            <app-link routerLink="/main/projects" routerLinkActive="active">
               <span> Projects </span>
             </app-link>
           </li>
 
           <li class="dw-item" *appHasRole="['Admin', 'Moderator']">
-            <app-link customClass="text" routerLink="/main/admin">
+            <app-link routerLink="/main/admin">
               <span> Admin </span>
             </app-link>
           </li>
           <li class="dw-item" *appHasRole="['Admin', 'Moderator']">
-            <app-link customClass="text" routerLink="/errors">
+            <app-link routerLink="/errors">
               <span> Errors </span>
             </app-link>
           </li>
@@ -135,6 +129,7 @@
             customClass="white"
             routerLink="/main"
             routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
           >
             <span>{{ user.knownAs }}</span>
           </app-link>
@@ -161,7 +156,9 @@
         <li class="nav-item d-none d-lg-block">
           <app-dropdown-link
             label="Message"
-            customClass="dropdown-menu-right messsage-dropdown"
+            class="nav-dropdown"
+            [customClass]="'white'"
+            menuClass="dropdown-menu-right messsage-dropdown white"
             ariaControls="message-dropdown"
             id="message-dropdown"
             (onChange)="handleChange($event)"
@@ -172,12 +169,12 @@
               </app-message-overview>
               <div class="text-end m-3">
                 <app-link
-                  customClass="primary"
-                  icon="fa-solid fa-arrow-right"
+                  customClass="primary no-radius"
                   routerLink="/main/messages"
                   routerLinkActive="active"
                 >
                   <span> View all messages </span>
+                  <i class="fa-solid fa-arrow-right"></i>
                 </app-link>
               </div>
             </li>
@@ -206,6 +203,7 @@
             customClass="dropdown-menu-right"
             ariaControls="account-dropdown"
             id="account-dropdown"
+            class="no-active"
           >
             <li class="dw-item" role="menuitem">
               <img

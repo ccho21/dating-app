@@ -1,6 +1,7 @@
 import { ViewportScroller } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -28,33 +29,17 @@ import { MessageService } from 'src/app/_services/message.service';
   templateUrl: './member-messages.component.html',
   styleUrls: ['./member-messages.component.scss'],
 })
-export class MemberMessagesComponent implements OnInit, OnChanges, OnDestroy {
+export class MemberMessagesComponent implements OnInit, OnDestroy {
   @ViewChild('messageBody') messageBody?: ElementRef<HTMLDivElement>;
   @ViewChild('messageForm') messageForm?: NgForm;
-  @Input() messages?: Message[];
   @Output() messageClose = new EventEmitter();
   messageContent?: string;
   loading = false;
   user?: User;
   member?: Member;
 
-  membername?: string;
-
+  messages?: Message[];
   messageThread$?: Subscription;
-  folders: Section[] = [
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
-    },
-    {
-      name: 'Work',
-      updated: new Date('1/28/16'),
-    },
-  ];
 
   constructor(
     public messageService: MessageService,
@@ -62,9 +47,9 @@ export class MemberMessagesComponent implements OnInit, OnChanges, OnDestroy {
     private scroller: ViewportScroller,
     private route: ActivatedRoute,
     private router: Router,
-    private memberService: MemberService
+    private memberService: MemberService,
+    private ref: ChangeDetectorRef
   ) {}
-  ngOnChanges(changes: SimpleChanges): void {}
 
   // ngAfterViewInit() {
   //   const maxScroll = this.messageBody?.nativeElement.scrollHeight;
@@ -77,38 +62,34 @@ export class MemberMessagesComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.loading = true;
-
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: (user: User | null) => {
         if (user) {
           this.user = user;
-          console.log('### ACCOUNT SERVICE', this.user);
         }
       },
-      complete: () => {
-        this.loading = false;
-      },
+      complete: () => {},
     });
 
-    console.log('### MEMBER MESSAGE STARTED');
     this.messageThread$ = this.messageService.messageThread$.subscribe({
       next: (res) => {
-        console.log('### Check Message Thread$', res);
+        console.log('## what is happening?');
+
+        this.messages = res;
+        this.ref.detectChanges();
+        this.loading = false;
       },
       complete: () => {
-        this.loading = false;
+        console.log('## working?');
       },
     });
 
     this.route.params.subscribe(({ membername }) => {
-      this.membername = membername;
-
       this.memberService.getMember(membername).subscribe({
         next: (member) => {
           this.member = member;
-          console.log('####################', this.member);
           this.messageService.setSendMemberSource(this.member);
-          if (this.user && this.member) this.selectTab();
+          if (this.user && this.member) this.checkConnection();
         },
         complete: () => {
           this.loading = false;
@@ -117,10 +98,8 @@ export class MemberMessagesComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  selectTab() {
+  checkConnection() {
     if (!this.messages || this.messages?.length === 0) {
-      console.log('### start', this.messages);
-
       this.messageService.createHubConnection(
         this.user as User,
         this.member?.username as string
@@ -148,6 +127,7 @@ export class MemberMessagesComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   resetMessageService() {
+    this.member = undefined;
     this.messageThread$!.unsubscribe();
     this.messageService.stopHubConnection();
   }

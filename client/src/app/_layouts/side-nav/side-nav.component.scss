@@ -5,3 +5,13 @@
   background-color: var(--primary-light);
   border-radius: 0;
 }
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  background-color: var(--white);
+
+  height: 100%;
+  border-right: 1px solid var(--border-main);
+}

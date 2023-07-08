@@ -41,16 +41,20 @@ export class MessageService {
       .finally(() => this.busyService.idle());
 
     this.hubConnection.on('ReceiveMessageThread', (messages) => {
+      console.log('### ReceiveMessageThread');
       this.messageThreadSource.next(messages);
     });
 
     this.hubConnection.on('NewMessage', (message) => {
       this.messageThread$.pipe(take(1)).subscribe((messages) => {
+        console.log('### ReceiveMessageThread');
         this.messageThreadSource.next([...messages, message]);
       });
     });
 
     this.hubConnection.on('UpdatedGroup', (group: Group) => {
+      console.log('### UpdatedGroup');
+
       if (group.connections.some((x) => x.username === otherUsername)) {
         this.messageThread$.pipe(take(1)).subscribe((messages) => {
           messages.forEach((message) => {
@@ -64,12 +68,13 @@ export class MessageService {
     });
   }
 
-  setSendMemberSource (member: Member) {
+  setSendMemberSource(member: Member) {
     this.sendMemberSource.next(member);
   }
 
   stopHubConnection() {
     if (this.hubConnection) {
+      console.log('### stopHubConnection');
       this.messageThreadSource.next([]);
       this.hubConnection.stop();
     }

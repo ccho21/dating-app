@@ -26,9 +26,9 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  handleChange(data: boolean): void {
-    console.log('### data', data);
-    this.isDropdownOpen = data;
+  handleChange(isOpen: boolean): void {
+    console.log('### data', isOpen);
+    this.isDropdownOpen = isOpen;
   }
 
   handleMobileChange(data: boolean): void {

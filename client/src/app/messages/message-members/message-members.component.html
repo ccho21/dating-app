@@ -1,17 +1,15 @@
 <div class="message">
-  <div class="spinner" *ngIf="loading">
-    <div class="spinner-border md" role="status">
-      <span class="visually-hidden">Loading...</span>
+  <div class="spinner-box" *ngIf="loading">
+    <div class="spinner">
+      <div class="spinner-border lg" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     </div>
   </div>
   <div *ngIf="members && members.length; else noData">
     <ul class="list-group member-list">
       <li class="list-group-item" *ngFor="let member of members">
-        <a
-          href=""
-          class="member-item"
-          routerLink="/main/messages/{{ member.username }}"
-        >
+        <a class="member-item" (click)="goToMessage(member.username)">
           <div class="thumbnail-box">
             <img
               src="{{ member.photoUrl || './assets/shared/user.png' }}"

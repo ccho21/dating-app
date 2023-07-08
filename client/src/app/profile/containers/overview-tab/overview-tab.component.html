@@ -8,8 +8,8 @@
           routerLink="/main/messages"
           routerLinkActive="active"
         >
-          <i class="fa-solid fa-arrow-right"></i>
           <span class="ms-3"> View all messages </span>
+          <i class="fa-solid fa-arrow-right"></i>
         </app-link>
       </div>
     </app-panel>
@@ -22,12 +22,7 @@
   </div>
 
   <div class="col-md-12">
-    <app-panel title="Projects">
-      <app-project-overview
-        [projects]="member?.projects"
-        class="w-100"
-      ></app-project-overview>
-    </app-panel>
+    <app-project-overview class="w-100"></app-project-overview>
   </div>
 
   <div class="col-md-8">

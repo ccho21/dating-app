@@ -47,13 +47,10 @@ import { SwiperModule } from 'swiper/angular';
 import { FormControlPipe } from './_pipes/form-control.pipe';
 import { FormGroupPipe } from './_pipes/form-group.pipe';
 import { MessagesComponent } from './messages/messages/messages.component';
-import { MessageOverviewComponent } from './messages/message-overview/message-overview.component';
-import { ConnectionOverviewComponent } from './connections/containers/connection-overview/connection-overview.component';
 import { MemberComponent } from './members/components/member/member.component';
 import { ConnectionCardComponent } from './connections/components/connection-card/connection-card.component';
 import { ProjectListComponent } from './projects/containers/project-list/project-list.component';
 import { ProjectComponent } from './projects/components/project/project.component';
-import { VisitorOverviewComponent } from './visitors/visitor-overview/visitor-overview.component';
 
 import { SlicePipe } from '@angular/common';
 import { ExperienceListComponent } from './experiences/experience-list/experience-list.component';
@@ -78,7 +75,6 @@ import { HeaderComponent } from './_layouts/header/header.component';
 import { LinkComponent } from './_forms/link/link.component';
 import { OverviewTabComponent } from './profile/containers/overview-tab/overview-tab.component';
 import { DynamicComponentComponent } from './_layouts/dynamic-component/dynamic-component.component';
-import { ExperienceOverviewComponent } from './experiences/experience-overview/experience-overview.component';
 import { DropdownLinkComponent } from './_forms/dropdown-link/dropdown-link.component';
 import { SideNavComponent } from './_layouts/side-nav/side-nav.component';
 import { ProjectTableComponent } from './projects/components/project-table/project-table.component';
@@ -91,13 +87,17 @@ import { AboutTabComponent } from './profile/containers/about-tab/about-tab.comp
 import { ConnectionSmComponent } from './connections/components/connection-sm/connection-sm.component';
 import { ExperienceTabComponent } from './profile/containers/experience-tab/experience-tab.component';
 import { NoDataComponent } from './_layouts/no-data/no-data.component';
-import { ProjectOverviewComponent } from './projects/containers/project-overview/project-overview.component';
 import { MemberCardComponent } from './members/components/member-card/member-card.component';
 import { MemberSearchComponent } from './members/components/member-search/member-search.component';
 import { AboutComponent } from './about/about/about.component';
 import { MessageMembersComponent } from './messages/message-members/message-members.component';
 import { MessageEmptyComponent } from './messages/message-empty/message-empty.component';
 import { LoaderComponent } from './_layouts/loader/loader.component';
+import { MessageOverviewComponent } from './profile/containers/overview-tab/containers/message-overview/message-overview.component';
+import { ConnectionOverviewComponent } from './profile/containers/overview-tab/connection-overview/connection-overview.component';
+import { ProjectOverviewComponent } from './profile/containers/overview-tab/containers/project-overview/project-overview.component';
+import { ExperienceOverviewComponent } from './profile/containers/overview-tab/containers/experience-overview/experience-overview.component';
+import { VisitorOverviewComponent } from './profile/containers/overview-tab/containers/visitor-overview/visitor-overview.component';
 
 @NgModule({
   declarations: [
@@ -125,13 +125,11 @@ import { LoaderComponent } from './_layouts/loader/loader.component';
     MemberSearchComponent,
     ProfileComponent,
     MessagesComponent,
-    MessageOverviewComponent,
-    ConnectionOverviewComponent,
+
     MemberComponent,
     ConnectionCardComponent,
     ProjectListComponent,
     ProjectComponent,
-    VisitorOverviewComponent,
     ExperienceListComponent,
     ExperienceComponent,
     ProfileEditComponent,
@@ -153,7 +151,6 @@ import { LoaderComponent } from './_layouts/loader/loader.component';
     LinkComponent,
     OverviewTabComponent,
     DynamicComponentComponent,
-    ExperienceOverviewComponent,
     DropdownLinkComponent,
     SideNavComponent,
     ProjectTableComponent,
@@ -166,11 +163,15 @@ import { LoaderComponent } from './_layouts/loader/loader.component';
     ConnectionSmComponent,
     ExperienceTabComponent,
     NoDataComponent,
-    ProjectOverviewComponent,
     AboutComponent,
     MessageMembersComponent,
     MessageEmptyComponent,
     LoaderComponent,
+    MessageOverviewComponent,
+    ConnectionOverviewComponent,
+    ProjectOverviewComponent,
+    ExperienceOverviewComponent,
+    VisitorOverviewComponent,
   ],
   imports: [
     BrowserModule,

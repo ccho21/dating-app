@@ -28,10 +28,18 @@
                 </div>
                 <div class="col-md-6 mb-3 mt-auto">
                   <div class="btn-box">
-                    <app-button icon="fa fa-plus" customClass="">
+                    <app-button
+                      icon="fa fa-plus"
+                      customClass=""
+                      [routerLink]="'/main/dashboard/projects/create'"
+                    >
                       Add Project
                     </app-button>
-                    <app-button icon="fa fa-plus" customClass="">
+                    <app-button
+                      icon="fa fa-plus"
+                      customClass=""
+                      [routerLink]="'/main/dashboard/experiences/create'"
+                    >
                       Add Experience
                     </app-button>
                   </div>

@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  background-color: var(--base);
   height: 100%;
   & .no-data-icon {
     color: var(--text-light);
