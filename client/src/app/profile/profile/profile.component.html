@@ -66,14 +66,6 @@
           </tab>
 
           <tab
-            heading="About"
-            (selectTab)="activateTab($event)"
-            #projectTab="tab"
-          >
-            <app-about-tab *ngIf="member" [member]="member"> </app-about-tab>
-          </tab>
-
-          <tab
             heading="Projects"
             (selectTab)="activateTab($event)"
             #projectTab="tab"

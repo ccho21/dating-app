@@ -1,41 +1,7 @@
-<!-- <div class="profile-edit" *ngIf="member">
-  <div class="row">
-    <div class="offset-xl-1 col-xl-10">
-      <div class="py-5">
-        <div class="w-100">
-          <form
-            [formGroup]="experiencesForm"
-            id="experiencesForm"
-            (ngSubmit)="updateExperience()"
-          >
-            <div formArrayName="experiences">
-              <ng-container
-                *ngFor="
-                  let experienceForm of experiences.controls;
-                  let i = index
-                "
-                [formGroup]="experienceForm | formGroup"
-              >
-                <app-experience-edit
-                  [experience]="member.experiences[i]"
-                  [experienceForm]="experienceForm | formGroup"
-                ></app-experience-edit>
-              </ng-container>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-<div class="row">
-  <div class="offset-xl-1 col-xl-10">
-    <app-panel
-      title="Experience"
-      sub="Create, edit and manage your projects."
-      [btns]="btns"
-    >
-      <app-experience-list></app-experience-list>
+<section class="my-5">
+  <div *ngFor="let experience of experiences">
+    <app-panel>
+      <app-experience [experience]="experience"></app-experience>
     </app-panel>
   </div>
-</div>
+</section>

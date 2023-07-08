@@ -8,6 +8,17 @@
     [projects]="projects"
     [pagination]="pagination"
   ></app-project-table>
+  <div class="text-end m-3">
+    <app-link
+      customClass="primary"
+      [routerLink]="['/main']"
+      [queryParams]="{ tab: 'Projects' }"
+      routerLinkActive="active"
+    >
+      <i class="fa-solid fa-arrow-right"></i>
+      <span class="ms-3"> View all Projects </span>
+    </app-link>
+  </div>
   <div class="spinner-box" *ngIf="loading">
     <div class="spinner">
       <div class="spinner-border" role="status">

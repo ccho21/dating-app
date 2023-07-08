@@ -53,8 +53,7 @@ import { ProjectListComponent } from './projects/containers/project-list/project
 import { ProjectComponent } from './projects/components/project/project.component';
 
 import { SlicePipe } from '@angular/common';
-import { ExperienceListComponent } from './experiences/experience-list/experience-list.component';
-import { ExperienceComponent } from './experiences/experience/experience.component';
+import { ExperienceComponent } from './experiences/components/experience/experience.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { ProfileComponent } from './profile/profile/profile.component';
 import { TextareaInputComponent } from './_forms/textarea-input/textarea-input.component';
@@ -83,7 +82,6 @@ import { ProjectCardComponent } from './projects/components/project-card/project
 import { TruncatePipe } from './_pipes/truncate.pipe';
 import { ProjectsComponent } from './projects/components/projects/projects.component';
 import { ProjectsTabComponent } from './profile/containers/projects-tab/projects-tab.component';
-import { AboutTabComponent } from './profile/containers/about-tab/about-tab.component';
 import { ConnectionSmComponent } from './connections/components/connection-sm/connection-sm.component';
 import { ExperienceTabComponent } from './profile/containers/experience-tab/experience-tab.component';
 import { NoDataComponent } from './_layouts/no-data/no-data.component';
@@ -98,6 +96,7 @@ import { ConnectionOverviewComponent } from './profile/containers/overview-tab/c
 import { ProjectOverviewComponent } from './profile/containers/overview-tab/containers/project-overview/project-overview.component';
 import { ExperienceOverviewComponent } from './profile/containers/overview-tab/containers/experience-overview/experience-overview.component';
 import { VisitorOverviewComponent } from './profile/containers/overview-tab/containers/visitor-overview/visitor-overview.component';
+import { ExperienceCardComponent } from './experiences/components/experience-card/experience-card.component';
 
 @NgModule({
   declarations: [
@@ -130,7 +129,6 @@ import { VisitorOverviewComponent } from './profile/containers/overview-tab/cont
     ConnectionCardComponent,
     ProjectListComponent,
     ProjectComponent,
-    ExperienceListComponent,
     ExperienceComponent,
     ProfileEditComponent,
     TextareaInputComponent,
@@ -159,7 +157,6 @@ import { VisitorOverviewComponent } from './profile/containers/overview-tab/cont
     TruncatePipe,
     ProjectsComponent,
     ProjectsTabComponent,
-    AboutTabComponent,
     ConnectionSmComponent,
     ExperienceTabComponent,
     NoDataComponent,
@@ -172,6 +169,7 @@ import { VisitorOverviewComponent } from './profile/containers/overview-tab/cont
     ProjectOverviewComponent,
     ExperienceOverviewComponent,
     VisitorOverviewComponent,
+    ExperienceCardComponent,
   ],
   imports: [
     BrowserModule,

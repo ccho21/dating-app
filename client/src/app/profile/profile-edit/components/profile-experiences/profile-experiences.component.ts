@@ -1,53 +1,36 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { Member } from 'src/app/_models/member';
-import { User } from 'src/app/_models/user';
-import { AccountService } from 'src/app/_services/account.service';
-import { MemberService } from 'src/app/_services/member.service';
-import { take } from 'rxjs/operators';
-import { Form, FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Detail, Experience, JobDescription } from 'src/app/_models/experience';
+import { Component, OnInit } from '@angular/core';
+import { ExperienceParams } from 'src/app/_models/experienceParams';
+import { Pagination } from 'src/app/_models/pagination';
+import { ExperienceService } from 'src/app/_services/experience.service';
+
 @Component({
   selector: 'app-profile-experiences',
   templateUrl: './profile-experiences.component.html',
   styleUrls: ['./profile-experiences.component.scss'],
 })
 export class ProfileExperiencesComponent implements OnInit {
-  member?: Member;
-  user?: User;
-  maxDate?: Date;
-  experiencesForm: FormGroup = this.fb.group({
-    experiences: this.fb.array([]),
-  });
-
-  btns?: Array<any>;
-  get experiences(): FormArray {
-    return this.experiencesForm.get('experiences') as FormArray;
-  }
-
-  constructor(
-    private accountService: AccountService,
-    private memberService: MemberService,
-    private fb: FormBuilder
-  ) {
-    this.accountService.currentUser$
-      .pipe(take(1))
-      .subscribe((user) => (this.user = user as User));
-  }
+  experiences?: Partial<any[]>;
+  pageNumber = 1;
+  pageSize = 5;
+  pagination?: Pagination;
+  constructor(private experienceService: ExperienceService) {}
 
   ngOnInit(): void {
-    this.btns = [
-      {
-        btnLabel: 'Add Experience',
-        btnLink: '/main/dashboard/experiences/create',
-        customClass: '',
-      },
-      {
-        btnLabel: 'View All Experience',
-        btnLink: '/main/experiences',
-        customClass: '',
-      },
-    ];
-    console.log('### experience');
-    this.maxDate = new Date();
+    const params: ExperienceParams =
+      this.experienceService.getExperienceParams();
+
+    console.log('### params', params);
+
+    this.loadExperiences(params);
+  }
+
+  loadExperiences(params: ExperienceParams) {
+    this.experienceService.getExperiences(params).subscribe((response) => {
+      if (response && response.pagination) {
+        this.experiences = response.result;
+        this.pagination = response.pagination;
+        this.pagination.currentPage = response.pagination.currentPage - 1;
+      }
+    });
   }
 }

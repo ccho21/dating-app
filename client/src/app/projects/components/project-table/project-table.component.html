@@ -31,10 +31,14 @@
         <td>{{ project.name }}</td>
         <td>{{ project.description }}</td>
         <td>{{ project.mainFeature }}</td>
-        <td>{{ project.projectStarted | date : "dd MMM yyyy" }}</td>
-        <td>{{ project.projectEnded | date : "dd MMM yyyy" }}</td>
+        <td>{{ project.projectStarted | date : "MMM yyyy" }}</td>
+        <td>{{ project.projectEnded | date : "MMM yyyy" }}</td>
         <td>
-          <app-dropdown-link label="" [customClass]="" [icon]="'fa-solid fa-ellipsis'">
+          <app-dropdown-link
+            label=""
+            [customClass]=""
+            [icon]="'fa-solid fa-ellipsis'"
+          >
             <li role="menuitem">
               <a
                 class="dropdown-item"

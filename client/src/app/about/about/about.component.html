@@ -1,33 +1,24 @@
 <div class="about">
-  <app-panel title="About" customClass="no-padding no-height" *ngIf="member">
+  <app-panel customClass="no-padding no-height" *ngIf="member">
     <div class="row">
       <div class="col-md-12">
         <div>
           <tabset #staticTabs class="vertical-tab" [vertical]="true">
             <tab heading="Overview">
               <div class="about-content">
-                <h3 class="">
-                  <i class="fa-solid fa-heading"></i>
-                  Introduction
-                </h3>
+                <h3 class="">Introduction</h3>
                 <p>
                   {{ member.introduction }}
                 </p>
               </div>
               <div class="about-content">
-                <h3 class="">
-                  <i class="fa-solid fa-mug-hot"></i>
-                  Interests
-                </h3>
+                <h3 class="">Interests</h3>
                 <p>
                   {{ member.interests }}
                 </p>
               </div>
               <div class="about-content">
-                <h3 class="">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                  Looking for
-                </h3>
+                <h3 class="">Looking for</h3>
                 <p>
                   {{ member.lookingFor }}
                 </p>
@@ -36,68 +27,37 @@
             <tab heading="Work and Education">
               <div>
                 <div class="about-content">
-                  <h3 class="">
-                    <i class="fa-solid fa-person-digging"></i>
-                    Work
-                  </h3>
+                  <h3 class="">Work</h3>
                   <p>
                     {{ member.introduction }}
                   </p>
                 </div>
                 <div class="about-content">
-                  <h3 class="">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                    Education
-                  </h3>
+                  <h3 class="">Education</h3>
                   <p>
                     {{ member.interests }}
                   </p>
                 </div>
               </div>
             </tab>
-            <tab heading="Places Lived">
+
+            <tab heading="Contact Info">
               <div>
                 <div class="about-content">
-                  <h3 class="">
-                    <i class="fa-solid fa-location-crosshairs"></i>
-                    Location
-                  </h3>
-                  <p>Toronto, Canada</p>
-                </div>
-              </div>
-            </tab>
-            <tab heading="Contact Basic info">
-              <div>
-                <div class="about-content">
-                  <h3 class="">
-                    <i class="icon fa-solid fa-address-card"></i>
-                    Contact info
-                  </h3>
+                  <h3 class="">Contact info</h3>
                   <p>abc@abc.com</p>
                   <p>Phone: 1234567899</p>
                 </div>
 
                 <div class="about-content">
-                  <h3 class="">
-                    <i class="fa-solid fa-thumbs-up"></i>
-                    Websites and social links
-                  </h3>
-                  <p>
-                    <span><i class="fa-brands fa-linkedin"></i></span>
-                    google.ca
-                  </p>
-                  <p>
-                    <span><i class="fa-brands fa-github"></i></span>
-                    google.ca
-                  </p>
+                  <h3 class="">Location</h3>
+                  <p>Toronto, Canada</p>
                 </div>
 
                 <div class="about-content">
-                  <h3 class="">
-                    <i class="fa-solid fa-building-columns"></i>
-                    Basic info
-                  </h3>
-                  <p>Computer programming, Seneca College</p>
+                  <h3 class="">Websites/SNS</h3>
+                  <p><i class="fa-brands fa-github"></i>google.ca</p>
+                  <p>google.ca</p>
                 </div>
               </div>
             </tab>

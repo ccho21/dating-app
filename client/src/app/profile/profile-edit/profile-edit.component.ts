@@ -23,7 +23,7 @@ export class ProfileEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadUser();
+    // this.loadUser();
   }
 
   loadUser(): void {

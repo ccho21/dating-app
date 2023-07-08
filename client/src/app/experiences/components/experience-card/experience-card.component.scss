@@ -1,0 +1,63 @@
+@import "_typography";
+
+.entry {
+  @extend .text-2;
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+  position: relative;
+  .date {
+    margin: 0.5em 0;
+    padding-right: 3rem;
+    position: relative;
+    text-align: right;
+    flex-basis: 9.7rem;
+    flex-shrink: 0;
+    &:before {
+      content: "";
+      position: absolute;
+      width: 1.1rem;
+      height: 1.1rem;
+      border: 0.3rem solid var(--primary-light);
+      border-radius: 100%;
+      top: 15%;
+      right: -1.04rem;
+      background-color: white;
+      z-index: 99;
+    }
+    h3 {
+      margin: 0;
+      @extend .text-3;
+    }
+    div {
+      margin: 0;
+      @extend .text-3;
+    }
+  }
+  .body {
+    padding-left: 3rem;
+    width: 100%;
+    .logo {
+      max-width: 100px;
+      margin-bottom: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    ul {
+      color: var(--text-light);
+      padding-left: 0;
+      list-style-type: none;
+      // font-size: 1.3rem;
+      div {
+        // font-size: 1.3rem;
+      }
+      li {
+        // font-size: 1.2rem;
+      }
+      li:before {
+        content: "–";
+        margin-right: 0.5em;
+      }
+    }
+  }
+}

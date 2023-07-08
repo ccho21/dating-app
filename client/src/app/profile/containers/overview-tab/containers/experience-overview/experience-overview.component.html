@@ -1,31 +1,14 @@
 <div class="timeline">
-  <div class="entry" *ngFor="let experience of experiences">
-    <div class="date">
-      <h3>
-        {{ experience.started | date : "MMM y" }} -
-        {{ experience.ended | date : "MMM y" }}
-      </h3>
-    </div>
-    <div class="body">
-      <div class="mb-3">
-        <img
-          class="logo"
-          src="./assets/shared/acentury-logo.svg"
-          alt="Get together Logo"
-        />
-      </div>
-      <div>{{ experience.position }}, {{ experience.companyName }}</div>
-      <div>
-        {{ experience.intro }}
-      </div>
-    </div>
-  </div>
+  <ng-container *ngFor="let experience of experiences">
+    <app-experience-card [experience]="experience"></app-experience-card>
+  </ng-container>
   <div class="text-end m-3">
     <app-link
       customClass="primary"
       icon=""
       label=""
-      routerLink="/main"
+      [routerLink]="['/main']"
+      [queryParams]="{ tab: 'Experiences' }"
       routerLinkActive="active"
     >
       <i class="fa-solid fa-arrow-right"></i>
