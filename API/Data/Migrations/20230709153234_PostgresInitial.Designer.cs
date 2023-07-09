@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230709152456_PostgresInitial")]
+    [Migration("20230709153234_PostgresInitial")]
     partial class PostgresInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,6 +65,9 @@ namespace API.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("City")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Company")
                         .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -161,6 +164,9 @@ namespace API.Data.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
+
+                    b.Property<string>("Website")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

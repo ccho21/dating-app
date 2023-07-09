@@ -65,6 +65,9 @@ namespace API.Data.Migrations
                     b.Property<string>("City")
                         .HasColumnType("text");
 
+                    b.Property<string>("Company")
+                        .HasColumnType("text");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("text");
@@ -159,6 +162,9 @@ namespace API.Data.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
+
+                    b.Property<string>("Website")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

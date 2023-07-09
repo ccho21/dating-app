@@ -1,5 +1,30 @@
 [
   {
+    "UserName": "ccho",
+    "Gender": "male",
+    "DateOfBirth": "1988-03-04",
+    "KnownAs": "Charles Cho",
+    "Firstname": "Charles",
+    "Lastname": "Cho",
+    "Created": "2023-01-31",
+    "LastActive": "2023-01-31",
+    "Introduction": "Highly motivated front-end developer with 5 years of experience developing and maintaining complex applications with the ability to write clean, modular, and reusable codes. Specializes in accomplishing objectives using a variety of programming skills.\r\n",
+    "Interests": "Teamwork, Collaboration, Leading multiple projects from initiation to completion, Managing project budgets, Communicating with stakeholders\r\n",
+    "City": "Toronto",
+    "Country": "Canada",
+    "LinkedIn": "Canada",
+    "Github": "Canada",
+    "Website": "https://charles-get-together-622fe43bcad0.herokuapp.com/main/members",
+    "Job": "Software Developer",
+    "Company": "Acentury",
+    "Photos": [
+      {
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875803/user-male-5_exawsv.svg",
+        "IsMain": true
+      }
+    ]
+  },
+  {
     "UserName": "pm_olive22",
     "Gender": "female",
     "DateOfBirth": "1956-07-22",
@@ -194,7 +219,7 @@
     "Country": "Luxembourg",
     "Photos": [
       {
-        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875803/user-male-5_exawsv.svg",
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875803/user-male-6_lwttya.svg",
         "IsMain": true
       }
     ]
