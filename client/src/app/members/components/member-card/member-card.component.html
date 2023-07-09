@@ -14,17 +14,6 @@
             <i class="fa-solid fa-heart me-2"></i>
             {{ member.likedByUsers ? member.likedByUsers.length : 0 }}
           </span>
-
-          <!-- <button (click)="addOrRemoveLike(member)" class="badge-btn">
-            <span
-              class="member-badge circle"
-              [ngClass]="{
-                'is-liked': getLikedUserIndex(member) !== -1 ? true : false
-              }"
-            >
-              <i class="fa-solid fa-star"></i>
-            </span>
-          </button> -->
         </div>
       </div>
       <a class="member-link" [routerLink]="['/main/members/', member.username]">

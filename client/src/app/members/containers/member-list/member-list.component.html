@@ -1,14 +1,14 @@
 <section>
-  <div class="container">
-    <div class="row my-5">
+  <div class="container px-0 px-sm-3">
+    <div class="row mt-5">
       <div class="col">
         <app-member-search (paramsEmit)="search($event)"></app-member-search>
       </div>
     </div>
   </div>
 </section>
-<section class="my-5">
-  <div class="container position-relative">
+<section class="">
+  <div class="container px-0 px-sm-3 position-relative">
     <div class="spinner-box" *ngIf="loading">
       <div class="spinner">
         <div class="spinner-border lg" role="status">
@@ -17,14 +17,14 @@
       </div>
     </div>
     <div class="row">
-      <div class="offset-lg-1 col-lg-10">
+      <div class="col-lg-12">
         <div class="row">
           <ng-container *ngIf="members && members.length; else noData">
             <div
               class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-4"
               *ngFor="let member of members"
             >
-              <app-member-card [member]="member"></app-member-card>
+              <app-member-card-one [member]="member"></app-member-card-one>
             </div>
           </ng-container>
           <ng-template #noData>

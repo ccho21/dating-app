@@ -1,34 +1,57 @@
-<div class="no-data" *ngIf="key === 'message'">
-  <i class="no-data-icon fa-solid fa-comment-dots"></i>
-  <div class="main-text-2">Your new messages will appear here.</div>
-  <div class="no-data-btn"></div>
-</div>
+<div class="py-5">
+  <div class="no-data" *ngIf="key === 'message'">
+    <div class="my-4">
+      <img width="150" src="/assets/shared/icons/icon-no-message.svg" alt="" />
+    </div>
+    <div class="main-text-2">Your new messages will appear here.</div>
+    <div class="no-data-btn"></div>
+  </div>
 
-<div class="no-data" *ngIf="key === 'connection'">
-  <i class="no-data-icon fa-regular fa-folder-open"></i>
-  <div class="main-text-2">No followers yet</div>
-  <div class="no-data-btn"></div>
-</div>
+  <div class="no-data" *ngIf="key === 'connection'">
+    <div class="my-4">
+      <img width="150" src="/assets/shared/icons/icon-no-follower.svg" alt="" />
+    </div>
+    <div class="main-text-2">No followers yet</div>
+    <div class="no-data-btn"></div>
+  </div>
 
-<div class="no-data" *ngIf="key === 'visitor'">
-  <i class="no-data-icon fa-solid fa-eye"></i>
-  <div class="main-text-2">No visitors yet</div>
-</div>
+  <div class="no-data" *ngIf="key === 'visitor'">
+    <div class="my-4">
+      <img width="150" src="/assets/shared/icons/icon-no-view.svg" alt="" />
+    </div>
+    <div class="main-text-2">No visitors yet</div>
+  </div>
 
-<div class="no-data" *ngIf="key === 'data'">
-  <i class="no-data-icon fa-regular fa-folder-open"></i>
-  <div class="main-text-2">No Data Available</div>
-  <div class="no-data-btn"></div>
-</div>
+  <div class="no-data" *ngIf="key === 'experience'">
+    <div class="my-4">
+      <img
+        width="150"
+        src="/assets/shared/icons/icon-no-experience.svg"
+        alt=""
+      />
+    </div>
+    <div class="main-text-2">No experiences yet</div>
+  </div>
 
-<div class="no-data" *ngIf="key === 'messages'">
-  <i class="no-data-icon fa-regular fa-folder-open"></i>
-  <div class="main-text-2">No chat room is loaded.</div>
-  <div class="no-data-btn"></div>
-</div>
+  <div class="no-data" *ngIf="key === 'data'">
+    <div class="my-4">
+      <img width="150" src="/assets/shared/icons/icon-no-project.svg" alt="" />
+    </div>
+    <div class="main-text-2">No Data Available</div>
+    <div class="no-data-btn"></div>
+  </div>
 
-<div class="no-data" *ngIf="key === 'message-members'">
-  <i class="no-data-icon fa-solid fa-head-side-mask"></i>
-  <div class="main-text-2">Haven't chatted before..</div>
-  <div class="no-data-btn"></div>
+  <div class="no-data" *ngIf="key === 'messages'">
+    <div class="my-4">
+      <img width="150" src="/assets/shared/icons/icon-message.svg" alt="" />
+    </div>
+    <div class="main-text-2">No chat room is loaded.</div>
+    <div class="no-data-btn"></div>
+  </div>
+
+  <div class="no-data" *ngIf="key === 'message-members'">
+    <img width="150" src="/assets/shared/icons/icon-message.svg" alt="" />
+    <div class="main-text-2">Haven't chatted before..</div>
+    <div class="no-data-btn"></div>
+  </div>
 </div>

@@ -1,0 +1,63 @@
+.member-card {
+  width: 100%;
+  height: fit-content;
+  border-radius: 0.5rem;
+  padding: 10px;
+  text-align: center;
+  background: var(--white);
+  color: var(--primary) !important;
+  .image img {
+    height: auto;
+    width: 120px;
+    border-radius: 50%;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+  }
+
+  .level {
+    font-size: 0.7em;
+    background-color: rgb(164, 189, 183, 0.5);
+    width: 50px;
+    padding: 3px;
+    border-radius: 5px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+
+    display: block;
+    margin: 0px auto 10px;
+  }
+  .button-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .name {
+    font-size: 1.25em;
+    font-weight: bolder;
+    letter-spacing: 1px;
+  }
+
+  .job_title {
+    font-size: 0.65em;
+    font-weight: bolder;
+    color: gray;
+    margin-top: -2px;
+  }
+
+  .job_discription {
+    font-size: 0.7em;
+    color: gray;
+    margin: 10px 30px 20px;
+  }
+
+  .icons {
+    margin: 0px 30px;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: space-around;
+  }
+}

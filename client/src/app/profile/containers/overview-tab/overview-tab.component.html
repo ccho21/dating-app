@@ -1,8 +1,8 @@
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-lg-12">
     <app-about [member]="member"></app-about>
   </div>
-  <div class="col-md-6">
+  <div class="col-lg-6">
     <app-panel title="Recent Messages" customClass="no-padding min-height">
       <app-message-overview class="w-100"></app-message-overview>
       <div class="text-end m-3">
@@ -17,28 +17,38 @@
       </div>
     </app-panel>
   </div>
-  <div class="col-md-6">
-    <app-panel title="Saved Connections" customClass="min-height no-padding">
-      <div class="title mb-4"></div>
-      <app-connection-overview class="w-100"></app-connection-overview>
+  <div class="col-lg-6">
+    <app-panel title="Recent visitors" customClass="no-padding min-height">
+      <app-visitor-overview class="w-100"></app-visitor-overview>
+      <div class="text-end m-3">
+        <app-link
+          customClass="primary"
+          routerLink="/main/messages"
+          routerLinkActive="active"
+        >
+          <span class="ms-3"> View Visitors </span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </app-link>
+      </div>
     </app-panel>
   </div>
 
-  <div class="col-md-12">
+  <div class="col-lg-12">
     <app-project-overview class="w-100"></app-project-overview>
   </div>
 
-  <div class="col-md-8">
-    <app-panel title="Career">
-      <app-experience-overview
-        [experiences]="member?.experiences"
-        class="w-100"
-      ></app-experience-overview>
-    </app-panel>
+  <div class="col-lg-6">
+   
+
+    <app-experience-overview
+      [experiences]="member?.experiences"
+      class="w-100"
+    ></app-experience-overview>
   </div>
-  <div class="col-md-4">
-    <app-panel title="Recent visitors">
-      <app-visitor-overview class="w-100"></app-visitor-overview>
+  <div class="col-lg-6">
+    <app-panel title="Saved Connections" customClass="min-height no-padding">
+      <div class="title mb-4"></div>
+      <app-connection-overview class="w-100"></app-connection-overview>
     </app-panel>
   </div>
 </div>

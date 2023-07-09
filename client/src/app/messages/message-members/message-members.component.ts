@@ -73,12 +73,12 @@ export class MessageMembersComponent implements OnInit {
         map((res) => {
           let { result } = res;
           const updated = result?.map((member: Member) => {
-            const messageSent = member.messagesSent.filter(
+            const recentMessages = member.recentMessages.filter(
               (m) => m.recipientUsername === this.user?.username
             );
             return {
               ...member,
-              messagesSent: messageSent,
+              messagesSent: recentMessages,
             };
           });
 

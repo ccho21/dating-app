@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container px-0 px-sm-3">
   <div class="pt-5">
     <div class="profile">
       <app-loader [loading]="loading"></app-loader>
@@ -51,7 +51,7 @@
       </app-panel>
 
       <section class="position-relative">
-        <tabset class="tabset" type="pills" #profileTabs>
+        <tabset class="overview-tabset" type="pills" #profileTabs>
           <tab
             heading="Overview"
             (selectTab)="activateTab($event)"
@@ -71,12 +71,6 @@
             #projectTab="tab"
           >
             <app-projects-tab *ngIf="member?.projects"> </app-projects-tab>
-            <app-no-data
-              *ngIf="
-                (!member?.projects || !member?.projects?.length) && !loading
-              "
-              [key]="'data'"
-            ></app-no-data>
           </tab>
 
           <tab

@@ -12,7 +12,7 @@
       border: 1px solid var(--white);
     }
   }
-  
+
   .no-active {
     .main-link {
       border-radius: 0;
@@ -28,18 +28,21 @@
     }
   }
 }
-.tabset {
+.overview-tabset {
   width: 100%;
   text-align: center;
   background-color: transparent;
-  .nav {
+  & > .nav {
     border-color: transparent;
+    background-color: var(--white);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px var(--black-transparent);
 
-    .nav-item {
-    }
     .nav-link {
       color: var(--text-main);
       border-radius: 0;
+      padding: 1rem;
       border-bottom: 0.3rem solid transparent;
 
       &.active {
@@ -47,6 +50,7 @@
         border-bottom: 0.3rem solid var(--primary);
         color: var(--text-main);
       }
+
       &:active,
       &:hover,
       &:focus,
@@ -58,11 +62,41 @@
   }
 }
 
-.vertical-tab {
+.connection-tabset {
+  width: 100%;
+  text-align: center;
+  background-color: transparent;
+  & > .nav {
+    border-color: transparent;
+
+    .nav-link {
+      color: var(--text-main);
+      border-radius: 0;
+      padding: 1rem;
+      border-bottom: 0.3rem solid transparent;
+
+      &.active {
+        background-color: transparent;
+        border-bottom: 0.3rem solid var(--primary);
+        color: var(--text-main);
+      }
+
+      &:active,
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        text-decoration: none;
+        color: var(--text-main);
+      }
+    }
+  }
+}
+
+.vertical-tabset {
   display: flex;
   // flex-wrap: wrap;
   min-height: 20rem;
-  & .nav-tabs {
+  & > .nav-tabs {
     flex-direction: column;
     flex-basis: 25%;
     border: 0;
@@ -78,15 +112,47 @@
         border-color: transparent !important;
       }
       &.active {
-        background-color: var(--primary);
+        background-color: var(--primary) !important;
         border-color: transparent !important;
-        color: var(--white);
+        color: var(--white) !important;
       }
     }
   }
+
   & .tab-content {
     flex-grow: 1;
     flex-basis: 75%;
     padding: 1rem;
+  }
+
+  & > .nav {
+    border-color: transparent;
+    background-color: var(--white);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px var(--black-transparent);
+
+    .nav-item {
+    }
+    .nav-link {
+      color: var(--text-main);
+      border-radius: 0;
+      padding: 1rem;
+      border-bottom: 0.3rem solid transparent;
+
+      &.active {
+        background-color: transparent;
+        border-bottom: 0.3rem solid var(--primary);
+        color: var(--text-main);
+      }
+
+      &:active,
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        text-decoration: none;
+        color: var(--text-main);
+      }
+    }
   }
 }

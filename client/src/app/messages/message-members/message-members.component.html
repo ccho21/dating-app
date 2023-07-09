@@ -21,14 +21,13 @@
             <div class="info">
               <div class="name">@{{ member.username }}</div>
 
-              <!-- <span class="date">{{
-                member.messagesSent[member.messagesSent.length - 1].messageSent
-                  | date : "mediumDate"
-              }}</span> -->
+              <span class="date">{{
+                member.recentMessages[0].messageSent | date : "mediumDate"
+              }}</span>
             </div>
-            <!-- <div class="message">
-              {{ member.messagesSent[member.messagesSent.length - 1].content }}
-            </div> -->
+            <div class="message">
+              {{ member.recentMessages[0].content }}
+            </div>
           </div>
 
           <div class="action">
@@ -39,8 +38,6 @@
     </ul>
   </div>
   <ng-template #noData>
-    <div class="py-5">
-      <app-no-data [key]="'message-members'" *ngIf="!loading"></app-no-data>
-    </div>
+    <app-no-data [key]="'message-members'" *ngIf="!loading"></app-no-data>
   </ng-template>
 </div>

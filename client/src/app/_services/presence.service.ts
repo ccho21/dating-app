@@ -49,7 +49,7 @@ export class PresenceService {
     });
 
     this.hubConnection.on('NewMessageReceived', (message) => {
-      console.log('### messageSent', message);
+      console.log('### recentMessages', message);
       const { senderUsername, content, recipientPhotoUrl } = message;
       // let snackBarRef = this._snackBar.open(
       //   `${senderUsername} has sent you a new message!`,

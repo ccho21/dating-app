@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+// ICON MODULE
+
 import { CommonModule } from '@angular/common';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
@@ -97,6 +99,7 @@ import { ProjectOverviewComponent } from './profile/containers/overview-tab/cont
 import { ExperienceOverviewComponent } from './profile/containers/overview-tab/containers/experience-overview/experience-overview.component';
 import { VisitorOverviewComponent } from './profile/containers/overview-tab/containers/visitor-overview/visitor-overview.component';
 import { ExperienceCardComponent } from './experiences/components/experience-card/experience-card.component';
+import { MemberCardOneComponent } from './members/components/member-card-one/member-card-one.component';
 
 @NgModule({
   declarations: [
@@ -170,6 +173,7 @@ import { ExperienceCardComponent } from './experiences/components/experience-car
     ExperienceOverviewComponent,
     VisitorOverviewComponent,
     ExperienceCardComponent,
+    MemberCardOneComponent,
   ],
   imports: [
     BrowserModule,

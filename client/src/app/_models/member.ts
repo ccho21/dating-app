@@ -19,7 +19,7 @@ export interface Member {
   city: string;
   country: string;
   photos: Photo[];
-  messagesSent: Message[];
+  recentMessages: Message[];
   likedByUsers: Partial<Member[]>;
   projects: Project[];
   experiences: Experience[];

@@ -46,7 +46,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
     'senderUsername',
     'recipientUsername',
     'content',
-    'messageSent',
+    'recentMessages',
   ];
   displayedColumns: Array<string> = [];
 
@@ -89,7 +89,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
           const updated = result?.map((member: Member) => {
             return {
               ...member,
-              messagesSent: member.messagesSent,
+              recentMessages: member.recentMessages,
             };
           });
 

@@ -1,6 +1,7 @@
-<div class="row py-5">
+<div class="row">
   <div class="offset-lg-1 col-lg-10">
     <div class="profile-edit" *ngIf="member">
+      <div></div>
       <div class="row">
         <div class="col-md-8">
           <div class="alert alert-info" *ngIf="editForm.dirty">
@@ -9,7 +10,14 @@
           </div>
         </div>
       </div>
-      <form [formGroup]="editForm" id="editForm" (ngSubmit)="updateMember()">
+      <div class="spinner-box" *ngIf="loading">
+        <div class="spinner">
+          <div class="spinner-border sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+      <form [formGroup]="editForm" id="editForm">
         <div class="row">
           <div class="col-md-9">
             <app-panel
@@ -200,6 +208,7 @@
                   [form]="editForm"
                   [type]="'submit'"
                   [customClass]="'btn btn-success btn-block'"
+                  (click)="updateMember()"
                 >
                   Save Changes
                 </app-button>

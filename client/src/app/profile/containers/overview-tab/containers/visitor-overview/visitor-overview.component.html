@@ -1,13 +1,10 @@
 <div class="visitor">
-  <app-no-data key="visitor"> </app-no-data>
-  <div class="text-end m-3">
-    <app-link
-      customClass="primary"
-      routerLink="/main"
-      routerLinkActive="active"
-    >
-      <i class="fa-solid fa-arrow-right"></i>
-      <span class="ms-3"> View Visitors </span>
-    </app-link>
+  <div class="spinner-box" *ngIf="">
+    <div class="spinner">
+      <div class="spinner-border sm" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
   </div>
+  <app-no-data key="visitor"> </app-no-data>
 </div>

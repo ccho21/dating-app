@@ -60,7 +60,9 @@
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 575px) {
     // margin: 3rem;
+    border: none;
+    border-radius: 0;
   }
 }

@@ -1,0 +1,50 @@
+<div class="member-card" *ngIf="member">
+  <div class="content">
+    <div class="image mb-3">
+      <img src="{{ member.photoUrl || './assets/shared/user.png' }}" alt="" />
+    </div>
+    <!-- <div class="level">
+      <span>PRO</span>
+    </div> -->
+    <div class="text">
+      <p class="name">{{ member.knownAs ? member.knownAs : "N/A" }}</p>
+      <!-- <p class="job_title">UI / UX Designer</p> -->
+      <p class="job_title">{{ member.city }}, {{ member.country }}</p>
+
+      <p class="job_discription">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam atque,
+        ipsam a amet laboriosam eligendi.
+      </p>
+    </div>
+    <!-- <div class="icons">
+      <button>
+        <ion-icon name="logo-instagram"></ion-icon>
+      </button>
+      <button>
+        <ion-icon name="logo-twitter"></ion-icon>
+      </button>
+      <button>
+        <ion-icon name="logo-linkedin"></ion-icon>
+      </button>
+      <button>
+        <ion-icon name="logo-facebook"></ion-icon>
+      </button>
+    </div> -->
+    <hr />
+    <span class="member-badge">
+      <i class="like-icon fa-solid fa-heart me-2"></i>
+      {{ member.likedByUsers ? member.likedByUsers.length : 0 }}
+    </span>
+    <hr />
+    <div class="button-box">
+      <app-button>
+        <span> Message </span>
+      </app-button>
+      <!-- <button class="message" type="button">Message</button> -->
+      <app-button>
+        <span> Connect </span>
+      </app-button>
+      <!-- <button class="connect" type="button">Connect</button> -->
+    </div>
+  </div>
+</div>

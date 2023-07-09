@@ -8,6 +8,8 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Photo } from 'src/app/_models/photo';
 import { PhotoUploadComponent } from 'src/app/photos/photo-upload/photo-upload.component';
 import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-about',
@@ -25,6 +27,7 @@ export class ProfileAboutComponent implements OnInit {
 
   uploaderReady: boolean = false;
   photos: Photo[] = [];
+  loading?: boolean;
 
   editForm: FormGroup = this.fb.group({
     gender: ['male'],
@@ -51,7 +54,9 @@ export class ProfileAboutComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private memberService: MemberService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private router: Router
   ) {
     this.accountService.currentUser$
       .pipe(take(1))
@@ -96,6 +101,8 @@ export class ProfileAboutComponent implements OnInit {
   }
 
   updateMember() {
+    console.log('### update member');
+
     const { name, interests, lookingFor, city, country, gender, introduction } =
       this.editForm.value;
     const form: MemberForm = {
@@ -107,9 +114,17 @@ export class ProfileAboutComponent implements OnInit {
       gender,
       introduction,
     };
-    this.memberService.updateMember(form).subscribe(() => {
-      this.updateImages(this.member?.id as number);
-      this.editForm?.reset(this.member);
+    this.memberService.updateMember(form).subscribe({
+      next: () => {
+        this.updateImages(this.member?.id as number);
+
+        this.toastr.success('Project has been created successfully');
+        this.router.navigate(['main']);
+        this.editForm?.reset(this.member);
+      },
+      complete: () => {
+        this.loading = false;
+      },
     });
   }
 

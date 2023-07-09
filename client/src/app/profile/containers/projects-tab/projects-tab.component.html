@@ -1,5 +1,10 @@
 <div class="mt-5">
-  <app-panel customClass="min-height">
-    <app-projects [projects]="projects"></app-projects>
-  </app-panel>
+  <!-- <app-panel customClass="min-height"> -->
+  <app-projects [projects]="projects"></app-projects>
+  <app-no-data
+    *ngIf="(!projects || !projects?.length) && !loading"
+    [key]="'data'"
+  >
+  </app-no-data>
+  <!-- </app-panel> -->
 </div>

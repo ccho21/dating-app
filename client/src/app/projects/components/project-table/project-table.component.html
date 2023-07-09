@@ -76,7 +76,10 @@
       </tr>
     </tbody>
   </table>
-  <div class="d-flex justify-content-end" *ngIf="pagination">
+  <div
+    class="d-flex justify-content-end"
+    *ngIf="pagination && pagination.totalItems > 0"
+  >
     <pagination
       [boundaryLinks]="true"
       [totalItems]="pagination.totalItems"

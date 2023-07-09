@@ -8,6 +8,7 @@ import {
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, Subscriber, mergeMap, of, take } from 'rxjs';
 import { Experience, JobDescription } from 'src/app/_models/experience';
 import { Skill } from 'src/app/_models/skill';
@@ -43,6 +44,7 @@ export class ExperienceEditComponent implements OnInit {
   uploaderReady: boolean = false;
   id?: number;
   isCurrent: boolean = false;
+  loading?: boolean = false;
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification(
     $event: any
@@ -56,7 +58,9 @@ export class ExperienceEditComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private accountService: AccountService,
-    private skillService: SkillService
+    private skillService: SkillService,
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.accountService.currentUser$
       .pipe(take(1))
@@ -102,6 +106,7 @@ export class ExperienceEditComponent implements OnInit {
     });
   }
   public saveExperience(): void {
+    this.loading = true;
     const { ended, started, jobDescriptions } = this.experienceForm?.value;
     console.log('### this. experience form', this.experienceForm?.value);
     const form: Experience = {
@@ -117,27 +122,43 @@ export class ExperienceEditComponent implements OnInit {
       skills: this.skills.map((x) => ({ ...x })),
     };
 
+    let experienceObservable = new Observable<Experience>();
+
+    if (this.mode === 'EDIT') {
+      experienceObservable = this.updateExperience(form);
+    } else {
+      experienceObservable = this.createExperience(form);
+    }
+
     if (this.mode === 'EDIT') {
       this.updateExperience(form);
     } else {
       this.createExperience(form);
     }
-  }
 
-  updateExperience(form: Experience) {
-    this.experienceService.updateExperience(form, form.id).subscribe((res) => {
-      console.log('### update experience result', res);
-      this.updateImages(res.id);
+    experienceObservable.subscribe({
+      next: (res) => {
+        this.updateImages(res.id);
+
+        if (this.mode === 'EDIT') {
+          this.toastr.success('Experience has been updated successfully');
+        } else {
+          this.toastr.success('Experience has been created successfully');
+        }
+        this.router.navigate(['main', 'dashboard', 'experiences']);
+      },
+      complete: () => {
+        this.loading = false;
+      },
     });
   }
 
+  updateExperience(form: Experience) {
+    return this.experienceService.updateExperience(form, form.id);
+  }
+
   createExperience(form: Experience) {
-    this.experienceService
-      .createExperience(form)
-      .subscribe((res: Experience) => {
-        console.log('### update experience result', res);
-        this.updateImages(res.id);
-      });
+    return this.experienceService.createExperience(form);
   }
 
   updateImages(id: number) {

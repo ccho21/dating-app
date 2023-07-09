@@ -16,6 +16,7 @@ import { AccountService } from 'src/app/_services/account.service';
 import { ProjectService } from 'src/app/_services/project.service';
 import { PhotoUploadComponent } from 'src/app/photos/photo-upload/photo-upload.component';
 import { environment } from 'src/environments/environment';
+import { Toast, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-project-edit',
@@ -46,8 +47,9 @@ export class ProjectEditComponent implements OnInit {
     private projectService: ProjectService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
+    private accountService: AccountService,
     private router: Router,
-    private accountService: AccountService
+    private toastr: ToastrService
   ) {
     this.accountService.currentUser$
       .pipe(take(1))
@@ -160,6 +162,11 @@ export class ProjectEditComponent implements OnInit {
       this.project = res;
       this.updateImages(res.id as number);
 
+      if (this.mode === 'EDIT') {
+        this.toastr.success('Project has been updated successfully');
+      } else {
+        this.toastr.success('Project has been created successfully');
+      }
       this.router.navigate(['main', 'dashboard', 'projects']);
     });
   }

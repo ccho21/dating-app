@@ -13,6 +13,7 @@ export class ExperienceOverviewComponent implements OnInit {
   pageNumber = 1;
   pageSize = 5;
   pagination?: Pagination;
+  loading?: boolean = false;
   constructor(private experienceService: ExperienceService) {}
 
   ngOnInit(): void {
