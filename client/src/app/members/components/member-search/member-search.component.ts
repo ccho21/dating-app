@@ -28,7 +28,6 @@ export class MemberSearchComponent implements OnInit {
   ];
 
   orderList = [
-    { value: '', display: 'Sort by' },
     { value: 'lastActive', display: 'Last Active' },
     { value: 'username', display: 'Username' },
   ];
@@ -40,7 +39,7 @@ export class MemberSearchComponent implements OnInit {
     this.searchForm = this.fb.group({
       keyword: [''],
       search: ['username', [Validators.required]],
-      orderBy: [''],
+      orderBy: ['lastActive'],
     });
 
     this.searchForm.get('orderBy')?.valueChanges.subscribe((change) => {

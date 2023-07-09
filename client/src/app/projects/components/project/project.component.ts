@@ -39,7 +39,7 @@ export class ProjectComponent implements OnInit {
   project$?: Observable<Project>;
   //
   items: GalleryItem[] = [];
-
+  loading?: boolean;
   //
 
   constructor(
@@ -66,6 +66,8 @@ export class ProjectComponent implements OnInit {
       const projectId = parseInt(params['id'], 10);
 
       if (!isNaN(projectId)) {
+        this.loading = true;
+
         this.projectService
           .getProject(projectId)
           .pipe(
@@ -78,10 +80,17 @@ export class ProjectComponent implements OnInit {
               return this.projectService.getProjects(params);
             })
           )
-          .subscribe((res: PaginatedResult<Project[]>) => {
-            this.otherProjects = res.result;
+          .subscribe({
+            next: (res: PaginatedResult<Project[]>) => {
+              this.otherProjects = res.result?.filter(
+                (x) => x.id !== projectId
+              );
 
-            this.projectService.resetProjectParams();
+              this.projectService.resetProjectParams();
+            },
+            complete: () => {
+              this.loading = false;
+            },
           });
       } else {
         this.router.navigate(['main', 'projects']);

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { concatMap, Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { concatMap, Observable, tap } from 'rxjs';
 import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -16,11 +17,15 @@ export class MemberCardOneComponent implements OnInit {
   @Input() member?: Member;
   currentUser?: User | null;
 
+  isLiked?: boolean;
+  loading?: boolean;
+
   constructor(
     private memberService: MemberService,
     public presence: PresenceService,
     private accountService: AccountService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -30,40 +35,41 @@ export class MemberCardOneComponent implements OnInit {
   }
 
   addOrRemoveLike(member: Member) {
+    this.loading = true;
     let observable$: Observable<Object>;
     let message: string;
-
-    this.memberService
-      .getMember(member.username)
+    const index = this.getLikedUserIndex(member);
+    if (index !== -1) {
+      observable$ = this.memberService.removeLike(member.username);
+      message = `You have removed like from ${member.knownAs}`;
+    } else {
+      observable$ = this.memberService.addLike(member.username);
+      message = `You have liked ${member.knownAs}`;
+    }
+    observable$
       .pipe(
-        concatMap((member: Member) => {
-          const index = this.getLikedUserIndex(member);
-          if (index !== -1) {
-            observable$ = this.memberService.removeLike(member.username);
-            message = `You have removed like from ${member.knownAs}`;
-          } else {
-            observable$ = this.memberService.addLike(member.username);
-            message = `You have liked ${member.knownAs}`;
-          }
-          return observable$;
+        concatMap((_) => {
+          return this.memberService.getMember(member.username).pipe(
+            tap((member) => {
+              console.log('###', member);
+              this.member = member;
+              this.isLiked =
+                this.getLikedUserIndex(this.member) === -1 ? false : true;
+            })
+          );
         })
       )
-      .subscribe(() => {
-        // this._snackBar.open(message, 'okay', {
-        //   duration: 5000,
-        //   verticalPosition: 'bottom',
-        //   horizontalPosition: 'right',
-        // });
+      .subscribe({
+        next: (member) => {
+          this.toastr.success(message);
+        },
+        complete: () => {
+          this.loading = false;
+        },
       });
   }
 
   getLikedUserIndex(member: Member) {
-    console.log(
-      '### like',
-      member.likedByUsers.findIndex(
-        (user) => user?.username === this.currentUser?.username
-      )
-    );
     return member.likedByUsers
       ? member.likedByUsers.findIndex(
           (user) => user?.username === this.currentUser?.username

@@ -7,8 +7,9 @@
   overflow: hidden;
 
   .img-container {
+    text-align: center;
     & img {
-      max-height: 300px;
+      max-height: 220px;
     }
   }
   .card-header {
@@ -16,5 +17,8 @@
     .card-title {
       @extend .heading-3;
     }
+  }
+  .description {
+    height: 50px;
   }
 }

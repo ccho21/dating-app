@@ -30,29 +30,31 @@
     </a>
   </div>
   <div class="card-body px-4 pt-2">
-    <div class="pb-3">{{ project.description }}</div>
+    <div class="description">{{ project.description | truncate : 100 }}</div>
 
-    <img
-      src="https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875803/user-female-1_fdawnf.svg"
-      class="rounded-circle mr-1"
-      alt="Avatar"
-      width="28"
-      height="28"
-    />
-    <img
-      src="https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875803/user-female-2_dtdlxz.svg"
-      class="rounded-circle mr-1"
-      alt="Avatar"
-      width="28"
-      height="28"
-    />
-    <img
-      src="https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875805/user-male-3_mgjic2.svg"
-      class="rounded-circle mr-1"
-      alt="Avatar"
-      width="28"
-      height="28"
-    />
+    <div class="team-members">
+      <img
+        src="https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875803/user-female-1_fdawnf.svg"
+        class="rounded-circle mr-1"
+        alt="Avatar"
+        width="28"
+        height="28"
+      />
+      <img
+        src="https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875803/user-female-2_dtdlxz.svg"
+        class="rounded-circle mr-1"
+        alt="Avatar"
+        width="28"
+        height="28"
+      />
+      <img
+        src="https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875805/user-male-3_mgjic2.svg"
+        class="rounded-circle mr-1"
+        alt="Avatar"
+        width="28"
+        height="28"
+      />
+    </div>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item px-4 pb-4">

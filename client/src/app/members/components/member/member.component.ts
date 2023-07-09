@@ -29,7 +29,7 @@ export class MemberComponent implements OnInit, OnDestroy {
     pagination: { clickable: true, dynamicBullets: true },
     scrollbar: { draggable: true },
   };
-  
+
   constructor(
     private route: ActivatedRoute,
     private memberService: MemberService,
@@ -46,7 +46,7 @@ export class MemberComponent implements OnInit, OnDestroy {
       console.log('### DATA?', data);
       this.member = data['member'];
       if (this.member) {
-        this.isLiked = this.isLiked =
+        this.isLiked =
           this.getLikedUserIndex(this.member) === -1 ? false : true;
       }
     });

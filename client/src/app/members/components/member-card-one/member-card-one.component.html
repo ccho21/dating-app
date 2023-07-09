@@ -1,22 +1,22 @@
 <div class="member-card" *ngIf="member">
   <div class="content">
-    <div class="image mb-3">
-      <img src="{{ member.photoUrl || './assets/shared/user.png' }}" alt="" />
-    </div>
-    <!-- <div class="level">
+    <a class="member-link" [routerLink]="['/main/members/', member.username]">
+      <div class="image mb-3">
+        <img src="{{ member.photoUrl || './assets/shared/user.png' }}" alt="" />
+      </div>
+      <!-- <div class="level">
       <span>PRO</span>
     </div> -->
-    <div class="text">
-      <p class="name">{{ member.knownAs ? member.knownAs : "N/A" }}</p>
-      <!-- <p class="job_title">UI / UX Designer</p> -->
-      <p class="job_title">{{ member.city }}, {{ member.country }}</p>
+      <div class="text">
+        <p class="name">{{ member.knownAs ? member.knownAs : "N/A" }}</p>
+        <!-- <p class="job_title">UI / UX Designer</p> -->
+        <p class="job-title">{{ member.city }}, {{ member.country }}</p>
 
-      <p class="job_discription">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam atque,
-        ipsam a amet laboriosam eligendi.
-      </p>
-    </div>
-    <!-- <div class="icons">
+        <p class="job-discription">
+          {{ member.introduction | truncate : 100 }}
+        </p>
+      </div>
+      <!-- <div class="icons">
       <button>
         <ion-icon name="logo-instagram"></ion-icon>
       </button>
@@ -30,19 +30,25 @@
         <ion-icon name="logo-facebook"></ion-icon>
       </button>
     </div> -->
+    </a>
     <hr />
-    <span class="member-badge">
-      <i class="like-icon fa-solid fa-heart me-2"></i>
-      {{ member.likedByUsers ? member.likedByUsers.length : 0 }}
-    </span>
+    <div class="">
+      <span class="member-badge">
+        <i class="like-icon fa-solid fa-heart me-2"></i>
+        {{ member.likedByUsers ? member.likedByUsers.length : 0 }}
+      </span>
+    </div>
     <hr />
     <div class="button-box">
-      <app-button>
+      <app-button routerLink="/main/messages/{{ member.username }}">
         <span> Message </span>
       </app-button>
       <!-- <button class="message" type="button">Message</button> -->
-      <app-button>
-        <span> Connect </span>
+      <app-button
+        [icon]="getLikedUserIndex(member) ? 'fa fa-plus' : 'fa fa-minus'"
+        (click)="addOrRemoveLike(member)"
+      >
+        {{ isLiked ? "Unfollow" : "Follow" }}
       </app-button>
       <!-- <button class="connect" type="button">Connect</button> -->
     </div>

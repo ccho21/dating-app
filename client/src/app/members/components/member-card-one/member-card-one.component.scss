@@ -41,17 +41,18 @@
     letter-spacing: 1px;
   }
 
-  .job_title {
+  .job-title {
     font-size: 0.65em;
     font-weight: bolder;
     color: gray;
     margin-top: -2px;
   }
 
-  .job_discription {
-    font-size: 0.7em;
+  .job-discription {
+    font-size: 1.2rem;
     color: gray;
     margin: 10px 30px 20px;
+    height: 50px;
   }
 
   .icons {

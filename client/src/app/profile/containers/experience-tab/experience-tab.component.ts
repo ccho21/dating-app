@@ -25,12 +25,15 @@ export class ExperienceTabComponent implements OnInit {
   }
 
   loadExperiences(params: ExperienceParams) {
-    this.experienceService.getExperiences(params).subscribe((response) => {
-      if (response && response.pagination) {
-        this.experiences = response.result;
-        this.pagination = response.pagination;
-        this.pagination.currentPage = response.pagination.currentPage - 1;
-      }
+    this.experienceService.getExperiences(params).subscribe({
+      next: (response) => {
+        console.log('### response', response);
+        if (response && response.pagination) {
+          this.experiences = response.result;
+          this.pagination = response.pagination;
+          this.pagination.currentPage = response.pagination.currentPage - 1;
+        }
+      },
     });
   }
 }

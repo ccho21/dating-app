@@ -100,7 +100,10 @@
         [title]="project.user.username + '\'s Other Projects'"
         customClass="no-height"
       >
-        <div class="row p-xl-4">
+        <div
+          class="row p-xl-4"
+          *ngIf="otherProjects && otherProjects.length; else noData"
+        >
           <swiper
             [pagination]="{
               clickable: false,
@@ -122,6 +125,9 @@
             </ng-template>
           </swiper>
         </div>
+        <ng-template #noData>
+          <app-no-data [key]="'data'" *ngIf="!loading"></app-no-data>
+        </ng-template>
       </app-panel>
     </div>
 
