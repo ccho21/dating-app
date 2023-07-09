@@ -31,10 +31,12 @@ namespace API.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    DateOfBirth = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     KnownAs = table.Column<string>(type: "text", nullable: true),
-                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    LastActive = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Firstname = table.Column<string>(type: "text", nullable: true),
+                    Lastname = table.Column<string>(type: "text", nullable: true),
+                    Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    LastActive = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Gender = table.Column<string>(type: "text", nullable: true),
                     Introduction = table.Column<string>(type: "text", nullable: true),
                     LookingFor = table.Column<string>(type: "text", nullable: true),
@@ -189,8 +191,8 @@ namespace API.Data.Migrations
                     Degree = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     AppUserId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -213,12 +215,12 @@ namespace API.Data.Migrations
                     Position = table.Column<string>(type: "text", nullable: true),
                     CompanyName = table.Column<string>(type: "text", nullable: true),
                     Url = table.Column<string>(type: "text", nullable: true),
-                    Started = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Started = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IsCurrent = table.Column<bool>(type: "boolean", nullable: false),
-                    Ended = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Ended = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     AppUserId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -266,8 +268,8 @@ namespace API.Data.Migrations
                     RecipientId = table.Column<int>(type: "integer", nullable: false),
                     RecipientUsername = table.Column<string>(type: "text", nullable: true),
                     Content = table.Column<string>(type: "text", nullable: true),
-                    DateRead = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    MessageSent = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DateRead = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    MessageSent = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     SenderDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     RecipientDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
@@ -295,6 +297,9 @@ namespace API.Data.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
+                    Status = table.Column<int>(type: "integer", nullable: false),
+                    Progress = table.Column<int>(type: "integer", nullable: false),
+                    IsPublic = table.Column<int>(type: "integer", nullable: false),
                     Intro = table.Column<string>(type: "text", nullable: true),
                     ProjectWith = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
@@ -305,11 +310,11 @@ namespace API.Data.Migrations
                     BackEnd = table.Column<string>(type: "text", nullable: true),
                     Database = table.Column<string>(type: "text", nullable: true),
                     Deployement = table.Column<string>(type: "text", nullable: true),
-                    ProjectStarted = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    ProjectEnded = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    ProjectStarted = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    ProjectEnded = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     AppUserId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -350,10 +355,10 @@ namespace API.Data.Migrations
                     Position = table.Column<string>(type: "text", nullable: true),
                     Details = table.Column<string>(type: "text", nullable: true),
                     IsCurrent = table.Column<bool>(type: "boolean", nullable: false),
-                    Started = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Ended = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Started = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Ended = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     ExperienceId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -361,25 +366,6 @@ namespace API.Data.Migrations
                     table.PrimaryKey("PK_JobDescriptions", x => x.Id);
                     table.ForeignKey(
                         name: "FK_JobDescriptions_Experiences_ExperienceId",
-                        column: x => x.ExperienceId,
-                        principalTable: "Experiences",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Skills",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    ExperienceId = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Skills", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Skills_Experiences_ExperienceId",
                         column: x => x.ExperienceId,
                         principalTable: "Experiences",
                         principalColumn: "Id");
@@ -413,6 +399,64 @@ namespace API.Data.Migrations
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Photos_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectLikes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    SourceUserId = table.Column<int>(type: "integer", nullable: false),
+                    LikedProjectId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectLikes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProjectLikes_AspNetUsers_SourceUserId",
+                        column: x => x.SourceUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProjectLikes_Projects_LikedProjectId",
+                        column: x => x.LikedProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Skills",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Category = table.Column<int>(type: "integer", nullable: false),
+                    AppUserId = table.Column<int>(type: "integer", nullable: true),
+                    ProjectId = table.Column<int>(type: "integer", nullable: true),
+                    ExperienceId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Skills", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Skills_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Skills_Experiences_ExperienceId",
+                        column: x => x.ExperienceId,
+                        principalTable: "Experiences",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Skills_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id");
@@ -506,14 +550,34 @@ namespace API.Data.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProjectLikes_LikedProjectId",
+                table: "ProjectLikes",
+                column: "LikedProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectLikes_SourceUserId",
+                table: "ProjectLikes",
+                column: "SourceUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Projects_AppUserId",
                 table: "Projects",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Skills_AppUserId",
+                table: "Skills",
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Skills_ExperienceId",
                 table: "Skills",
                 column: "ExperienceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Skills_ProjectId",
+                table: "Skills",
+                column: "ProjectId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -552,6 +616,9 @@ namespace API.Data.Migrations
                 name: "Photos");
 
             migrationBuilder.DropTable(
+                name: "ProjectLikes");
+
+            migrationBuilder.DropTable(
                 name: "Skills");
 
             migrationBuilder.DropTable(
@@ -561,10 +628,10 @@ namespace API.Data.Migrations
                 name: "Groups");
 
             migrationBuilder.DropTable(
-                name: "Projects");
+                name: "Experiences");
 
             migrationBuilder.DropTable(
-                name: "Experiences");
+                name: "Projects");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

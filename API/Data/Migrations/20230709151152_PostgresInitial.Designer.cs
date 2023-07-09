@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230703084718_PostgresInitial")]
+    [Migration("20230709151152_PostgresInitial")]
     partial class PostgresInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,10 +75,10 @@ namespace API.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -86,6 +86,9 @@ namespace API.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("Firstname")
+                        .HasColumnType("text");
 
                     b.Property<string>("Gender")
                         .HasColumnType("text");
@@ -100,7 +103,10 @@ namespace API.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("LastActive")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Lastname")
+                        .HasColumnType("text");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
@@ -195,7 +201,7 @@ namespace API.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Degree")
                         .HasColumnType("text");
@@ -210,7 +216,7 @@ namespace API.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -234,10 +240,10 @@ namespace API.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime?>("Ended")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Intro")
                         .HasColumnType("text");
@@ -249,10 +255,10 @@ namespace API.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("Started")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Url")
                         .HasColumnType("text");
@@ -283,7 +289,7 @@ namespace API.Data.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -292,7 +298,7 @@ namespace API.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("Ended")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int?>("ExperienceId")
                         .HasColumnType("integer");
@@ -304,10 +310,10 @@ namespace API.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("Started")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -328,10 +334,10 @@ namespace API.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("DateRead")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("MessageSent")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("RecipientDeleted")
                         .HasColumnType("boolean");
@@ -412,7 +418,7 @@ namespace API.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Database")
                         .HasColumnType("text");
@@ -432,23 +438,32 @@ namespace API.Data.Migrations
                     b.Property<string>("Intro")
                         .HasColumnType("text");
 
+                    b.Property<int>("IsPublic")
+                        .HasColumnType("integer");
+
                     b.Property<string>("MainFeature")
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<int>("Progress")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime?>("ProjectEnded")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime?>("ProjectStarted")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ProjectWith")
                         .HasColumnType("text");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Url")
                         .HasColumnType("text");
@@ -460,6 +475,29 @@ namespace API.Data.Migrations
                     b.ToTable("Projects");
                 });
 
+            modelBuilder.Entity("API.Entities.ProjectLike", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("LikedProjectId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SourceUserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LikedProjectId");
+
+                    b.HasIndex("SourceUserId");
+
+                    b.ToTable("ProjectLikes");
+                });
+
             modelBuilder.Entity("API.Entities.Skill", b =>
                 {
                     b.Property<int>("Id")
@@ -468,15 +506,28 @@ namespace API.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AppUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Category")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("ExperienceId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("AppUserId");
+
                     b.HasIndex("ExperienceId");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Skills");
                 });
@@ -613,7 +664,7 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Education", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "AppUser")
-                        .WithMany("educations")
+                        .WithMany("Educations")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -690,11 +741,44 @@ namespace API.Data.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("API.Entities.ProjectLike", b =>
+                {
+                    b.HasOne("API.Entities.Project", "LikedProject")
+                        .WithMany("Likes")
+                        .HasForeignKey("LikedProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.AppUser", "SourceUser")
+                        .WithMany("ProjectLikes")
+                        .HasForeignKey("SourceUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("LikedProject");
+
+                    b.Navigation("SourceUser");
+                });
+
             modelBuilder.Entity("API.Entities.Skill", b =>
                 {
-                    b.HasOne("API.Entities.Experience", null)
+                    b.HasOne("API.Entities.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("API.Entities.Experience", "Experience")
                         .WithMany("Skills")
                         .HasForeignKey("ExperienceId");
+
+                    b.HasOne("API.Entities.Project", "Project")
+                        .WithMany("Skills")
+                        .HasForeignKey("ProjectId");
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Experience");
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("API.Entities.UserLike", b =>
@@ -759,6 +843,8 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
+                    b.Navigation("Educations");
+
                     b.Navigation("Experiences");
 
                     b.Navigation("LikedByUsers");
@@ -771,11 +857,11 @@ namespace API.Data.Migrations
 
                     b.Navigation("Photos");
 
+                    b.Navigation("ProjectLikes");
+
                     b.Navigation("Projects");
 
                     b.Navigation("UserRoles");
-
-                    b.Navigation("educations");
                 });
 
             modelBuilder.Entity("API.Entities.Experience", b =>
@@ -795,6 +881,10 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Project", b =>
                 {
                     b.Navigation("Images");
+
+                    b.Navigation("Likes");
+
+                    b.Navigation("Skills");
                 });
 #pragma warning restore 612, 618
         }

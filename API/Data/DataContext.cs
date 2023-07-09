@@ -21,7 +21,7 @@ namespace API.Data
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
         public DbSet<UserLike> Likes { get; set; }
-
+        public DbSet<ProjectLike> ProjectLikes { get; set; }
         public DbSet<Message> Messages { get; set; }
 
         public DbSet<Group> Groups { get; set; }

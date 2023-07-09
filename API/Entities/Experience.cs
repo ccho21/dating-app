@@ -22,7 +22,5 @@ namespace API.Entities
         public DateTime? UpdatedDate { get; set; }
         public ICollection<JobDescription> JobDescriptions { get; set; }
         public ICollection<Skill> Skills { get; set; }
-
-
     }
 }
