@@ -8,12 +8,10 @@ namespace API.Entities
 {
     public class AppUser : IdentityUser<int>
     {
-        public DateTime DateOfBirth { get; set; }
+        public string Job { get; set; }
         public string KnownAs { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public DateTime Created { get; set; } = DateTime.Now;
-        public DateTime LastActive { get; set; } = DateTime.Now;
         public string Gender { get; set; }
         public string Introduction { get; set; }
         public string LookingFor { get; set; }
@@ -21,16 +19,30 @@ namespace API.Entities
         public string City { get; set; }
         public string Country { get; set; }
 
+        public string LinkedIn { get; set; }
+        public string Github { get; set; }
+        public string Facebook { get; set; }
+        public string Twitter { get; set; }
+        public string Instagram { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
+        public DateTime LastActive { get; set; } = DateTime.Now;
+
+        public ICollection<Skill> Skills { get; set; }
         public ICollection<Photo> Photos { get; set; }
-        public ICollection<UserLike> LikedByUsers { get; set; }
-        public ICollection<UserLike> LikedUsers { get; set; }
-        public ICollection<ProjectLike> ProjectLikes { get; set; }
-        public ICollection<Message> MessagesSent { get; set; }
-        public ICollection<Message> MessagesReceived { get; set; }
+
         public ICollection<AppUserRole> UserRoles { get; set; }
         public ICollection<Project> Projects { get; set; }
         public ICollection<Education> Educations { get; set; }
         public ICollection<Experience> Experiences { get; set; }
+
+        public ICollection<ProjectLike> ProjectLikes { get; set; }
+        public ICollection<UserLike> LikedByUsers { get; set; }
+        public ICollection<UserLike> LikedUsers { get; set; }
+
+        public ICollection<Message> MessagesSent { get; set; }
+        public ICollection<Message> MessagesReceived { get; set; }
 
     }
 }

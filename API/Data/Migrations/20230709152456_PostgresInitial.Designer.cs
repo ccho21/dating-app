@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230709151152_PostgresInitial")]
+    [Migration("20230709152456_PostgresInitial")]
     partial class PostgresInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,16 +87,28 @@ namespace API.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Facebook")
+                        .HasColumnType("text");
+
                     b.Property<string>("Firstname")
                         .HasColumnType("text");
 
                     b.Property<string>("Gender")
                         .HasColumnType("text");
 
+                    b.Property<string>("Github")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Instagram")
+                        .HasColumnType("text");
+
                     b.Property<string>("Interests")
                         .HasColumnType("text");
 
                     b.Property<string>("Introduction")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Job")
                         .HasColumnType("text");
 
                     b.Property<string>("KnownAs")
@@ -106,6 +118,9 @@ namespace API.Data.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Lastname")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LinkedIn")
                         .HasColumnType("text");
 
                     b.Property<bool>("LockoutEnabled")
@@ -135,6 +150,9 @@ namespace API.Data.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Twitter")
                         .HasColumnType("text");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -763,7 +781,7 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Skill", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "AppUser")
-                        .WithMany()
+                        .WithMany("Skills")
                         .HasForeignKey("AppUserId");
 
                     b.HasOne("API.Entities.Experience", "Experience")
@@ -860,6 +878,8 @@ namespace API.Data.Migrations
                     b.Navigation("ProjectLikes");
 
                     b.Navigation("Projects");
+
+                    b.Navigation("Skills");
 
                     b.Navigation("UserRoles");
                 });
