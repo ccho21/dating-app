@@ -51,15 +51,17 @@ namespace API.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<ProjectDto>> CreateProject(ProjectDto createProjectDto)
+        public async Task<ActionResult<ProjectDto>> CreateProject(ProjectUpdateDto createProjectDto)
         {
             var username = User.GetUsername();
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
 
             var project = new Project
             {
-                Intro = createProjectDto.Intro,
                 Name = createProjectDto.Name,
+                Status = createProjectDto.Status,
+                Progress = createProjectDto.Progress,
+                IsPublic = createProjectDto.IsPublic,
                 ProjectWith = createProjectDto.ProjectWith,
                 Description = createProjectDto.Description,
                 MainFeature = createProjectDto.MainFeature,
@@ -70,13 +72,28 @@ namespace API.Controllers
                 Database = createProjectDto.Database,
                 Deployement = createProjectDto.Deployement,
                 ProjectStarted = createProjectDto.ProjectStarted,
-                ProjectEnded = createProjectDto.ProjectEnded,
+            ProjectEnded = createProjectDto.ProjectEnded,
                 AppUser = user,
+                TeamMembers = new List<ProjectUser>()
             };
 
             _unitOfWork.ProjectRepository.AddProject(project);
+            _context.SaveChanges();
 
-            if (await _unitOfWork.Complete()) return Ok(_mapper.Map<ProjectDto>(project));
+            foreach (var memberId in createProjectDto.TeamMembers)
+            {
+                var member = await _unitOfWork.UserRepository.GetUserWithPhotoByIdAsync(memberId);
+                var projectUser = new ProjectUser
+                {
+                    AppUser = member,
+                    ProjectId = project.Id
+                };
+                project.TeamMembers.Add(projectUser);
+            }
+
+
+            if (await _unitOfWork.Complete())
+                return Ok(_mapper.Map<ProjectDto>(project));
 
             return BadRequest("Failed to send message");
         }
@@ -192,6 +209,7 @@ namespace API.Controllers
             return BadRequest("Failed to delete the photo");
 
         }
-    }
 
+
+    }
 }

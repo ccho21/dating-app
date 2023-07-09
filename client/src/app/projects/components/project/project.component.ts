@@ -40,6 +40,7 @@ export class ProjectComponent implements OnInit {
   //
   items: GalleryItem[] = [];
   loading?: boolean;
+  status = ['Planning', 'In Progress', 'Completed', 'On Hold', 'Stopped'];
   //
 
   constructor(
@@ -112,7 +113,19 @@ export class ProjectComponent implements OnInit {
     });
   }
 
+  parseSkills(skills: string): Array<string> {
+    if (skills && skills.length) {
+      return skills.split(',');
+    } else {
+      return ['', ''];
+    }
+  }
+
   goBack() {
     this.router.navigate(['main', 'projects']);
+  }
+
+  getStatus(status: number) {
+    return this.status[status];
   }
 }

@@ -33,7 +33,7 @@ namespace API.DTOs
         public string Instagram { get; set; }
 
         public ICollection<LikeDto> LikedByUsers { get; set; }
-        public ICollection<ProjectDto> Projects { get; set; }
-        public ICollection<ExperienceDto> Experiences { get; set; }
+        // public ICollection<ProjectDto> Projects { get; set; }
+        // public ICollection<ExperienceDto> Experiences { get; set; }
     }
 }

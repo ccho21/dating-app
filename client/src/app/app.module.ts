@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-// ICON MODULE
-
 import { CommonModule } from '@angular/common';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
@@ -19,6 +17,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -193,6 +192,7 @@ import { ExperienceCardComponent } from './experiences/components/experience-car
     PaginationModule.forRoot(),
     TypeaheadModule.forRoot(),
     ModalModule.forRoot(),
+    ProgressbarModule.forRoot(),
 
     GalleryModule.withConfig({
       // thumbView: 'contain',

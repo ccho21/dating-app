@@ -23,6 +23,8 @@ namespace API.Helpers
            .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url))
            .ForMember(dest => dest.Likes, opt => opt.MapFrom(src => src.LikedByUsers.Count()))
            .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
+
+
             CreateMap<AppUser, MemberMessageDto>()
             .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.UserName))
             .ForMember(dest => dest.RecentMessages, opt => opt.MapFrom(src => src.MessagesSent))
@@ -52,6 +54,17 @@ namespace API.Helpers
 
             CreateMap<JobDescriptionDto, JobDescription>();
             CreateMap<SkillDto, Skill>();
+
+            CreateMap<AppUser, UserDto>()
+                    .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url));
+
+            CreateMap<ProjectUser, TeamMemberDto>()
+              .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AppUser.Id))
+              .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.AppUser.UserName))
+              .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.AppUser.Name))
+              .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.AppUser.City))
+              .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.AppUser.Country))
+              .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.AppUser.Photos.FirstOrDefault(x => x.IsMain).Url));
         }
     }
 }

@@ -9,6 +9,8 @@ import { SwiperOptions } from 'swiper';
 })
 export class ProjectCardComponent implements OnInit {
   @Input() project?: Project;
+  status = ['Planning', 'In Progress', 'Completed', 'On Hold', 'Stopped'];
+
   config: SwiperOptions = {
     slidesPerView: 1,
     spaceBetween: 0,
@@ -20,4 +22,8 @@ export class ProjectCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  getStatus(status: number) {
+    return this.status[status];
+  }
 }

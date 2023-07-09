@@ -11,7 +11,7 @@ namespace API.Entities
         public string Name { get; set; }
         public int Status { get; set; }
         public int Progress { get; set; }
-        public int IsPublic { get; set; }
+        public bool IsPublic { get; set; }
         public string Intro { get; set; }
         public string ProjectWith { get; set; }
         public string Description { get; set; }
@@ -27,9 +27,10 @@ namespace API.Entities
         public AppUser AppUser { get; set; }
         public int AppUserId { get; set; }
         public ICollection<Photo> Images { get; set; }
-        public ICollection<Skill> Skills { get; set; }
+        public ICollection<ProjectUser> TeamMembers { get; set; }
         public ICollection<ProjectLike> Likes { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedDate { get; set; }
+        public ICollection<Skill> Skills { get; set; }
     }
 }

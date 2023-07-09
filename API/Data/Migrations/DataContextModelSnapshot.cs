@@ -147,6 +147,9 @@ namespace API.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
+                    b.Property<string>("Skills")
+                        .HasColumnType("text");
+
                     b.Property<string>("Twitter")
                         .HasColumnType("text");
 
@@ -454,8 +457,8 @@ namespace API.Data.Migrations
                     b.Property<string>("Intro")
                         .HasColumnType("text");
 
-                    b.Property<int>("IsPublic")
-                        .HasColumnType("integer");
+                    b.Property<bool>("IsPublic")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("MainFeature")
                         .HasColumnType("text");
@@ -512,6 +515,29 @@ namespace API.Data.Migrations
                     b.HasIndex("SourceUserId");
 
                     b.ToTable("ProjectLikes");
+                });
+
+            modelBuilder.Entity("API.Entities.ProjectUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("ProjectUser");
                 });
 
             modelBuilder.Entity("API.Entities.Skill", b =>
@@ -776,10 +802,29 @@ namespace API.Data.Migrations
                     b.Navigation("SourceUser");
                 });
 
+            modelBuilder.Entity("API.Entities.ProjectUser", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Project", "Project")
+                        .WithMany("TeamMembers")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Project");
+                });
+
             modelBuilder.Entity("API.Entities.Skill", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "AppUser")
-                        .WithMany("Skills")
+                        .WithMany()
                         .HasForeignKey("AppUserId");
 
                     b.HasOne("API.Entities.Experience", "Experience")
@@ -877,8 +922,6 @@ namespace API.Data.Migrations
 
                     b.Navigation("Projects");
 
-                    b.Navigation("Skills");
-
                     b.Navigation("UserRoles");
                 });
 
@@ -903,6 +946,8 @@ namespace API.Data.Migrations
                     b.Navigation("Likes");
 
                     b.Navigation("Skills");
+
+                    b.Navigation("TeamMembers");
                 });
 #pragma warning restore 612, 618
         }

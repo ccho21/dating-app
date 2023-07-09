@@ -25,9 +25,11 @@ export class AppComponent implements OnInit {
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
+        console.log('### NAV START');
         this.loading = true;
       }
       if (event instanceof NavigationEnd) {
+        console.log('### NAV END');
 
         this.loading = false;
       }

@@ -26,50 +26,39 @@
   <div class="card-header px-4 pt-4" *ngIf="project.user as user">
     <a [routerLink]="'/main/projects/' + project.id" class="">
       <h5 class="card-title mb-0">{{ project.name }}</h5>
-      <div class="badge bg-success my-2">Status badge</div>
+      <div class="badge bg-success my-2">{{ getStatus(project.status) }}</div>
     </a>
   </div>
   <div class="card-body px-4 pt-2">
-    <div class="description">{{ project.description | truncate : 100 }}</div>
+    <div class="description">{{ project.description | truncate : 60 }}</div>
 
-    <div class="team-members">
-      <img
-        src="https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875803/user-female-1_fdawnf.svg"
-        class="rounded-circle mr-1"
-        alt="Avatar"
-        width="28"
-        height="28"
-      />
-      <img
-        src="https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875803/user-female-2_dtdlxz.svg"
-        class="rounded-circle mr-1"
-        alt="Avatar"
-        width="28"
-        height="28"
-      />
-      <img
-        src="https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875805/user-male-3_mgjic2.svg"
-        class="rounded-circle mr-1"
-        alt="Avatar"
-        width="28"
-        height="28"
-      />
+    <div class="team-members mb-3">
+      <a
+        *ngFor="let teamMember of project.teamMembers"
+        [routerLink]="['/main/members/', teamMember.username]"
+      >
+        <img
+          src="{{ teamMember.photoUrl }}"
+          class="rounded-circle mr-1"
+          alt="Avatar"
+          width="28"
+          height="28"
+        />
+      </a>
     </div>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item px-4 pb-4">
-      <div class="mb-2 font-weight-bold">
-        Progress <span class="float-right">65%</span>
-      </div>
       <div class="progress progress-sm">
-        <div
-          class="progress-bar"
-          role="progressbar"
-          aria-valuenow="65"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          style="width: 65%"
-        ></div>
+        <progressbar
+          [max]="100"
+          [value]="project.progress || 0"
+          type="info"
+          [striped]="false"
+          [animate]="false"
+        >
+          <i class="">{{ project.progress || 0 }} / 100</i>
+        </progressbar>
       </div>
     </li>
   </ul>

@@ -102,6 +102,11 @@ namespace API.Data
             return await _context.Users.FindAsync(id);
         }
 
+        public async Task<AppUser> GetUserWithPhotoByIdAsync(int id)
+        {
+            return await _context.Users.Include(x => x.Photos).FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
             return await _context.Users

@@ -8,7 +8,9 @@ namespace API.DTOs
     public class ProjectUpdateDto
     {
         public string Name { get; set; }
-        public string Intro { get; set; }
+        public int Status { get; set; }
+        public int Progress { get; set; }
+        public bool IsPublic { get; set; }
         public string ProjectWith { get; set; }
         public string Description { get; set; }
         public string MainFeature { get; set; }
@@ -21,5 +23,6 @@ namespace API.DTOs
         public DateTime? ProjectStarted { get; set; }
         public DateTime? ProjectEnded { get; set; }
         public ICollection<PhotoDto> Images { get; set; }
+        public List<int> TeamMembers { get; set; }
     }
 }

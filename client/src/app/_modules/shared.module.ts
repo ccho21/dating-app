@@ -13,7 +13,7 @@ import { ToastrModule } from 'ngx-toastr';
     TimeagoModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
-      timeOut: 5000, // 15 seconds
+      timeOut: 1000, // 15 seconds
       closeButton: true,
       progressBar: true,
     }),

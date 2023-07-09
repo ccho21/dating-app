@@ -25,8 +25,7 @@
   }
 
   .description {
-    @extend .text-2;
-    font-weight: normal;
+    @extend .text-1;
   }
   .tech-item {
     @extend .text-2;
@@ -37,16 +36,10 @@
       text-align: right;
       min-width: 12rem;
       font-weight: 600;
-      &::before {
-        content: "✔";
-        display: inline;
-        padding-right: 0.5rem;
-      }
     }
 
     .content {
       text-align: left;
-      margin-left: 1.5rem;
     }
   }
 }

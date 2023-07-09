@@ -49,6 +49,7 @@ namespace API.Data.Migrations
                     DateOfBirth = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     LastActive = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Skills = table.Column<string>(type: "text", nullable: true),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -305,7 +306,7 @@ namespace API.Data.Migrations
                     Name = table.Column<string>(type: "text", nullable: true),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     Progress = table.Column<int>(type: "integer", nullable: false),
-                    IsPublic = table.Column<int>(type: "integer", nullable: false),
+                    IsPublic = table.Column<bool>(type: "boolean", nullable: false),
                     Intro = table.Column<string>(type: "text", nullable: true),
                     ProjectWith = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
@@ -431,6 +432,32 @@ namespace API.Data.Migrations
                     table.ForeignKey(
                         name: "FK_ProjectLikes_Projects_LikedProjectId",
                         column: x => x.LikedProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectUser",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    AppUserId = table.Column<int>(type: "integer", nullable: false),
+                    ProjectId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectUser", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProjectUser_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProjectUser_Projects_ProjectId",
+                        column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -571,6 +598,16 @@ namespace API.Data.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProjectUser_AppUserId",
+                table: "ProjectUser",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectUser_ProjectId",
+                table: "ProjectUser",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Skills_AppUserId",
                 table: "Skills",
                 column: "AppUserId");
@@ -623,6 +660,9 @@ namespace API.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProjectLikes");
+
+            migrationBuilder.DropTable(
+                name: "ProjectUser");
 
             migrationBuilder.DropTable(
                 name: "Skills");

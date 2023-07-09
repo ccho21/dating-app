@@ -11,8 +11,7 @@ namespace API.DTOs
         public string Name { get; set; }
         public int Status { get; set; }
         public int Progress { get; set; }
-        public int IsPublic { get; set; }
-        public string Intro { get; set; }
+        public bool IsPublic { get; set; }
         public string ProjectWith { get; set; }
         public string Description { get; set; }
         public string MainFeature { get; set; }
@@ -27,7 +26,8 @@ namespace API.DTOs
         public DateTime? ProjectEnded { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
-        public UserDetailDto User { get; set; }
+        public UserDto User { get; set; }
         public ICollection<PhotoDto> Images { get; set; }
+        public ICollection<TeamMemberDto> TeamMembers { get; set; }
     }
 }

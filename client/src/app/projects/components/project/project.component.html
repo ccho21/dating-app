@@ -33,7 +33,7 @@
                 </swiper>
                 <ng-template #noImage>
                   <img
-                    src="./assets/shared/user.png"
+                    src="./assets/shared/icons/icon-not-found.svg"
                     class="user-thumbnail square"
                     alt=""
                   />
@@ -41,54 +41,112 @@
               </div>
             </div>
             <div class="col-xl-12">
-              <div class="p-xl-5">
-                <h3 class="sub-title">Intro</h3>
-                <p class="intro">
-                  {{ project.intro }}
-                </p>
-                <h3 class="sub-title">Description</h3>
-                <p class="description">{{ project.description }}</p>
-                <h3 class="sub-title">Contributors</h3>
-                <p class="intro">
-                  {{ project.projectWith }}
-                </p>
-                <hr />
-                <div class="tech-item">
-                  <div class="label">Main Feature</div>
-                  <div class="content">
-                    내가 생각하는 나의 성격 검사하기, 친구에게 나의 성격 평가
-                    부탁하기, 나의 성격에 대한 나와 친구의 검사 결과 비교하기
-                  </div>
+              <div class="px-md-3 p-xl-5">
+                <div class="mb-3">
+                  <h3 class="sub-title">Description</h3>
+                  <p class="description">{{ project.description }}</p>
                 </div>
-                <div class="tech-item">
-                  <div class="label">Github</div>
-                  <div class="content">
-                    <a href="">{{ project.githubUrl }}</a>
-                  </div>
+                <div class="mb-3">
+                  <h3 class="sub-title">Features</h3>
+                  <p class="description">{{ project.mainFeature }}</p>
                 </div>
-                <div class="tech-item">
-                  <div class="label">Website</div>
-                  <div class="content">
-                    <a [href]="project.url">{{ project.url }}</a>
-                  </div>
+                <div class="team-members mb-3">
+                  <h3 class="sub-title">Teams</h3>
+                  <a
+                    *ngFor="let teamMember of project.teamMembers"
+                    [routerLink]="['/main/members/', teamMember.username]"
+                  >
+                    <img
+                      src="{{ teamMember.photoUrl }}"
+                      class="rounded-circle mr-1"
+                      alt="Avatar"
+                      width="28"
+                      height="28"
+                    />
+                  </a>
                 </div>
                 <hr />
-                <div class="tech-item">
-                  <div class="label">Frontend</div>
-                  <div class="content">{{ project.frontEnd }}</div>
+
+                <div class="mb-3">
+                  <h3 class="sub-title">Status</h3>
+                  <div class="mb-2">
+                    <span class="badge bg-success me-2 mb-2"
+                      >{{ getStatus(project.status) }}
+                    </span>
+                  </div>
                 </div>
-                <div class="tech-item">
-                  <div class="label">Backend</div>
-                  <div class="content">{{ project.backEnd }}</div>
+                <div class="mb-3">
+                  <h3 class="sub-title">Project Progress</h3>
+                  <progressbar
+                    [max]="100"
+                    [value]="project.progress || 0"
+                    type="success"
+                    [striped]="true"
+                    [animate]="true"
+                  >
+                    <i>{{ project.progress || 0 }} / 100</i>
+                  </progressbar>
                 </div>
+                <hr />
                 <div class="tech-item">
-                  <div class="label">Database</div>
-                  <div class="content">{{ project.database }}</div>
+                  <div class="content">
+                    <a
+                      href="{{ project.githubUrl }}"
+                      target="_blank"
+                      class="d-block mb-2"
+                    >
+                      <img
+                        src="/assets/shared/icons/github.svg"
+                        width="30"
+                        alt=""
+                      />
+                      {{ project.githubUrl }}
+                    </a>
+
+                    <div>
+                      <a
+                        href="{{ project.url }}"
+                        target="_blank"
+                        class="d-block mb-2"
+                      >
+                        <img
+                          src="/assets/shared/icons/website.svg"
+                          width="30"
+                          alt=""
+                        />
+                        {{ project.url }}
+                      </a>
+                    </div>
+                  </div>
                 </div>
 
+                <hr />
                 <div class="tech-item">
-                  <div class="label">Deployment</div>
-                  <div class="content">{{ project.deployement }}</div>
+                  <div class="content">
+                    <span
+                      *ngFor="let skill of parseSkills(project.frontEnd)"
+                      class="badge bg-dark me-2 mb-2"
+                      >{{ skill }}
+                    </span>
+                  </div>
+                </div>
+                <!-- <div class="tech-item">
+                  <div class="label">Backend</div>
+                  <div class="content">{{ project.backEnd }}</div>
+                </div> -->
+                <!-- <div class="tech-item">
+                  <div class="label">Database</div>
+                  <div class="content">{{ project.database }}</div>
+                </div> -->
+
+                <div class="tech-item">
+                  <div class="content">
+                    <span
+                      *ngFor="let skill of ['Heroku', 'Docker']"
+                      class="badge bg-dark me-2 mb-2"
+                      >{{ skill }}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -96,39 +154,39 @@
         </div>
       </app-panel>
 
-      <app-panel
-        [title]="project.user.username + '\'s Other Projects'"
-        customClass="no-height"
-      >
-        <div
-          class="row p-xl-4"
-          *ngIf="otherProjects && otherProjects.length; else noData"
-        >
-          <swiper
-            [pagination]="{
-              clickable: false,
-              dynamicBullets: false
-            }"
-            [navigation]="true"
-            [slidesPerView]="2"
-            [spaceBetween]="10"
-            [centeredSlides]="false"
-            [centeredSlidesBounds]="false"
-            [preventClicks]="false"
-            [preventClicksPropagation]="false"
-            class="other-project-swiper"
-          >
-            <ng-template swiperSlide *ngFor="let p of otherProjects">
-              <div>
-                <app-project-card [project]="p"></app-project-card>
-              </div>
-            </ng-template>
-          </swiper>
+      <app-panel customClass="no-height">
+        <div class="heading-3">
+          {{ "Other Projects" }}
         </div>
-        <ng-template #noData>
-          <app-no-data [key]="'data'" *ngIf="!loading"></app-no-data>
-        </ng-template>
       </app-panel>
+      <div
+        class="row p-xl-3"
+        *ngIf="otherProjects && otherProjects.length; else noData"
+      >
+        <swiper
+          [pagination]="{
+            clickable: false,
+            dynamicBullets: false
+          }"
+          [navigation]="true"
+          [slidesPerView]="2"
+          [spaceBetween]="10"
+          [centeredSlides]="false"
+          [centeredSlidesBounds]="false"
+          [preventClicks]="false"
+          [preventClicksPropagation]="false"
+          class="other-project-swiper"
+        >
+          <ng-template swiperSlide *ngFor="let p of otherProjects">
+            <div>
+              <app-project-card [project]="p"></app-project-card>
+            </div>
+          </ng-template>
+        </swiper>
+      </div>
+      <ng-template #noData>
+        <!-- <app-no-data [key]="'data'" *ngIf="!loading"></app-no-data> -->
+      </ng-template>
     </div>
 
     <div class="col-lg-4">
