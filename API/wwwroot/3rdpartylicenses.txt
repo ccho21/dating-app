@@ -160,6 +160,9 @@ MIT
 ngx-bootstrap/positioning
 MIT
 
+ngx-bootstrap/progressbar
+MIT
+
 ngx-bootstrap/tabs
 MIT
 
