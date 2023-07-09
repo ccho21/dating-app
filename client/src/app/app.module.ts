@@ -100,6 +100,7 @@ import { ExperienceOverviewComponent } from './profile/containers/overview-tab/c
 import { VisitorOverviewComponent } from './profile/containers/overview-tab/containers/visitor-overview/visitor-overview.component';
 import { ExperienceCardComponent } from './experiences/components/experience-card/experience-card.component';
 import { MemberCardOneComponent } from './members/components/member-card-one/member-card-one.component';
+import { ProjectCardOneComponent } from './projects/components/project-card-one/project-card-one.component';
 
 @NgModule({
   declarations: [
@@ -174,6 +175,7 @@ import { MemberCardOneComponent } from './members/components/member-card-one/mem
     VisitorOverviewComponent,
     ExperienceCardComponent,
     MemberCardOneComponent,
+    ProjectCardOneComponent,
   ],
   imports: [
     BrowserModule,

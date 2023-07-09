@@ -56,6 +56,8 @@ body {
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {

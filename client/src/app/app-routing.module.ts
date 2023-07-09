@@ -25,7 +25,6 @@ import { ProjectEditComponent } from './profile/profile-edit/components/profile-
 import { ProjectListComponent } from './projects/containers/project-list/project-list.component';
 import { ProjectComponent } from './projects/components/project/project.component';
 import { ExperienceEditComponent } from './profile/profile-edit/components/profile-experiences/components/experience-edit/experience-edit.component';
-import { NoDataComponent } from './_layouts/no-data/no-data.component';
 import { MessageEmptyComponent } from './messages/message-empty/message-empty.component';
 
 const routes: Routes = [
@@ -86,12 +85,10 @@ const routes: Routes = [
       {
         path: 'projects',
         component: ProjectListComponent,
-        children: [{ path: '', component: NoDataComponent }],
       },
       {
         path: 'projects/:id',
         component: ProjectComponent,
-        children: [{ path: '', component: NoDataComponent }],
       },
       {
         path: 'messages',

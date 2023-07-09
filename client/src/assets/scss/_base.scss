@@ -44,6 +44,10 @@
     }
   }
 }
+.rounded-circle {
+  max-height: 35px;
+  backface-visibility: hidden;
+}
 
 .like-icon {
   color: var(--red);
