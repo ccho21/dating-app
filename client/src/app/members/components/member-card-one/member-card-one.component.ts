@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { concatMap, Observable, tap } from 'rxjs';
+import { concatMap, Observable, Subscription, tap } from 'rxjs';
 import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -13,9 +13,11 @@ import { PresenceService } from 'src/app/_services/presence.service';
   templateUrl: './member-card-one.component.html',
   styleUrls: ['./member-card-one.component.scss'],
 })
-export class MemberCardOneComponent implements OnInit {
+export class MemberCardOneComponent implements OnInit, OnDestroy {
   @Input() member?: Member;
-  currentUser?: User | null;
+  currentUser?: User;
+
+  userSub$?: Subscription;
 
   isLiked?: boolean;
   loading?: boolean;
@@ -27,11 +29,18 @@ export class MemberCardOneComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService
   ) {}
+  ngOnDestroy(): void {
+    this.userSub$!.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.accountService.currentUser$.subscribe((res: User | null) => {
-      this.currentUser = res;
-    });
+    this.userSub$ = this.accountService.currentUser$.subscribe(
+      (user: User | null) => {
+        if (user) {
+          this.currentUser = user;
+        }
+      }
+    );
   }
 
   addOrRemoveLike(member: Member) {

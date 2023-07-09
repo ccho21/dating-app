@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Member } from 'src/app/_models/member';
 import { Pagination } from 'src/app/_models/pagination';
 import { Project } from 'src/app/_models/project';
@@ -12,11 +13,12 @@ import { ProjectService } from 'src/app/_services/project.service';
   templateUrl: './profile-projects.component.html',
   styleUrls: ['./profile-projects.component.scss'],
 })
-export class ProfileProjectsComponent implements OnInit {
+export class ProfileProjectsComponent implements OnInit, OnDestroy {
   projects?: Project[];
   pagination?: Pagination;
 
   user?: User;
+  userSub$?: Subscription;
   btns?: Array<any>;
 
   @Input() member?: Member;
@@ -26,11 +28,17 @@ export class ProfileProjectsComponent implements OnInit {
     private projectService: ProjectService,
     private accountService: AccountService
   ) {
-    this.accountService.currentUser$.subscribe((user: User | null) => {
-      if (user) {
-        this.user = user;
+    this.userSub$ = this.accountService.currentUser$.subscribe(
+      (user: User | null) => {
+        if (user) {
+          this.user = user;
+        }
       }
-    });
+    );
+  }
+  ngOnDestroy(): void {
+    this.userSub$!.unsubscribe();
+    this.projectService.resetProjectParams();
   }
 
   ngOnInit(): void {

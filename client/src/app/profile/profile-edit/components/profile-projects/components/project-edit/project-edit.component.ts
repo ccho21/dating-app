@@ -2,13 +2,14 @@ import {
   Component,
   HostListener,
   Input,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
-import { Observable, map, mergeMap, take, tap } from 'rxjs';
+import { Observable, Subscription, map, mergeMap, take, tap } from 'rxjs';
 import { Photo } from 'src/app/_models/photo';
 import { Project } from 'src/app/_models/project';
 import { User } from 'src/app/_models/user';
@@ -23,7 +24,7 @@ import { Toast, ToastrService } from 'ngx-toastr';
   templateUrl: './project-edit.component.html',
   styleUrls: ['./project-edit.component.scss'],
 })
-export class ProjectEditComponent implements OnInit {
+export class ProjectEditComponent implements OnInit, OnDestroy {
   @ViewChild('photoUpload') photoUpload?: PhotoUploadComponent;
 
   baseUrl = environment.apiUrl;
@@ -32,6 +33,7 @@ export class ProjectEditComponent implements OnInit {
   photos: Photo[] = [];
   mode?: string;
   user?: User;
+  userSub$?: Subscription;
 
   project?: Project;
   uploaderReady: boolean = false;
@@ -51,9 +53,13 @@ export class ProjectEditComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService
   ) {
-    this.accountService.currentUser$
+    this.userSub$ = this.accountService.currentUser$
       .pipe(take(1))
       .subscribe((user) => (this.user = user as User));
+  }
+
+  ngOnDestroy(): void {
+    this.userSub$!.unsubscribe();
   }
 
   ngOnInit(): void {

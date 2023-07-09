@@ -1,10 +1,17 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { MemberService } from 'src/app/_services/member.service';
 import { Member } from 'src/app/_models/member';
+import { Subscription } from 'rxjs';
 
 interface ITab {
   title: string;
@@ -21,11 +28,13 @@ interface ITab {
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   @ViewChild('profileTabs', { static: true }) profileTabs?: TabsetComponent;
 
   container?: ViewContainerRef;
   user?: User;
+  userSub$?: Subscription;
+
   member?: Member;
   loading: boolean = false;
   constructor(
@@ -43,23 +52,27 @@ export class ProfileComponent implements OnInit {
       },
     });
 
-    this.accountService.currentUser$.subscribe((user: User | null) => {
-      if (user) {
-        this.loading = true;
-        this.user = user;
+    this.userSub$ = this.accountService.currentUser$.subscribe(
+      (user: User | null) => {
+        if (user) {
+          this.loading = true;
+          this.user = user;
 
-        this.memberService.getMember(this.user.username).subscribe({
-          next: (member) => {
-            this.member = member;
-          },
-          complete: () => {
-            this.loading = false;
-          },
-        });
+          this.memberService.getMember(this.user.username).subscribe({
+            next: (member) => {
+              this.member = member;
+            },
+            complete: () => {
+              this.loading = false;
+            },
+          });
+        }
       }
-    });
+    );
+  }
 
-    console.log('### profile tabs', this.profileTabs);
+  ngOnDestroy(): void {
+    this.userSub$!.unsubscribe();
   }
 
   selectTab(heading: string) {

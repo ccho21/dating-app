@@ -28,7 +28,8 @@ export class MessageOverviewComponent implements OnInit, OnDestroy {
 
   user?: User;
   member?: Member;
-  user$?: Subscription;
+  userSub$?: Subscription;
+
   constructor(
     private messageService: MessageService,
     private accountService: AccountService,
@@ -40,7 +41,7 @@ export class MessageOverviewComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.user$ = this.accountService.currentUser$.subscribe((res) => {
+    this.userSub$ = this.accountService.currentUser$.subscribe((res) => {
       this.user = res!;
       if (this.user) {
         this.loadUsers();
@@ -98,9 +99,7 @@ export class MessageOverviewComponent implements OnInit, OnDestroy {
 
     this.messages = [];
     this.user = undefined;
-    if (this.user$) {
-      this.user$.unsubscribe();
-    }
+    this.userSub$!.unsubscribe();
   }
 
   ngOnDestroy(): void {

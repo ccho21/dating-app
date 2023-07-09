@@ -7,6 +7,7 @@ import {
   Output,
   ChangeDetectionStrategy,
   SimpleChanges,
+  OnDestroy,
 } from '@angular/core';
 import { FileItem, FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
@@ -23,6 +24,7 @@ import {
 } from 'ng-gallery';
 import { Lightbox } from 'ng-gallery/lightbox';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-photo-upload',
@@ -30,9 +32,11 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./photo-upload.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PhotoUploadComponent implements OnInit {
+export class PhotoUploadComponent implements OnInit, OnDestroy {
   uploader?: FileUploader;
   user?: User;
+  userSub$?: Subscription;
+
   @Input() photos?: Photo[];
   @Input() photo?: Photo;
 
@@ -61,7 +65,7 @@ export class PhotoUploadComponent implements OnInit {
     public lightbox: Lightbox,
     private sanitizer: DomSanitizer
   ) {
-    this.accountService.currentUser$
+    this.userSub$ = this.accountService.currentUser$
       .pipe(take(1))
       .subscribe((user) => (this.user = user as User));
   }
@@ -82,6 +86,10 @@ export class PhotoUploadComponent implements OnInit {
     console.log('### this uploader', this.uploader);
   }
 
+  ngOnDestroy(): void {
+    this.userSub$!.unsubscribe();
+  }
+  
   initUploader() {
     this.initializeUploader();
     this.updatedPhotos = [];

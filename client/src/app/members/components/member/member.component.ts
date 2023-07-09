@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { concatMap, Observable, tap } from 'rxjs';
+import { concatMap, Observable, Subscription, tap } from 'rxjs';
 import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -19,7 +19,9 @@ export class MemberComponent implements OnInit, OnDestroy {
   member?: Member;
   galleryImages?: any[];
 
-  currentUser?: User | null;
+  currentUser?: User;
+  userSub$?: Subscription;
+
   isLiked: boolean = false;
 
   config: SwiperOptions = {
@@ -38,9 +40,13 @@ export class MemberComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.accountService.currentUser$.subscribe((res: User | null) => {
-      this.currentUser = res;
-    });
+    this.userSub$ = this.accountService.currentUser$.subscribe(
+      (user: User | null) => {
+        if (user) {
+          this.currentUser = user;
+        }
+      }
+    );
 
     this.route.data.subscribe((data) => {
       console.log('### DATA?', data);
@@ -97,5 +103,6 @@ export class MemberComponent implements OnInit, OnDestroy {
     if (this.member) {
       this.member = undefined;
     }
+    this.userSub$!.unsubscribe();
   }
 }

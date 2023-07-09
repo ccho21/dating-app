@@ -2,6 +2,7 @@ import {
   Component,
   HostListener,
   Input,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -9,7 +10,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, Subscriber, mergeMap, of, take } from 'rxjs';
+import { Observable, Subscriber, Subscription, mergeMap, of, take } from 'rxjs';
 import { Experience, JobDescription } from 'src/app/_models/experience';
 import { Skill } from 'src/app/_models/skill';
 import { User } from 'src/app/_models/user';
@@ -24,7 +25,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './experience-edit.component.html',
   styleUrls: ['./experience-edit.component.scss'],
 })
-export class ExperienceEditComponent implements OnInit {
+export class ExperienceEditComponent implements OnInit, OnDestroy {
   @ViewChild('photoUpload') photoUpload?: PhotoUploadComponent;
 
   baseUrl = environment.apiUrl;
@@ -34,6 +35,7 @@ export class ExperienceEditComponent implements OnInit {
   mode?: string = 'ADD';
 
   maxDate?: Date;
+  userSub$?: Subscription;
 
   asyncSelected?: string;
   dataSource?: Observable<any[]>;
@@ -62,7 +64,7 @@ export class ExperienceEditComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService
   ) {
-    this.accountService.currentUser$
+    this.userSub$ = this.accountService.currentUser$
       .pipe(take(1))
       .subscribe((user) => (this.user = user as User));
 
@@ -70,6 +72,10 @@ export class ExperienceEditComponent implements OnInit {
       // Runs on every search
       observer.next(this.skillForm.value);
     }).pipe(mergeMap((token: string) => this.getStatesAsObservable(token)));
+  }
+
+  ngOnDestroy(): void {
+    this.userSub$!.unsubscribe();
   }
 
   get jobDescriptions(): FormArray {

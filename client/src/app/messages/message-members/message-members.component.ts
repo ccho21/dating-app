@@ -27,7 +27,7 @@ export class MessageMembersComponent implements OnInit {
   loading = false;
 
   user?: User;
-  user$?: Subscription;
+  userSub$?: Subscription;
   member?: Member;
   constructor(
     private accountService: AccountService,
@@ -39,7 +39,7 @@ export class MessageMembersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user$ = this.accountService.currentUser$.subscribe((res) => {
+    this.userSub$ = this.accountService.currentUser$.subscribe((res) => {
       this.user = res!;
       if (this.user) {
         this.loadUsers();
@@ -109,9 +109,7 @@ export class MessageMembersComponent implements OnInit {
 
     this.messages = [];
     this.user = undefined;
-    if (this.user$) {
-      this.user$.unsubscribe();
-    }
+    this.userSub$!.unsubscribe();
   }
 
   goToMessage(username: string) {

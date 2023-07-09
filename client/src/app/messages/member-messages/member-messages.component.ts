@@ -36,6 +36,8 @@ export class MemberMessagesComponent implements OnInit, OnDestroy {
   messageContent?: string;
   loading = false;
   user?: User;
+  userSub$?: Subscription;
+
   member?: Member;
 
   messages?: Message[];
@@ -89,7 +91,7 @@ export class MemberMessagesComponent implements OnInit, OnDestroy {
   }
 
   getCurrentUser() {
-    this.accountService.currentUser$.pipe(take(1)).subscribe({
+    this.userSub$ = this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: (user: User | null) => {
         if (user) {
           this.user = user;
@@ -131,6 +133,7 @@ export class MemberMessagesComponent implements OnInit, OnDestroy {
     this.member = undefined;
     this.messageThread$!.unsubscribe();
     this.messageService.stopHubConnection();
+    this.userSub$!.unsubscribe();
   }
 
   close() {

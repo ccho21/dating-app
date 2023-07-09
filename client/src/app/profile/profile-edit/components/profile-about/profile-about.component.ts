@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  HostListener,
+  OnDestroy,
+} from '@angular/core';
 import { Member, MemberForm } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -10,19 +16,22 @@ import { PhotoUploadComponent } from 'src/app/photos/photo-upload/photo-upload.c
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile-about',
   templateUrl: './profile-about.component.html',
   styleUrls: ['./profile-about.component.scss'],
 })
-export class ProfileAboutComponent implements OnInit {
+export class ProfileAboutComponent implements OnInit, OnDestroy {
   // @ViewChild('editForm') editForm?: NgForm;
   @ViewChild('photoUpload') photoUpload?: PhotoUploadComponent;
   baseUrl = environment.apiUrl;
 
   member?: Member;
   user?: User;
+  userSub$?: Subscription;
+
   activeTab?: number;
 
   uploaderReady: boolean = false;
@@ -58,9 +67,12 @@ export class ProfileAboutComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router
   ) {
-    this.accountService.currentUser$
+    this.userSub$ = this.accountService.currentUser$
       .pipe(take(1))
       .subscribe((user) => (this.user = user as User));
+  }
+  ngOnDestroy(): void {
+    this.userSub$!.unsubscribe();
   }
 
   ngOnInit(): void {

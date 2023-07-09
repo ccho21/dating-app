@@ -37,6 +37,8 @@ export class MessagesComponent implements OnInit, OnDestroy {
   loading = false;
 
   user?: User;
+  userSub$?: Subscription;
+
   member?: Member;
   // newMessageThread$?: Subscription;
   // messageThread$?: Subscription;
@@ -63,7 +65,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.accountService.currentUser$.subscribe((user) => {
+    this.userSub$ = this.accountService.currentUser$.subscribe((user) => {
       if (user) this.user = user;
     });
   }
@@ -178,6 +180,8 @@ export class MessagesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.userSub$!.unsubscribe();
+
     console.log('### Member message is destroyed');
   }
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { concatMap, Observable } from 'rxjs';
+import { concatMap, Observable, Subscription } from 'rxjs';
 import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -12,9 +12,10 @@ import { PresenceService } from 'src/app/_services/presence.service';
   templateUrl: './member-card.component.html',
   styleUrls: ['./member-card.component.scss'],
 })
-export class MemberCardComponent implements OnInit {
+export class MemberCardComponent implements OnInit, OnDestroy {
   @Input() member?: Member;
-  currentUser?: User | null;
+  currentUser?: User;
+  userSub$?: Subscription;
 
   constructor(
     private memberService: MemberService,
@@ -22,11 +23,18 @@ export class MemberCardComponent implements OnInit {
     private accountService: AccountService,
     private router: Router
   ) {}
+  ngOnDestroy(): void {
+    this.userSub$!.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.accountService.currentUser$.subscribe((res: User | null) => {
-      this.currentUser = res;
-    });
+    this.userSub$ = this.accountService.currentUser$.subscribe(
+      (user: User | null) => {
+        if (user) {
+          this.currentUser = user;
+        }
+      }
+    );
   }
 
   addOrRemoveLike(member: Member) {

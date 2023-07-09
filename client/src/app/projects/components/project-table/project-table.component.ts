@@ -31,8 +31,7 @@ export class ProjectTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const params: ProjectParams = this.projectService.getProjectParams();
-    console.log('### NG ON INIT', params);
+ 
   }
 
   loadProjects(params: ProjectParams) {

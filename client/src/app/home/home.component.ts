@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AccountService } from '../_services/account.service';
 import { Router } from '@angular/router';
@@ -7,7 +7,7 @@ import { UserParams } from '../_models/userParams';
 import { User } from '../_models/user';
 import { Member } from '../_models/member';
 import { Pagination } from '../_models/pagination';
-import { concatMap, of } from 'rxjs';
+import { Subscription, concatMap, of } from 'rxjs';
 import { ViewportScroller } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { PresenceService } from '../_services/presence.service';
@@ -17,10 +17,9 @@ export function getAlertConfig(): TooltipConfig {
   return Object.assign(new TooltipConfig(), {
     placement: 'right',
     container: 'body',
-    delay: 500
+    delay: 500,
   });
 }
-
 
 const enterTransition = transition(':enter', [
   style({
@@ -37,7 +36,7 @@ const fadeIn = trigger('fadeIn', [enterTransition]);
   styleUrls: ['./home.component.scss'],
   animations: [fadeIn],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   registerMode = false;
 
   members?: Member[];
@@ -45,6 +44,7 @@ export class HomeComponent implements OnInit {
   pagination?: Pagination;
   userParams?: UserParams;
   user?: User;
+  userSub$?: Subscription;
 
   genderList = [
     { value: 'male', display: 'Males' },
@@ -66,18 +66,19 @@ export class HomeComponent implements OnInit {
     private scroller: ViewportScroller,
     public presence: PresenceService
   ) {}
+  ngOnDestroy(): void {
+    this.userSub$!.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.accountService.currentUser$.subscribe((res) => {
+    this.userSub$ = this.accountService.currentUser$.subscribe((res) => {
       this.user = res!;
       if (this.user) {
         this.router.navigate(['main']);
       }
     });
-
-    
   }
-  
+
   registerToggle() {
     this.registerMode = !this.registerMode;
   }

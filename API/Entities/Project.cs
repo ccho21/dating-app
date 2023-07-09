@@ -24,6 +24,7 @@ namespace API.Entities
         public AppUser AppUser { get; set; }
         public int AppUserId { get; set; }
         public ICollection<Photo> Images { get; set; }
+        public ICollection<AppUser> TeamMembers { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedDate { get; set; }
     }

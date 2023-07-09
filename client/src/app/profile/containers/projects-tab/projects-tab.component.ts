@@ -1,4 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Project } from 'src/app/_models/project';
 import { ProjectParams } from 'src/app/_models/projectParams';
 import { User } from 'src/app/_models/user';
@@ -10,20 +11,24 @@ import { ProjectService } from 'src/app/_services/project.service';
   templateUrl: './projects-tab.component.html',
   styleUrls: ['./projects-tab.component.scss'],
 })
-export class ProjectsTabComponent implements OnInit {
+export class ProjectsTabComponent implements OnInit, OnDestroy {
   projects: Project[] = [];
   user?: User;
+  userSub$?: Subscription;
+
   loading: boolean = false;
 
   constructor(
     private projectService: ProjectService,
     private accountService: AccountService
   ) {
-    this.accountService.currentUser$.subscribe((user: User | null) => {
-      if (user) {
-        this.user = user;
+    this.userSub$ = this.accountService.currentUser$.subscribe(
+      (user: User | null) => {
+        if (user) {
+          this.user = user;
+        }
       }
-    });
+    );
   }
 
   ngOnInit(): void {
@@ -46,6 +51,6 @@ export class ProjectsTabComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    console.log('### project destroyed');
+    this.userSub$!.unsubscribe();
   }
 }
