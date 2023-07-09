@@ -33,7 +33,6 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
-            var gender = await _unitOfWork.UserRepository.GetUserGender(User.GetUsername());
             userParams.CurrentUsername = User.GetUsername();
 
             var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
@@ -58,7 +57,7 @@ namespace API.Controllers
 
 
         [HttpGet("{username}", Name = "GetUser")]
-        public async Task<ActionResult<MemberDto>> GetUser(string username)
+        public async Task<ActionResult<MemberDetailDto>> GetUser(string username)
         {
             return await _unitOfWork.UserRepository.GetMemberAsync(username);
         }

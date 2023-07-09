@@ -12,7 +12,7 @@
     "Country": "Martinique",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/women/54.jpg",
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875803/user-female-1_fdawnf.svg",
         "IsMain": true
       }
     ]
@@ -30,7 +30,7 @@
     "Country": "Grenada",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/women/50.jpg",
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875803/user-female-2_dtdlxz.svg",
         "IsMain": true
       }
     ]
@@ -48,7 +48,7 @@
     "Country": "Svalbard and Jan Mayen Islands",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/women/14.jpg",
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875804/user-female-5_abba3e.svg",
         "IsMain": true
       }
     ]
@@ -66,7 +66,7 @@
     "Country": "Zimbabwe",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/women/11.jpg",
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875803/user-female-3_gwbuc6.svg",
         "IsMain": true
       }
     ]
@@ -84,7 +84,7 @@
     "Country": "Antigua and Barbuda",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/women/84.jpg",
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875804/user-female-4_pk1pv1.svg",
         "IsMain": true
       }
     ]
@@ -102,7 +102,7 @@
     "Country": "British Indian Ocean Territory",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/men/90.jpg",
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875804/user-male-1_ezuqek.svg",
         "IsMain": true
       }
     ]
@@ -120,7 +120,7 @@
     "Country": "Christmas Island",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/men/87.jpg",
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875804/user-male-2_ewkphe.svg",
         "IsMain": true
       }
     ]
@@ -138,7 +138,7 @@
     "Country": "Burkina Faso",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/men/57.jpg",
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875805/user-male-3_mgjic2.svg",
         "IsMain": true
       }
     ]
@@ -156,7 +156,7 @@
     "Country": "Poland",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/men/11.jpg",
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875803/user-male-4_rjan2i.svg",
         "IsMain": true
       }
     ]
@@ -174,7 +174,7 @@
     "Country": "Luxembourg",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/men/93.jpg",
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1688875803/user-male-5_exawsv.svg",
         "IsMain": true
       }
     ]

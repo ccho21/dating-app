@@ -23,11 +23,11 @@ namespace API.Data
             _context = context;
         }
 
-        public async Task<MemberDto> GetMemberAsync(string username)
+        public async Task<MemberDetailDto> GetMemberAsync(string username)
         {
             return await _context.Users
                 .Where(x => x.UserName == username)
-                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<MemberDetailDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }
 

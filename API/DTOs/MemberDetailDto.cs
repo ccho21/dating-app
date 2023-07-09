@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace API.DTOs
 {
-    public class MemberDto
+    public class MemberDetailDto
     {
-
         public int Id { get; set; }
         public string Username { get; set; }
         public string PhotoUrl { get; set; }
@@ -23,5 +22,7 @@ namespace API.DTOs
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<LikeDto> LikedByUsers { get; set; }
+        public ICollection<ProjectDto> Projects { get; set; }
+        public ICollection<ExperienceDto> Experiences { get; set; }
     }
 }
