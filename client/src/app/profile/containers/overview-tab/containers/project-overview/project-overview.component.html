@@ -1,8 +1,4 @@
-<app-panel
-  title="Projects"
-  sub="Create, edit and manage your projects."
-  [btns]="btns"
->
+<app-panel title="Projects" [btns]="btns">
   <app-project-table
     (paramsEmit)="pageChanged($event)"
     [projects]="projects"

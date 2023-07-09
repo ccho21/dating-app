@@ -64,10 +64,10 @@ export class MemberComponent implements OnInit, OnDestroy {
     const index = this.getLikedUserIndex(member);
     if (index !== -1) {
       observable$ = this.memberService.removeLike(member.username);
-      message = `You have removed like from ${member.knownAs}`;
+      message = `You have removed like from ${member.username}`;
     } else {
       observable$ = this.memberService.addLike(member.username);
-      message = `You have liked ${member.knownAs}`;
+      message = `You have liked ${member.username}`;
     }
     observable$
       .pipe(

@@ -41,7 +41,6 @@ export class ProfileAboutComponent implements OnInit, OnDestroy {
   editForm: FormGroup = this.fb.group({
     gender: ['male'],
     name: [''],
-    knownAs: [''],
     dateOfBirth: [''],
     city: [''],
     country: [''],
@@ -89,18 +88,11 @@ export class ProfileAboutComponent implements OnInit, OnDestroy {
   }
 
   updateForm(member: Member) {
-    const {
-      interests,
-      lookingFor,
-      city,
-      country,
-      gender,
-      introduction,
-      knownAs,
-    } = member;
+    const { interests, lookingFor, city, country, gender, introduction, name } =
+      member;
 
     this.editForm?.patchValue({
-      name: knownAs,
+      name,
       interests,
       lookingFor,
       city,
@@ -118,7 +110,7 @@ export class ProfileAboutComponent implements OnInit, OnDestroy {
     const { name, interests, lookingFor, city, country, gender, introduction } =
       this.editForm.value;
     const form: MemberForm = {
-      knownAs: name,
+      name,
       interests,
       lookingFor,
       city,

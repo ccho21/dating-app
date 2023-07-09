@@ -1,4 +1,4 @@
-<app-panel title="Career">
+<app-panel title="Experiences" [btns]="btns">
   <div *ngIf="experiences && experiences.length; else noData">
     <div class="timeline">
       <ng-container *ngFor="let experience of experiences">

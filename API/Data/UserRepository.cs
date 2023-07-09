@@ -79,9 +79,7 @@ namespace API.Data
             {
                 Id = u.Id,
                 UserName = u.UserName,
-                KnownAs = u.KnownAs,
-                Firstname = u.Firstname,
-                Lastname = u.Lastname,
+                Name = u.Name,
                 LastActive = u.LastActive,
                 Photos = u.Photos,
                 MessagesSent = messages.Where(x => (x.RecipientUsername == userParams.CurrentUsername && x.SenderUsername == u.UserName) || (x.SenderUsername == userParams.CurrentUsername && x.RecipientUsername == u.UserName)).OrderByDescending(x => x.MessageSent).Take(3).ToList()

@@ -5,11 +5,11 @@ import { Project } from './project';
 
 export interface Member {
   id: number;
-  name: string;
   username: string;
+  name: string;
+
   photoUrl: string;
   age: number;
-  knownAs: string;
   created: Date;
   lastActive: Date;
   gender: string;
@@ -23,10 +23,22 @@ export interface Member {
   likedByUsers: Partial<Member[]>;
   projects: Project[];
   experiences: Experience[];
+
+  job: string;
+  email: string;
+  phoneNumber: string;
+  company: string;
+
+  website: string;
+  linkedIn: string;
+  github: string;
+  facebook: string;
+  twitter: string;
+  instagram: string;
 }
 
 export interface MemberForm {
-  knownAs: string;
+  name: string;
   gender: string;
   introduction: string;
   lookingFor: string;

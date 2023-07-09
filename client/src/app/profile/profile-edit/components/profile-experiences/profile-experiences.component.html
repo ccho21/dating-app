@@ -1,7 +1,18 @@
-<section>
-  <div *ngFor="let experience of experiences">
-    <app-panel>
-      <app-experience [experience]="experience"></app-experience>
-    </app-panel>
+<section class="my-5">
+  <div *ngIf="experiences && experiences.length; else noData">
+    <div *ngFor="let experience of experiences">
+      <app-panel [btns]="btns" sub="Create, edit and manage your experiences.">
+        <app-experience [experience]="experience"></app-experience>
+      </app-panel>
+    </div>
   </div>
+  <ng-template #noData>
+    <app-panel
+      title="Experiences"
+      sub="Create, edit and manage your experiences."
+      [btns]="btns"
+    >
+      <app-no-data [key]="'experience'"></app-no-data>
+    </app-panel>
+  </ng-template>
 </section>

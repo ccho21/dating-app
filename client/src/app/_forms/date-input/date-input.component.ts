@@ -30,6 +30,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 export class DateInputComponent implements OnInit, ControlValueAccessor {
   @Input() label?: string;
   @Input() maxDate?: Date;
+  @Input() size?: string;
   bsConfig: Partial<BsDatepickerConfig> | undefined;
   @Input() formControl?: FormControl;
   @Input() customClass: string = '';

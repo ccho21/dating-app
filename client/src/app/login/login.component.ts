@@ -56,8 +56,10 @@ export class LoginComponent implements OnInit {
         } else {
           this.toastr.error('Error occured! Please try again');
         }
+        this.loading = false;
       },
       complete: () => {
+        console.log('### complete not working?');
         this.loading = false;
       },
     });

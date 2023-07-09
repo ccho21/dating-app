@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -25,10 +26,10 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup = this.fb.group({
     gender: ['male'],
     username: ['', Validators.required],
-    knownAs: [''],
+    name: ['', Validators.required],
     dateOfBirth: ['', Validators.required],
     city: [''],
-    country: ['', Validators.required],
+    country: [''],
     password: [
       '',
       [Validators.required, Validators.minLength(4), Validators.maxLength(8)],
@@ -39,9 +40,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private fb: FormBuilder,
-    public bsModalRef: BsModalRef
-  )
-  {}
+    public bsModalRef: BsModalRef,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.intitializeForm();
@@ -64,26 +65,20 @@ export class RegisterComponent implements OnInit {
     this.accountService.register(this.registerForm?.value).subscribe({
       next: (res) => {
         console.log('### Successfully Registered ', res);
-        // this._snackBar.open('Successfully Registered', 'Dance', {
-        //   panelClass: ['blue-snackbar'],
-        //   duration: 5000,
-        //   verticalPosition: 'bottom',
-        //   horizontalPosition: 'right',
-        // });
-        // this.dialogRef.close(true);
+        this.closeModal();
+        this.toastr.success('Successfully registered');
       },
       error: (err) => {
         this.validationErrors = err;
 
         console.log('### ERROR', err);
-        // this._snackBar.open('Error occured', 'Dance', {
-        //   panelClass: ['red-snackbar'],
-        //   duration: 5000,
-        //   verticalPosition: 'bottom',
-        //   horizontalPosition: 'right',
-        // });
+        this.toastr.error('Error occured! Please try again');
       },
     });
+  }
+
+  closeModal() {
+    this.bsModalRef.hide();
   }
 
   cancel() {

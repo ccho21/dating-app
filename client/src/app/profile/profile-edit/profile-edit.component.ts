@@ -32,7 +32,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnDestroy(): void {
-    this.userSub$!.unsubscribe();
+    // this.userSub$!.unsubscribe();
   }
 
   ngOnInit(): void {

@@ -14,9 +14,18 @@ export class ExperienceOverviewComponent implements OnInit {
   pageSize = 5;
   pagination?: Pagination;
   loading?: boolean = false;
+
+  btns?: Array<any>;
   constructor(private experienceService: ExperienceService) {}
 
   ngOnInit(): void {
+    this.btns = [
+      {
+        btnLabel: 'Add Experience',
+        btnLink: '/main/dashboard/experiences/create',
+        customClass: '',
+      },
+    ];
     const params: ExperienceParams =
       this.experienceService.getExperienceParams();
 

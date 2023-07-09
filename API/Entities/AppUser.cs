@@ -8,11 +8,7 @@ namespace API.Entities
 {
     public class AppUser : IdentityUser<int>
     {
-        public string Job { get; set; }
-        public string Company { get; set; }
-        public string KnownAs { get; set; }
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
+        public string Name { get; set; }
         public string Gender { get; set; }
         public string Introduction { get; set; }
         public string LookingFor { get; set; }
@@ -20,6 +16,8 @@ namespace API.Entities
         public string City { get; set; }
         public string Country { get; set; }
 
+        public string Job { get; set; }
+        public string Company { get; set; }
         public string Website { get; set; }
         public string LinkedIn { get; set; }
         public string Github { get; set; }

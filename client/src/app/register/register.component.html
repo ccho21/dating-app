@@ -68,20 +68,8 @@
         <div class="row mb-3 align-items-center">
           <div class="col-md-12">
             <app-text-input
-              [formControl]="registerForm.controls['username'] | formControl"
-              [label]="'First name'"
-              [size]="'lg'"
-              [type]="'text'"
-            >
-            </app-text-input>
-          </div>
-        </div>
-
-        <div class="row mb-3 align-items-center">
-          <div class="col-md-12">
-            <app-text-input
-              [formControl]="registerForm.controls['username'] | formControl"
-              [label]="'Last name'"
+              [formControl]="registerForm.controls['name'] | formControl"
+              [label]="'Name'"
               [size]="'lg'"
               [type]="'text'"
             >
@@ -94,6 +82,7 @@
             <app-date-input
               [formControl]="registerForm.controls['dateOfBirth'] | formControl"
               [label]="'Date Of Birth'"
+              [size]="'lg'"
               [maxDate]="maxDate"
             ></app-date-input>
           </div>

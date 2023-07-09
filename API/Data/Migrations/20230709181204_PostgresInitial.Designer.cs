@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230709153234_PostgresInitial")]
+    [Migration("20230709181204_PostgresInitial")]
     partial class PostgresInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -93,9 +93,6 @@ namespace API.Data.Migrations
                     b.Property<string>("Facebook")
                         .HasColumnType("text");
 
-                    b.Property<string>("Firstname")
-                        .HasColumnType("text");
-
                     b.Property<string>("Gender")
                         .HasColumnType("text");
 
@@ -114,14 +111,8 @@ namespace API.Data.Migrations
                     b.Property<string>("Job")
                         .HasColumnType("text");
 
-                    b.Property<string>("KnownAs")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("LastActive")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Lastname")
-                        .HasColumnType("text");
 
                     b.Property<string>("LinkedIn")
                         .HasColumnType("text");
@@ -133,6 +124,9 @@ namespace API.Data.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("LookingFor")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
                         .HasColumnType("text");
 
                     b.Property<string>("NormalizedEmail")

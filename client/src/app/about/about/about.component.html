@@ -17,26 +17,16 @@
                   {{ member.interests }}
                 </p>
               </div>
-              <div class="about-content">
-                <h3 class="">Looking for</h3>
-                <p>
-                  {{ member.lookingFor }}
-                </p>
-              </div>
             </tab>
             <tab heading="Work and Education">
               <div>
                 <div class="about-content">
                   <h3 class="">Work</h3>
-                  <p>
-                    {{ member.introduction }}
-                  </p>
+                  <p>{{ member.job }}, {{ member.company }}</p>
                 </div>
                 <div class="about-content">
                   <h3 class="">Education</h3>
-                  <p>
-                    {{ member.interests }}
-                  </p>
+                  <p>Seneca College</p>
                 </div>
               </div>
             </tab>
@@ -45,19 +35,28 @@
               <div>
                 <div class="about-content">
                   <h3 class="">Contact info</h3>
-                  <p>abc@abc.com</p>
-                  <p>Phone: 1234567899</p>
+                  <p>{{ member.email }}</p>
+                  <p>{{ member.phoneNumber }}</p>
                 </div>
 
                 <div class="about-content">
                   <h3 class="">Location</h3>
-                  <p>Toronto, Canada</p>
+                  <p>{{ member.city }}, {{ member.country }}</p>
                 </div>
 
                 <div class="about-content">
                   <h3 class="">Websites/SNS</h3>
-                  <p><i class="fa-brands fa-github"></i>google.ca</p>
-                  <p>google.ca</p>
+                  <p>
+                    <i class="fa-brands fa-github me-3"></i>{{ member.github }}
+                  </p>
+                  <p>
+                    <i class="fa-brands fa-linkedin me-3"></i
+                    >{{ member.linkedIn }}
+                  </p>
+                  <p>
+                    <i class="fa-brands fa-website me-3"></i
+                    >{{ member.website }}
+                  </p>
                 </div>
               </div>
             </tab>

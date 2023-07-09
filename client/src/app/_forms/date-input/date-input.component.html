@@ -4,6 +4,7 @@
       [id]="label"
       type="text"
       [class.is-invalid]="formControl.touched && formControl.invalid"
+      [ngClass]="{ 'size-lg': size }"
       class="form-control"
       [formControl]="formControl | formControl"
       placeholder="{{ label }}"

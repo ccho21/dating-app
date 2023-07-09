@@ -6,6 +6,7 @@ import {
   Output,
   OnDestroy,
 } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
@@ -30,7 +31,8 @@ export class ConnectionSmComponent implements OnInit, OnDestroy {
   constructor(
     private memberService: MemberService,
     private accountService: AccountService,
-    public presence: PresenceService
+    public presence: PresenceService,
+    private toastr: ToastrService
   ) {
     console.log('### working');
   }
@@ -53,15 +55,7 @@ export class ConnectionSmComponent implements OnInit, OnDestroy {
       // update using ngrx later
       this.updateMembers.emit();
 
-      // this._snackBar.open(
-      //   `You have removed like from ${member.knownAs}`,
-      //   'okay',
-      //   {
-      //     duration: 5000,
-      //     verticalPosition: 'bottom',
-      //     horizontalPosition: 'right',
-      //   }
-      // );
+      this.toastr.success(`You have removed like from ${member.username}`);
     });
   }
 
