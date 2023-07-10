@@ -13,23 +13,26 @@
         <p class="job-title">{{ member.city }}, {{ member.country }}</p>
 
         <p class="job-discription">
-          {{ member.introduction | truncate : 100 }}
+          {{ member.introduction || "" | truncate : 100 }}
         </p>
       </div>
-      <!-- <div class="icons">
-      <button>
-        <ion-icon name="logo-instagram"></ion-icon>
-      </button>
-      <button>
-        <ion-icon name="logo-twitter"></ion-icon>
-      </button>
-      <button>
-        <ion-icon name="logo-linkedin"></ion-icon>
-      </button>
-      <button>
-        <ion-icon name="logo-facebook"></ion-icon>
-      </button>
-    </div> -->
+      <div class="icons">
+        <a *ngIf="member.github" href="{{ member.github }}">
+          <img src="/assets/shared/icons/github.svg" alt="" width="28" />
+        </a>
+        <a *ngIf="member.linkedIn" href="{{ member.linkedIn }}">
+          <img src="/assets/shared/icons/linkedin.svg" alt="" width="28" />
+        </a>
+        <a *ngIf="member.facebook" href="{{ member.facebook }}">
+          <img src="/assets/shared/icons/facebook.svg" alt="" width="28" />
+        </a>
+        <a *ngIf="member.instagram" href="{{ member.instagram }}">
+          <img src="/assets/shared/icons/instagram.svg" alt="" width="28" />
+        </a>
+        <a *ngIf="member.twitter" href="{{ member.twitter }}">
+          <img src="/assets/shared/icons/twitter.svg" alt="" width="28" />
+        </a>
+      </div>
     </a>
     <hr />
     <div class="">
