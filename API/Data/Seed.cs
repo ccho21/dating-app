@@ -18,6 +18,9 @@ namespace API.Data
             var projectData = await System.IO.File.ReadAllTextAsync("Data/ProjectSeedData.json");
             var projects = JsonSerializer.Deserialize<List<Project>>(projectData);
 
+            var experienceData = await System.IO.File.ReadAllTextAsync("Data/ExperienceSeedData.json");
+            var experiences = JsonSerializer.Deserialize<List<Experience>>(experienceData);
+
             if (users == null) return;
 
             var roles = new List<AppRole>
@@ -66,6 +69,27 @@ namespace API.Data
                         await context.Projects.AddAsync(p);
                     }
                 }
+
+                if (experiences == null) return;
+
+                foreach (var experience in experiences)
+                {
+                    if (experience.AppUserId == user.Id)
+                    {
+                        var e = new Experience
+                        {
+                            Intro = experience.Intro,
+                            Position = experience.Position,
+                            CompanyName = experience.CompanyName,
+                            Url = experience.Url,
+                            Started = DateTime.SpecifyKind(experience.Started, DateTimeKind.Utc),
+                            Ended = DateTime.SpecifyKind(experience.Started, DateTimeKind.Utc),
+                            JobDescriptions = experience.JobDescriptions,
+                            AppUser = user
+                        };
+                        await context.Experiences.AddAsync(e);
+                    }
+                }
                 await context.SaveChangesAsync();
             }
 
@@ -79,7 +103,7 @@ namespace API.Data
 
 
 
-           
+
 
         }
     }

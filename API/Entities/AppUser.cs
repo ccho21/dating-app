@@ -26,8 +26,8 @@ namespace API.Entities
         public string Instagram { get; set; }
 
         public DateTime DateOfBirth { get; set; }
-        public DateTime Created { get; set; } = DateTime.Now;
-        public DateTime LastActive { get; set; } = DateTime.Now;
+        public DateTime Created { get; set; } = DateTime.UtcNow;
+        public DateTime LastActive { get; set; } = DateTime.UtcNow;
 
         public string Skills { get; set; }
         public ICollection<Photo> Photos { get; set; }

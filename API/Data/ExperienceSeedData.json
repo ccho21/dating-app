@@ -1,0 +1,50 @@
+[
+  {
+    "Position": "SOFTWARE DEVELOPER",
+    "CompanyName": "Acentury",
+    "Url": "github.com/ccho21",
+    "Started": "2023-01-31",
+    "AppUserId": 1,
+    "JobDescriptions": [
+      {
+        "Description": "Managed a web-based solution (LAMTA) that is used for end-to end RF testing platform using Angular 13, TypeScript, RxJS, LESS, eChart.js, Java Spring Boot."
+      },
+      {
+        "Description": "Created License manager, Test automation platform through effective component structure, navigation, and optimization"
+      },
+      {
+        "Description": "Implemented task dashboard with data visualizations using echart.js enhancing data insights."
+      },
+      {
+        "Description": "Collaborated with BA, project manager, and other developers to meet project requirements and goals."
+      },
+      {
+        "Description": "Participated in developing RESTful APIs using Java Spring Boot. "
+      }
+    ]
+  },
+  {
+    "Position": "SOFTWARE DEVELOPER",
+    "CompanyName": "Acentury",
+    "Url": "github.com/ccho21",
+    "Started": "2023-01-31",
+    "AppUserId": 1,
+    "JobDescriptions": [
+      {
+        "Description": "Managed a web-based solution (LAMTA) that is used for end-to end RF testing platform using Angular 13, TypeScript, RxJS, LESS, eChart.js, Java Spring Boot."
+      },
+      {
+        "Description": "Created License manager, Test automation platform through effective component structure, navigation, and optimization"
+      },
+      {
+        "Description": "Implemented task dashboard with data visualizations using echart.js enhancing data insights."
+      },
+      {
+        "Description": "Collaborated with BA, project manager, and other developers to meet project requirements and goals."
+      },
+      {
+        "Description": "Participated in developing RESTful APIs using Java Spring Boot. "
+      }
+    ]
+  }
+]
