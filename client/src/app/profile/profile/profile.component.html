@@ -72,7 +72,7 @@
             (selectTab)="activateTab($event)"
             #projectTab="tab"
           >
-            <app-projects-tab *ngIf="member?.projects"> </app-projects-tab>
+            <app-projects-tab *ngIf="projectTab.active"> </app-projects-tab>
           </tab>
 
           <tab

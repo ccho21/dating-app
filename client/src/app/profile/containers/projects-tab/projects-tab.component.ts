@@ -32,6 +32,7 @@ export class ProjectsTabComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('### hello');
     this.getProjects();
   }
 

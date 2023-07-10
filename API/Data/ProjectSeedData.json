@@ -1,0 +1,76 @@
+[
+  {
+    "Name": "Get Together",
+    "Status": 3,
+    "Progress": 85,
+    "IsPublic": true,
+    "Intro": "",
+    "ProjectWith": "",
+    "Description": "A network building application for my IT friends with features of polishing user main profile by adding projects, experiences, skills, and educations.",
+    "MainFeature": "Featured real-time messages, live-status and follow/unfollow.",
+    "Url": "https://charles-get-together-622fe43bcad0.herokuapp.com/main",
+    "GithubUrl": "https://github.com/ccho21/get-together",
+    "FrontEnd": "Angular 14, Heroku, Git, PostgreSQL, ASP.NET, Bootstrap 5, SignalR, WebSocket",
+    "BackEnd": "",
+    "Database": "",
+    "Deployement": "Vercel, AWS (EC2, RDS, Route 53)",
+    "AppUserId": 1,
+    "Images": [
+      {
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1663853460/cld-sample-3.jpg",
+        "IsMain": false
+      },
+      {
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1663853460/cld-sample-4.jpg",
+        "IsMain": false
+      }
+    ]
+  },
+  {
+    "Name": "Bulletin Board",
+    "Status": 4,
+    "Progress": 60,
+    "IsPublic": true,
+    "Intro": "",
+    "ProjectWith": "",
+    "Description": "An Instagram-like web-base application with features of view, comment, like, and posts.",
+    "MainFeature": "View, Comment, Sub comments, Tag, Like, and Posts Google and Facebook login",
+    "Url": "https://charles-get-together-622fe43bcad0.herokuapp.com/main",
+    "GithubUrl": "https://github.com/ccho21/pf-angular-combined",
+    "FrontEnd": "Angular, Firebase , Git, NgRx , RxJS , TypeScriptSkills",
+    "BackEnd": "",
+    "Database": "",
+    "Deployement": "",
+    "AppUserId": 1,
+    "Images": [
+      {
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1663853459/cld-sample.jpg",
+        "IsMain": true
+      },
+      {
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1663853459/cld-sample-2.jpg",
+        "IsMain": false
+      }
+    ]
+  },
+  {
+    "Name": "MINESWEEPER",
+    "Status": 2,
+    "Progress": 100,
+    "IsPublic": true,
+    "Intro": "",
+    "ProjectWith": "",
+    "Description": "A mini game focusing a variety of JavaScript Events using Vue.js",
+    "MainFeature": "Find mines with mouse events, checking blocks, marking mines, finding all blocks surrounded",
+    "Url": "https://github.com/ccho21/minesweeper",
+    "GithubUrl": "https://github.com/ccho21/minesweeper",
+    "FrontEnd": "Vuejs, SASS, HTML5",
+    "BackEnd": "",
+    "Database": "",
+    "Deployement": "",
+    "AppUserId": 1,
+    "Images": [
+     
+    ]
+  }
+]
