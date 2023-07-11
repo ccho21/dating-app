@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.form = this.fb.group({
-      username: ['pm_olive22', [Validators.required]],
+      username: ['ccho', [Validators.required]],
       password: ['Pa$$w0rd', [Validators.required]],
     });
   }
