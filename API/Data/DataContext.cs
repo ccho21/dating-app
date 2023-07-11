@@ -22,6 +22,7 @@ namespace API.Data
         }
         public DbSet<UserLike> Likes { get; set; }
         public DbSet<ProjectLike> ProjectLikes { get; set; }
+        public DbSet<ProjectUser> ProjectUsers { get; set; }
         public DbSet<Message> Messages { get; set; }
 
         public DbSet<Group> Groups { get; set; }

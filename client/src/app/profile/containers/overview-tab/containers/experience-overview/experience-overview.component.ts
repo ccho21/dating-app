@@ -11,7 +11,7 @@ import { ExperienceService } from 'src/app/_services/experience.service';
 export class ExperienceOverviewComponent implements OnInit {
   @Input() experiences?: Partial<any[]>;
   pageNumber = 1;
-  pageSize = 5;
+  pageSize = 3;
   pagination?: Pagination;
   loading?: boolean = false;
 
@@ -29,7 +29,7 @@ export class ExperienceOverviewComponent implements OnInit {
     const params: ExperienceParams =
       this.experienceService.getExperienceParams();
 
-    // this.loadExperiences(params);
+    this.loadExperiences(params);
   }
 
   loadExperiences(params: ExperienceParams) {

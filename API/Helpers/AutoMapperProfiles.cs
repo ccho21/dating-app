@@ -24,6 +24,8 @@ namespace API.Helpers
            .ForMember(dest => dest.Likes, opt => opt.MapFrom(src => src.LikedByUsers.Count()))
            .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
 
+            CreateMap<AppUser, TeamMemberDto>()
+                        .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url));
 
             CreateMap<AppUser, MemberMessageDto>()
             .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.UserName))

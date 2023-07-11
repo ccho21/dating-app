@@ -1,4 +1,3 @@
-import { ViewportScroller } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -47,7 +46,6 @@ export class MemberMessagesComponent implements OnInit, OnDestroy {
   constructor(
     public messageService: MessageService,
     private accountService: AccountService,
-    private scroller: ViewportScroller,
     private route: ActivatedRoute,
     private router: Router,
     private memberService: MemberService,

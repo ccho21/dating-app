@@ -273,6 +273,9 @@ namespace API.Data.Migrations
                     b.Property<string>("Position")
                         .HasColumnType("text");
 
+                    b.Property<string>("Skills")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("Started")
                         .HasColumnType("timestamp without time zone");
 
@@ -457,6 +460,9 @@ namespace API.Data.Migrations
                     b.Property<string>("Intro")
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsCurrent")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("IsPublic")
                         .HasColumnType("boolean");
 
@@ -537,7 +543,7 @@ namespace API.Data.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("ProjectUser");
+                    b.ToTable("ProjectUsers");
                 });
 
             modelBuilder.Entity("API.Entities.Skill", b =>
@@ -828,7 +834,7 @@ namespace API.Data.Migrations
                         .HasForeignKey("AppUserId");
 
                     b.HasOne("API.Entities.Experience", "Experience")
-                        .WithMany("Skills")
+                        .WithMany()
                         .HasForeignKey("ExperienceId");
 
                     b.HasOne("API.Entities.Project", "Project")
@@ -930,8 +936,6 @@ namespace API.Data.Migrations
                     b.Navigation("JobDescriptions");
 
                     b.Navigation("Logos");
-
-                    b.Navigation("Skills");
                 });
 
             modelBuilder.Entity("API.Entities.Group", b =>

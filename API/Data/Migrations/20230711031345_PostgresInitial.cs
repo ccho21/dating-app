@@ -222,6 +222,7 @@ namespace API.Data.Migrations
                     Position = table.Column<string>(type: "text", nullable: true),
                     CompanyName = table.Column<string>(type: "text", nullable: true),
                     Url = table.Column<string>(type: "text", nullable: true),
+                    Skills = table.Column<string>(type: "text", nullable: true),
                     Started = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IsCurrent = table.Column<bool>(type: "boolean", nullable: false),
                     Ended = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
@@ -307,6 +308,7 @@ namespace API.Data.Migrations
                     Status = table.Column<int>(type: "integer", nullable: false),
                     Progress = table.Column<int>(type: "integer", nullable: false),
                     IsPublic = table.Column<bool>(type: "boolean", nullable: false),
+                    IsCurrent = table.Column<bool>(type: "boolean", nullable: false),
                     Intro = table.Column<string>(type: "text", nullable: true),
                     ProjectWith = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
@@ -438,7 +440,7 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProjectUser",
+                name: "ProjectUsers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -448,15 +450,15 @@ namespace API.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectUser", x => x.Id);
+                    table.PrimaryKey("PK_ProjectUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProjectUser_AspNetUsers_AppUserId",
+                        name: "FK_ProjectUsers_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProjectUser_Projects_ProjectId",
+                        name: "FK_ProjectUsers_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
@@ -598,13 +600,13 @@ namespace API.Data.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectUser_AppUserId",
-                table: "ProjectUser",
+                name: "IX_ProjectUsers_AppUserId",
+                table: "ProjectUsers",
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectUser_ProjectId",
-                table: "ProjectUser",
+                name: "IX_ProjectUsers_ProjectId",
+                table: "ProjectUsers",
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
@@ -662,7 +664,7 @@ namespace API.Data.Migrations
                 name: "ProjectLikes");
 
             migrationBuilder.DropTable(
-                name: "ProjectUser");
+                name: "ProjectUsers");
 
             migrationBuilder.DropTable(
                 name: "Skills");

@@ -8,7 +8,6 @@ import { User } from '../_models/user';
 import { Member } from '../_models/member';
 import { Pagination } from '../_models/pagination';
 import { Subscription, concatMap, of } from 'rxjs';
-import { ViewportScroller } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { PresenceService } from '../_services/presence.service';
 
@@ -63,7 +62,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     public accountService: AccountService,
     private router: Router,
     private memberService: MemberService,
-    private scroller: ViewportScroller,
     public presence: PresenceService
   ) {}
   ngOnDestroy(): void {
@@ -117,8 +115,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (member) {
       this.member = member;
     }
-
-    this.scroller.scrollToAnchor('member-detail');
   }
 
   openMessage(member: Member) {

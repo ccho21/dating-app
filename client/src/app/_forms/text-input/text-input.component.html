@@ -6,7 +6,6 @@
     type="{{ type }}"
     class="form-control"
     [formControl]="formControl | formControl"
-    placeholder="{{ label }}"
     [class]="customClass"
   />
   <div *ngIf="formControl.errors?.required" class="invalid-feedback">

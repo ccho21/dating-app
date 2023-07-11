@@ -36,10 +36,6 @@ export class ProjectOverviewComponent implements OnInit, OnDestroy {
       }
     );
   }
-  ngOnDestroy(): void {
-    this.userSub$!.unsubscribe();
-    this.projectService.resetProjectParams();
-  }
 
   ngOnInit(): void {
     this.btns = [
@@ -64,6 +60,8 @@ export class ProjectOverviewComponent implements OnInit, OnDestroy {
   loadProjects(params: ProjectParams) {
     this.loading = true;
     params.currentUsername = this.user?.username || undefined;
+    params.pageNumber = 1;
+    params.pageSize = 5;
 
     this.projectService.getProjects(params).subscribe({
       next: (response) => {
@@ -82,5 +80,10 @@ export class ProjectOverviewComponent implements OnInit, OnDestroy {
 
   pageChanged(params: ProjectParams): void {
     this.loadProjects(params);
+  }
+
+  ngOnDestroy(): void {
+    this.userSub$!.unsubscribe();
+    this.projectService.resetProjectParams();
   }
 }

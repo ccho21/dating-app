@@ -5,7 +5,6 @@
     [rows]="rows"
     class="form-control"
     [formControl]="formControl | formControl"
-    placeholder="{{ label }}"
   ></textarea>
   <div *ngIf="formControl.errors?.required" class="invalid-feedback">
     Please enter a {{ label }}

@@ -12,6 +12,7 @@ namespace API.Entities
         public string Position { get; set; }
         public string CompanyName { get; set; }
         public string Url { get; set; }
+        public string Skills { get; set; }
         public DateTime Started { get; set; }
         public bool IsCurrent { get; set; }
         public DateTime? Ended { get; set; }
@@ -21,6 +22,5 @@ namespace API.Entities
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedDate { get; set; }
         public ICollection<JobDescription> JobDescriptions { get; set; }
-        public ICollection<Skill> Skills { get; set; }
     }
 }

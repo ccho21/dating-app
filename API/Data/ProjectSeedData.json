@@ -1,9 +1,12 @@
 [
   {
     "Name": "Get Together",
+    "ProjectStarted": "2023-01-31",
+    "ProjectEnded": "2023-07-01",
     "Status": 3,
     "Progress": 85,
     "IsPublic": true,
+    "IsCurrent": true,
     "Intro": "",
     "ProjectWith": "",
     "Description": "A network building application for my IT friends with features of polishing user main profile by adding projects, experiences, skills, and educations.",
@@ -15,6 +18,11 @@
     "Database": "",
     "Deployement": "Vercel, AWS (EC2, RDS, Route 53)",
     "AppUserId": 1,
+    "TeamMembers": [
+      {
+        "AppUserId": 4
+      }
+    ],
     "Images": [
       {
         "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1663853460/cld-sample-3.jpg",
@@ -28,9 +36,12 @@
   },
   {
     "Name": "Bulletin Board",
+    "ProjectStarted": "2022-04-01",
+    "ProjectEnded": "2022-07-01",
     "Status": 4,
     "Progress": 60,
     "IsPublic": true,
+    "IsCurrent": false,
     "Intro": "",
     "ProjectWith": "",
     "Description": "An Instagram-like web-base application with features of view, comment, like, and posts.",
@@ -42,6 +53,14 @@
     "Database": "",
     "Deployement": "",
     "AppUserId": 1,
+    "TeamMembers": [
+      {
+        "AppUserId": 7
+      },
+      {
+        "AppUserId": 9
+      }
+    ],
     "Images": [
       {
         "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1663853459/cld-sample.jpg",
@@ -55,9 +74,12 @@
   },
   {
     "Name": "MINESWEEPER",
+    "ProjectStarted": "2019-04-01",
+    "ProjectEnded": "2019-07-01",
     "Status": 2,
     "Progress": 100,
     "IsPublic": true,
+    "IsCurrent": false,
     "Intro": "",
     "ProjectWith": "",
     "Description": "A mini game focusing a variety of JavaScript Events using Vue.js",
@@ -69,8 +91,14 @@
     "Database": "",
     "Deployement": "",
     "AppUserId": 1,
-    "Images": [
-     
-    ]
+    "TeamMembers": [
+      {
+        "AppUserId": 4
+      },
+      {
+        "AppUserId": 9
+      }
+    ],
+    "Images": []
   }
 ]

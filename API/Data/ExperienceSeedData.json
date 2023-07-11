@@ -1,9 +1,10 @@
 [
   {
-    "Position": "SOFTWARE DEVELOPER",
+    "Position": "Software developer",
     "CompanyName": "Acentury",
     "Url": "github.com/ccho21",
-    "Started": "2023-01-31",
+    "Started": "2023-05-02",
+    "IsCurrent": true,
     "AppUserId": 1,
     "JobDescriptions": [
       {
@@ -24,26 +25,57 @@
     ]
   },
   {
-    "Position": "SOFTWARE DEVELOPER",
+    "Position": "Web developer",
     "CompanyName": "Acentury",
-    "Url": "github.com/ccho21",
-    "Started": "2023-01-31",
+    "Url": "https://www.aristahomes.com/",
+    "Started": "2020-05-02",
+    "Ended": "2022-04-02",
+    "IsCurrent": false,
     "AppUserId": 1,
     "JobDescriptions": [
       {
-        "Description": "Managed a web-based solution (LAMTA) that is used for end-to end RF testing platform using Angular 13, TypeScript, RxJS, LESS, eChart.js, Java Spring Boot."
+        "Description": "Developed websites and kiosks from front-end to back-end to premier home"
       },
       {
-        "Description": "Created License manager, Test automation platform through effective component structure, navigation, and optimization"
+        "Description": "builder clients such as Arista homes, Deco homes, Tribute using Nuxt.js, WordPress, Vanila JavaScript, and SASS"
       },
       {
-        "Description": "Implemented task dashboard with data visualizations using echart.js enhancing data insights."
+        "Description": "Translated mockup designs into fully functional and responsive websites ensuring cross-browser compatibility and multi-platform optimization"
       },
       {
-        "Description": "Collaborated with BA, project manager, and other developers to meet project requirements and goals."
+        "Description": "Implemented Google Analytics and implemented effective SEO practices."
       },
       {
-        "Description": "Participated in developing RESTful APIs using Java Spring Boot. "
+        "Description": "Managed multiple projects for different clients under tight deadlines. "
+      }
+    ]
+  },
+  {
+    "Position": "Front-end developer",
+    "CompanyName": "Acentury",
+    "Url": "https://www.myfastrak.511sd.com/en/",
+    "Started": "2019-05-02",
+    "Ended": "2020-03-31",
+    "IsCurrent": false,
+    "AppUserId": 1,
+    "JobDescriptions": [
+      {
+        "Description": "Developed web-based tolling system application for San Diego Association of Governments (SANDAG) using Angular 7+, TypeScript, Material UI, SASS, Jasmine"
+      },
+      {
+        "Description": "Developed and managed services such as case dispute, transponder, pay-by-plate, and payment"
+      },
+      {
+        "Description": "Enhanced web functionality, cross-browser compatibility including IE, responsiveness, and accessibility with best practices"
+      },
+      {
+        "Description": "Deployed API services and codes to a dev server on a daily basis."
+      },
+      {
+        "Description": "Collaborated with designers, BA, and QA in different countries. "
+      },
+      {
+        "Description": "Conducted code reviews and study group with other developers. "
       }
     ]
   }

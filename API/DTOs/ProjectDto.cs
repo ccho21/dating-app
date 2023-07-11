@@ -26,7 +26,7 @@ namespace API.DTOs
         public DateTime? ProjectEnded { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
-        public UserDto User { get; set; }
+        public TeamMemberDto User { get; set; }
         public ICollection<PhotoDto> Images { get; set; }
         public ICollection<TeamMemberDto> TeamMembers { get; set; }
     }

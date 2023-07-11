@@ -55,6 +55,7 @@ export class ExperienceEditComponent implements OnInit, OnDestroy {
       $event.returnValue = true;
     }
   }
+
   constructor(
     private experienceService: ExperienceService,
     private route: ActivatedRoute,
@@ -177,25 +178,23 @@ export class ExperienceEditComponent implements OnInit, OnDestroy {
 
   private initForm(): void {
     this.experienceForm = this.fb.group({
-      intro: ['Hello everyone I am charles.'],
-      position: ['Front-end Developer'],
-      companyName: ['Guidelines advertising'],
+      intro: [''],
+      position: [''],
+      companyName: [''],
       isCurrent: [false],
       jobDescriptions: this.fb.array([]),
-      url: ['google.ca'],
+      url: [''],
       started: [new Date()],
       ended: [new Date()],
       skill: [''],
     });
 
     const jdForm = this.fb.group({
-      description: ['Simple job description about guidelnies advertising'],
-      position: ['Web developer'],
+      description: [''],
+      position: [],
       started: [new Date()],
       ended: [new Date()],
-      details: [
-        'I was working as a web developer for 2 years and I was working on developing a variety of websites that promotes the pre-construction condos and houses',
-      ],
+      details: [''],
     });
   }
 

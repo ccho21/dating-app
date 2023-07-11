@@ -82,8 +82,6 @@ namespace API.Controllers
             var username = User.GetUsername();
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
 
-            var matchingSkills = await getMatchingSkills(createExperienceDto.Skills);
-
             var experience = new Experience
             {
                 Intro = createExperienceDto.Intro,
@@ -93,6 +91,7 @@ namespace API.Controllers
                 IsCurrent = createExperienceDto.IsCurrent,
                 Started = createExperienceDto.Started,
                 Ended = createExperienceDto.Ended,
+                Skills = createExperienceDto.Skills,
                 AppUser = user,
                 JobDescriptions = createExperienceDto.JobDescriptions.Select(x => new JobDescription
                 {
@@ -104,7 +103,6 @@ namespace API.Controllers
                     Details = x.Details,
 
                 }).ToList(),
-                Skills = matchingSkills,
             };
 
             _unitOfWork.ExperienceRepository.AddExperience(experience);

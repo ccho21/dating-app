@@ -85,21 +85,19 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
   private initForm(): void {
     this.projectForm = this.fb.group({
       id: null,
-      name: ['creating a project'],
-      intro: ['this project is just a same ple one'],
-      projectWith: ['I build this app all by my self'],
-      description: ['to learn c# and Angular'],
-      mainFeature: [
-        'Searching, finding, message, looking for people, CRUD projects, photos, experiences',
-      ],
-      url: ['localhost:4200'],
-      githubUrl: ['github.com/ccho21'],
-      frontEnd: ['angular, rxjs, ngrx'],
-      backEnd: ['dotnet c#'],
-      database: ['postgresSQL'],
-      deployement: ['Heroku'],
-      projectStarted: [new Date()],
-      projectEnded: [new Date()],
+      name: [''],
+      intro: [''],
+      projectWith: [''],
+      description: [''],
+      mainFeature: [''],
+      url: [''],
+      githubUrl: [''],
+      frontEnd: [''],
+      backEnd: [''],
+      database: [''],
+      deployement: [''],
+      projectStarted: [null],
+      projectEnded: [null],
     });
   }
 

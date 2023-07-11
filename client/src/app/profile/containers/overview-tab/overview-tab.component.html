@@ -17,19 +17,11 @@
       </div>
     </app-panel>
   </div>
+
   <div class="col-lg-6">
-    <app-panel title="Recent visitors" customClass="no-padding min-height">
-      <app-visitor-overview class="w-100"></app-visitor-overview>
-      <div class="text-end m-3">
-        <app-link
-          customClass="primary"
-          routerLink="/main/messages"
-          routerLinkActive="active"
-        >
-          <span class="ms-3"> View Visitors </span>
-          <i class="fa-solid fa-arrow-right"></i>
-        </app-link>
-      </div>
+    <app-panel title="Saved Connections" customClass="min-height no-padding">
+      <div class="title mb-4"></div>
+      <app-connection-overview class="w-100"></app-connection-overview>
     </app-panel>
   </div>
 
@@ -38,17 +30,25 @@
   </div>
 
   <div class="col-lg-6">
-   
-
     <app-experience-overview
       [experiences]="member?.experiences"
       class="w-100"
     ></app-experience-overview>
   </div>
+
   <div class="col-lg-6">
-    <app-panel title="Saved Connections" customClass="min-height no-padding">
-      <div class="title mb-4"></div>
-      <app-connection-overview class="w-100"></app-connection-overview>
+    <app-panel title="Recent visitors" customClass="no-padding min-height">
+      <app-visitor-overview class="w-100"></app-visitor-overview>
+      <div class="text-end m-3">
+        <app-link
+          customClass="primary"
+          routerLink="/main"
+          routerLinkActive="active"
+        >
+          <span class="ms-3"> View Visitors </span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </app-link>
+      </div>
     </app-panel>
   </div>
 </div>
