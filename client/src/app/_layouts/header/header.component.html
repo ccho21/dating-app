@@ -20,6 +20,7 @@
           menuClass="dropdown-menu-right messsage-dropdown"
           ariaControls="message-dropdown"
           id="message-dropdown"
+          class="d-block no-active"
           (onChange)="handleMobileChange($event)"
         >
           <li class="dw-item" role="menuitem">Chats</li>
@@ -47,6 +48,7 @@
           customClass="dropdown-menu-right"
           ariaControls="account-dropdown"
           id="account-dropdown"
+          class="d-block no-active"
         >
           <li class="dw-item" role="menuitem">
             <img
@@ -161,6 +163,7 @@
             menuClass="dropdown-menu-right messsage-dropdown white"
             ariaControls="message-dropdown"
             id="message-dropdown"
+            class="d-block no-active"
             (onChange)="handleChange($event)"
           >
             <li class="dw-item" role="menuitem">Chats</li>
@@ -203,7 +206,7 @@
             customClass="dropdown-menu-right"
             ariaControls="account-dropdown"
             id="account-dropdown"
-            class="no-active"
+            class="no-active d-block"
           >
             <li class="dw-item" role="menuitem">
               <img
