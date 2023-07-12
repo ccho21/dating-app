@@ -53,6 +53,11 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<ProjectDto>> CreateProject(ProjectUpdateDto createProjectDto)
         {
+            if (createProjectDto == null)
+            {
+                return BadRequest("Project data cannot be null");
+            }
+
             var username = User.GetUsername();
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
 
@@ -72,25 +77,28 @@ namespace API.Controllers
                 Database = createProjectDto.Database,
                 Deployement = createProjectDto.Deployement,
                 ProjectStarted = createProjectDto.ProjectStarted,
-            ProjectEnded = createProjectDto.ProjectEnded,
+                ProjectEnded = createProjectDto.ProjectEnded,
                 AppUser = user,
-                TeamMembers = new List<ProjectUser>()
             };
 
             _unitOfWork.ProjectRepository.AddProject(project);
             _context.SaveChanges();
 
-            foreach (var memberId in createProjectDto.TeamMembers)
-            {
-                var member = await _unitOfWork.UserRepository.GetUserWithPhotoByIdAsync(memberId);
-                var projectUser = new ProjectUser
-                {
-                    AppUser = member,
-                    ProjectId = project.Id
-                };
-                project.TeamMembers.Add(projectUser);
-            }
+            var teamMembers = new List<ProjectUser>();
 
+            if (createProjectDto.TeamMembers != null)
+            {
+                foreach (var memberId in createProjectDto.TeamMembers)
+                {
+                    var member = await _unitOfWork.UserRepository.GetUserWithPhotoByIdAsync(memberId);
+                    var projectUser = new ProjectUser
+                    {
+                        AppUser = member,
+                        ProjectId = project.Id
+                    };
+                    project.TeamMembers.Add(projectUser);
+                }
+            }
 
             if (await _unitOfWork.Complete())
                 return Ok(_mapper.Map<ProjectDto>(project));

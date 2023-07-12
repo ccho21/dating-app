@@ -44,10 +44,14 @@ namespace API.Helpers
                         opt => opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(dest => dest.RecipientPhotoUrl,
                         opt => opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
+            
+            
             CreateMap<Project, ProjectDto>()
                 .ForMember(dest => dest.User,
                         opt => opt.MapFrom(src => src.AppUser));
             CreateMap<ProjectUpdateDto, Project>();
+            
+            
             CreateMap<Experience, ExperienceDto>();
             CreateMap<ExperienceUpdateDto, Experience>();
 
