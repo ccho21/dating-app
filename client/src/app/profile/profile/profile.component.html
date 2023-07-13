@@ -1,9 +1,168 @@
-<div class="container px-sm-3">
+<div class="container px-sm-3" *ngIf="member as user">
   <div class="pt-5">
-    <div class="profile">
-      <app-loader [loading]="loading"></app-loader>
-      <app-panel>
-        <section class="header-background" *ngIf="user">
+    <app-loader [loading]="loading"></app-loader>
+    <app-panel>
+      <section class="profile p-2 px-lg-4">
+        <div class="row">
+          <div class="col-lg-2 text-center mb-2">
+            <div class="thumbnail-box">
+              <img
+                class="user-thumbnail size-sm user-border"
+                width="40"
+                [src]="user.photoUrl || './assets/shared/user.png'"
+                [alt]="user.username"
+              />
+            </div>
+          </div>
+          <div class="col-lg-10 mt-auto">
+            <div class="row text-center text-lg-start">
+              <div class="col">
+                <h1 class="heading-1 mb-0">
+                  {{ user.name }}
+                </h1>
+                <div class="job mb-3">
+                  {{ user.job }} <span *ngIf="user.company">at</span>
+                  {{ user.company }}
+                </div>
+                <!-- <div class="location">
+                    <div class="">{{ member.city }}, {{ member.country }}</div>
+                  </div> -->
+
+                <div
+                  class="sns justify-content-center justify-content-lg-start mb-3"
+                >
+                  <a
+                    *ngIf="user.website"
+                    href="{{ user.website }}"
+                    target="_blank"
+                    class="d-block mb-2"
+                  >
+                    <img
+                      src="/assets/shared/icons/website.svg"
+                      width="30"
+                      alt=""
+                    />
+                  </a>
+                  <a
+                    *ngIf="member.linkedIn"
+                    href="{{ member.linkedIn }}"
+                    target="_blank"
+                    class="d-block mb-2"
+                  >
+                    <img
+                      src="/assets/shared/icons/linkedin.svg"
+                      width="30"
+                      alt=""
+                    />
+                  </a>
+
+                  <div>
+                    <a
+                      *ngIf="member.github"
+                      href="{{ member.github }}"
+                      target="_blank"
+                      class="d-block mb-2"
+                    >
+                      <img
+                        src="/assets/shared/icons/github.svg"
+                        width="30"
+                        alt=""
+                      />
+                    </a>
+                  </div>
+                  <div>
+                    <a
+                      *ngIf="member.facebook"
+                      href="{{ member.facebook }}"
+                      target="_blank"
+                      class="d-block mb-2"
+                    >
+                      <img
+                        src="/assets/shared/icons/facebook.svg"
+                        width="30"
+                        alt=""
+                      />
+                    </a>
+                  </div>
+                  <div>
+                    <a
+                      *ngIf="member.instagram"
+                      href="{{ member.instagram }}"
+                      target="_blank"
+                      class="d-block mb-2"
+                    >
+                      <img
+                        src="/assets/shared/icons/instagram.svg"
+                        width="30"
+                        alt=""
+                      />
+                    </a>
+                  </div>
+                  <div>
+                    <a
+                      *ngIf="member.twitter"
+                      href="{{ member.twitter }}"
+                      target="_blank"
+                      class="d-block mb-2"
+                    >
+                      <img
+                        src="/assets/shared/icons/twitter.svg"
+                        width="30"
+                        alt=""
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row align-items-center">
+              <div class="col-lg-6 mb-4">
+                <div
+                  class="activities justify-content-center justify-content-lg-start"
+                >
+                  <small>
+                    <span>
+                      {{ member.likedByUsers.length }}
+                    </span>
+                    projects
+                  </small>
+                  <small class="ms-3">
+                    <span>
+                      {{ member.likedByUsers.length }}
+                    </span>
+                    Followers
+                  </small>
+                  <small class="ms-3">
+                    <span>
+                      {{ member.likedByUsers.length }}
+                    </span>
+                    Following
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-6 mb-4">
+                <div class="btn-box text-center text-lg-start">
+                  <app-button
+                    icon="fa fa-plus"
+                    customClass=""
+                    [routerLink]="'/main/dashboard/projects/create'"
+                  >
+                    Add Project
+                  </app-button>
+                  <app-button
+                    icon="fa fa-plus"
+                    customClass=""
+                    [routerLink]="'/main/dashboard/experiences/create'"
+                  >
+                    Add Experience
+                  </app-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- <section class="header-background" *ngIf="user">
           <div class="row">
             <div class="col-lg-2 text-center mb-3">
               <div class="thumbnail-box">
@@ -49,67 +208,66 @@
               </div>
             </div>
           </div>
-        </section>
-      </app-panel>
+        </section> -->
+    </app-panel>
 
-      <section class="position-relative">
-        <tabset class="overview-tabset" type="pills" #profileTabs>
-          <tab
-            heading="Overview"
-            (selectTab)="activateTab($event)"
-            #overviewTab="tab"
-          >
-            <div class="py-5">
-              <app-overview-tab
-                [member]="member"
-                *ngIf="overviewTab.active"
-              ></app-overview-tab>
-            </div>
-          </tab>
-
-          <tab
-            heading="Projects"
-            (selectTab)="activateTab($event)"
-            #projectTab="tab"
-          >
-            <app-projects-tab *ngIf="projectTab.active"> </app-projects-tab>
-          </tab>
-
-          <tab
-            heading="Experiences"
-            (selectTab)="activateTab($event)"
-            #experienceTab="tab"
-          >
-            <app-experience-tab *ngIf="experienceTab.active">
-            </app-experience-tab>
-          </tab>
-          <!-- <tab heading="Education" (selectTab)="activateTab($event)">
-            TAB3
-
-            <sub-component
-                name="C"
-                *ngIf="tabC.active"
-                (onInit)="message('Sub-Component C activated')"
-                (onDestroy)="message('Sub-Component C destroyed')"
-              ></sub-component>
-          </tab> -->
-          <!-- <tab heading="Skills" (selectTab)="activateTab($event)">
-            TAB3
-
-            <sub-component
-                name="C"
-                *ngIf="tabC.active"
-                (onInit)="message('Sub-Component C activated')"
-                (onDestroy)="message('Sub-Component C destroyed')"
-              ></sub-component>
-          </tab> -->
-        </tabset>
-        <!-- <div class="spinner" *ngIf="loading">
-          <div class="spinner-border md" role="status">
-            <span class="visually-hidden">Loading...</span>
+    <section class="position-relative">
+      <tabset class="overview-tabset" type="pills" #profileTabs>
+        <tab
+          heading="Overview"
+          (selectTab)="activateTab($event)"
+          #overviewTab="tab"
+        >
+          <div class="py-5">
+            <app-overview-tab
+              [member]="member"
+              *ngIf="overviewTab.active"
+            ></app-overview-tab>
           </div>
-        </div> -->
-      </section>
-    </div>
+        </tab>
+
+        <tab
+          heading="Projects"
+          (selectTab)="activateTab($event)"
+          #projectTab="tab"
+        >
+          <app-projects-tab *ngIf="projectTab.active"></app-projects-tab>
+        </tab>
+
+        <tab
+          heading="Experiences"
+          (selectTab)="activateTab($event)"
+          #experienceTab="tab"
+        >
+          <app-experience-tab *ngIf="experienceTab.active">
+          </app-experience-tab>
+        </tab>
+        <!-- <tab heading="Education" (selectTab)="activateTab($event)">
+            TAB3
+
+            <sub-component
+                name="C"
+                *ngIf="tabC.active"
+                (onInit)="message('Sub-Component C activated')"
+                (onDestroy)="message('Sub-Component C destroyed')"
+              ></sub-component>
+          </tab> -->
+        <!-- <tab heading="Skills" (selectTab)="activateTab($event)">
+            TAB3
+
+            <sub-component
+                name="C"
+                *ngIf="tabC.active"
+                (onInit)="message('Sub-Component C activated')"
+                (onDestroy)="message('Sub-Component C destroyed')"
+              ></sub-component>
+          </tab> -->
+      </tabset>
+      <div class="spinner" *ngIf="loading">
+        <div class="spinner-border md" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </section>
   </div>
 </div>

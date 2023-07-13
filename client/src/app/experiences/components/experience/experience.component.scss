@@ -1,77 +1,87 @@
 @import "_typography";
-
 .experience {
-  @extend .text-1;
+  margin: 1rem 0;
+  background-color: var(--white);
+  border-radius: 1rem;
+  box-shadow: 0 0 10px var(--transparent-more);
+  overflow: hidden;
+  padding: 1.5rem;
   text-align: left;
   position: relative;
-  .content {
-    position: relative;
-    margin-left: 3rem;
-    .content-header {
-      @extend .heading-4;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-    }
-  }
+
   .img-box {
-    position: relative;
-    padding-right: 3rem;
-    &::before {
-      content: " ";
-      position: absolute;
-      height: 100%;
-      width: 0.1rem;
-      right: 0;
-      background-color: var(--black-transparent);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 15rem;
+      height: 15rem;
+      // object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--white);
     }
   }
-  & img {
-    background-color: var(--black-transparent);
-    padding: 1rem;
-  }
-  .position {
-    @extend .heading-2;
-    font-weight: 500;
-  }
 
-  .company-name {
-    @extend .text-1;
-    color: var(--text-light);
-    margin-bottom: 0.5rem;
-  }
-  .working-date {
-    padding-bottom: 1rem;
-    font-weight: 400;
-    // font-size: 1.1rem;
-    color: var(--text-light);
-  }
+  .content {
+    color: var(--text-main);
 
-  .company-description {
-    padding-bottom: 1rem;
-  }
-
-  .description {
-    margin-bottom: 1.5rem;
-    .description-header {
+    .content-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.5rem;
+
+      .position {
+        @extend .heading-3;
+        color: var(--text-main);
+        font-weight: 900;
+      }
+
+      .company-name {
+        @extend .text-1;
+      }
     }
-    .description-title {
-      @extend .text-1;
-      color: var(--text-main);
-      margin-bottom: 0.5rem;
-    }
+
     .job-date {
-      @extend .text-3;
-      color: var(--text-light);
-    }
-    .job-detail {
-      @extend .text-2;
       color: var(--text-main);
-      margin-left: 2rem;
+      margin-top: 0.5rem;
     }
+
+    .company-description {
+      @extend .text-3;
+    }
+
+    .description {
+      @extend .text-3;
+
+      .description-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .description {
+          @extend .text-2;
+          color: var(--text-main);
+        }
+
+        .job-date {
+          @extend .text-2;
+          color: var(--text-main);
+          margin-top: 0.5rem;
+        }
+      }
+
+      .job-detail {
+        font-size: 1.1rem;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+
+  .dropdown-link {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
   }
 }

@@ -66,10 +66,10 @@
   margin-top: 2rem;
   padding: 0.5rem;
   border: none;
-  box-shadow: 0 5px 14px 2px var(--black-transparent);
+  box-shadow: 0 0 10px var(--black-transparent-more);
   &::before {
     background-color: var(--white);
-    box-shadow: 1px 2px 2px 0 var(--black-transparent);
+    box-shadow: 0 0 10px var(--black-transparent-more);
     content: " ";
     height: 15px;
     width: 15px;

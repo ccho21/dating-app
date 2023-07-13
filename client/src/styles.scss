@@ -16,6 +16,7 @@
   --white-transparent: rgba(255, 255, 255, 0.4);
   --black: #656565;
   --black-transparent: rgba(0, 0, 0, 0.25);
+  --black-transparent-more: rgba(0, 0, 0, 0.05);
 
   --red: #dc3545;
   --primary: #004b89;
@@ -44,7 +45,7 @@ html {
   font-size: 62.5% !important;
 }
 body {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   position: relative;
   height: 100%;
   background-color: var(--base);
@@ -69,6 +70,7 @@ a {
 p {
   @extend .text-2;
   padding-left: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 h1,

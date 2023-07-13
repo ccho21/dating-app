@@ -185,7 +185,7 @@ import { ExperienceCardComponent } from './experiences/components/experience-car
 
     BsDropdownModule,
     CollapseModule,
-    TabsModule,
+    TabsModule.forRoot(),
     BsDatepickerModule.forRoot(),
     TooltipModule.forRoot(),
     CarouselModule.forRoot(),

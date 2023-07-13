@@ -6,10 +6,25 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
-import { Observable, Subscription, map, mergeMap, take, tap } from 'rxjs';
+import {
+  Observable,
+  Subscriber,
+  Subscription,
+  map,
+  mergeMap,
+  of,
+  take,
+  tap,
+} from 'rxjs';
 import { Photo } from 'src/app/_models/photo';
 import { Project } from 'src/app/_models/project';
 import { User } from 'src/app/_models/user';
@@ -18,6 +33,8 @@ import { ProjectService } from 'src/app/_services/project.service';
 import { PhotoUploadComponent } from 'src/app/photos/photo-upload/photo-upload.component';
 import { environment } from 'src/environments/environment';
 import { Toast, ToastrService } from 'ngx-toastr';
+import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
+import { Member } from 'src/app/_models/member';
 
 @Component({
   selector: 'app-project-edit',
@@ -37,12 +54,23 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
 
   project?: Project;
   uploaderReady: boolean = false;
+
+  // asyncSelected?: string;
+  
+  teamMembers: Member[] = [];
+
+  loading?: boolean = false;
+
   @HostListener('window:beforeunload', ['$event']) unloadNotification(
     $event: any
   ) {
     if (this.projectForm?.dirty) {
       $event.returnValue = true;
     }
+  }
+
+  get teamMemberForm(): FormControl {
+    return this.projectForm?.get('skill') as FormControl;
   }
 
   constructor(
@@ -84,20 +112,26 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
 
   private initForm(): void {
     this.projectForm = this.fb.group({
-      id: null,
-      name: [''],
-      intro: [''],
-      projectWith: [''],
-      description: [''],
+      id: [''],
+      name: ['', Validators.required],
+      status: ['', Validators.required],
+      progress: ['', Validators.required],
+      isPublic: [false, Validators.required],
+      isCurrent: [false, Validators.required],
+      description: ['', Validators.required],
       mainFeature: [''],
       url: [''],
       githubUrl: [''],
       frontEnd: [''],
       backEnd: [''],
       database: [''],
-      deployement: [''],
-      projectStarted: [null],
-      projectEnded: [null],
+      deployment: [''],
+      appUserId: [''],
+      projectStarted: [''],
+      projectEnded: [''],
+      createdDate: [''],
+
+      teamMembers: this.fb.array([]),
     });
   }
 
@@ -111,39 +145,19 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getMode(): string {
-    return this.project ? 'EDIT' : 'CREATE';
+  createTeamMember(): FormControl {
+    return new FormControl('', Validators.required);
   }
 
-  public deletePhoto(photoId: number): void {
-    console.log(`### deletePhoto: ${photoId}`);
-
-    if (!this.project || !photoId) {
-      return;
-    }
-
-    this.projectService
-      .deletePhoto(this.project.id as number, photoId)
-      .subscribe(() => {
-        //TODO: NGRX
-        if (this.project) {
-          this.project.images = this.project.images.filter(
-            (x) => x.id !== photoId
-          );
-        }
-      });
-  }
-
-  public updatePhoto(photo: Photo): void {
-    console.log('### updatePhoto:', photo);
-
-    // //TODO: NGRX
-    if (photo) {
-      this.project?.images.push(photo);
-    }
+  addTeamMember(): void {
+    this.teamMembers.push();
   }
 
   public saveProject(): void {
+    if (!this.projectForm?.valid) {
+      return;
+    }
+
     const { projectEnded, projectStarted, images } = this.projectForm?.value;
 
     const form: Project = {
@@ -175,11 +189,6 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  private updateProject(form: Project): Observable<Project> {
-    const { id } = form;
-    return this.projectService.updateProject(form, id as number);
-  }
-
   private createProject(form: Project): Observable<Project> {
     console.log('### form:', form);
 
@@ -190,6 +199,41 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
     return this.projectService.createProject(form);
   }
 
+  private updateProject(form: Project): Observable<Project> {
+    const { id } = form;
+    return this.projectService.updateProject(form, id as number);
+  }
+
+  public deleteProject(): void {}
+
+  public deletePhoto(photoId: number): void {
+    console.log(`### deletePhoto: ${photoId}`);
+
+    if (!this.project || !photoId) {
+      return;
+    }
+
+    this.projectService
+      .deletePhoto(this.project.id as number, photoId)
+      .subscribe(() => {
+        //TODO: NGRX
+        if (this.project) {
+          this.project.images = this.project.images.filter(
+            (x) => x.id !== photoId
+          );
+        }
+      });
+  }
+
+  public updatePhoto(photo: Photo): void {
+    console.log('### updatePhoto:', photo);
+
+    // //TODO: NGRX
+    if (photo) {
+      this.project?.images.push(photo);
+    }
+  }
+
   updateImages(id: number) {
     if (id) {
       const url = `${this.baseUrl}projects/${id}/add-photo`;
@@ -197,6 +241,4 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
       this.photoUpload?.uploadAll();
     }
   }
-
-  public deleteProject(): void {}
 }

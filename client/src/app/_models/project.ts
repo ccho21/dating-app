@@ -14,7 +14,8 @@ export interface TeamMemberDto {
 export interface Project {
   id?: number;
   name: string;
-  intro: string;
+  isPublic: boolean;
+  isCurrent: boolean;
   projectWith: string;
   description: string;
   mainFeature: string;

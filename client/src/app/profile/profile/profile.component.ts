@@ -8,10 +8,10 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
-import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { MemberService } from 'src/app/_services/member.service';
 import { Member } from 'src/app/_models/member';
 import { Subscription } from 'rxjs';
+import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 
 interface ITab {
   title: string;
@@ -29,10 +29,10 @@ interface ITab {
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-  @ViewChild('profileTabs', { static: true }) profileTabs?: TabsetComponent;
+  @ViewChild('profileTabs', { static: false }) profileTabs!: TabsetComponent;
 
   container?: ViewContainerRef;
-  user?: User;
+
   userSub$?: Subscription;
 
   member?: Member;
@@ -47,8 +47,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.queryParams.subscribe({
       next: (params) => {
-        const { tab } = params;
-        params['tab'] && this.selectTab(tab);
+        setTimeout(() => {
+          params['tab'] && this.selectTab(params['tab']);
+        }, 200);
       },
     });
 
@@ -56,9 +57,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
       (user: User | null) => {
         if (user) {
           this.loading = true;
-          this.user = user;
 
-          this.memberService.getMember(this.user.username).subscribe({
+          this.memberService.getMember(user.username).subscribe({
             next: (member) => {
               this.member = member;
             },
@@ -71,18 +71,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(): void {
-    this.userSub$!.unsubscribe();
-  }
-
   selectTab(heading: string) {
+    console.log('### heading', this.profileTabs);
+    console.log('### heading', heading);
     if (this.profileTabs) {
       this.profileTabs.tabs.find((x) => x.heading === heading)!.active = true;
     }
   }
 
   activateTab(tab: TabDirective) {
-    console.log('### activate tab', tab);
     this.router.navigate(['/main'], { queryParams: { tab: tab.heading } });
+  }
+
+  ngOnDestroy(): void {
+    this.userSub$!.unsubscribe();
   }
 }

@@ -37,6 +37,8 @@ export class ExperienceEditComponent implements OnInit, OnDestroy {
   maxDate?: Date;
   userSub$?: Subscription;
 
+
+  //
   asyncSelected?: string;
   dataSource?: Observable<any[]>;
   typeaheadLoading?: boolean;
@@ -75,13 +77,10 @@ export class ExperienceEditComponent implements OnInit, OnDestroy {
     }).pipe(mergeMap((token: string) => this.getStatesAsObservable(token)));
   }
 
-  ngOnDestroy(): void {
-    this.userSub$!.unsubscribe();
-  }
-
   get jobDescriptions(): FormArray {
     return this.experienceForm?.get('jobDescriptions') as FormArray;
   }
+
   get skillForm(): FormControl {
     return this.experienceForm?.get('skill') as FormControl;
   }
@@ -187,14 +186,6 @@ export class ExperienceEditComponent implements OnInit, OnDestroy {
       started: [new Date()],
       ended: [new Date()],
       skill: [''],
-    });
-
-    const jdForm = this.fb.group({
-      description: [''],
-      position: [],
-      started: [new Date()],
-      ended: [new Date()],
-      details: [''],
     });
   }
 
@@ -325,5 +316,9 @@ export class ExperienceEditComponent implements OnInit, OnDestroy {
 
     // Get the checked value from the checkbox element
     this.isCurrent = checkbox.checked;
+  }
+
+  ngOnDestroy(): void {
+    this.userSub$!.unsubscribe();
   }
 }

@@ -153,40 +153,6 @@
           </div>
         </div>
       </app-panel>
-
-      <app-panel customClass="no-height">
-        <div class="heading-3">
-          {{ "Other Projects" }}
-        </div>
-      </app-panel>
-      <div
-        class="row p-xl-3"
-        *ngIf="otherProjects && otherProjects.length; else noData"
-      >
-        <swiper
-          [pagination]="{
-            clickable: false,
-            dynamicBullets: false
-          }"
-          [navigation]="true"
-          [slidesPerView]="2"
-          [spaceBetween]="10"
-          [centeredSlides]="false"
-          [centeredSlidesBounds]="false"
-          [preventClicks]="false"
-          [preventClicksPropagation]="false"
-          class="other-project-swiper"
-        >
-          <ng-template swiperSlide *ngFor="let p of otherProjects">
-            <div>
-              <app-project-card [project]="p"></app-project-card>
-            </div>
-          </ng-template>
-        </swiper>
-      </div>
-      <ng-template #noData>
-        <!-- <app-no-data [key]="'data'" *ngIf="!loading"></app-no-data> -->
-      </ng-template>
     </div>
 
     <div class="col-lg-4">
@@ -221,11 +187,52 @@
         </ng-template>
       </app-panel>
     </div>
-    <div class="text-end m-3">
-      <app-link customClass="primary" (click)="goBack()">
-        <i class="fa-solid fa-arrow-right"></i>
-        <span class="ms-3">Go back to projects</span>
-      </app-link>
+    <div class="row">
+      <div class="col">
+        <app-panel customClass="no-height">
+          <div class="heading-3">
+            {{ "Other Projects" }}
+          </div>
+        </app-panel>
+        <div
+          class="row p-xl-3"
+          *ngIf="otherProjects && otherProjects.length; else noData"
+        >
+          <swiper
+            [pagination]="{
+              clickable: false,
+              dynamicBullets: false
+            }"
+            [navigation]="true"
+            [slidesPerView]="4"
+            [spaceBetween]="10"
+            [centeredSlides]="false"
+            [centeredSlidesBounds]="false"
+            [preventClicks]="false"
+            [preventClicksPropagation]="false"
+            class="other-project-swiper"
+          >
+            <ng-template swiperSlide *ngFor="let p of otherProjects">
+              <div>
+                <app-project-card [project]="p"></app-project-card>
+              </div>
+            </ng-template>
+          </swiper>
+        </div>
+        <ng-template #noData>
+          <!-- <app-no-data [key]="'data'" *ngIf="!loading"></app-no-data> -->
+        </ng-template>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-9">
+        <div class="text-end m-3">
+          <app-link customClass="primary" (click)="goBack()">
+            <i class="fa-solid fa-arrow-right"></i>
+            <span class="ms-3">Go back to projects</span>
+          </app-link>
+        </div>
+      </div>
     </div>
   </div>
 </div>

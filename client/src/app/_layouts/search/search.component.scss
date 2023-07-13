@@ -23,11 +23,11 @@
     @extend .text-1;
     margin-top: 2rem;
     border: none;
-    box-shadow: 0 5px 14px 2px var(--black-transparent);
+    box-shadow: 0 0 10px var(--black-transparent-more);
     z-index: 999;
     &::before {
       background-color: var(--white);
-      box-shadow: 3px 3px 3px 0 var(--black-transparent);
+      box-shadow: 0 0 10px var(--black-transparent-more);
       content: " ";
       height: 15px;
       width: 15px;

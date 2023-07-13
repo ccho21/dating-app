@@ -1,6 +1,6 @@
 <div *ngIf="projectForm">
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-10">
       <div class="alert alert-info" *ngIf="projectForm.dirty">
         <strong>Information: </strong> You have made changes. Any unsaved
         changes will be lost
@@ -9,11 +9,8 @@
   </div>
   <form [formGroup]="projectForm" id="projectForm">
     <div class="row">
-      <div class="col-md-9">
-        <app-panel
-          title="My Projects"
-          sub="Name this project and describe it to your visitors"
-        >
+      <div class="col-md-10">
+        <app-panel title="Required" sub="Basic information to create a project">
           <div class="row align-items-start mb-3">
             <div class="col-md-2 text-end">
               <label for="name" class="label"> Name </label>
@@ -23,15 +20,8 @@
                 [type]="'text'"
                 [label]="'name'"
                 [formControl]="projectForm.controls['name'] | formControl"
-                class="theme-green"
               >
               </app-text-input>
-              <p class="main-text-1 description">
-                Project name or Github repository name
-              </p>
-              <p class="main-text-1 description">
-                You can only change your name twice within 14 days.
-              </p>
             </div>
           </div>
 
@@ -39,19 +29,60 @@
             <div class="col-md-2 text-end">
               <label for="description" class="label"> Description </label>
             </div>
-            <div class="offset-md-1 col-md-8">
+            <div class="offset-md-1 col-md-6">
               <app-textarea-input
-                [rows]="4"
+                [rows]="2"
                 [label]="'description'"
                 [formControl]="
                   projectForm.controls['description'] | formControl
                 "
-                class="theme-green"
               >
               </app-textarea-input>
-              <p class="main-text-1 description">
-                Description about purpose, technologies of the project.
-              </p>
+            </div>
+          </div>
+
+          <div class="row align-items-start mb-3">
+            <div class="col-md-2 text-end">
+              <label for="status" class="label"> Status </label>
+            </div>
+            <div class="offset-md-1 col-md-6">
+              <app-text-input
+                [type]="'text'"
+                [label]="'status'"
+                [formControl]="projectForm.controls['status'] | formControl"
+              >
+              </app-text-input>
+            </div>
+          </div>
+
+          <div class="row align-items-start mb-3">
+            <div class="col-md-2 text-end">
+              <label for="progress" class="label"> Progress </label>
+            </div>
+            <div class="offset-md-1 col-md-6">
+              <app-text-input
+                [type]="'text'"
+                [label]="'progress'"
+                [formControl]="projectForm.controls['progress'] | formControl"
+              >
+              </app-text-input>
+            </div>
+          </div>
+
+          <div class="row align-items-start mb-3">
+            <div class="col-md-2 text-end">
+              <label for="isPublic" class="label"> Is Public </label>
+            </div>
+            <div class="offset-md-1 col-md-6">
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="isPublic"
+                  formControlName="isPublic"
+                />
+              </div>
             </div>
           </div>
         </app-panel>
@@ -62,23 +93,21 @@
         >
           <div class="row align-items-start mb-3">
             <div class="col-md-2 text-end">
-              <label for="projectWith" class="label"> Project With </label>
+              <label for="isCurrent" class="label"> Is Current </label>
             </div>
             <div class="offset-md-1 col-md-6">
-              <app-text-input
-                [type]="'text'"
-                [label]="'projectWith'"
-                [formControl]="
-                  projectForm.controls['projectWith'] | formControl
-                "
-                class="theme-green"
-              >
-              </app-text-input>
-              <p class="main-text-1 description">
-                ex) Individual project or team project
-              </p>
+              <div class="form-check form-switch">
+                <input
+                  formControlName="isCurrent"
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="isCurrent"
+                />
+              </div>
             </div>
           </div>
+
           <div class="row align-items-start mb-3">
             <div class="col-md-2 text-end">
               <label for="projectStarted" class="label">
@@ -117,27 +146,9 @@
         </app-panel>
 
         <app-panel
-          title="Tech Info"
+          title="Technology"
           sub="Give visitors a quick overview of technologies that are used for this project"
         >
-          <div class="row align-items-start mb-3">
-            <div class="col-md-2 text-end">
-              <label for="intro" class="label"> Introduction </label>
-            </div>
-            <div class="offset-md-1 col-md-8">
-              <app-textarea-input
-                [rows]="4"
-                [label]="'intro'"
-                [formControl]="projectForm.controls['intro'] | formControl"
-                class="theme-green"
-              >
-              </app-textarea-input>
-              <p class="main-text-1 description">
-                Please give us a brief introduction about the project
-              </p>
-            </div>
-          </div>
-
           <div class="row align-items-center mb-3">
             <div class="col-md-2 text-end">
               <label for="mainFeature" class="label"> mainFeature </label>
@@ -152,79 +163,18 @@
                 class="theme-green"
               >
               </app-text-input>
-              <p class="main-text-1 description">
-                Main features the project has
-              </p>
             </div>
           </div>
 
           <div class="row align-items-start mb-3">
             <div class="col-md-2 text-end">
-              <label for="githubUrl" class="label"> GithubUrl </label>
-            </div>
-            <div class="offset-md-1 col-md-6">
-              <app-text-input
-                [type]="'text'"
-                [label]="'githubUrl'"
-                [formControl]="projectForm.controls['githubUrl'] | formControl"
-                class="theme-green"
-              >
-              </app-text-input>
-            </div>
-          </div>
-          <div class="row align-items-start mb-3">
-            <div class="col-md-2 text-end">
-              <label for="frontEnd" class="label"> FrontEnd </label>
+              <label for="frontEnd" class="label"> Technology </label>
             </div>
             <div class="offset-md-1 col-md-6">
               <app-text-input
                 [type]="'text'"
                 [label]="'frontEnd'"
                 [formControl]="projectForm.controls['frontEnd'] | formControl"
-                class="theme-green"
-              >
-              </app-text-input>
-            </div>
-          </div>
-          <div class="row align-items-start mb-3">
-            <div class="col-md-2 text-end">
-              <label for="backEnd" class="label"> Backend </label>
-            </div>
-            <div class="offset-md-1 col-md-6">
-              <app-text-input
-                [type]="'text'"
-                [label]="'backEnd'"
-                [formControl]="projectForm.controls['backEnd'] | formControl"
-                class="theme-green"
-              >
-              </app-text-input>
-            </div>
-          </div>
-          <div class="row align-items-start mb-3">
-            <div class="col-md-2 text-end">
-              <label for="database" class="label"> Database </label>
-            </div>
-            <div class="offset-md-1 col-md-6">
-              <app-text-input
-                [type]="'text'"
-                [label]="'database'"
-                [formControl]="projectForm.controls['database'] | formControl"
-                class="theme-green"
-              >
-              </app-text-input>
-            </div>
-          </div>
-
-          <div class="row align-items-start mb-3">
-            <div class="col-md-2 text-end">
-              <label for="deployement" class="label"> Deployment </label>
-            </div>
-            <div class="offset-md-1 col-md-6">
-              <app-text-input
-                [label]="'deployement'"
-                [formControl]="
-                  projectForm.controls['deployement'] | formControl
-                "
                 class="theme-green"
               >
               </app-text-input>
@@ -237,15 +187,30 @@
           sub="Give visitors to explore the projects through the link"
           customClass="no-height"
         >
-          <div class="row align-items-center mb-3">
+          <div class="row align-items-start mb-3">
             <div class="col-md-2 text-end">
-              <label for="url" class="label"> Url </label>
+              <label for="url" class="label"> URL </label>
             </div>
             <div class="offset-md-1 col-md-6">
               <app-text-input
                 [type]="'text'"
                 [label]="'url'"
                 [formControl]="projectForm.controls['url'] | formControl"
+                class="theme-green"
+              >
+              </app-text-input>
+            </div>
+          </div>
+
+          <div class="row align-items-start mb-3">
+            <div class="col-md-2 text-end">
+              <label for="githubUrl" class="label"> GithubUrl </label>
+            </div>
+            <div class="offset-md-1 col-md-6">
+              <app-text-input
+                [type]="'text'"
+                [label]="'githubUrl'"
+                [formControl]="projectForm.controls['githubUrl'] | formControl"
                 class="theme-green"
               >
               </app-text-input>
@@ -269,6 +234,7 @@
             </div>
           </div>
         </app-panel>
+
         <!-- <hr class="my-5" /> -->
         <div class="row align-items-start mb-3">
           <div class="col-md-12 text-end">
@@ -284,7 +250,7 @@
         </div>
       </div>
 
-      <div class="col-md-3">
+      <!-- <div class="col-md-3">
         <app-panel customClass="no-height">
           <div class="d-flex align-items-center">
             <div>Hide this project</div>
@@ -313,7 +279,7 @@
             </div>
           </div>
         </app-panel>
-      </div>
+      </div> -->
     </div>
   </form>
 </div>

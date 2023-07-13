@@ -12,6 +12,7 @@ namespace API.DTOs
         public int Status { get; set; }
         public int Progress { get; set; }
         public bool IsPublic { get; set; }
+        public bool IsCurrent { get; set; }
         public string ProjectWith { get; set; }
         public string Description { get; set; }
         public string MainFeature { get; set; }

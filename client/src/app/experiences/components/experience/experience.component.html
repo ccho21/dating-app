@@ -1,47 +1,49 @@
-<div class="experience my-5" *ngIf="experience">
+<div class="experience my-4" *ngIf="experience">
   <div class="row">
-    <div class="col-md-2 img-box">
-      <div class="">
+    <div class="col-md-2">
+      <div class="img-box mb-4">
         <img
           class="user-thumbnail square size-sm"
-          width="40"
+          width="80"
           [src]="
             experience.logo && experience.logo.url
               ? experience.logo.url
-              : './assets/shared/user.png'
+              : './assets/shared/acentury-logo.svg'
           "
           [alt]="experience.companyName"
         />
+      </div>
+      <div class="dropdown-link">
+        <app-dropdown-link
+          icon="fa-solid fa-ellipsis-vertical"
+          ariaControls="option-dropdown"
+          id="option-dropdown"
+        >
+          <li role="menuitem">
+            <a
+              class="dropdown-item"
+              routerLink="/main/dashboard/experiences/{{ experience.id }}"
+              >View experience</a
+            >
+          </li>
+          <li role="menuitem">
+            <a
+              class="dropdown-item"
+              routerLink="/main/dashboard/experiences/{{ experience.id }}"
+              >Edit experience</a
+            >
+          </li>
+        </app-dropdown-link>
       </div>
     </div>
     <div class="col-md-10">
       <div class="content">
         <div class="content-header">
           <div>
-            <div class="position">{{ experience.position }}</div>
-            <div class="company-name">{{ experience.companyName }}</div>
-          </div>
-          <div>
-            <app-dropdown-link
-              icon="fa-solid fa-ellipsis-vertical"
-              ariaControls="option-dropdown"
-              id="option-dropdown"
-            >
-              <li role="menuitem">
-                <a
-                  class="dropdown-item"
-                  routerLink="/main/dashboard/experiences/{{ experience.id }}"
-                  >View experience</a
-                >
-              </li>
-              <li role="menuitem">
-                <a
-                  class="dropdown-item"
-                  routerLink="/main/dashboard/experiences/{{ experience.id }}"
-                  >Edit experience</a
-                >
-              </li>
-            </app-dropdown-link>
+            <span class="position">{{ experience.position }}</span> -
+            <span class="company-name">{{ experience.companyName }}</span
+            >,
+            <span class="location">Toronto, ON</span>
           </div>
         </div>
         <div class="job-date">
@@ -51,14 +53,18 @@
         <div class="company-description">
           {{ experience.intro }}
         </div>
+        <div class="job-date">
+          URL:
+          <app-link> {{ "http:// google.com" }} </app-link>
+        </div>
         <hr />
         <div
           class="description"
           *ngFor="let jobDescription of experience.jobDescriptions"
         >
           <div class="description-header">
-            <div class="description-title">
-              <span>▎</span>{{ jobDescription.description }}
+            <div class="description">
+              <span class="me-3">| </span> {{ jobDescription.description }}
             </div>
             <div
               class="job-date"

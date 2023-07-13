@@ -2,127 +2,170 @@
   <div class="container">
     <div class="pt-5">
       <app-panel>
-        <div class="header-background mb-5">
-          <div class="container">
-            <div class="row">
-              <div class="offset-lg-1 col-lg-4 offset-md-2 col-md-8 my-5">
-                <div
-                  *ngIf="member.photos && member.photos.length; else noPhoto"
-                >
-                  <swiper
-                    [spaceBetween]="10"
-                    [config]="config"
-                    class="member-swiper"
+        <section class="member-header p-2 px-lg-4">
+          <div class="row">
+            <div class="col-lg-2 text-center mb-2">
+              <div class="thumbnail-box">
+                <img
+                  class="user-thumbnail size-sm user-border"
+                  width="40"
+                  [src]="member.photoUrl || './assets/shared/user.png'"
+                  [alt]="member.username"
+                />
+              </div>
+            </div>
+            <div class="col-lg-10 mt-auto">
+              <div class="row text-center text-lg-start">
+                <div class="col">
+                  <h1 class="heading-1 mb-0">
+                    {{ member.name }}
+                  </h1>
+                  <div class="job mb-3">
+                    {{ member.job }} at {{ member.company }}
+                  </div>
+                  <!-- <div class="location">
+                    <div class="">{{ member.city }}, {{ member.country }}</div>
+                  </div> -->
+
+                  <div class="mb-4">
+                    <span class="last-visit">
+                      Last visit:
+                      <strong class="ms-2">{{
+                        member.lastActive | timeago
+                      }}</strong>
+                    </span>
+                  </div>
+                  <div
+                    class="sns justify-content-center justify-content-lg-start mb-3"
                   >
-                    <ng-template
-                      swiperSlide
-                      *ngFor="let image of member.photos; let i = index"
+                    <a
+                      *ngIf="member.website"
+                      href="{{ member.website }}"
+                      target="_blank"
+                      class="d-block mb-2"
                     >
                       <img
-                        [src]="image.url"
+                        src="/assets/shared/icons/website.svg"
+                        width="30"
                         alt=""
-                        class="user-thumbnail square"
                       />
-                    </ng-template>
-                  </swiper>
-                </div>
-                <ng-template #noPhoto>
-                  <img
-                    src="./assets/shared/user.png"
-                    alt=""
-                    class="user-thumbnail square"
-                  />
-                </ng-template>
-              </div>
-              <div class="col-lg-6 my-5">
-                <div class="member-info">
-                  <div class="member-settings">
-                    <div
-                      class="member-badge"
-                      [ngClass]="{
-                        'is-liked': isLiked
-                      }"
+                    </a>
+                    <a
+                      *ngIf="member.linkedIn"
+                      href="{{ member.linkedIn }}"
+                      target="_blank"
+                      class="d-block mb-2"
                     >
-                      <i class="like-icon fa-solid fa-heart me-2"></i>
-                      <span class="text-white">
+                      <img
+                        src="/assets/shared/icons/linkedin.svg"
+                        width="30"
+                        alt=""
+                      />
+                    </a>
+
+                    <div>
+                      <a
+                        *ngIf="member.github"
+                        href="{{ member.github }}"
+                        target="_blank"
+                        class="d-block mb-2"
+                      >
+                        <img
+                          src="/assets/shared/icons/github.svg"
+                          width="30"
+                          alt=""
+                        />
+                      </a>
+                    </div>
+                    <div>
+                      <a
+                        *ngIf="member.facebook"
+                        href="{{ member.facebook }}"
+                        target="_blank"
+                        class="d-block mb-2"
+                      >
+                        <img
+                          src="/assets/shared/icons/facebook.svg"
+                          width="30"
+                          alt=""
+                        />
+                      </a>
+                    </div>
+                    <div>
+                      <a
+                        *ngIf="member.instagram"
+                        href="{{ member.instagram }}"
+                        target="_blank"
+                        class="d-block mb-2"
+                      >
+                        <img
+                          src="/assets/shared/icons/instagram.svg"
+                          width="30"
+                          alt=""
+                        />
+                      </a>
+                    </div>
+                    <div>
+                      <a
+                        *ngIf="member.twitter"
+                        href="{{ member.twitter }}"
+                        target="_blank"
+                        class="d-block mb-2"
+                      >
+                        <img
+                          src="/assets/shared/icons/twitter.svg"
+                          width="30"
+                          alt=""
+                        />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col-lg-6 mb-4">
+                  <div
+                    class="activities justify-content-center justify-content-lg-start"
+                  >
+                    <small>
+                      <span>
                         {{ member.likedByUsers.length }}
                       </span>
-                    </div>
-
-                    <app-dropdown-link
-                      icon="fa-solid fa-ellipsis-vertical"
-                      ariaControls="option-dropdown"
-                      id="option-dropdown"
-                    >
-                      <li role="menuitem">
-                        <a
-                          class="dropdown-item"
-                          (click)="addOrRemoveLike(member)"
-                        >
-                          {{ isLiked ? "Unfollow" : "Follow" }}
-                        </a>
-                      </li>
-                      <li role="menuitem">
-                        <a
-                          class="dropdown-item"
-                          routerLink="/main/messages/{{ member.username }}"
-                        >
-                          Send message
-                        </a>
-                      </li>
-                    </app-dropdown-link>
+                      projects
+                    </small>
+                    <small class="ms-3">
+                      <span>
+                        {{ member.likedByUsers.length }}
+                      </span>
+                      Followers
+                    </small>
+                    <small class="ms-3">
+                      <span>
+                        {{ member.likedByUsers.length }}
+                      </span>
+                      Following
+                    </small>
                   </div>
-                  <div class="member-content">
-                    <div></div>
-                    <div>
-                      <div class="member-name">
-                        {{ member.name }},
-                        <span class="member-age">{{ member.age }}</span>
-                      </div>
-                      <div class="member-job">Occupation</div>
-
-                      <div class="d-flex align-items-center mb-3">
-                        <span class="distance">
-                          <i class="fa-solid fa-location-dot me-1"></i> Location
-                        </span>
-                        <span class="member-badge ms-2">
-                          {{ member.city }}
-                        </span>
-                      </div>
-
-                      <div class="last-visit">
-                        <span class="member-badge">
-                          Last Login:
-                          <strong class="ms-2">{{
-                            member.lastActive | timeago
-                          }}</strong>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="action-groups">
-                      <div>
-                        <app-button
-                          [icon]="isLiked ? 'fa fa-minus' : 'fa fa-plus'"
-                          (click)="addOrRemoveLike(member)"
-                        >
-                          {{ isLiked ? "Unfollow" : "Follow" }}
-                        </app-button>
-                      </div>
-
-                      <div>
-                        <app-button
-                          routerLink="/main/messages/{{ member.username }}"
-                        >
-                          Send Message
-                        </app-button>
-                      </div>
-                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                  <div class="btn-box text-center text-lg-start">
+                    <app-button
+                      [icon]="isLiked ? 'fa fa-minus' : 'fa fa-plus'"
+                      (click)="addOrRemoveLike(member)"
+                    >
+                      {{ isLiked ? "Unfollow" : "Follow" }}
+                    </app-button>
+                    <app-button
+                      routerLink="/main/messages/{{ member.username }}"
+                    >
+                      Send Message
+                    </app-button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </app-panel>
 
       <app-about [member]="member"></app-about>
@@ -131,53 +174,6 @@
         <app-experience-list></app-experience-list>
       </app-panel>
 
-      <!-- <app-panel>
-        <div class="col-xl-3">
-          <div>
-            <article class="member-card">
-              <h2 class="text-start">SKILLS</h2>
-              <div>
-                <h3 class="mb-0">FRONT END</h3>
-                <div class="tech-item">HTML5</div>
-                <div class="tech-item">CSS</div>
-                <div class="tech-item">JavaScript</div>
-                <div class="tech-item">HTML5</div>
-              </div>
-
-              <hr />
-              <div>
-                <h3 class="mb-0">BACK END</h3>
-                <div class="tech-item">Node Js</div>
-                <div class="tech-item">.NET</div>
-                <div class="tech-item">Java</div>
-                <div class="tech-item">Firebase</div>
-                <div class="tech-item">PostgreSQL</div>
-              </div>
-              <hr />
-              <div>
-                <h3 class="mb-0">DEPLOYEMENT</h3>
-                <div class="tech-item">Heroku</div>
-                <div class="tech-item">Firebase</div>
-                <div class="tech-item">Docker</div>
-              </div>
-              <hr />
-              <div>
-                <h3 class="mb-0">VERSION CONTROL</h3>
-                <div class="tech-item">Git</div>
-                <div class="tech-item">Github</div>
-                <div class="tech-item">BitBucket</div>
-              </div>
-              <hr />
-              <div>
-                <h3 class="mb-0">COMMUNICATION</h3>
-                <div class="tech-item">Jira</div>
-                <div class="tech-item">Confluence</div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </app-panel>
-       -->
       <app-projects [projects]="member.projects"></app-projects>
     </div>
   </div>
