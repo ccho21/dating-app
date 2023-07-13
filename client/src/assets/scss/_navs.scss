@@ -28,6 +28,7 @@
     }
   }
 }
+
 .overview-tabset {
   width: 100%;
   text-align: center;
@@ -94,13 +95,13 @@
 
 .vertical-tabset {
   display: flex;
-  // flex-wrap: wrap;
-  min-height: 20rem;
+  flex-wrap: nowrap;
   & > .nav-tabs {
     @extend .heading-5;
 
     flex-direction: column;
     flex-basis: 25%;
+    flex-shrink: 0;
     border: 0;
     border-right: 1px solid;
     border-color: var(--border-main);
@@ -120,11 +121,11 @@
     }
   }
 
-  & .tab-content {
-    flex-grow: 1;
-    flex-basis: 75%;
-    padding: 1rem;
-  }
+  // & .tab-content {
+  //   flex-grow: 1;
+  //   flex-basis: 75%;
+  //   padding: 1rem;
+  // }
 
   & > .nav {
     border-color: transparent;
@@ -153,6 +154,14 @@
         text-decoration: none;
         color: var(--text-main);
       }
+    }
+  }
+  @media screen and (max-width: 767px) {
+    display: block;
+    flex-wrap: nowrap;
+    min-height: auto;
+    & > .nav-tabs {
+      flex-direction: row;
     }
   }
 }

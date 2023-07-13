@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/_models/member';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
+import { ScreenService } from 'src/app/_services/screen.service';
 
 @Component({
   selector: 'app-about',
@@ -9,11 +10,14 @@ import { TabsetComponent } from 'ngx-bootstrap/tabs';
 })
 export class AboutComponent implements OnInit {
   @ViewChild('staticTabs', { static: false }) staticTabs?: TabsetComponent;
+  isMobile?: boolean;
 
   @Input() member?: Member;
-  constructor() {}
+  constructor(private screenService: ScreenService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.screenService.isBelowMd()) this.isMobile = true;
+  }
 
   selectTab(tabId: number) {
     console.log('### ', tabId);
