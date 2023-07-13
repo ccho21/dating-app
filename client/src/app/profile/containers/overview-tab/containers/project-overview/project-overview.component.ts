@@ -60,8 +60,7 @@ export class ProjectOverviewComponent implements OnInit, OnDestroy {
   loadProjects(params: ProjectParams) {
     this.loading = true;
     params.currentUsername = this.user?.username || undefined;
-    params.pageNumber = 1;
-    params.pageSize = 5;
+    params.pageSize = 3;
 
     this.projectService.getProjects(params).subscribe({
       next: (response) => {

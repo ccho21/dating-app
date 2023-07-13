@@ -116,8 +116,37 @@ h5 {
 // }
 
 .pagination {
-  font-size: 1.75rem;
-  --bs-pagination-font-size: 1.75rem;
+  .page-item {
+    &.active {
+      .page-link {
+        color: var(--white);
+        background-color: var(--primary);
+        border: 1px solid transparent;
+      }
+    }
+  }
+  
+  & &-first,
+  & &-prev,
+  & &-next,
+  & &-last {
+    height: 3rem;
+    & .page-link {
+      color: var(--text-main);
+      font-size: 2rem;
+      --bs-pagination-font-size: 2rem;
+    }
+  }
+
+  & &-page {
+    height: 3rem;
+    .page-link {
+      color: var(--text-main);
+      padding-top: 0.7rem;
+      font-size: 1.6rem;
+      --bs-pagination-font-size: 1.5rem;
+    }
+  }
 }
 
 .show {

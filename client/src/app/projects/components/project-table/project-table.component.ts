@@ -30,9 +30,7 @@ export class ProjectTableComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
- 
-  }
+  ngOnInit(): void {}
 
   loadProjects(params: ProjectParams) {
     params.currentUsername = this.user?.username || undefined;
@@ -51,6 +49,7 @@ export class ProjectTableComponent implements OnInit {
     if (this.pagination?.currentPage != event.page) {
       const params: ProjectParams = this.projectService.getProjectParams();
       params.pageNumber = event.page;
+      console.log('###  params', params);
       this.paramsEmit.emit(params);
     }
   }

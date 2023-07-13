@@ -5,9 +5,12 @@
   color: var(--text-main);
 
   .about-content {
-    padding: 1rem 1rem;
+    padding: .5rem 1rem;
     position: relative;
-    // margin-bottom: 30px;
+
+    &:first-child {
+      margin-top: 1.5rem;
+    }
 
     h3 {
       @extend .heading-3;

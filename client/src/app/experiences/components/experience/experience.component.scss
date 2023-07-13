@@ -10,13 +10,15 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     img {
+      padding: 0.5rem;
       width: 15rem;
       height: 15rem;
-      // object-fit: cover;
-      border-radius: 50%;
+      object-fit: contain;
+      // border-radius: 50%;
       border: 3px solid var(--white);
+      background-color: rgba(0, 0, 0, 0.05);
     }
   }
 

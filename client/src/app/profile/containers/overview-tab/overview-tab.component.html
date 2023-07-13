@@ -3,7 +3,7 @@
     <app-about [member]="member"></app-about>
   </div>
   <div class="col-lg-6">
-    <app-panel title="Recent Messages" customClass="no-padding min-height">
+    <app-panel title="Recent Messages" customClass="no-padding">
       <app-message-overview class="w-100"></app-message-overview>
       <div class="text-end m-3">
         <app-link
@@ -11,7 +11,7 @@
           routerLink="/main/messages"
           routerLinkActive="active"
         >
-          <span class="ms-3"> View all messages </span>
+          <span> View all messages </span>
           <i class="fa-solid fa-arrow-right"></i>
         </app-link>
       </div>
@@ -19,8 +19,7 @@
   </div>
 
   <div class="col-lg-6">
-    <app-panel customClass="min-height no-padding">
-      <div class="title mb-4"></div>
+    <app-panel customClass="no-padding">
       <app-connection-overview class="w-100"></app-connection-overview>
     </app-panel>
   </div>

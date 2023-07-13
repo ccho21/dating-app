@@ -4,10 +4,10 @@
       <tr>
         <th></th>
         <th>Name</th>
-        <th>Description</th>
-        <th>Features</th>
-        <th>Started</th>
-        <th>Completed</th>
+        <th width="30%">Description</th>
+        <th width="30%">Features</th>
+        <th width="10%">Started</th>
+        <th width="10%">Completed</th>
         <th></th>
       </tr>
     </thead>
@@ -29,8 +29,8 @@
           ></div>
         </td>
         <td>{{ project.name }}</td>
-        <td>{{ project.description }}</td>
-        <td>{{ project.mainFeature }}</td>
+        <td>{{ project.description | truncate : 50 }}</td>
+        <td>{{ project.mainFeature | truncate : 50 }}</td>
         <td>{{ project.projectStarted | date : "MMM yyyy" }}</td>
         <td>{{ project.projectEnded | date : "MMM yyyy" }}</td>
         <td>
