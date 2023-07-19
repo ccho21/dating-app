@@ -16,7 +16,7 @@ export function getAlertConfig(): TooltipConfig {
   return Object.assign(new TooltipConfig(), {
     placement: 'right',
     container: 'body',
-    delay: 500,
+    delay: 100,
   });
 }
 

@@ -54,19 +54,20 @@
 }
 
 //  TEMP SOLUTION
-.popover {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
+// .popover {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+// }
 
-.popover-arrow {
-  position: absolute;
-}
+// .popover-arrow {
+//   position: absolute;
+// }
 
 .tooltip {
   position: absolute;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+  bottom: 0;
 }
 
 .tooltip-arrow {

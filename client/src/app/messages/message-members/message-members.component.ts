@@ -28,6 +28,7 @@ export class MessageMembersComponent implements OnInit {
 
   user?: User;
   userSub$?: Subscription;
+  messageThread$?: Subscription;
   member?: Member;
   constructor(
     private accountService: AccountService,
@@ -48,6 +49,7 @@ export class MessageMembersComponent implements OnInit {
 
     this.messageService.sendMember$.subscribe((member: Member | null) => {
       if (member) {
+        console.log('### MEMBER', member);
         const i = this.members?.findIndex((x) => x.id === member.id) || 0;
         if (i < 0) {
           if (this.members && this.members.length) {
@@ -57,6 +59,15 @@ export class MessageMembersComponent implements OnInit {
           }
         }
       }
+    });
+
+    this.messageThread$ = this.messageService.messageThread$.subscribe({
+      next: (res) => {
+        this.loadUsers();
+      },
+      complete: () => {
+        console.log('## working?');
+      },
     });
   }
 

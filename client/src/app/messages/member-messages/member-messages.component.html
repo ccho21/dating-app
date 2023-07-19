@@ -86,7 +86,7 @@
               aria-describedby=""
               name="messageContent"
               [(ngModel)]="messageContent"
-              class="form-control"
+              class="form-control font-sm"
             />
             <div class="input-group-append">
               <app-button customClass="icon icon-lg primary">
@@ -96,34 +96,6 @@
           </div>
         </div>
       </form>
-
-      <!-- <form
-        #messageForm="ngForm"
-        autocomplete="off"
-     
-        (ngSubmit)="sendMessage()"
-      >
-        <mat-form-field class="w-100 px-3 pt-2" appearance="standard">
-          <mat-label>Message</mat-label>
-          <input
-            matInput
-            class=""
-            placeholder="Send a private message"
-            name="messageContent"
-            [(ngModel)]="messageContent"
-            type="text"
-          />
-          <button
-            matSuffix
-            mat-mini-fab
-            color="primary"
-            class="mb-2"
-            aria-label=""
-          >
-            <mat-icon>send</mat-icon>
-          </button>
-        </mat-form-field>
-      </form> -->
     </div>
   </div>
 </div>

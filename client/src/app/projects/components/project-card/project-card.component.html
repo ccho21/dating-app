@@ -36,6 +36,8 @@
       <a
         *ngFor="let teamMember of project.teamMembers"
         [routerLink]="['/main/members/', teamMember.username]"
+        [tooltip]="teamMember.name"
+        placement="right"
       >
         <img
           src="{{ teamMember.photoUrl }}"

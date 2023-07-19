@@ -29,7 +29,7 @@ interface ITab {
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-  @ViewChild('profileTabs', { static: false }) profileTabs!: TabsetComponent;
+  @ViewChild('profileTabs', { static: false }) profileTabs?: TabsetComponent;
 
   container?: ViewContainerRef;
 
@@ -72,15 +72,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   selectTab(heading: string) {
-    console.log('### heading', this.profileTabs);
-    console.log('### heading', heading);
     if (this.profileTabs) {
       this.profileTabs.tabs.find((x) => x.heading === heading)!.active = true;
     }
   }
 
   activateTab(tab: TabDirective) {
-    this.router.navigate(['/main'], { queryParams: { tab: tab.heading } });
+    if (tab && tab.heading) {
+      this.router.navigate(['/main'], { queryParams: { tab: tab.heading } });
+    }
   }
 
   ngOnDestroy(): void {

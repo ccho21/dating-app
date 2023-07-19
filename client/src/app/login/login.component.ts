@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
 import { AccountService } from '../_services/account.service';
-import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { RegisterComponent } from '../register/register.component';
 import { ToastrService } from 'ngx-toastr';
 
@@ -66,20 +65,7 @@ export class LoginComponent implements OnInit {
   }
 
   openModalWithComponent() {
-    const initialState: ModalOptions = {
-      initialState: {
-        list: [
-          'Open a modal with component',
-          'Pass your data',
-          'Do something else',
-          '...',
-        ],
-        title: 'Modal with component',
-      },
-    };
-    this.bsModalRef = this.modalService.show(RegisterComponent, initialState);
+    this.bsModalRef = this.modalService.show(RegisterComponent);
     this.bsModalRef.content.closeBtnName = 'Close';
   }
-
-  ok() {}
 }

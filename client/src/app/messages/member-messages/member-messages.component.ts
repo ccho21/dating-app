@@ -76,8 +76,6 @@ export class MemberMessagesComponent implements OnInit, OnDestroy {
   getMessageThread() {
     this.messageThread$ = this.messageService.messageThread$.subscribe({
       next: (res) => {
-        console.log('## messageThread?', res);
-
         this.messages = res;
         this.ref.detectChanges();
         this.loading = false;

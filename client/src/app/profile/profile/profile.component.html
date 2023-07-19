@@ -120,20 +120,18 @@
                 <div
                   class="activities justify-content-center justify-content-lg-start"
                 >
-                  <small>
-                    <span>
-                      {{ member.likedByUsers.length }}
-                    </span>
-                    projects
+                  <small class="ms-3">
+                    <span class="font-sm"> 2 </span>
+                    Projects
                   </small>
                   <small class="ms-3">
-                    <span>
+                    <span class="font-sm">
                       {{ member.likedByUsers.length }}
                     </span>
                     Followers
                   </small>
                   <small class="ms-3">
-                    <span>
+                    <span class="font-sm">
                       {{ member.likedByUsers.length }}
                     </span>
                     Following
@@ -162,53 +160,6 @@
           </div>
         </div>
       </section>
-      <!-- <section class="header-background" *ngIf="user">
-          <div class="row">
-            <div class="col-lg-2 text-center mb-3">
-              <div class="thumbnail-box">
-                <img
-                  class="user-thumbnail size-sm user-border"
-                  width="40"
-                  [src]="user.photoUrl || './assets/shared/user.png'"
-                  [alt]="user.username"
-                />
-                <a class="edit-icon" routerLink="/main/dashboard">
-                  <i class="fa-solid fa-pen"></i>
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-10 mt-auto">
-              <div class="row text-center text-md-start">
-                <div class="col-lg-6 mb-5">
-                  <div class="text-center text-lg-start">
-                    <h1 class="heading-1">
-                      {{ user.name }}
-                    </h1>
-                    <span class="sub-heading-1">2 friends</span>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-3 mt-auto">
-                  <div class="btn-box">
-                    <app-button
-                      icon="fa fa-plus"
-                      customClass=""
-                      [routerLink]="'/main/dashboard/projects/create'"
-                    >
-                      Add Project
-                    </app-button>
-                    <app-button
-                      icon="fa fa-plus"
-                      customClass=""
-                      [routerLink]="'/main/dashboard/experiences/create'"
-                    >
-                      Add Experience
-                    </app-button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section> -->
     </app-panel>
 
     <section class="position-relative">
