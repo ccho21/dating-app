@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { concatMap, map } from 'rxjs/operators';
+import { Observable, iif } from 'rxjs';
+import { concatMap, map, mergeMap, tap } from 'rxjs/operators';
 import { Project } from 'src/app/_models/project';
 import { ProjectService } from 'src/app/_services/project.service';
 import SwiperCore, { Pagination, Navigation, SwiperOptions } from 'swiper';
@@ -18,6 +18,7 @@ import { Lightbox } from 'ng-gallery/lightbox';
 import { Photo } from 'src/app/_models/photo';
 import { ProjectParams } from 'src/app/_models/projectParams';
 import { PaginatedResult } from 'src/app/_models/pagination';
+import { ScreenService } from 'src/app/_services/screen.service';
 
 @Component({
   selector: 'app-project',
@@ -41,6 +42,7 @@ export class ProjectComponent implements OnInit {
   items: GalleryItem[] = [];
   loading?: boolean;
   status = ['Planning', 'In Progress', 'Completed', 'On Hold', 'Stopped'];
+  perSlide: number = 2;
   //
 
   constructor(
@@ -48,7 +50,8 @@ export class ProjectComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    public gallery: Gallery
+    public gallery: Gallery,
+    private screenService: ScreenService
   ) {}
 
   ngOnInit(): void {
@@ -95,6 +98,18 @@ export class ProjectComponent implements OnInit {
           });
       } else {
         this.router.navigate(['main', 'projects']);
+      }
+    });
+
+    this.getSlideView();
+  }
+
+  getSlideView() {
+    return this.screenService.isBelowMd().subscribe((res) => {
+      if (res.matches) {
+        this.perSlide = 1;
+      } else {
+        this.perSlide = 2;
       }
     });
   }

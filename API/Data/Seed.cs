@@ -79,7 +79,7 @@ namespace API.Data
                             MainFeature = project.MainFeature,
                             Url = project.Url,
                             IsPublic = project.IsPublic,
-                            IsCurrent  =   project.IsCurrent,
+                            IsCurrent = project.IsCurrent,
                             ProjectStarted = project.ProjectStarted,
                             ProjectEnded = project.ProjectEnded,
                             GithubUrl = project.Name,
@@ -131,7 +131,10 @@ namespace API.Data
                             CompanyName = experience.CompanyName,
                             Url = experience.Url,
                             Started = experience.Started,
+                            Ended = experience.Ended,
+                            IsCurrent = experience.IsCurrent,
                             JobDescriptions = experience.JobDescriptions,
+                            Logos = experience.Logos,
                             AppUser = u,
                         };
                         await context.Experiences.AddAsync(e);

@@ -21,6 +21,9 @@ namespace API.DTOs
         public string Interests { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public int ProjectNumber { get; set; }
+        public int FollowerNumber { get; set; }
+        public int FollowingNumber { get; set; }
         public ICollection<LikeDto> LikedByUsers { get; set; }
     }
 }

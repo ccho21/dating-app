@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Message } from '../_models/message';
 import { User } from '../_models/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,7 @@ export class PresenceService {
   onlineUsers$ = this.onlineUsersSource.asObservable();
   newMessage$ = this.newMessageSource.asObservable();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private toastr: ToastrService) {}
 
   createHubConnection(user: User) {
     this.hubConnection = new HubConnectionBuilder()
@@ -51,23 +52,16 @@ export class PresenceService {
     this.hubConnection.on('NewMessageReceived', (message) => {
       console.log('### recentMessages', message);
       const { senderUsername, content, recipientPhotoUrl } = message;
-      // let snackBarRef = this._snackBar.open(
-      //   `${senderUsername} has sent you a new message!`,
-      //   'Check',
-      //   {
-      //     duration: 5000,
-      //     verticalPosition: 'bottom',
-      //     horizontalPosition: 'right',
-      //   }
-      // );
+      this.toastr
+        .info(
+          senderUsername + ' has sent you a new message! Click me to see it'
+        )
+        .onTap.pipe(take(1))
+        .subscribe({
+          next: () => this.router.navigateByUrl('/main/messages/' + senderUsername),
+        });
 
       this.newMessageSource.next(message);
-
-      // snackBarRef
-      //   .onAction()
-      //   .subscribe(() =>
-      //     this.router.navigateByUrl('/messages/' + senderUsername)
-      //   );
     });
   }
 

@@ -11,6 +11,7 @@ namespace API.DTOs
         public string Intro { get; set; }
         public string Position { get; set; }
         public string CompanyName { get; set; }
+        public string LogoUrl { get; set; }
         public string Url { get; set; }
         public int AppUserId { get; set; }
         public int PhotoId { get; set; }

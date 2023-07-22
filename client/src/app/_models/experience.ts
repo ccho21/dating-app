@@ -8,6 +8,7 @@ export interface Experience {
   position: string;
   companyName: string;
   isCurrent: boolean;
+  logoUrl: string;
   jobDescriptions: JobDescription[];
   url: string;
   appUserId: number;

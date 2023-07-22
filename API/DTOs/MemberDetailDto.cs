@@ -32,6 +32,9 @@ namespace API.DTOs
         public string Twitter { get; set; }
         public string Instagram { get; set; }
 
+        public int ProjectNumber { get; set; }
+        public int FollowerNumber { get; set; }
+        public int FollowingNumber { get; set; }
         public ICollection<LikeDto> LikedByUsers { get; set; }
         // public ICollection<ProjectDto> Projects { get; set; }
         // public ICollection<ExperienceDto> Experiences { get; set; }

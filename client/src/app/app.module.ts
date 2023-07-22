@@ -98,6 +98,7 @@ import { ProjectOverviewComponent } from './profile/containers/overview-tab/cont
 import { ExperienceOverviewComponent } from './profile/containers/overview-tab/containers/experience-overview/experience-overview.component';
 import { VisitorOverviewComponent } from './profile/containers/overview-tab/containers/visitor-overview/visitor-overview.component';
 import { ExperienceCardComponent } from './experiences/components/experience-card/experience-card.component';
+import { ConnectionModalComponent } from './connections/containers/connection-modal/connection-modal.component';
 
 @NgModule({
   declarations: [
@@ -171,6 +172,7 @@ import { ExperienceCardComponent } from './experiences/components/experience-car
     ExperienceOverviewComponent,
     VisitorOverviewComponent,
     ExperienceCardComponent,
+    ConnectionModalComponent,
   ],
   imports: [
     BrowserModule,

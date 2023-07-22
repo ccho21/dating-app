@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { Member } from 'src/app/_models/member';
 import { Pagination } from 'src/app/_models/pagination';
 import { MemberService } from 'src/app/_services/member.service';
+import { ConnectionModalComponent } from 'src/app/connections/containers/connection-modal/connection-modal.component';
 
 @Component({
   selector: 'app-connection-overview',
@@ -22,7 +23,11 @@ export class ConnectionOverviewComponent implements OnInit {
   activeTab: any;
   loading: boolean = false;
 
-  constructor(private memberService: MemberService, private router: Router) {}
+  bsModalRef?: BsModalRef;
+  constructor(
+    private memberService: MemberService,
+    private modalService: BsModalService
+  ) {}
 
   ngOnInit(): void {
     this.loadMembersWithLikes();
@@ -56,5 +61,19 @@ export class ConnectionOverviewComponent implements OnInit {
     }
     console.log(this.predicate);
     this.loadMembersWithLikes(this.predicate);
+  }
+
+  openModalWithComponent() {
+    const initialState: ModalOptions = {
+      initialState: {
+        predicate: this.predicate,
+        title: 'All followers',
+      },
+    };
+    this.bsModalRef = this.modalService.show(
+      ConnectionModalComponent,
+      initialState
+    );
+    this.bsModalRef.content.closeBtnName = 'Close';
   }
 }

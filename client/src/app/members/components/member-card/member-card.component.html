@@ -38,7 +38,7 @@
     <div class="">
       <span class="member-badge">
         <i class="like-icon fa-solid fa-heart me-2"></i>
-        {{ member.likedByUsers ? member.likedByUsers.length : 0 }}
+        <!-- {{ member.likedByUsers ? member.likedByUsers.length : 0 }} -->
       </span>
     </div>
     <hr />
@@ -48,7 +48,7 @@
       </app-button>
       <!-- <button class="message" type="button">Message</button> -->
       <app-button
-        [icon]="getLikedUserIndex(member) ? 'fa fa-plus' : 'fa fa-minus'"
+        [icon]="member.followerNumber ? 'fa fa-plus' : 'fa fa-minus'"
         (click)="addOrRemoveLike(member)"
       >
         {{ isLiked ? "Unfollow" : "Follow" }}

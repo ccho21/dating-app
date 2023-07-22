@@ -58,12 +58,4 @@ export class ConnectionSmComponent implements OnInit, OnDestroy {
       this.toastr.success(`You have removed like from ${member.username}`);
     });
   }
-
-  getLikedUserIndex(member: Partial<Member>): number {
-    return member && member.likedByUsers
-      ? member.likedByUsers.findIndex(
-          (user) => user?.username === this.currentUser?.username
-        )
-      : -1;
-  }
 }

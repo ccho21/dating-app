@@ -5,11 +5,7 @@
         <div class="img-box mb-4">
           <img
             class="user-thumbnail square size-sm"
-            [src]="
-              experience.logo && experience.logo.url
-                ? experience.logo.url
-                : './assets/shared/acentury-logo.svg'
-            "
+            [src]="experience.logoUrl || './assets/shared/acentury-logo.svg'"
             [alt]="experience.companyName"
           />
         </div>
@@ -40,8 +36,15 @@
             </div>
           </div>
           <div class="job-date">
-            {{ experience.started | date : "MMM y" }} -
-            {{ experience.ended | date : "MMM y" }}
+            <span *ngIf="experience.isCurrent; else notCurrent">
+              {{ experience.started | date : "MMM y" }} - Current
+            </span>
+            <ng-template else #notCurrent>
+              <span>
+                {{ experience.started | date : "MMM y" }} -
+                {{ experience.ended | date : "MMM y" }}
+              </span>
+            </ng-template>
           </div>
           <div class="company-description">
             {{ experience.intro }}

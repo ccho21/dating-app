@@ -49,13 +49,13 @@
     </tab>
   </tabset>
   <div class="text-end m-3">
-    <app-link
+    <app-button
       customClass="primary"
-      routerLink="/main"
       routerLinkActive="active"
+      (click)="openModalWithComponent()"
     >
       <span> View all </span>
       <i class="fa-solid fa-arrow-right"></i>
-    </app-link>
+    </app-button>
   </div>
 </section>

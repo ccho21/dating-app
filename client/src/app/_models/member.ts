@@ -20,7 +20,7 @@ export interface Member {
   country: string;
   photos: Photo[];
   recentMessages: Message[];
-  likedByUsers: Partial<Member[]>;
+
   projects: Project[];
   experiences: Experience[];
 
@@ -35,6 +35,11 @@ export interface Member {
   facebook: string;
   twitter: string;
   instagram: string;
+  
+  projectNumber: number;
+  followerNumber: number;
+  followingNumber: number;
+  likedByUsers: Partial<Member[]>;
 }
 
 export interface MemberForm {

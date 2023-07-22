@@ -1,19 +1,26 @@
 <div class="entry mb-4" *ngIf="experience">
   <div class="date">
-    <h3>
-      {{ experience.started | date : "MMM y" }} -
-      {{ experience.ended | date : "MMM y" }}
+    <h3 *ngIf="experience.isCurrent; else notCurrent">
+      {{ experience.started | date : "MMM y" }} - Current
     </h3>
+    <ng-template else #notCurrent>
+      <h3>
+        {{ experience.started | date : "MMM y" }} -
+        {{ experience.ended | date : "MMM y" }}
+      </h3>
+    </ng-template>
   </div>
   <div class="body">
     <div class="mb-2">
       <img
         class="logo"
-        src="./assets/shared/acentury-logo.svg"
+        [src]="experience.logoUrl || './assets/shared/acentury-logo.svg'"
         alt="Get together Logo"
       />
     </div>
-    <div class="mb-2">{{ experience.position }}, {{ experience.companyName }}</div>
+    <div class="mb-2">
+      {{ experience.position }}, {{ experience.companyName }}
+    </div>
     <div>
       {{ experience.intro }}
     </div>

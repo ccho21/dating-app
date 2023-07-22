@@ -4,6 +4,7 @@
     "CompanyName": "Acentury",
     "Url": "github.com/ccho21",
     "Started": "2023-05-02",
+    "Ended": null,
     "IsCurrent": true,
     "AppUserId": 1,
     "JobDescriptions": [
@@ -22,11 +23,17 @@
       {
         "Description": "Participated in developing RESTful APIs using Java Spring Boot. "
       }
+    ],
+    "Logos": [
+      {
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1689994962/acentury-logo_fgkuto.svg",
+        "IsMain": true
+      }
     ]
   },
   {
     "Position": "Web developer",
-    "CompanyName": "Acentury",
+    "CompanyName": "Guidelines Advertising",
     "Url": "https://www.aristahomes.com/",
     "Started": "2020-05-02",
     "Ended": "2022-04-02",
@@ -48,11 +55,17 @@
       {
         "Description": "Managed multiple projects for different clients under tight deadlines. "
       }
+    ],
+    "Logos": [
+      {
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1689995581/guidelines-advertising_uajpw8.png",
+        "IsMain": true
+      }
     ]
   },
   {
     "Position": "Front-end developer",
-    "CompanyName": "Acentury",
+    "CompanyName": "UBIX Innovations",
     "Url": "https://www.myfastrak.511sd.com/en/",
     "Started": "2019-05-02",
     "Ended": "2020-03-31",
@@ -76,6 +89,12 @@
       },
       {
         "Description": "Conducted code reviews and study group with other developers. "
+      }
+    ],
+    "Logos": [
+      {
+        "Url": "https://res.cloudinary.com/dydhdyfxd/image/upload/v1689994971/ubix_logo-1_imcmih.png",
+        "IsMain": true
       }
     ]
   }
