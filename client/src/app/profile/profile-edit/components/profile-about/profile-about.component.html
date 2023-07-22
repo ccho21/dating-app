@@ -3,7 +3,7 @@
     <div class="profile-edit" *ngIf="member">
       <div></div>
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div class="alert alert-info" *ngIf="editForm.dirty">
             <strong>Information: </strong> You have made changes. Any unsaved
             changes will be lost
@@ -19,7 +19,7 @@
       </div>
       <form [formGroup]="editForm" id="editForm">
         <div class="row">
-          <div class="col-md-9">
+          <div class="col-md-12">
             <app-panel
               title="User Info"
               sub="Give members a quick introduction about yourself"
@@ -215,29 +215,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-3">
-            <app-panel customClass="no-height">
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="">
-                    <p>
-                      NEED Help?
-                      <i class="ms-2 fa-regular fa-circle-question"></i>
-                    </p>
-                    <p>
-                      Get phone support or start a live chat with our Customer
-                      Care team.
-                    </p>
-                    <div>
-                      <app-link>
-                        <span> Contact Support </span>
-                      </app-link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </app-panel>
-          </div>
+         
         </div>
       </form>
     </div>

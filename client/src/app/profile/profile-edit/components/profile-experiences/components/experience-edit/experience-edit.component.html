@@ -1,6 +1,6 @@
 <div *ngIf="experienceForm">
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-10">
       <div class="alert alert-info" *ngIf="experienceForm.dirty">
         <strong>Information: </strong> You have made changes. Any unsaved
         changes will be lost
@@ -9,7 +9,7 @@
   </div>
   <form [formGroup]="experienceForm" id="experienceForm">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-10">
         <app-panel
           title="Experience"
           sub="Give a quick overview about your experience"
@@ -226,40 +226,10 @@
               [type]="'submit'"
               (click)="saveExperience()"
             >
-              {{ mode === "EDIT" ? "Save Changes" : "Save Project" }}
+              {{ mode === "EDIT" ? "Save Changes" : "Save Experience" }}
             </app-button>
           </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <app-panel customClass="no-height">
-          <div class="d-flex align-items-center">
-            <div>Hide this project</div>
-            <div class="ms-auto">
-              <app-button>Click</app-button>
-            </div>
-          </div>
-        </app-panel>
-
-        <app-panel customClass="no-height">
-          <div class="">
-            <p>
-              NEED Help?
-              <i class="ms-2 fa-regular fa-circle-question"></i>
-            </p>
-            <p>
-              Get phone support or start a live chat with our Customer Care
-              team.
-            </p>
-            <div>
-              <app-link customClass="primary" label="">
-                <i class="fa-solid fa-arrow-right"></i>
-
-                <span class="ms-3">Contact Support</span>
-              </app-link>
-            </div>
-          </div>
-        </app-panel>
       </div>
     </div>
   </form>
